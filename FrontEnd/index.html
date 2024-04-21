@@ -13,34 +13,47 @@
   <meta name="author" content="Yasas">
   <meta name="theme-color" content="red">
   <meta name="robots" content="index,follow">
+
   <link rel="stylesheet" href="assets/css/normalize.css">
+  <link rel="stylesheet" href="assets/css/HomePage.css">
+
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.css">
+  <script src="assets/bootstrap/js/bootstrap.bundle.js"></script>
+
+  <link rel="stylesheet" href="assets/fontawesome/css/all.css">
+  <script src="assets/fontawesome/js/all.js"></script>
 
 </head>
 <body>
 <div class="custom-cursor"></div>
 <div class="custom-cursor-tw"></div>
-<script>
-  const customCursor = document.querySelector(".custom-cursor");
-  document.addEventListener('mousemove', (e) => {
-    const x = e.clientX;
-    const y = e.clientY;
-    customCursor.style.transform = `translate(${x}px, ${y}px)`;
-  });
-  const customCurs = document.querySelector(".custom-cursor-tw");
-  document.addEventListener('mousemove', (e) => {
-    const x = e.clientX;
-    const y = e.clientY;
-    customCurs.style.transform = `translate(${x}px, ${y}px)`;
-  });
-</script>
-<header dfn id="header">
-  <section>
-  </section>
+<header id="header">
+  <nav class="navbar navbar-expand-lg bg-white nav-bar container-fluid d-flex " style="height: 60px; padding-right: 20px">
+
+     <!-- <img src="" width="" class="me-3">-->
+      <div class="ms-auto">
+        <button type="button" class="btn" id="signIn">Log In</button>
+        <button type="button" class="btn" id="signUp">Sign Up</button>
+      </div>
+  </nav>
 </header>
 
 <main id="main-container">
 
   <section1 dfn id="section1">
+    <section class="container-fluid" id="section1">
+
+      <div class="container" style="position: relative">
+
+        <!--<img src="assest/images/browsepage/TrustedBar.png" style="width: 25%; position: absolute; top: 10vh; left: 5vw">-->
+        <h1 style="position: absolute; top: 19vh; left: 5vw; font-family: 'Fira Sans', sans-serif; font-weight: 700; font-size: 60px">Step Up</h1>
+        <h1 style="position: absolute; top: 25vh; left: 5vw; font-family: 'Fira Sans', sans-serif; font-weight: 900; font-size: 80px; color: #FFA633">Feel Sculpted</h1>
+        <h7 style="width: 30vw; position: absolute; top: 38vh; left: 5.5vw; font-family: 'Fira Sans', sans-serif; font-weight: bold; font-size: 20px; color: #9FA0A0">Light, medium, or high support for every move and every body.</h7>
+        <button type="button" class="btn" id="btn-log" style="position: absolute; top: 48vh; left: 5.5vw">Log In<i class="fa-solid fa-arrow-right ms-2"></i></button>
+
+      </div>
+
+    </section>
   </section1>
 
   <section2 dfn id="section2">
@@ -62,7 +75,6 @@
   </section7>
 
   <section8 dfn id="section8">
-
   </section8>
 
   <section9 dfn id="section9">
