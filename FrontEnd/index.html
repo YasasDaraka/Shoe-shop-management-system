@@ -179,7 +179,7 @@
 
     <div class="container-fluid h-100">
       <div class="row h-100">
-        <div class="col-lg-3 col-10 " id="nav-bar"> <!-- Adjust the width of the navbar column as needed -->
+        <div class="col-lg-3 col-10 " id="nav-bar">
 
           <nav class="nav">
             <div class="nav_list d-lg-flex flex-lg-column justify-content-lg-between" style="padding-top: 10vh; padding-left:0.3vh;">
@@ -198,32 +198,13 @@
       </div>
     </div>
 
-    <!--<div class="rating">
-      <input type="radio" id="star5" name="rating" value="5">
-      <label for="star5" class="star-label"><img src="assets/images/first-icon.png" alt="Gold Medal"><span>★</span></label>
-      <input type="radio" id="star4" name="rating" value="4">
-      <label for="star4" class="star-label"><img src="assets/images/first-icon.png" alt="Silver Medal"><span>★</span></label>
-      <input type="radio" id="star3" name="rating" value="3">
-      <label for="star3" class="star-label"><img src="assets/images/first-icon.png" alt="Bronze Medal"><span>★</span></label>
-      <input type="radio" id="star2" name="rating" value="2">
-      <label for="star2" class="star-label"><span>★</span></label>
-      <input type="radio" id="star1" name="rating" value="1">
-      <label for="star1" class="star-label"><span>★</span></label>
-    </div>-->
-
-
   </section4>
 
   <section id="customer-container" class="container-fluid w-100 h-100 p-0">
-    <!--<div class="container-fluid p-0 d-flex" style=" background-color: #0a53be; height: 90.5vh; z-index: 5">
-      <div class="flex-fill bg-black"></div>
-      <div class="flex-fill bg-success"></div>
-      <div class="flex-fill bg-primary"></div>
-      <div class="flex-fill bg-secondary"></div>
-    </div>-->
+
     <div class="container-fluid p-0" style="height: 90.5vh; z-index: 5;">
       <div class="row h-100 m-0 w-100">
-        <div class="container m-0" style="z-index: -1; padding: 1.9vw 1.9vw 1.5vw 6.9vw;">
+        <div class="container m-0" style="z-index: 10; padding: 1.9vw 1.9vw 1.5vw 7vw;">
           <div class="row h-100 m-0" style="box-shadow: 0px 1px 10px #909090; border-radius: 10px;">
             <div class="col-md-6 "style="padding: 0 0 0 0.9vw;">
               <div class="row h-50 m-0">
@@ -232,7 +213,7 @@
 
                       <div class="col">
                         <label for="cusId" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px;width: 20vw;">Customer ID</label>
-                        <input type="text" class="form-control" id="cusId">
+                        <input type="text" class="form-control" id="cusId" >
                       </div>
 
                       <div class="col">
@@ -250,7 +231,7 @@
 
                     <div class="col">
                       <label for="cusDob" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Date of Birth</label>
-                      <input type="text" class="form-control" id="cusDob" style="width: 20vw">
+                      <input type="date" class="form-control" id="cusDob" style="width: 20vw">
                     </div>
 
                   </div>
@@ -258,7 +239,7 @@
               </div>
               <div class="row h-50 m-0">
                 <div class="col-md-12 p-0">
-                  <div class="container row mt-4">
+                  <div class="container row ">
 
                     <div class="col">
                       <label for="buildNo" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Building No or Name</label>
@@ -286,6 +267,21 @@
                       <label for="postalCode" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Postal Code</label>
                       <input type="text" class="form-control" id="postalCode"style="width: 10vw">
                     </div>
+
+                    <div class="row mt-4">
+                      <div class="col-12">
+                        <button type="button" class="btn btn-primary" style="font-weight: bold;" id="cusSave">Save</button>
+                        <button type="button" class="btn btn-success" style="font-weight: bold;" id="cusUpdate">Update</button>
+                        <button type="button" class="btn btn-secondary"
+                                style="font-weight: bold;" id="cusSearch">Search</button>
+                        <button type="button" class="btn btn-danger"
+                                style="width: 66px;" id="cusDelete">Delete</button>
+                        <button type="button" class="btn btn-warning" id="cusClear">Clear</button>
+
+                      </div>
+
+                    </div>
+
                   </div>
 
                 </div>
@@ -326,8 +322,53 @@
                 </div>
               </div>
               <div class="row h-50 m-0">
-                <div class="col-md-12 p-0"></div>
+                <div class="col-md-6 p-0">
+                  <div class="container h-100">
+                    <div class="row h-100">
+                      <div class="col p-0">
+                        <div class="bg-secondary h-100 w-100 ">
+                          <!-- Content for first column -->
+                          <div class="rating">
+                            <input type="radio" id="star5" name="rating" value="5">
+                            <label for="star5" class="star-label"><img src="assets/images/first-icon.png"
+                                                                       alt="Gold Medal"><span>★</span></label>
+                            <input type="radio" id="star4" name="rating" value="4">
+                            <label for="star4" class="star-label"><img src="assets/images/first-icon.png"
+                                                                       alt="Silver Medal"><span>★</span></label>
+                            <input type="radio" id="star3" name="rating" value="3">
+                            <label for="star3" class="star-label"><img src="assets/images/first-icon.png"
+                                                                       alt="Bronze Medal"><span>★</span></label>
+                            <input type="radio" id="star2" name="rating" value="2">
+                            <label for="star2" class="star-label"><span>★</span></label>
+                            <input type="radio" id="star1" name="rating" value="1">
+                            <label for="star1" class="star-label"><span>★</span></label>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6 p-0">
+                  <div class="container h-100">
+                    <div class="row h-100">
+                      <div class="col p-0">
+                        <div class="bg-success h-100 w-100 ">
+                          <div class="row">
+                            <div class="col-12">
+                              <video id="video" class="web" width="200" height="150" style="display:none;" autoplay></video>
+                              <canvas id="canvas" class="web" width="200" height="150" style="display:none;"></canvas>
+                              <img src="assets/images/walk.gif" id="capturedImage" class="web" width="200"  style="display:block; padding-top: 3%">
+                              <button id="captureButton" class="btn btn-primary" style="display:block;" type="button">Capture</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
+
             </div>
           </div>
         </div>
