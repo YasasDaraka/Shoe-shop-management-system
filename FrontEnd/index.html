@@ -497,10 +497,9 @@
                       </div>
 
                       <div class="col">
-                        <label for="emergency" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">In Case of Emergency</label>
-                        <input type="text" class="form-control" id="emergency" style="width: 18vw">
+                        <label for="empContactNo" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Contact No</label>
+                        <input type="text" class="form-control" id="empContactNo" style="width: 18vw">
                       </div>
-
                     </div>
                   </div>
                 </div>
@@ -518,11 +517,15 @@
                               <input type="email" class="form-control" id="empEmail" style="width: 18vw">
                             </div>
 
-                            <div class="col mt-4">
-                              <label for="empContactNo" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Contact No</label>
-                              <input type="text" class="form-control" id="empContactNo">
+                            <div class="col mt-1">
+                              <label for="guardianName" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Name of Guardian</label>
+                              <input type="text" class="form-control" id="guardianName" >
                             </div>
 
+                            <div class="col mt-1">
+                              <label for="emergencyContact" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Emergency Contact</label>
+                              <input type="text" class="form-control" id="emergencyContact" >
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -562,8 +565,185 @@
     </div>
   </section>
 
-  <section7 dfn id="section7">
-  </section7>
+  <!--<section  id="supplier-container">
+    <div class="container-fluid p-0" style="height: 90.5vh; z-index: 5;">
+      <div class="row h-100 m-0 w-100">
+        <div class="container m-0" style=" padding: 1.9vw 1.9vw 1.5vw 7vw;">
+          <div class="row h-100 m-0" style="box-shadow: 0px 1px 10px #909090; border-radius: 10px;">
+            <div class="col-md-6 "style="padding: 0 0 0 0.9vw;">
+              <div class="row h-50 m-0">
+                <div class="col-md-12 p-0 d-flex justify-content-center justify-content-evenly" style="width: 24.4vw">
+                  <div class="container row mt-4">
+
+                    <div class="col">
+                      <label for="supId" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px;width: 20vw;">Supplier ID</label>
+                      <input type="text" class="form-control" id="supId" >
+                    </div>
+
+                    <div class="col">
+                      <label for="CusGender" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Gender</label>
+                      <select aria-label="Default select example" class="form-select" id="CusGender" style="width: 16vw"></select>
+                    </div>
+
+                  </div>
+                  <div class="container row mt-4">
+
+                    <div class="col">
+                      <label for="cusName" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Supplier Name</label>
+                      <input type="text" class="form-control" id="cusName">
+                    </div>
+
+                    <div class="col">
+                      <label for="cusDob" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Date of Birth</label>
+                      <input type="date" class="form-control" id="cusDob" style="width: 20vw">
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              <div class="row h-50 m-0">
+                <div class="col-md-12 p-0">
+                  <div class="container row ">
+
+                    <div class="col">
+                      <label for="buildNo" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Building No or Name</label>
+                      <input type="text" class="form-control" id="buildNo">
+                    </div>
+
+                    <div class="col">
+                      <label for="lane" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Lane</label>
+                      <input type="text" class="form-control" id="lane" style="width: 20vw">
+                    </div>
+
+                  </div>
+                  <div class="container row mt-4">
+
+                    <div class="col">
+                      <label for="city" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">City</label>
+                      <input type="text" class="form-control" id="city" style="width: 13.5vw">
+                    </div>
+
+                    <div class="col">
+                      <label for="state" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">State</label>
+                      <input type="text" class="form-control" id="state" style="width: 13.5vw">
+                    </div>
+                    <div class="col">
+                      <label for="postalCode" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Postal Code</label>
+                      <input type="text" class="form-control" id="postalCode"style="width: 10vw">
+                    </div>
+
+                    <div class="row mt-4">
+                      <div class="col-12">
+                        <button type="button" class="btn btn-primary" style="font-weight: bold;" id="cusSave">Save</button>
+                        <button type="button" class="btn btn-success" style="font-weight: bold;" id="cusUpdate">Update</button>
+                        <button type="button" class="btn btn-secondary"
+                                style="font-weight: bold;" id="cusSearch">Search</button>
+                        <button type="button" class="btn btn-danger"
+                                style="width: 66px;" id="cusDelete">Delete</button>
+                        <button type="button" class="btn btn-warning" id="cusClear">Clear</button>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 p-0">
+              <div class="row h-50 m-0">
+                <div class="col-md-12 p-0">
+                  <div class="row h-100 m-0 p-0 d-flex justify-content-center">
+                    <div class="container row mt-4">
+                      <div class="col">
+                        <label for="email" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Email</label>
+                        <input type="email" class="form-control" id="email">
+                      </div>
+
+                      <div class="col">
+                        <label for="contactNo" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Contact No</label>
+                        <input type="text" class="form-control" id="contactNo"style="width: 20vw">
+                      </div>
+
+                    </div>
+                    <div class="container row">
+                      <div class="col">
+                        <label for="loyaltyDate" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Loyalty Start Date</label>
+                        <input type="date" class="form-control" id="loyaltyDate" style="width: 10vw">
+                      </div>
+
+                      <div class="col">
+                        <label for="totalPoints" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Total Points</label>
+                        <input type="number" class="form-control" id="totalPoints" style="width: 10vw">
+                      </div>
+                      <div class="col">
+                        <label for="lastPurchaseDate" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Last Purchase Date</label>
+                        <input type="text" class="form-control" id="lastPurchaseDate" style="width: 10vw">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row h-50 m-0">
+                <div class="col-md-6 p-0">
+                  <div class="row h-50">
+                    <div class="container h-100">
+                      <label class="form-label" style="padding-left: 8.6vw; font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 16px">Customer Level</label>
+                      <div class="row h-100">
+                        <div class="col p-0">
+                          <div class="h-100 w-100 "style="padding-left: 5.2vw;">
+
+                            <div class="rating">
+                              <input type="radio" id="star4" name="rating" value="4">
+                              <label for="star4" class="star-label"><img src="assets/images/first-icon.png" alt="Silver Medal"><span>★</span></label>
+                              <input type="radio" id="star3" name="rating" value="3">
+                              <label for="star3" class="star-label"><img src="assets/images/first-icon.png" alt="Bronze Medal"><span>★</span></label>
+                              <input type="radio" id="star2" name="rating" value="2">
+                              <label for="star2" class="star-label"><img src="assets/images/first-icon.png" alt="Bronze Medal"><span>★</span></label>
+                              <input type="radio" id="star1" name="rating" value="1">
+                              <label for="star1" class="star-label"><img src="assets/images/first-icon.png" alt="Bronze Medal"><span>★</span></label>
+                            </div>
+
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row h-50">
+
+                  </div>
+                </div>
+                <div class="col-md-6 p-0">
+                  <div class="container h-100">
+                    <label for="lastPurchaseDate" class="form-label" style="padding-left: 6.6vw; font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 16px;">Capture Image</label>
+                    <div class="row h-100">
+                      <div class="col p-0">
+                        <div class=" h-100 w-100 ">
+                          <div class="row">
+                            <div class="col-12 d-flex justify-content-center">
+                              <video id="video" class="web" width="200" height="150" style="display:none;" autoplay></video>
+                              <canvas id="canvas" class="web" width="200" height="150" style="display:none;"></canvas>
+                              <img src="assets/images/walk.gif" id="capturedImage" class="web" width="200"  style="display:block; padding-top: 3%">
+                            </div>
+                            <div class="col-12 d-flex justify-content-center">
+                              <button id="captureButton" class="btn btn-primary mt-4" style="display:block;" type="button">Capture</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>-->
 
   <section8 dfn id="section8">
   </section8>
