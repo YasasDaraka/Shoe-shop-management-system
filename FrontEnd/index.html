@@ -328,7 +328,7 @@
                       <label for="lastPurchaseDate" class="form-label" style="padding-left: 8.6vw; font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 16px">Customer Level</label>
                       <div class="row h-100">
                         <div class="col p-0">
-                          <div class="bg-secondary h-100 w-100 "style="padding-left: 5.2vw;">
+                          <div class="h-100 w-100 "style="padding-left: 5.2vw;">
 
                             <div class="rating">
                               <input type="radio" id="star4" name="rating" value="4">
@@ -353,15 +353,18 @@
                 </div>
                 <div class="col-md-6 p-0">
                   <div class="container h-100">
+                    <label for="lastPurchaseDate" class="form-label" style="padding-left: 6.6vw; font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 16px;">Capture Image</label>
                     <div class="row h-100">
                       <div class="col p-0">
-                        <div class="bg-success h-100 w-100 ">
+                        <div class=" h-100 w-100 ">
                           <div class="row">
-                            <div class="col-12">
+                            <div class="col-12 d-flex justify-content-center">
                               <video id="video" class="web" width="200" height="150" style="display:none;" autoplay></video>
                               <canvas id="canvas" class="web" width="200" height="150" style="display:none;"></canvas>
                               <img src="assets/images/walk.gif" id="capturedImage" class="web" width="200"  style="display:block; padding-top: 3%">
-                              <button id="captureButton" class="btn btn-primary" style="display:block;" type="button">Capture</button>
+                            </div>
+                            <div class="col-12 d-flex justify-content-center">
+                              <button id="captureButton" class="btn btn-primary mt-4" style="display:block;" type="button">Capture</button>
                             </div>
                           </div>
                         </div>
