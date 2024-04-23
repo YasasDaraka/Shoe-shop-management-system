@@ -565,7 +565,7 @@
     </div>
   </section>-->
 
-  <section  id="supplier-container">
+  <!--<section  id="supplier-container">
     <div class="container-fluid p-0" style="height: 90.5vh; z-index: 5;">
       <div class="row h-100 m-0 w-100">
         <div class="container m-0" style=" padding: 1.9vw 1.9vw 1.5vw 7vw;">
@@ -716,10 +716,171 @@
         </div>
       </div>
     </div>
-  </section>
+  </section>-->
 
-  <section8 dfn id="section8">
-  </section8>
+  <section id="inventory-container">
+    <div class="container-fluid p-0" style="height: 90.5vh; z-index: 5;">
+      <div class="row h-100 m-0 w-100">
+        <div class="container m-0" style=" padding: 1.9vw 1.9vw 1.5vw 7vw;">
+          <div class="row h-100 m-0" style="box-shadow: 0px 1px 10px #909090; border-radius: 10px;">
+            <div class="col-md-6 "style="padding: 0 0 0 0.9vw;">
+              <div class="row h-50 m-0">
+                <div class="col-md-12 p-0 d-flex justify-content-center justify-content-evenly" style="width: 24.4vw">
+                  <div class="container row mt-4">
+
+                    <div class="col">
+                      <label for="itmCode" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px;width: 20vw;">Item Code</label>
+                      <input type="text" class="form-control" id="itmCode" >
+                    </div>
+
+                    <div class="col">
+                      <label for="itmCat" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Item Category</label>
+                      <input type="text" class="form-control" id="itmCat">
+                    </div>
+
+                  </div>
+                  <div class="container row mt-4">
+
+                    <div class="col">
+                      <label for="itmName" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Item Description</label>
+                      <input type="text" class="form-control" id="itmName" style="width: 20vw">
+                    </div>
+
+                    <div class="col">
+                      <label for="itmSize" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Size</label>
+                      <input type="number" class="form-control" id="itmSize" style="width: 12vw">
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              <div class="row h-50 m-0">
+                <div class="col-md-12 p-0">
+                  <div class="container row ">
+
+                    <div class="col">
+                      <label for="itmSupId" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Supplier ID</label>
+                      <input type="text" class="form-control" id="itmSupId" style="width: 15vw">
+                    </div>
+
+                    <div class="col">
+                      <label for="itmSupName" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Supplier Name</label>
+                      <input type="text" class="form-control" id="itmSupName" style="width: 20vw" readonly>
+                    </div>
+
+                  </div>
+                  <div class="container row mt-4">
+
+                    <div class="col">
+                      <label for="itmBuyPrice" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Buy Price</label>
+                      <input type="text" class="form-control" id="itmBuyPrice" style="width: 13.5vw">
+                    </div>
+
+                    <div class="col">
+                      <label for="itmSalePrice" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Sale Price</label>
+                      <input type="text" class="form-control" id="itmSalePrice" style="width: 13.5vw">
+                    </div>
+                    <div class="col">
+                      <label for="itemExcProfit" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Expected Profit</label>
+                      <input type="text" class="form-control" id="itemExcProfit"style="width: 10vw">
+                    </div>
+
+                    <div class="row mt-4">
+                      <div class="col-12">
+                        <button type="button" class="btn btn-primary" style="font-weight: bold;" id="empSave">Save</button>
+                        <button type="button" class="btn btn-success" style="font-weight: bold;" id="empUpdate">Update</button>
+                        <button type="button" class="btn btn-secondary"
+                                style="font-weight: bold;" id="empSearch">Search</button>
+                        <button type="button" class="btn btn-danger"
+                                style="width: 66px;" id="empDelete">Delete</button>
+                        <button type="button" class="btn btn-warning" id="empClear">Clear</button>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 p-0">
+              <div class="row h-50 m-0">
+                <div class="col-md-12 p-0">
+                  <div class="row h-100 m-0 p-0 d-flex justify-content-center">
+                    <div class="container row mt-4">
+
+                      <div class="col">
+                        <label for="itmProfitMargin" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Profit Margin</label>
+                        <input type="text" class="form-control" id="itmProfitMargin" style="width: 10vw">
+                      </div>
+
+                      <div class="col">
+                        <label for="itemStatus" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Status</label>
+                        <select aria-label="Default select example" class="form-select" id="itemStatus" style="width: 10vw"></select>
+                      </div>
+
+                    </div>
+                    <div class="container row mt-5">
+                      <div class="col">
+                        <label for="itemImgFile" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Select Item Image</label>
+                        <input class="form-control" type="file" id="itemImgFile" style="width: 17.4vw">
+                      </div>
+
+                      <div class="col"style="padding-right: 2vw;>
+                        <div class="container h-100">
+                          <label class="form-label" style="padding-left: 5vw; font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 16px;">Capture Image</label>
+                          <div class="row h-100">
+                            <div class="col p-0">
+                              <div class=" h-100 w-100 ">
+                                <div class="row">
+                                  <div class="col-12 d-flex justify-content-center">
+                                    <video id="empVideo" class="web" width="200" height="150" style="display:none;" autoplay></video>
+                                    <canvas id="empCanvas" class="web" width="200" height="150" style="display:none;"></canvas>
+                                    <img src="assets/images/walk.gif" id="empCapturedImage" class="web" width="200"  style="display:block; padding-top: 3%">
+                                  </div>
+                                  <div class="col-12 d-flex justify-content-center">
+                                    <button id="emoCaptureButton" class="btn btn-primary mt-3" style="display:block;" type="button">Capture</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row h-50 m-0">
+                <div class="col-md-6 p-0">
+                  <div class="row h-50">
+                    <div class="container h-100" style="padding-left: 3.5vw;">
+                      <div class="row h-100">
+                        <div class="col p-0">
+                          <div class="h-100 w-100">
+                            <!--space-->
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row h-50">
+
+                  </div>
+                </div>
+                <div class="col-md-6 p-0">
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <section9 dfn id="section9">
   </section9>
