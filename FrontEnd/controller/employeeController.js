@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    var targetNode = document.getElementById('customer-container');
+    var targetNode = document.getElementById('employee-container');
     var config = {attributes: true, attributeFilter: ['style']};
     var callback = function (mutationsList, observer) {
         for (var mutation of mutationsList) {
@@ -7,11 +7,11 @@ $(document).ready(function () {
                 var displayStyle = window.getComputedStyle(targetNode).getPropertyValue('display');
                 if (displayStyle === 'none') {
                     stopWebcamStream();
-                    $("#cusCapturedImage").show();
-                    $('#cusCaptureButton').css("background-color", "#007bff");
-                    $('#cusCaptureButton').css("border-color", "#007bff");
-                    $('#cusCaptureButton').text("Capture");
-                    $("#cusCapturedImage").attr('src', "assets/images/walk.gif");
+                    $("#empCapturedImage").show();
+                    $('#empCaptureButton').css("background-color", "#007bff");
+                    $('#empCaptureButton').css("border-color", "#007bff");
+                    $('#empCaptureButton').text("Capture");
+                    $("#empCapturedImage").attr('src', "assets/images/walk.gif");
                 }
             }
         }
@@ -19,19 +19,19 @@ $(document).ready(function () {
     var observer = new MutationObserver(callback);
     observer.observe(targetNode, config);
 });
-let videoStream;
-$('#cusCaptureButton').click(function () {
+let empVideoStream;
+$('#empCaptureButton').click(function () {
     let text = $(this).text();
-    var video = $('#cusVideo')[0];
-    var canvas = $('#cusCanvas')[0];
-    var capturedImage = $('#cusCapturedImage');
+    var video = $('#empVideo')[0];
+    var canvas = $('#empCanvas')[0];
+    var capturedImage = $('#empCapturedImage');
 
     var constraints = {
         video: true
     };
 
     if (text === "Capture") {
-        $("#cusClear").prop("disabled", false);
+        $("#empClear").prop("disabled", false);
         $(this).text("Take Picture");
         $(this).css("background-color", "#dc3545");
         $(this).css("border-color", "#dc3545");
@@ -40,14 +40,14 @@ $('#cusCaptureButton').click(function () {
 
         navigator.mediaDevices.getUserMedia(constraints)
             .then((stream) => {
-                videoStream = stream;
+                empVideoStream = stream;
                 video.srcObject = stream;
             })
             .catch((error) => {
                 console.error('Error accessing webcam:', error);
             });
     } else if (text === "Take Picture") {
-        $("#cusClear").prop("disabled", false);
+        $("#empClear").prop("disabled", false);
         const context = canvas.getContext('2d');
         context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
@@ -57,15 +57,15 @@ $('#cusCaptureButton').click(function () {
         $(this).css("background-color", "#007bff");
         $(this).css("border-color", "#007bff");
         $(this).text("Capture");
-        stopWebcamStream();
+        stopEmpWebcamStream();
         $(video).hide();
     }
 });
 
-function stopWebcamStream() {
-    if (videoStream) {
-        const tracks = videoStream.getTracks();
+function stopEmpWebcamStream() {
+    if (empVideoStream) {
+        const tracks = empVideoStream.getTracks();
         tracks.forEach(track => track.stop());
-        videoStream = null;
+        empVideoStream = null;
     }
 }
