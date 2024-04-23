@@ -34,9 +34,8 @@ $(document).ready(function () {
         logInPage.css('display','block');
         mainPage.css('display','none');
     });
-    btnSignInBackToHome.click(function (){
+    $('#signUpBackToHome,#logInBackToHome').click(function (){
         allContainerHide();
-        logInPage.css('display','none');
         mainPage.css('display','block');
     });
 
@@ -45,6 +44,7 @@ $(document).ready(function () {
         signUpPage.css('display','block');
         mainPage.css('display','none');
     });
+
     $('#order-thead').css({
         'width': '100%',
         'display': 'flex'
