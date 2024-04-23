@@ -5,10 +5,11 @@ $(document).ready(function () {
 
     let btnMainLogIn = $('#btn-log');
     let btnSignUpBackToHome = $('#signUpBackToHome');
+    let btnSignInBackToHome = $('#logInBackToHome');
 
     let mainPage = $('#main-view');
-    let logPage = $('#log-in-page');
-    let signPage = $('#sign-up-page');
+    let logInPage = $('#log-in-page');
+    let signUpPage = $('#sign-up-page');
     let adminPage = $('#admin-container');
     let customerPage = $('#customer-container');
     let employeePage = $('#employee-container');
@@ -17,8 +18,8 @@ $(document).ready(function () {
     let paymentPage = $('#payment-container');
 
     function allContainerHide(){
-        logPage.css('display','none');
-        signPage.css('display','none');
+        logInPage.css('display','none');
+        signUpPage.css('display','none');
         adminPage.css('display','none');
         customerPage.css('display','none');
         employeePage.css('display','none');
@@ -30,15 +31,20 @@ $(document).ready(function () {
 
     $('#btn-log,#signIn').click(function (){
         allContainerHide();
-        signPage.css('display','block');
+        logInPage.css('display','block');
         mainPage.css('display','none');
     });
-    btnSignUpBackToHome.click(function (){
+    btnSignInBackToHome.click(function (){
         allContainerHide();
-        signPage.css('display','none');
+        logInPage.css('display','none');
         mainPage.css('display','block');
     });
 
+    $('#signUp').click(function (){
+        allContainerHide();
+        signUpPage.css('display','block');
+        mainPage.css('display','none');
+    });
     $('#order-thead').css({
         'width': '100%',
         'display': 'flex'
