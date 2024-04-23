@@ -14,27 +14,23 @@ function hideAdminPages(){
     inventoryPage.css('display','none');
     paymentPage.css('display','none');
 }
-/*
-$(document).ready(function () {
-
-    $("#btnDashboard, #btnCustomer, #btnInventory, #btnEmployee, #btnSales, #btnAdminPanel, #btnUsers").each(function () {
-        switch ($(this).attr('id')) {
-            case 'btnCustomer':
-                hideAdminPages();customerPage.css('display','block');
-                break;
-            case 'btnInventory':
-                hideAdminPages();inventoryPage.css('display','block');
-                break;
-            case 'btnSupplier':
-                hideAdminPages();employeePage.css('display','block');
-                break;
-            case 'btnEmployee':
-                hideAdminPages();employeePage.css('display','block');
-                break;
-            case 'btnSales':
-                hideAdminPages();paymentPage.css('display','block');
-                break;
-        }
-    });
-
-});*/
+$("#btnCustomer, #btnInventory, #btnSupplier, #btnEmployee, #btnSales").click(function () {
+    hideAdminPages();
+    switch ($(this).attr('id')) {
+        case 'btnCustomer':
+            customerPage.css('display', 'block');
+            break;
+        case 'btnInventory':
+            inventoryPage.css('display', 'block');
+            break;
+        case 'btnSupplier':
+            supplierPage.css('display', 'block');
+            break;
+        case 'btnEmployee':
+            employeePage.css('display', 'block');
+            break;
+        case 'btnSales':
+            paymentPage.css('display', 'block');
+            break;
+    }
+});
