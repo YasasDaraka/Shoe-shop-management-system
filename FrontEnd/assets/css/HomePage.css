@@ -9,7 +9,7 @@ html {
     background-color: #FFA633;
     font-family: 'Fira Sans', sans-serif;
 }
-#btn-log,#signIn,#signUp{
+#btn-log,#signIn,#signUp,#adminSignIn,#adminSignUp{
     padding: 0.593vw 1.112vw;
     text-decoration: none;
     font-weight: bold;

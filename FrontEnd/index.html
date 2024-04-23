@@ -30,8 +30,7 @@
 
   <link rel="stylesheet" href="assets/fontawesome/css/all.css">
   <script src="assets/fontawesome/js/all.js"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">
-  <script src="controller/indexController.js"></script>
+  <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@10">-->
 
 </head>
 <body>
@@ -49,7 +48,7 @@
 
 <main id="main-container">
 
-  <!--<section id="main-view">
+  <section id="main-view">
     <section class="container-fluid" >
 
       <div class="container" style="position: relative">
@@ -58,18 +57,18 @@
         <h1 style="position: absolute; top: 18vh; left: 5vw; font-family: 'Fira Sans', sans-serif; font-weight: 700; font-size: 60px">Step Up</h1>
         <h1 style="position: absolute; top: 25vh; left: 5vw; font-family: 'Fira Sans', sans-serif; font-weight: 900; font-size: 80px; color: #FFA633">Feel Sculpted</h1>
         <h7 style="width: 30vw; position: absolute; top: 38vh; left: 5.5vw; font-family: 'Fira Sans', sans-serif; font-weight: bold; font-size: 20px; color: #9FA0A0">Exclusive access, fresh fits, medium, high support for every move and every body.</h7>
-        <button type="button" class="btn" id="btn-log" style="position: absolute; top: 48vh; left: 5.5vw">Log In<i class="fa-solid fa-arrow-right ms-2"></i></button>
+        <button type="button" class="btn" id="btn-log" style="position: absolute; top: 48vh; left: 5.5vw">Sign In<i class="fa-solid fa-arrow-right ms-2"></i></button>
 
       </div>
 
     </section>
-  </section>-->
+  </section>
 
-  <!--<section id="log-in-page">
+  <section id="log-in-page">
     <img src="assets/images/sport-shoe.png" style="width: 45%; position: absolute; top: 19vh; left: 5vw">
     <div id="log-in-container">
 
-      <button type="button" class="btn mt-3 ms-3" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 10px"><i class="fa-solid fa-arrow-left me-2"></i>Back to Homepage</button>
+      <button type="button" id="logInBackToHome" class="btn mt-3 ms-3" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 10px"><i class="fa-solid fa-arrow-left me-2"></i>Back to Homepage</button>
       <h1 class="mt-4 ms-5" style="font-family: 'Fira Sans', sans-serif; font-weight: 900; font-size: 40px">Sign In</h1>
       <h1 class="ms-5" style="color: #FFA633 ;font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 10px">Sign In to Access the Portal</h1>
 
@@ -93,9 +92,9 @@
 
 
     </div>
-  </section>-->
+  </section>
 
-  <!--<section id="sign-up-page">
+  <section id="sign-up-page">
     <form id="sign-up-form">
 
       <div id="sign-up-container" style="border-radius: 10px">
@@ -106,7 +105,7 @@
 
             <div class="col-5" style="height: 70vh; background-color: #f1f1f1;  box-shadow: 0px 1px 10px #FFA633; border: 2px solid #FFA633; text-align: center; position: relative; border-radius: 10px">
 
-              <button type="button" class="btn mt-3 ms-3" style="color: rgba(59,59,59,0.9) ;position: absolute; top: 1vh; left: 0; margin: 0; font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 10px"><i class="fa-solid fa-arrow-left me-2"></i>Back to Homepage</button>
+              <button type="button" id="signUpBackToHome"  class="btn mt-3 ms-3" style="color: rgba(59,59,59,0.9) ;position: absolute; top: 1vh; left: 0; margin: 0; font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 10px"><i class="fa-solid fa-arrow-left me-2"></i>Back to Homepage</button>
 
               <h1 style="font-family: 'Fira Sans', sans-serif; font-weight: 700; font-size: 40px; color: #ffa633; position: absolute; top: 20vh; right: 0; left: 0; margin: 0">Welcome</h1>
 
@@ -165,16 +164,16 @@
       </div>
 
             </form>
-  </section>-->
+  </section>
 
-  <!--<section4 dfn id="admin-container">
+  <section4 dfn id="admin-container">
     <header id="admin-header">
       <nav class="navbar navbar-expand-lg bg-white nav-bar container-fluid d-flex " style="height: 60px; padding-right: 20px;padding-left: 50px">
         <div class="d-flex justify-content-center align-items-center"style="display: inline-block; box-shadow: 0px 1px 10px #909090; background-color: white; z-index: 4; width: 32px; height: 33px; border-radius: 25%"><img class="admin-icon" style="width: 60px; padding-right:10px; z-index: 5" src="assets/images/arrow.gif"></div>
-        &lt;!&ndash; <img src="" width="" class="me-3">&ndash;&gt;
+        <!-- <img src="" width="" class="me-3">-->
         <div class="ms-auto">
-          <button type="button" class="btn" id="signIn">Log In</button>
-          <button type="button" class="btn" id="signUp">Sign Up</button>
+          <button type="button" class="btn" id="adminSignIn">Log In</button>
+          <button type="button" class="btn" id="adminSignUp">Sign Up</button>
         </div>
       </nav>
     </header>
@@ -200,10 +199,10 @@
       </div>
     </div>
 
-  </section4>-->
+  </section4>
 
-  <!--<section id="customer-container" class="container-fluid w-100 h-100 p-0">
-    &lt;!&ndash;<div class="container-fluid p-0" style="height: 90.5vh; z-index: 5;" id="customer-main">
+  <section id="customer-container" class="container-fluid w-100 h-100 p-0">
+    <!--<div class="container-fluid p-0" style="height: 90.5vh; z-index: 5;" id="customer-main">
       <div class="row h-100 m-0 w-100">
         <div class="container m-0" style=" padding: 1.9vw 1.9vw 1.5vw 7vw;">
           <div class="row h-100 m-0" style="box-shadow: 0px 1px 10px #909090; border-radius: 10px;">
@@ -379,7 +378,7 @@
           </div>
         </div>
       </div>
-    </div>&ndash;&gt;
+    </div>-->
     <div class="container-fluid p-0" style="height: 90.5vh; z-index: 5;" id="customer-list">
       <div class="row h-100 m-0 w-100">
         <div class="container m-0" style=" padding: 1.9vw 1.9vw 1.5vw 7vw;">
@@ -416,10 +415,10 @@
         </div>
       </div>
     </div>
-  </section>-->
+  </section>
 
   <section id="employee-container">
-    <!--<div class="container-fluid p-0" style="height: 90.5vh; z-index: 5;" id="employee-main">
+    <div class="container-fluid p-0" style="height: 90.5vh; z-index: 5;" id="employee-main">
       <div class="row h-100 m-0 w-100">
         <div class="container m-0" style=" padding: 1.9vw 1.9vw 1.5vw 7vw;">
           <div class="row h-100 m-0" style="box-shadow: 0px 1px 10px #909090; border-radius: 10px;">
@@ -612,8 +611,8 @@
           </div>
         </div>
       </div>
-    </div>-->
-    <!--<div class="container-fluid p-0" style="height: 90.5vh; z-index: 5;" id="employee-list">
+    </div>
+    <div class="container-fluid p-0" style="height: 90.5vh; z-index: 5;" id="employee-list">
       <div class="row h-100 m-0 w-100">
         <div class="container m-0" style=" padding: 1.9vw 1.9vw 1.5vw 7vw;">
           <div class="row h-100 m-0" style="box-shadow: 0px 1px 10px #909090; border-radius: 10px;">
@@ -648,11 +647,11 @@
           </div>
         </div>
       </div>
-    </div>-->
+    </div>
   </section>
 
   <section  id="supplier-container">
-    <!--<div class="container-fluid p-0" style="height: 90.5vh; z-index: 5;"id="supplier-main">
+    <div class="container-fluid p-0" style="height: 90.5vh; z-index: 5;"id="supplier-main">
       <div class="row h-100 m-0 w-100">
         <div class="container m-0" style=" padding: 1.9vw 1.9vw 1.5vw 7vw;">
           <div class="row h-100 m-0" style="box-shadow: 0px 1px 10px #909090; border-radius: 10px;">
@@ -812,8 +811,8 @@
           </div>
         </div>
       </div>
-    </div>-->
-    <!--<div class="container-fluid p-0" style="height: 90.5vh; z-index: 5;" id="supplier-list">
+    </div>
+    <div class="container-fluid p-0" style="height: 90.5vh; z-index: 5;" id="supplier-list">
       <div class="row h-100 m-0 w-100">
         <div class="container m-0" style=" padding: 1.9vw 1.9vw 1.5vw 7vw;">
           <div class="row h-100 m-0" style="box-shadow: 0px 1px 10px #909090; border-radius: 10px;">
@@ -848,11 +847,11 @@
           </div>
         </div>
       </div>
-    </div>-->
+    </div>
   </section>
 
   <section id="inventory-container">
-    <!--<div class="container-fluid p-0" style="height: 90.5vh; z-index: 5;" id="inventory-main">
+    <div class="container-fluid p-0" style="height: 90.5vh; z-index: 5;" id="inventory-main">
       <div class="row h-100 m-0 w-100">
         <div class="container m-0" style=" padding: 1.9vw 1.9vw 1.5vw 7vw;">
           <div class="row h-100 m-0" style="box-shadow: 0px 1px 10px #909090; border-radius: 10px;">
@@ -928,13 +927,13 @@
 
                     <div class="row mt-2">
                       <div class="col-12">
-                        <button type="button" class="btn btn-primary" style="font-weight: bold;" id="empSave">Save</button>
-                        <button type="button" class="btn btn-success" style="font-weight: bold;" id="empUpdate">Update</button>
+                        <button type="button" class="btn btn-primary" style="font-weight: bold;" id="itmSave">Save</button>
+                        <button type="button" class="btn btn-success" style="font-weight: bold;" id="itmUpdate">Update</button>
                         <button type="button" class="btn btn-secondary"
-                                style="font-weight: bold;" id="empSearch">Search</button>
+                                style="font-weight: bold;" id="itmSearch">Search</button>
                         <button type="button" class="btn btn-danger"
-                                style="width: 66px;" id="empDelete">Delete</button>
-                        <button type="button" class="btn btn-warning" id="empClear">Clear</button>
+                                style="width: 66px;" id="itmDelete">Delete</button>
+                        <button type="button" class="btn btn-warning" id="itmClear">Clear</button>
 
                       </div>
 
@@ -978,12 +977,12 @@
                               <div class=" h-100 w-100 ">
                                 <div class="row">
                                   <div class="col-12 d-flex justify-content-center">
-                                    <video id="empVideo" class="web" width="200" height="150" style="display:none;" autoplay></video>
-                                    <canvas id="empCanvas" class="web" width="200" height="150" style="display:none;"></canvas>
-                                    <img src="assets/images/walk.gif" id="empCapturedImage" class="web" width="200"  style="display:block; padding-top: 3%">
+                                    <video id="itmVideo" class="web" width="200" height="150" style="display:none;" autoplay></video>
+                                    <canvas id="itmCanvas" class="web" width="200" height="150" style="display:none;"></canvas>
+                                    <img src="assets/images/walk.gif" id="itmCapturedImage" class="web" width="200"  style="display:block; padding-top: 3%">
                                   </div>
                                   <div class="col-12 d-flex justify-content-center">
-                                    <button id="emoCaptureButton" class="btn btn-primary mt-3" style="display:block;" type="button">Capture</button>
+                                    <button id="itmCaptureButton" class="btn btn-primary mt-3" style="display:block;" type="button">Capture</button>
                                   </div>
                                 </div>
                               </div>
@@ -1003,7 +1002,7 @@
                       <div class="row h-100">
                         <div class="col p-0">
                           <div class="h-100 w-100">
-                            &lt;!&ndash;space&ndash;&gt;
+                            <!--space-->
                           </div>
                         </div>
                       </div>
@@ -1022,8 +1021,8 @@
           </div>
         </div>
       </div>
-    </div>-->
-    <!--<div class="container-fluid p-0" style="height: 90.5vh; z-index: 5;" id="inventory-list">
+    </div>
+    <div class="container-fluid p-0" style="height: 90.5vh; z-index: 5;" id="inventory-list">
       <div class="row h-100 m-0 w-100">
         <div class="container m-0" style=" padding: 1.9vw 1.9vw 1.5vw 7vw;">
           <div class="row h-100 m-0" style="box-shadow: 0px 1px 10px #909090; border-radius: 10px;">
@@ -1058,7 +1057,7 @@
           </div>
         </div>
       </div>
-    </div>-->
+    </div>
   </section>
 
   <section id="payment-container">
@@ -1242,9 +1241,9 @@
 </footer>
 <script src="assets/jquery/code.jquery.com_jquery-3.7.1.min.js"></script>
 <script src="controller/indexController.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<!--<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>-->
 </body>
 </html>
