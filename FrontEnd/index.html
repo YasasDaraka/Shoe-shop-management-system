@@ -922,9 +922,9 @@
       <div class="row h-100 m-0 w-100">
         <div class="container m-0" style=" padding: 1.9vw 1.9vw 1.5vw 7vw;">
           <div class="row h-100 m-0" style="box-shadow: 0px 1px 10px #909090; border-radius: 10px;">
-            <div class="col-md-6 "style="padding: 0 0 0 0.9vw;">
-              <div class="row h-50 m-0">
-                <div class="col-md-12 p-0 ">
+            <div class="col-md-12 "style="padding: 0 0 0 0.9vw;">
+              <div class="row">
+                <div class="col-lg-6 p-0 ">
                   <div class="container row mt-2">
 
                     <div class="col">
@@ -986,96 +986,86 @@
 
                   </div>
                 </div>
-              </div>
-              <div class="row h-50 m-0">
-                <div class="col-md-12 p-0">
+                <div class="col-lg-6 p-0">
+                  <div class="col-md-12 p-0">
+                    <div class="row h-50 m-0">
+                      <div class="col-md-12 p-0">
+                        <div class="row h-100 m-0 p-0 d-flex justify-content-center">
+                          <div class="col"style="height: 330px; width: auto;">
+                            <section class="content-box-2 p-0 mt-2" style="padding: 40px;">
 
-
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6 p-0">
-              <div class="row h-50 m-0">
-                <div class="col-md-12 p-0">
-                  <div class="row h-100 m-0 p-0 d-flex justify-content-center">
-                    <div class="col"style="height: 330px; width: auto;">
-                      <section class="content-box-2 p-0 mt-2" style="padding: 40px;">
-
-                        <div class="row">
-                          <div class="container col-6">
-                            <div class="form-group">
-                              <label for="paymentMethod" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Payment Method</label>
-                              <select class="form-control" id="paymentMethod">
-                                <option value="cash">Cash</option>
-                                <option value="card">Card</option>
-                              </select>
-                            </div>
-
-                          </div>
-
-                          <div class="container col-6">
-                            <div class="col-12">
                               <div class="row">
-                                <div class="col-12">
-                                  <span class="" id="total-text" style="color: #3d98ef;font-size: 13px;">Total : </span>
+                                <div class="container col-6">
+                                  <div class="form-group">
+                                    <label for="paymentMethod" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Payment Method</label>
+                                    <select class="form-control" id="paymentMethod">
+                                      <option value="cash">Cash</option>
+                                      <option value="card">Card</option>
+                                    </select>
+                                  </div>
+
                                 </div>
-                                <div class="col-12">
-                                  <span id="total"style="font-size: 30px;color: #3d98ef;">0</span> Rs/=
+
+                                <div class="container col-6">
+                                  <div class="col-12">
+                                    <div class="row">
+                                      <div class="col-12">
+                                        <span class="" id="total-text" style="color: #3d98ef;font-size: 13px;">Total : </span>
+                                      </div>
+                                      <div class="col-12">
+                                        <span id="total"style="font-size: 30px;color: #3d98ef;">0</span> Rs/=
+                                      </div>
+                                    </div>
+                                  </div>
+
+                                  <div class="col-12">
+                                    <div class="row">
+                                      <div class="col-12">
+                                        <span id="total-text1" style="color: #ef5350;font-size: 13px;">SubTotal : </span>
+                                      </div>
+                                      <div class="col-12">
+                                        <span id="subtotal" style="color: #ef5350;font-size: 30px;">0</span> Rs/=
+                                      </div>
+                                    </div>
+                                  </div>
                                 </div>
+
+                                <div class="col-6 mt-4">
+                                  <div class="form-group">
+                                    <label style="font-weight: bold;margin-right: 10px;">Cash</label>
+                                    <input class="form-control" id="txtCash" min="0" type="number">
+                                    <span class="control-error"
+                                          id="cash-empty-error"></span>
+                                  </div>
+                                </div>
+
+                                <div class="col-6 mt-4">
+                                  <div class="form-group">
+                                    <label style="font-weight: bold;margin-right: 10px;">Discount</label>
+                                    <input class="form-control" id="txtDiscount" min="0" type="number" style="width: 15vw">
+                                  </div>
+                                </div>
+
+                                <div class="col-8 mt-2" style="width: 200%;">
+                                  <div class="form-group">
+                                    <label style="font-weight: bold;margin-right: 10px;">Balance</label>
+                                    <input class="form-control" id="txtBalance" type="text" style="width: 21vw">
+                                  </div>
+                                </div>
+
                               </div>
-                            </div>
-
-                            <div class="col-12">
-                              <div class="row">
-                                <div class="col-12">
-                                  <span id="total-text1" style="color: #ef5350;font-size: 13px;">SubTotal : </span>
-                                </div>
-                                <div class="col-12">
-                                  <span id="subtotal" style="color: #ef5350;font-size: 30px;">0</span> Rs/=
-                                </div>
-                              </div>
-                            </div>
+                            </section>
                           </div>
-
-                          <div class="col-6 mt-4">
-                            <div class="form-group">
-                              <label style="font-weight: bold;margin-right: 10px;">Cash</label>
-                              <input class="form-control" id="txtCash" min="0" type="number">
-                              <span class="control-error"
-                                    id="cash-empty-error"></span>
-                            </div>
-                          </div>
-
-                          <div class="col-6 mt-4">
-                            <div class="form-group">
-                              <label style="font-weight: bold;margin-right: 10px;">Discount</label>
-                              <input class="form-control" id="txtDiscount" min="0" type="number" style="width: 15vw">
-                            </div>
-                          </div>
-
-                          <div class="col-8 mt-2" style="width: 200%;">
-                            <div class="form-group">
-                              <label style="font-weight: bold;margin-right: 10px;">Balance</label>
-                              <input class="form-control" id="txtBalance" type="text" style="width: 21vw">
-                            </div>
-                          </div>
-
                         </div>
-                      </section>
+                      </div>
                     </div>
+
                   </div>
                 </div>
-              </div>
-              <div class="row h-50 m-0">
-                <div class="col-md-6 p-0">
-                  <!--space-->
-                </div>
-                <div class="col-md-6 p-0">
-
                 </div>
               </div>
-
             </div>
+
           </div>
         </div>
       </div>
