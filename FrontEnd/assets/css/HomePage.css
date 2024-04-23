@@ -9,7 +9,7 @@ html {
     background-color: #FFA633;
     font-family: 'Fira Sans', sans-serif;
 }
-#btn-log,#signIn,#signUp,#adminSignIn,#adminSignUp{
+#btn-log,#signIn,#signUp,#adminLogOut{
     padding: 0.593vw 1.112vw;
     text-decoration: none;
     font-weight: bold;
@@ -23,7 +23,7 @@ html {
     transition: .5s ease-out;
     font-size: 0.8vw;
 }
-#btn-log:hover,#signIn:hover,#signUp:hover{
+#btn-log:hover,#signIn:hover,#signUp:hover,#adminLogOut:hover{
     background-position: left;
     color: #ffffff;
 }
