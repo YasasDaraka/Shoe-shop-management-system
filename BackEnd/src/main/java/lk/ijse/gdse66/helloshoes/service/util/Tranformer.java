@@ -1,10 +1,13 @@
 package lk.ijse.gdse66.helloshoes.service.util;
 
+import lk.ijse.gdse66.helloshoes.dto.CustomerDTO;
+import lk.ijse.gdse66.helloshoes.entity.Customer;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 
@@ -32,7 +35,7 @@ public class Tranformer {
     }
 
     public <R> R convert(Object from, ClassType to) {
-        if (getType(to) instanceof OrderDetailsDTO) {
+        /*if (getType(to) instanceof OrderDetailsDTO) {
             return (R) toOrderDetailsDTO((OrderDetails) from);
         }
         if (getType(to) instanceof OrderDetails) {
@@ -49,11 +52,11 @@ public class Tranformer {
         }
         if (to.equals(ClassType.ORDER_DETAILS_DTO_LIST)){
             return (R) toOrderDetailDTOList((List<OrderDetails>) from);
-        }
+        }*/
         return (R) mapper.map(from, getType(to));
 
     }
-    public List<OrderDTO> toOrderDTOList(List<Order> orders) {
+    /*public List<OrderDTO> toOrderDTOList(List<Order> orders) {
         return orders.stream()
                 .map(this::toOrderDTO)
                 .collect(Collectors.toList());
@@ -113,14 +116,14 @@ public class Tranformer {
                 .addMapping(src -> src.getItmQTY(), OrderDetails::setItmQTY)
                 .map(detailsDTO);
     }
-
+*/
     private Type getType(ClassType type) {
         switch (type) {
             case CUS_DTO:
                 return CustomerDTO.class;
             case CUS_ENTITY:
                 return Customer.class;
-            case CUS_DTO_LIST:
+            /*case CUS_DTO_LIST:
                 return new TypeToken<ArrayList<CustomerDTO>>() {}.getType();
             case CUS_ENTITY_LIST:
                 return new TypeToken<ArrayList<Customer>>() {}.getType();
@@ -145,7 +148,7 @@ public class Tranformer {
             case ORDER_DTO_LIST:
                 return new TypeToken<ArrayList<OrderDTO>>() {}.getType();
             case ORDER_DETAILS_DTO_LIST:
-                return new TypeToken<ArrayList<OrderDetailsDTO>>() {}.getType();
+                return new TypeToken<ArrayList<OrderDetailsDTO>>() {}.getType();*/
             default:
                 throw new IllegalArgumentException("Unsupported ClassType: " + type);
         }
