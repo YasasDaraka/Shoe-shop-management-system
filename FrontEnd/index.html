@@ -214,8 +214,10 @@
 
                       <div class="col">
                         <label for="cusId" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px;width: 20vw;">Customer ID</label>
-                        <input type="text" class="form-control" id="cusId" >
-                      </div>
+                        <div class="row m-0 p-0">
+                          <input type="text" class="form-control" id="cusId"style="width: 12vw" >
+                          <img id="cusAdd" style="width: 4.5vw; z-index: 10;" src="assets/images/add-icon.gif"></div>
+                        </div>
 
                       <div class="col">
                         <label for="cusGender" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Gender</label>
@@ -332,7 +334,7 @@
                         <div class="col p-0">
                           <div class="h-100 w-100 "style="padding-left: 5.2vw;">
 
-                            <div class="rating">
+                            <div class="rating" id="rating">
                               <input type="radio" id="star4" name="rating" value="4">
                               <label for="star4" class="star-label"><img src="assets/images/first-icon.png" alt="Silver Medal"><span>★</span></label>
                               <input type="radio" id="star3" name="rating" value="3">

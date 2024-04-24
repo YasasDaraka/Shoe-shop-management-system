@@ -79,3 +79,19 @@ function cusCaptureClear() {
     $('#captureButton').text("Capture");
     $("#capturedImage").attr('src', "assets/images/defaultCusPic.gif");
 }
+$('#cusAdd').click(function () {
+    cusFieldSet(true);
+    $(this).find("#cusId").focus();
+    /*generateCustomerId();
+    setClBtn();*/
+});
+function cusFieldSet(state) {
+    var ids = ["cusId", "cusGender", "cusName","cusDob","cusBuildNo", "cusLane", "cusCity","cusState","cusPostalCode",
+        "cusEmail", "cusContactNo","loyaltyDate","totalPoints", "lastPurchaseDate","rating"];
+    ids.forEach(function(id) {
+        $("#" + id).prop('disabled', state);
+    });
+    // $(this).find("#customerID").focus();
+    // generateCustomerId();
+    // setClBtn();
+}
