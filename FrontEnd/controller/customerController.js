@@ -7,6 +7,7 @@ $(document).ready(function () {
                 var displayStyle = window.getComputedStyle(targetNode).getPropertyValue('display');
                 if (displayStyle === 'none') {
                     stopWebcamStream();
+                    $('#cusVideo').hide();
                     $("#cusCapturedImage").show();
                     $('#cusCaptureButton').css("background-color", "#007bff");
                     $('#cusCaptureButton').css("border-color", "#007bff");
@@ -68,4 +69,13 @@ function stopWebcamStream() {
         tracks.forEach(track => track.stop());
         videoStream = null;
     }
+}
+function cusCaptureClear() {
+    stopWebcamStream();
+    $('#video').hide();
+    $("#capturedImage").show();
+    $('#captureButton').css("background-color", "#007bff");
+    $('#captureButton').css("border-color", "#007bff");
+    $('#captureButton').text("Capture");
+    $("#capturedImage").attr('src', "assets/images/defaultCusPic.gif");
 }
