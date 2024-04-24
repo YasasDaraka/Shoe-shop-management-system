@@ -6,7 +6,8 @@ $(document).ready(function () {
             if (mutation.attributeName === 'style') {
                 var displayStyle = window.getComputedStyle(targetNode).getPropertyValue('display');
                 if (displayStyle === 'none') {
-                    stopWebcamStream();
+                    stopEmpWebcamStream();
+                    $('#empVideo').hide();
                     $("#empCapturedImage").show();
                     $('#empCaptureButton').css("background-color", "#007bff");
                     $('#empCaptureButton').css("border-color", "#007bff");
