@@ -72,24 +72,6 @@ public class JwtServiceImpl implements JwtService {
         Date expiredDate = extractClaims(token, Claims::getExpiration);
         return expiredDate.before(new Date());
     }
-    @Override
-    public String generateAccessTokenFromRefreshToken(String refreshToken) {
 
-        String username = extractUserName(refreshToken);
-        System.out.println(username);
-        UserDetails user = userRepo.findByEmail(username)
-                .map(userEntity -> mapper.map(userEntity, UserDetails.class))
-                .orElseThrow(() -> new RuntimeException("User Not Found"));
-        System.out.println(user);
-        return generateToken(user);
-    }
-    public boolean validateRefreshToken(String refreshToken) {
-        try {
-            Jwts.parser().setSigningKey(jwtKey).parseClaimsJws(refreshToken);
-            return true;
-        } catch (JwtException | IllegalArgumentException e) {
-            return false;
-        }
-    }
 
 }

@@ -10,6 +10,7 @@ let mainPage = $('#main-view');
 let logInPage = $('#log-in-page');
 let signUpPage = $('#sign-up-page');
 let adminPage = $('#admin-container');
+let userPage = $('#user-container');
 let customerPage = $('#customer-container');
 let employeePage = $('#employee-container');
 let supplierPage = $('#supplier-container');
@@ -22,6 +23,7 @@ function allContainerHide(){
     logInPage.css('display','none');
     signUpPage.css('display','none');
     adminPage.css('display','none');
+    userPage.css('display','none');
     customerPage.css('display','none');
     employeePage.css('display','none');
     supplierPage.css('display','none');

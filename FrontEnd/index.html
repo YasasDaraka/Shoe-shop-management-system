@@ -23,6 +23,7 @@
   <link rel="stylesheet" href="assets/css/LogInPage.css">
   <link rel="stylesheet" href="assets/css/SignUpPage.css">
   <link rel="stylesheet" href="assets/css/AdminPage.css">
+  <link rel="stylesheet" href="assets/css/UserPage.css">
   <link rel="stylesheet" href="assets/css/CustomerPage.css">
 
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.css">
@@ -205,6 +206,40 @@
     </div>
 
   </section4>
+  <section dfn id="user-container">
+    <header id="user-header">
+      <nav class="navbar navbar-expand-lg bg-white nav-bar container-fluid d-flex " style="height: 60px; padding-right: 20px;padding-left: 50px">
+        <div class="d-flex justify-content-center align-items-center"style="display: inline-block; box-shadow: 0px 1px 10px #909090; background-color: white; z-index: 4; width: 32px; height: 33px; border-radius: 25%"><img class="admin-icon" style="width: 60px; padding-right:10px; z-index: 5" src="assets/images/arrow.gif"></div>
+        <!-- <img src="" width="" class="me-3">-->
+        <div class="ms-auto">
+          <!--<button type="button" class="btn" id="adminSignIn">Sign In</button>-->
+          <button type="button" class="btn" id="userLogOut" style="z-index: 5;">Log Out</button>
+        </div>
+      </nav>
+    </header>
+
+    <div class="container-fluid h-100">
+      <div class="row h-100">
+        <div class="col-lg-3 col-10 " id="user-nav-bar">
+
+          <nav class="nav">
+            <div class="nav_list d-lg-flex flex-lg-column justify-content-lg-between" style="padding-top: 10vh; padding-left:0.3vh;">
+              <a href="#" id="UserBtnDashboard" class="nav_link active admin-icon"><img style="width: 34px; padding-top:4.4vh; padding-left:0.6vh; z-index: 10;" src="assets/images/dashboard.gif"></a>
+              <a href="#" id="userBtnCustomer" class="nav_link admin-icon"><img style="width: 40px; padding-top:4.4vh; z-index: 10;" src="assets/images/customer.gif"></a>
+              <a href="#" id="userBtnInventory" class="nav_link admin-icon"><img style="width: 40px; padding-top:4.4vh; z-index: 10;" src="assets/images/inventory.gif"></a>
+              <a href="#" id="userBtnSupplier" class="nav_link admin-icon"><img style="width: 44px; padding-top:4.4vh; z-index: 10;" src="assets/images/supply.gif"></a>
+              <a href="#" id="userBtnEmployee" class="nav_link admin-icon"><img style="width: 40px; padding-top:4.4vh; z-index: 10;" src="assets/images/employee.gif"></a>
+              <a href="#" id="userBtnSales" class="nav_link admin-icon"><img style="width: 40px; padding-top:4.4vh; z-index: 10;" src="assets/images/payment.gif"></a>
+              <a href="#" id="userBtnUsers" class="nav_link admin-icon"><img style="width: 42px; padding-top:4vh; z-index: 10;" src="assets/images/users.gif"></a>
+            </div>
+          </nav>
+        </div>
+        <div class="col-lg-9">
+        </div>
+      </div>
+    </div>
+
+  </section>
 
   <section id="customer-container" class="container-fluid w-100 h-100 p-0">
     <div class="container-fluid p-0" style="height: 90.5vh; z-index: 5;" id="customer-main">
@@ -1254,9 +1289,10 @@
 </footer>
 <script src="assets/jquery/code.jquery.com_jquery-3.7.1.min.js"></script>
 <script src="controller/indexController.js"></script>
-<script src="controller/logInController.js"></script>
+<script src="controller/signInController.js"></script>
 <script src="controller/signUpController.js"></script>
 <script src="controller/adminController.js"></script>
+<script src="controller/userController.js"></script>
 <script src="controller/customerController.js"></script>
 <script src="controller/employeeController.js"></script>
 <!--<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>

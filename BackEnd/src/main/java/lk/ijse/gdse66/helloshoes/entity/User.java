@@ -1,6 +1,7 @@
 package lk.ijse.gdse66.helloshoes.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lk.ijse.gdse66.helloshoes.service.util.Role;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,9 +21,12 @@ public class User implements UserDetails {
     @Id
     private String id;
     @Column(unique = true)
+    @NotNull
     private String email;
+    @NotNull
     private String password;
     @Enumerated(EnumType.STRING)
+    @NotNull
     private Role role;
 
     @Override
