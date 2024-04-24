@@ -1,6 +1,5 @@
-package lk.ijse.gdse66.helloshoes.dto;
+package lk.ijse.gdse66.helloshoes.auth.request;
 
-import lk.ijse.gdse66.helloshoes.service.util.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,9 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UserDTO {
-    private String id;
+public class SignUpRequest {
     private String email;
     private String password;
-    private Role role;
+    private String role;
 }
