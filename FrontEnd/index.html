@@ -134,24 +134,28 @@
               <div class="ms-4 mt-4" style="width: 90%; height: 48vh">
                 <div class="col-sm">
                   <label for="inputEmail" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Email</label>
-                  <input type="email" class="form-control border border-secondary" id="inputEmail">
+                  <input type="email" class="form-control border border-secondary" id="inputEmail"style="width: 18vw">
                 </div>
-
-                <div class="mt-4">
+                <div class="">
                   <div class="row">
 
                     <div class="col-sm">
                       <label for="inputPassword" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Password</label>
                       <input type="password" class="form-control border border-secondary" id="inputPassword" style="width: 250px">
                     </div>
-
+                    <div class="col-sm">
+                      <label for="reInputPassword" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Confirm Password</label>
+                      <input type="password" class="form-control border border-secondary" id="reInputPassword" style="width: 250px">
+                    </div>
                     <div class="col-sm">
                       <label for="inputRole" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Role</label>
-                      <select aria-label="Default select example" class="form-select border border-secondary" id="inputRole" style="width: 250px">
+                      <select aria-label="Default select example" class="form-select border border-secondary" id="inputRole" style="width: 10vw">
+                        <option value="signUpAdmin"selected>Admin</option>
+                        <option value="signUpUser">User</option>
                       </select>
                     </div>
-                    <div class="col d-flex justify-content-end mt-5">
-                      <button id="signup-page-signup" type="button" class="btn mt-3" style="color: #ffffff;background-color: rgba(59, 59, 59, 0.9);width: 8vw">Sign Up</button>
+                    <div class="col d-flex justify-content-end mt-3">
+                      <button id="signup-page-signup" type="button" class="btn mt-4" style="color: #ffffff;background-color: rgba(59, 59, 59, 0.9);width: 8vw;height: fit-content">Sign Up</button>
                     </div>
                   </div>
                 </div>
@@ -216,7 +220,7 @@
                         <label for="cusId" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px;width: 20vw;">Customer ID</label>
                         <div class="row m-0 p-0">
                           <input type="text" class="form-control" id="cusId" style="width: 12vw">
-                          <img id="cusAdd" style="width: 4.5vw; z-index: 10;" src="assets/images/add-icon.gif"></div>
+                          <img class="admin-icon" id="cusAdd" style="width: 4.5vw; z-index: 10;" src="assets/images/add-icon.gif"></div>
                         <p class="position-absolute mt-1"><small class="text-danger" id="cusIdError"></small></p>
                         </div>
 
@@ -436,7 +440,7 @@
                       <label for="empId" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px;width: 20vw;">Employee ID</label>
                       <div class="row m-0 p-0">
                         <input type="text" class="form-control" id="empId" style="width: 12vw">
-                        <img id="empAdd" style="width: 4.5vw; z-index: 10;" src="assets/images/add-icon.gif"></div>
+                        <img class="admin-icon" id="empAdd" style="width: 4.5vw; z-index: 10;" src="assets/images/add-icon.gif"></div>
                       <p class="position-absolute mt-1"><small class="text-danger" id="empIdError"></small></p>
                     </div>
 
