@@ -56,7 +56,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                     /*if (proPic != null && !proPic.startsWith("data:image/png;base64,")) {
                         Base64.getEncoder().encodeToString(profilePic.getBytes());
                     }*/
-                    employeeRepo.save(tranformer.convert(dto, Tranformer.ClassType.CUS_ENTITY));
+                    employeeRepo.save(tranformer.convert(dto, Tranformer.ClassType.EMP_ENTITY));
                 });
     }
 

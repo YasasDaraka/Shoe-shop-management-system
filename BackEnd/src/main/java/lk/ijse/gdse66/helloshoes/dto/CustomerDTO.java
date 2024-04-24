@@ -1,5 +1,4 @@
 package lk.ijse.gdse66.helloshoes.dto;
-import lk.ijse.gdse66.helloshoes.embedded.Address;
 import lk.ijse.gdse66.helloshoes.service.util.Gender;
 import lk.ijse.gdse66.helloshoes.service.util.LoyaltyLevel;
 import lombok.AllArgsConstructor;
