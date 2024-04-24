@@ -432,10 +432,12 @@
                 <div class="col-md-12 p-0 d-flex justify-content-center justify-content-evenly" style="width: 24.4vw">
                   <div class="container row mt-4">
 
-                    <div class="col">
+                    <div class="col pb-3">
                       <label for="empId" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px;width: 20vw;">Employee ID</label>
-                      <input type="text" class="form-control" id="empId" >
-                      <p><small class="text-danger position-absolute mt-1" id="empIdError"></small></p>
+                      <div class="row m-0 p-0">
+                        <input type="text" class="form-control" id="empId" style="width: 12vw">
+                        <img id="empAdd" style="width: 4.5vw; z-index: 10;" src="assets/images/add-icon.gif"></div>
+                      <p class="position-absolute mt-1"><small class="text-danger" id="empIdError"></small></p>
                     </div>
 
                     <div class="col">
