@@ -70,15 +70,17 @@ function stopWebcamStream() {
         videoStream = null;
     }
 }
+
 function cusCaptureClear() {
     stopWebcamStream();
     $('#video').hide();
-    $("#capturedImage").show();
-    $('#captureButton').css("background-color", "#007bff");
-    $('#captureButton').css("border-color", "#007bff");
-    $('#captureButton').text("Capture");
-    $("#capturedImage").attr('src', "assets/images/defaultCusPic.gif");
+    $("#cusCapturedImage").show();
+    $('#cusCaptureButton').css("background-color", "#007bff");
+    $('#cusCaptureButton').css("border-color", "#007bff");
+    $('#cusCaptureButton').text("Capture");
+    $("#cusCapturedImage").attr('src', "assets/images/defaultCusPic.gif");
 }
+
 /*$('#cusAdd').click(function () {
     cusFieldSet(true);
     $(this).find("#cusId").focus();
@@ -95,3 +97,73 @@ function cusFieldSet(state) {
     // generateCustomerId();
     // setClBtn();
 }*/
+$("#cusSave").click(function () {
+
+
+        var image = $("#cusCapturedImage");
+        var imageUrl = image.attr('src');
+        if (!imageUrl) {
+            alert("Error");
+        } else {
+            saveCustomer();
+        }
+
+});
+
+function saveCustomer() {
+
+    /*var array = $("#CusForm").serializeArray();
+    var data = {};
+    array.forEach(function (field) {
+        data[field.name] = field.value;
+    });*/
+    var formData = returnAllCusVal();
+    var image = $("#cusCapturedImage");
+    var imageUrl = image.attr('src');
+    formData.push({name: 'proPic', value: imageUrl});
+    performAuthenticatedRequest();
+    const accessToken = localStorage.getItem('accessToken');
+    console.log(formData);
+    console.log(accessToken);
+    $.ajax({
+        url: "http://localhost:8080/helloshoes/api/v1/customer",
+        method: "POST",
+        headers: {
+            'Authorization': 'Bearer ' + accessToken
+        },
+        data: formData,
+        /*contentType: "application/x-www-form-urlencoded",*/
+        success: function (res, textStatus, jsXH) {
+            alert("Customer Added Successfully");
+        },
+        error: function (ob, textStatus, error) {
+            alert(textStatus + " : Error Customer Not Added")
+
+        }
+    });
+
+}
+function returnAllCusVal(){
+    var formData = {};
+    var address = {};
+    var rating = $("input[name='rating']:checked").val();
+
+    formData.customerId = $("#cusId").val();
+    formData.customerName = $("#cusName").val();
+    formData.gender = $("#cusGender").val();
+    formData.loyaltyDate = $("#loyaltyDate").val();
+    formData.level = rating;
+    formData.totalPoints = $("#totalPoints").val();
+    formData.customerDob = $("#cusDob").val();
+    address.buildNo = $("#cusBuildNo").val();
+    address.lane = $("#cusLane").val();
+    address.city = $("#cusCity").val();
+    address.state = $("#cusState").val();
+    address.postalCode = $("#cusPostalCode").val();
+    formData.contactNo = $("#cusContactNo").val();
+    formData.email = $("#cusEmail").val();
+    formData.recentPurchase = $("#lastPurchaseDate").val();
+
+    return formData;
+
+}

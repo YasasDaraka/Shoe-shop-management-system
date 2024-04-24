@@ -20,8 +20,7 @@ import java.util.Date;
 public class Customer {
 
     @Id
-    @Column(name = "customer_id")
-    private Long customerId;
+    private String customerId;
 
     private String customerName;
 
@@ -31,7 +30,6 @@ public class Customer {
     private Date loyaltyDate;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "level")
     private LoyaltyLevel level;
 
     private Integer totalPoints;

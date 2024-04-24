@@ -6,12 +6,8 @@ import lk.ijse.gdse66.helloshoes.auth.response.JwtAuthResponse;
 import lk.ijse.gdse66.helloshoes.service.AuthenticationService;
 import lk.ijse.gdse66.helloshoes.service.JwtService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @RestController
 @RequestMapping("api/v1/auth")

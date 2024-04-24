@@ -14,19 +14,14 @@ import lombok.ToString;
 @Embeddable
 public class Address {
 
-    @Column(name = "address_line_01")
     private String buildNo;
 
-    @Column(name = "address_line_02")
-    private String cane;
+    private String lane;
 
-    @Column(name = "address_line_03")
     private String city;
 
-    @Column(name = "address_line_04")
     private String state;
 
-    @Column(name = "address_line_05")
     private String postalCode;
 
 }

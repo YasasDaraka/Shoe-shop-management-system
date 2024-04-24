@@ -7,7 +7,6 @@ import lk.ijse.gdse66.helloshoes.service.exception.DuplicateRecordException;
 import lk.ijse.gdse66.helloshoes.service.exception.NotFoundException;
 import lk.ijse.gdse66.helloshoes.service.util.IdGenerator;
 import lk.ijse.gdse66.helloshoes.service.util.Tranformer;
-import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -57,6 +56,9 @@ public class CustomerServiceImpl implements CustomerService {
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
+                    }*/
+                    /*if (proPic != null && !proPic.startsWith("data:image/png;base64,")) {
+                        Base64.getEncoder().encodeToString(profilePic.getBytes());
                     }*/
                     customerRepo.save(tranformer.convert(dto, Tranformer.ClassType.CUS_ENTITY));
                 });
