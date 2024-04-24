@@ -30,7 +30,7 @@ public class CustomerDTO{
 
     private Date customerDob;
 
-    private Address address;
+    private AddressDTO address;
 
     private String contactNo;
 

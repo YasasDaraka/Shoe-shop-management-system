@@ -6,7 +6,7 @@ import org.springframework.stereotype.Component;
 public class IdGenerator {
 
     public enum GenerateTypes {
-        CUSTOMER, ITEM, ORDER
+        CUSTOMER, EMPLOYEE, ITEM, ORDER
     }
 
     public String getGenerateID(String id, GenerateTypes type) {
@@ -25,6 +25,8 @@ public class IdGenerator {
                 return "I00-"+id;
             case ORDER:
                 return "OID-"+id;
+            case EMPLOYEE:
+                return "E00-"+id;
             default:
                 throw new IllegalArgumentException("Unsupported ClassType Gor Generate: " + type);
         }

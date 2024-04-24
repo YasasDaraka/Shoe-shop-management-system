@@ -1,8 +1,11 @@
 package lk.ijse.gdse66.helloshoes.service.util;
 
 import lk.ijse.gdse66.helloshoes.dto.CustomerDTO;
+import lk.ijse.gdse66.helloshoes.dto.EmployeeDTO;
 import lk.ijse.gdse66.helloshoes.entity.Customer;
+import lk.ijse.gdse66.helloshoes.entity.Employee;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -20,6 +23,9 @@ public class Tranformer {
         CUS_DTO,
         CUS_ENTITY,
         CUS_DTO_LIST,
+        EMP_DTO,
+        EMP_ENTITY,
+        EMP_DTO_LIST,
         CUS_ENTITY_LIST,
         ITEM_DTO,
         ITEM_ENTITY,
@@ -123,9 +129,15 @@ public class Tranformer {
                 return CustomerDTO.class;
             case CUS_ENTITY:
                 return Customer.class;
-            /*case CUS_DTO_LIST:
+            case CUS_DTO_LIST:
                 return new TypeToken<ArrayList<CustomerDTO>>() {}.getType();
-            case CUS_ENTITY_LIST:
+            case EMP_DTO:
+                return EmployeeDTO.class;
+            case EMP_ENTITY:
+                return Employee.class;
+            case EMP_DTO_LIST:
+                return new TypeToken<ArrayList<EmployeeDTO>>() {}.getType();
+            /*case CUS_ENTITY_LIST:
                 return new TypeToken<ArrayList<Customer>>() {}.getType();
             case ITEM_DTO:
                 return ItemDTO.class;
