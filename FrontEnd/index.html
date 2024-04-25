@@ -1195,16 +1195,18 @@
                             <section class="content-box-2 p-0 mt-2" style="padding: 40px;">
 
                               <div class="row">
-                                <div class="container col-6">
-                                  <div class="form-group">
-                                    <label for="paymentMethod" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Payment Method</label>
-                                    <select class="form-control" id="paymentMethod">
-                                      <option value="cash">Cash</option>
-                                      <option value="card">Card</option>
-                                    </select>
+                                <div class=" container col-6 d-flex justify-content-evenly align-items-center" style="padding-right: 3vw;">
+                                  <div id="cashImage" class="mt-2 d-flex flex-column align-items-center">
+                                    <label for="paymentCash" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px; margin-bottom: 10px;">Cash Payment</label>
+                                    <img class="mt-1 admin-icon" src="assets/images/cash.gif" alt="Cash" id="paymentCash" style="width: 80px; z-index: 10;"/>
                                   </div>
 
+                                  <div id="cardImage" class="mt-2 d-flex flex-column align-items-center">
+                                    <label for="paymentCard" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px; margin-bottom: 10px;">Card Payment</label>
+                                    <img class="mt-1 admin-icon" src="assets/images/card.gif" alt="Card" id="paymentCard" style="width: 80px; z-index: 10;" />
+                                  </div>
                                 </div>
+
 
                                 <div class="container col-6">
                                   <div class="col-12">
