@@ -1,10 +1,7 @@
 package lk.ijse.gdse66.helloshoes.dto;
 import lk.ijse.gdse66.helloshoes.service.util.Gender;
 import lk.ijse.gdse66.helloshoes.service.util.LoyaltyLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -13,6 +10,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Builder
 public class CustomerDTO{
 
     private String customerId;

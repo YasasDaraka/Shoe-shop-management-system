@@ -1,14 +1,12 @@
 package lk.ijse.gdse66.helloshoes.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Builder
 public class AddressDTO {
     private String buildNo;
 

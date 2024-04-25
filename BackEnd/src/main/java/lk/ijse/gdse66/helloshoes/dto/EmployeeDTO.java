@@ -4,16 +4,14 @@ import jakarta.persistence.*;
 import lk.ijse.gdse66.helloshoes.embedded.Address;
 import lk.ijse.gdse66.helloshoes.service.util.Gender;
 import lk.ijse.gdse66.helloshoes.service.util.Role;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
+@Builder
 public class EmployeeDTO {
     private String employeeId;
     private String employeeName;
