@@ -2,9 +2,11 @@ package lk.ijse.gdse66.helloshoes.service.util;
 
 import lk.ijse.gdse66.helloshoes.dto.CustomerDTO;
 import lk.ijse.gdse66.helloshoes.dto.EmployeeDTO;
+import lk.ijse.gdse66.helloshoes.dto.SupplierDTO;
 import lk.ijse.gdse66.helloshoes.dto.UserDTO;
 import lk.ijse.gdse66.helloshoes.entity.Customer;
 import lk.ijse.gdse66.helloshoes.entity.Employee;
+import lk.ijse.gdse66.helloshoes.entity.Supplier;
 import lk.ijse.gdse66.helloshoes.entity.User;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -30,6 +32,9 @@ public class Tranformer {
         EMP_DTO,
         EMP_ENTITY,
         EMP_DTO_LIST,
+        SUP_DTO,
+        SUP_ENTITY,
+        SUP_DTO_LIST,
         CUS_ENTITY_LIST,
         ITEM_DTO,
         ITEM_ENTITY,
@@ -145,6 +150,12 @@ public class Tranformer {
                 return Employee.class;
             case EMP_DTO_LIST:
                 return new TypeToken<ArrayList<EmployeeDTO>>() {}.getType();
+            case SUP_DTO:
+                return SupplierDTO.class;
+            case SUP_ENTITY:
+                return Supplier.class;
+            case SUP_DTO_LIST:
+                return new TypeToken<ArrayList<SupplierDTO>>() {}.getType();
             /*case CUS_ENTITY_LIST:
                 return new TypeToken<ArrayList<Customer>>() {}.getType();
             case ITEM_DTO:
