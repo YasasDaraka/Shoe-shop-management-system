@@ -47,7 +47,8 @@ public class UserServiceImpl implements UserService {
     public void updateUser(UserDTO dto) {
         userRepo.findByEmail(dto.getEmail()).ifPresentOrElse(
                 user -> {
-                        userRepo.save(tranformer.convert(dto, Tranformer.ClassType.USER_ENTITY));
+                    System.out.println(user);
+                        userRepo.save(new User(user.getId(),dto.getEmail(),dto.getPassword(),dto.getRole()));
                 },
                 () -> {
                     throw new NotFoundException("User Not Exist");

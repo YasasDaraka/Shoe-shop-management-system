@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final AuthenticationService authenticationService;
-    private final JwtService jwtService;
     private final UserService userService;
 
     @PostMapping("/signin")

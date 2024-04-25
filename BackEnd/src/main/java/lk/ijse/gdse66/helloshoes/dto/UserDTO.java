@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class UserDTO {
-    @NotBlank(message = "id can not be null")
+
     private String id;
     @NotBlank(message = "email can not be null")
     private String email;
