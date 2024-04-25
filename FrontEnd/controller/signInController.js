@@ -1,6 +1,8 @@
 $("#btnSignIn").click(function () {
-    signIn();
-
+    //signIn();
+    allContainerHide();
+    adminPage.css('display','block');
+    logInPage.css('display','none');
 });
 function signIn() {
     let value = {
