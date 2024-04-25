@@ -5,7 +5,6 @@ import lk.ijse.gdse66.helloshoes.auth.request.SignUpRequest;
 import lk.ijse.gdse66.helloshoes.auth.response.JwtAuthResponse;
 import lk.ijse.gdse66.helloshoes.dto.UserDTO;
 import lk.ijse.gdse66.helloshoes.service.AuthenticationService;
-import lk.ijse.gdse66.helloshoes.service.JwtService;
 import lk.ijse.gdse66.helloshoes.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -52,5 +51,12 @@ public class UserController {
     public ResponseEntity<Void> deleteUser(@RequestParam("username") String username) {
         userService.deleteUser(username);
         return ResponseEntity.noContent().build();
+    }
+
+    @ResponseStatus(HttpStatus.OK)
+    @PostMapping
+    public ResponseEntity<Boolean> checkPassword(@RequestBody UserDTO dto) {
+        boolean isCorrect = userService.checkPassword(dto);
+        return ResponseEntity.ok(isCorrect);
     }
 }

@@ -35,7 +35,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(signInRequest.getEmail(), signInRequest.getPassword()));
         User user = userRepo.findByEmail(signInRequest.getEmail())
                 .orElseThrow(() -> new UsernameNotFoundException("user not found"));
-        String generatedToken = jwtService.generateToken(user);
+            String generatedToken = jwtService.generateToken(user);
         return JwtAuthResponse.builder().token(generatedToken).build();
     }
 
@@ -51,4 +51,17 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         String generatedToken = jwtService.generateToken(savedUser);
         return JwtAuthResponse.builder().token(generatedToken).build();
     }
+
 }
+    /*User user = userRepo.findByEmail(signInRequest.getEmail())
+            .map(userCheck -> {
+                boolean matches = passwordEncoder.matches(signInRequest.getPassword(), userCheck.getPassword());
+                if (!matches) {
+                    new PassordNotFoundException("user not found")
+                    System.out.println("Password matches!");
+                } else {
+                    System.out.println("Password does not match!");
+                }
+
+            })
+            .orElseThrow(() -> new UsernameNotFoundException("user not found"));*/
