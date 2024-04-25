@@ -1249,9 +1249,15 @@
                                 </div>
 
                                 <div class="col-8 mt-2" style="width: 200%;">
-                                  <div class="form-group">
-                                    <label style="font-weight: bold;margin-right: 10px;">Balance</label>
-                                    <input class="form-control" id="txtBalance" type="text" style="width: 21vw">
+                                  <label style="font-weight: bold;margin-right: 10px;">Balance</label>
+                                  <div class="form-group d-flex align-items-center">
+                                    <input class="form-control me-2" id="txtBalance" type="text" style="width: 21vw;">
+                                    <button class="ms-4 btn btn-success" id="btnSubmitOrder" type="button">Purchase</button>
+                                  </div>
+
+                                  <div class="col mt-4">
+                                    <button id="order-add-item" class="btn btn-danger" style="" type="button">Add Item</button>
+                                    <button type="button" class="btn ms-2 btn-warning" id="order-clear" style="">Clear</button>
                                   </div>
                                 </div>
 
