@@ -23,39 +23,39 @@ public class SupplierController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(path = "/getAll")
     public List<SupplierDTO> getAllSuppliers() {
-        return supService.getAllCustomer();
+        return supService.getAllSuppliers();
     }
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(path = "/search/{id:S00-0*[1-9]\\d{0,2}}")
     public SupplierDTO getSupplier(@PathVariable("id") String id) {
-        return supService.searchCustomer(id);
+        return supService.searchSupplier(id);
     }
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(path = "/getGenId")
     public String getSupplierGenId() {
-        return supService.getCustomerGenId();
+        return supService.getSupplierGenId();
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Void> saveSupplier(@RequestBody SupplierDTO dto) {
         System.out.println("Received supplier data: " + dto.toString());
-        supService.saveCustomer(dto);
+        supService.saveSupplier(dto);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping
     public ResponseEntity<Void> updateSupplier(@RequestBody SupplierDTO dto) {
         System.out.println("Received supplier data: " + dto.toString());
-        supService.updateCustomer(dto);
+        supService.updateSupplier(dto);
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping(params = "supId")
     public ResponseEntity<Void> deleteSupplier(@RequestParam("supId") String supId) {
-        supService.deleteCustomer(supId);
+        supService.deleteSupplier(supId);
         return ResponseEntity.noContent().build();
     }
 
