@@ -33,7 +33,7 @@ function allContainerHide(){
     cardPage.css('display','none');
 }
 $(document).ready(function () {
-
+    purchaseBtnHide(true);
     allContainerHide();
     header.css('display','block');
     mainPage.css('display','block');
@@ -65,3 +65,9 @@ $(document).ready(function () {
         'max-width': 'calc(100%/5*1)'
     })
 });
+function purchaseBtnHide(value){
+    $("#txtBalance").prop("disabled", value);
+    $("#txtDiscount").prop("disabled", value);
+    $("#txtCash").prop("disabled", value);
+    $("#btnSubmitOrder").prop("disabled", value);
+}
