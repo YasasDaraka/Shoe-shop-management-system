@@ -1296,29 +1296,30 @@
     <div id="card-container" class="container-fluid p-0" style="background-color:rgba(229,229,229,0.5); position:absolute; height: 91vh; z-index: 5;width: 95vw;left: 5vw; right:0; top: 4.4vw; bottom: 0; margin: auto">
     <div style="border-radius: 10px; z-index: 15; width: 60vw;position: absolute; left: 0; right:0; top: 4.4vw; bottom: 0; margin: auto">
 
-      <div class="container" style="box-shadow: 0px 1px 10px #909090; border-radius: 10px;background-color:rgb(255,255,255);">
+      <div class="container" style="box-shadow: 0px 1px 10px #3aa7ee; border-radius: 10px;background-color:rgb(255,255,255);">
 
         <div class="row" style="">
 
-          <div class="col-5" style="height: 72vh; background-color: #f1f1f1;  box-shadow: 0px 1px 10px #FFA633; border: 2px solid #FFA633; text-align: center; position: relative; border-radius: 10px">
+          <div class="col-7" style="padding: 0;height: 72vh; /*background-color: #f1f1f1;*/  box-shadow: 0px 1px 10px #FFA633; border: 2px solid #FFA633; text-align: center; position: relative; border-radius: 10px">
+              <img style="position: absolute; width: 30vw; z-index: 5; top: 0; bottom: 0; left: 0; right: 0; margin: auto;" src="assets/images/banks.png">
           </div>
 
-          <div class="col-7">
+          <div class="col-5">
 
             <div class="mt-2"><h1 class="mt-2" style="padding-top: 2.1vh; font-family: 'Fira Sans', sans-serif; font-weight: 700; font-size: 30px; color: #434142;text-align: center;">Card Payment</h1>
 
             <div class="ms-4 mt-3" style="width: 90%; height: 48vh">
               <div class="col-sm d-flex flex-column align-items-center">
-                <label for="inputEmail" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px; color: #35393B;">Card Number</label>
-                <input type="email" class="form-control border border-secondary" id="inputil"style="width: 18vw">
+                <label for="cardNum" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px; color: #35393B;">Card Number</label>
+                <input type="email" class="form-control border border-info" id="cardNum"style="width: 18vw">
               </div>
               <div class="">
 
                   <div class="row">
 
                     <div class="mt-2 d-flex flex-column align-items-center">
-                      <label for="inputPassword" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Bank Name</label>
-                      <input type="password" class="form-control border border-secondary" id="inassword" style="width: 250px">
+                      <label for="bankName" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Bank Name</label>
+                      <input type="text" class="form-control border border-info" id="bankName" style="width: 250px">
                     </div>
 
 
@@ -1327,8 +1328,8 @@
                               <div class="col"style="text-align: center;">
                                   <label for="empId" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px;">Expiration Date</label>
                                   <div class="d-flex align-items-center justify-content-center">
-                                      <input type="month" placeholder="Month" class="form-control border border-secondary me-2" id="cardMonth" style="width: 125px;">
-                                      <input type="text" placeholder="Year" class="form-control border border-secondary" id="cardYear" style="width: 125px;">
+                                      <input type="month" placeholder="Month" class="form-control border border-info me-2" id="cardMonth" style="width: 125px;">
+                                      <input type="text" placeholder="Year" class="form-control border border-info" id="cardYear" style="width: 125px;">
                                   </div>
                               </div>
                           </div>
@@ -1337,8 +1338,8 @@
 
 
                       <div class="mt-2 d-flex flex-column align-items-center">
-                          <label for="inputPassword" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Password</label>
-                          <input type="password" class="form-control border border-secondary" id="inpPassword" style="width: 250px">
+                          <label for="verifyNum" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Verification Number</label>
+                          <input type="password" class="form-control border border-info" id="verifyNum" style="width: 250px">
                         </div>
 
 
