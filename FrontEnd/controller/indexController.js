@@ -16,6 +16,7 @@ let employeePage = $('#employee-container');
 let supplierPage = $('#supplier-container');
 let inventoryPage = $('#inventory-container');
 let paymentPage = $('#payment-container');
+let cardPage = $('#card-container');
 
 function allContainerHide(){
     header.css('display','none');
@@ -29,6 +30,7 @@ function allContainerHide(){
     supplierPage.css('display','none');
     inventoryPage.css('display','none');
     paymentPage.css('display','none');
+    cardPage.css('display','none');
 }
 $(document).ready(function () {
 
