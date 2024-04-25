@@ -2,8 +2,10 @@ package lk.ijse.gdse66.helloshoes.service.util;
 
 import lk.ijse.gdse66.helloshoes.dto.CustomerDTO;
 import lk.ijse.gdse66.helloshoes.dto.EmployeeDTO;
+import lk.ijse.gdse66.helloshoes.dto.UserDTO;
 import lk.ijse.gdse66.helloshoes.entity.Customer;
 import lk.ijse.gdse66.helloshoes.entity.Employee;
+import lk.ijse.gdse66.helloshoes.entity.User;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,8 @@ public class Tranformer {
     private ModelMapper mapper;
 
     public enum ClassType {
+        USER_DTO,
+        USER_ENTITY,
         CUS_DTO,
         CUS_ENTITY,
         CUS_DTO_LIST,
@@ -125,6 +129,10 @@ public class Tranformer {
 */
     private Type getType(ClassType type) {
         switch (type) {
+            case USER_DTO:
+                return UserDTO.class;
+            case USER_ENTITY:
+                return User.class;
             case CUS_DTO:
                 return CustomerDTO.class;
             case CUS_ENTITY:

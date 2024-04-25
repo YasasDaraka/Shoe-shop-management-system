@@ -3,9 +3,12 @@ package lk.ijse.gdse66.helloshoes.api;
 import lk.ijse.gdse66.helloshoes.auth.request.SignInRequest;
 import lk.ijse.gdse66.helloshoes.auth.request.SignUpRequest;
 import lk.ijse.gdse66.helloshoes.auth.response.JwtAuthResponse;
+import lk.ijse.gdse66.helloshoes.dto.UserDTO;
 import lk.ijse.gdse66.helloshoes.service.AuthenticationService;
 import lk.ijse.gdse66.helloshoes.service.JwtService;
+import lk.ijse.gdse66.helloshoes.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +20,7 @@ public class UserController {
 
     private final AuthenticationService authenticationService;
     private final JwtService jwtService;
+    private final UserService userService;
 
     @PostMapping("/signin")
     public ResponseEntity<JwtAuthResponse> signIn(
@@ -32,5 +36,22 @@ public class UserController {
         return ResponseEntity.ok(
                 authenticationService.signUp(signUpRequest));
     }
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping(path = "/search/{id}")
+    public UserDTO getUser(@PathVariable("id") String id) {
+        return userService.searchUser(id);
+    }
 
+    @PutMapping
+    public ResponseEntity<Void> updateUser(@RequestBody UserDTO dto) {
+        System.out.println("Received User data: " + dto.toString());
+        userService.updateUser(dto);
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping(params = "username")
+    public ResponseEntity<Void> deleteUser(@RequestParam("username") String username) {
+        userService.deleteUser(username);
+        return ResponseEntity.noContent().build();
+    }
 }
