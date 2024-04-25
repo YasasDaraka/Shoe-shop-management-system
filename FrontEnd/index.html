@@ -1129,8 +1129,10 @@
 
                     <div class="col">
                       <label for="orderId" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px;width: 20vw;">Order ID</label>
-                      <input type="text" class="form-control" id="orderId" style="width: 12vw" >
-                      <p><small class="text-danger position-absolute mt-1" id="orderIdError"></small></p>
+                      <div class="row m-0 p-0">
+                        <input type="text" class="form-control" id="orderId" style="width: 12vw">
+                        <img class="admin-icon" id="orderIdAdd" style="width: 4.5vw; z-index: 10;" src="assets/images/add-icon.gif"></div>
+                      <p class="position-absolute mt-1"><small class="text-danger" id="orderIdError"></small></p>
                     </div>
 
                     <div class="col">
