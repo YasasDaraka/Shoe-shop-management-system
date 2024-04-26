@@ -737,11 +737,12 @@
                     </div>
 
                     <div class="col">
-                      <label for="category" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Category</label>
-                      <select aria-label="Default select example" class="form-select" id="category" style="width: 16vw">
+                      <label for="supCategory" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Category</label>
+                      <select aria-label="Default select example" class="form-select" id="supCategory" style="width: 16vw">
                         <option value="INTERNATIONAL"selected>Male</option>
                         <option value="LOCAL">Female</option>
                       </select>
+                      <p class="position-absolute mt-1"><small class="text-danger" id="supCategoryError"></small></p>
                     </div>
 
                   </div>
@@ -1648,6 +1649,8 @@
 <script src="controller/userController.js"></script>
 <script src="controller/customerController.js"></script>
 <script src="controller/validation/customerValidation.js"></script>
+<script src="controller/supplierController.js"></script>
+<script src="controller/validation/supplierValidation.js"></script>
 <script src="controller/employeeController.js"></script>
 <script src="controller/orderController.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
