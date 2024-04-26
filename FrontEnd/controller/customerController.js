@@ -519,15 +519,3 @@ $('#cusSearch').click(function () {
     });
     setClBtn();
 });
-
-
-/*
-function cusCaptureClear() {
-    stopWebcamStream();
-    $('#video').hide();
-    $("#cusCapturedImage").show();
-    $('#cusCaptureButton').css("background-color", "#007bff");
-    $('#cusCaptureButton').css("border-color", "#007bff");
-    $('#cusCaptureButton').text("Capture");
-    $("#cusCapturedImage").attr('src', "assets/images/admin.gif");
-}*/

@@ -209,4 +209,5 @@ function captureClear() {
     $('#cusCaptureButton').css("border-color", "#007bff");
     $('#cusCaptureButton').text("Capture");
     $("#cusCapturedImage").attr('src', "assets/images/walk.gif");
+    $('input[name="rating"]:checked').prop('checked', false);
 }
