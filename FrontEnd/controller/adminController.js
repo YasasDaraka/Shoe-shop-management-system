@@ -27,6 +27,7 @@ let supMain = $('#supplier-main');
 let itmMain = $('#inventory-main');
 let cusMain = $('#customer-main');
 
+
 function hideAdminPages(){
     customerPage.css('display','none');
     employeePage.css('display','none');
@@ -64,7 +65,7 @@ $("#getAllCus, #getAllItm, #getAllEmp, #getAllSup").click(function () {
             break;
     }
 });
-$("#btnCustomer, #btnInventory, #btnSupplier, #btnEmployee, #btnSales").click(function () {
+$("#btnCustomer, #btnInventory, #btnSupplier, #btnEmployee, #btnSales,#btnAdminPanel").click(function () {
     hideAdminPages();
     switch ($(this).attr('id')) {
         case 'btnCustomer':
@@ -86,6 +87,9 @@ $("#btnCustomer, #btnInventory, #btnSupplier, #btnEmployee, #btnSales").click(fu
             empList.css('display', 'none');
             empMain.css('display', 'block');
             employeePage.css('display', 'block');
+            break;
+        case 'btnAdminPanel':
+            adminEditPage.css('display', 'block');
             break;
         case 'btnSales':
             paymentPage.css('display', 'block');

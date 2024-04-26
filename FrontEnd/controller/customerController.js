@@ -167,3 +167,22 @@ function returnAllCusVal(){
     return formData;
 
 }
+function setAllCusVal(ar){
+    var rating = $("input[name='rating']:checked").val();
+
+    $("#cusId").val(ar.customerId);
+    $("#cusName").val(ar.customerName);
+    $("#cusGender").val(ar.gender);
+    $("#loyaltyDate").val(ar.loyaltyDate);
+    $("#totalPoints").val(ar.totalPoints);
+    $("#cusDob").val(ar.customerDob);
+    $("#cusBuildNo").val(ar.buildNo);
+    $("#cusLane").val(ar.lane);
+    $("#cusCity").val(ar.city);
+    $("#cusState").val(ar.state);
+    $("#cusPostalCode").val(ar.postalCode);
+    $("#cusContactNo").val(ar.contactNo);
+    $("#cusEmail").val(ar.email);
+    $("#lastPurchaseDate").val(ar.recentPurchase);
+
+}
