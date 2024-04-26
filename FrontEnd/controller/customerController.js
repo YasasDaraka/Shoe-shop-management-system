@@ -7,39 +7,6 @@ $(document).ready(function () {
     $("#customerAddress").prop('disabled', true);
 */
 
-    /* $('#cusThead').css({
-         'width': '600px',
-         'display': 'flex'
-     });
-     $('#cusThead>th').css({
-         'flex': '1',
-         'max-width': 'calc(100%/15*1)'
-     });
-     $('#customerTable').css({
-         'max-height': '370px',
-         'overflow-y': 'auto',
-         'display': 'table-caption'
-     });
-     $('#customerTable>tr').css({
-         'width': '600px',
-         'display': 'flex'
-     });
-     $('#customerTable>tr>td').css({
-         'flex': '1',
-         'max-width': 'calc(100%/15*1)'
-     });*/
-    /*$('#customerTableDiv').css({
-        'max-height': '370px',
-        'overflow-y': 'auto',
-        'display': 'table-caption'
-    });
-     $('#customer-thead').css({
-         'display': 'flex'
-     });
-     $('#customer-thead>th').css({
-         'flex': '1',
-         'max-width': 'calc(94%/15*1)'
-     });*/
 });
 $(document).ready(function () {
     cusFieldSet(true);
@@ -161,6 +128,7 @@ function returnAllCusVal() {
     return formData;
 }
 function setLevel(value) {
+    console.log(value)
     switch (value) {
         case 'GOLD':
             $('#star4').prop('checked', true);
@@ -303,9 +271,6 @@ function bindTrrEvents() {
         $("#cusContactNo").val(contactNo);
         $("#cusEmail").val(email);
         $("#lastPurchaseDate").val(recentPurchase);
-        setLevel(level);
-
-
         /*$("#customerID").prop('disabled', false);
         $("#customerName").prop('disabled', false);
         $("#customerAddress").prop('disabled', false);
@@ -314,7 +279,9 @@ function bindTrrEvents() {
         setBtn();
         searchCustomer(customerId).then(function (res){
             captureClear();
+            setLevel(res.level);
             $("#cusCapturedImage").attr('src', res.proPic);
+
         });
     });
 }
@@ -502,31 +469,6 @@ function getAllCustomers() {
                     <td>${r.recentPurchase}</td>
                     </tr>`;
                 $("#customerTable").append(row);
-               /* $('#customerTable').css({
-                    'max-height': '370px',
-                    'overflow-y': 'none',
-                    'display': 'table-caption'
-                });
-                $('#customerTable>tr').css({
-                    'width': '94vw',
-                    'display': 'flex'
-                });                                       <td>${r.customerId}</td>
-                $('#customerTable>tr>td').css({
-                    'flex': '1',
-                    'max-width': 'calc(94%/15*1)',
-                    'font-family': 'Arial, sans-serif',
-                    'text-align': 'center'
-                });
-                $('#customerTable>tr>td').eq(14).css({
-                    'position': 'absolute',
-                    'width': '1px',
-                    'height': '1px',
-                    'margin': '-1px',
-                    'padding': '0',
-                    'overflow': 'hidden',
-                    'clip': 'rect(0, 0, 0, 0)',
-                    'border': '0'
-                });*/
                 bindTrrEvents();
             }
         }
