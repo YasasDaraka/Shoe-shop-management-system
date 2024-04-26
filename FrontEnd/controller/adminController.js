@@ -53,6 +53,7 @@ $("#getAllCus, #getAllItm, #getAllEmp, #getAllSup").click(function () {
     switch ($(this).attr('id')) {
         case 'getAllCus':
             cusList.css('display', 'block');
+            getAllCustomers();
             break;
         case 'getAllItm':
             itmList.css('display', 'block');

@@ -1,7 +1,7 @@
 $("#btnSignIn").click(function () {
-    showAlert();
+    //showAlert();
     signIn();
-    /*allContainerHide();
+   /* allContainerHide();
     adminPage.css('display','block');
     logInPage.css('display','none');*/
 });

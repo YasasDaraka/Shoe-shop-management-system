@@ -1,31 +1,45 @@
 $(document).ready(function () {
     // setTime();
     // setDate();
-    $("#customerID").prop('disabled', true);
+
+    /*$("#customerID").prop('disabled', true);
     $("#customerName").prop('disabled', true);
     $("#customerAddress").prop('disabled', true);
+*/
 
-    /*$('#cusThead').css({
-        'width': '600px',
-        'display': 'flex'
-    });
-    $('#cusThead>th').css({
-        'flex': '1',
-        'max-width': 'calc(100%/3*1)'
-    });
-    $('#customerTable').css({
+    /* $('#cusThead').css({
+         'width': '600px',
+         'display': 'flex'
+     });
+     $('#cusThead>th').css({
+         'flex': '1',
+         'max-width': 'calc(100%/15*1)'
+     });
+     $('#customerTable').css({
+         'max-height': '370px',
+         'overflow-y': 'auto',
+         'display': 'table-caption'
+     });
+     $('#customerTable>tr').css({
+         'width': '600px',
+         'display': 'flex'
+     });
+     $('#customerTable>tr>td').css({
+         'flex': '1',
+         'max-width': 'calc(100%/15*1)'
+     });*/
+    /*$('#customerTableDiv').css({
         'max-height': '370px',
         'overflow-y': 'auto',
         'display': 'table-caption'
     });
-    $('#customerTable>tr').css({
-        'width': '600px',
-        'display': 'flex'
-    });
-    $('#customerTable>tr>td').css({
-        'flex': '1',
-        'max-width': 'calc(100%/3*1)'
-    });*/
+     $('#customer-thead').css({
+         'display': 'flex'
+     });
+     $('#customer-thead>th').css({
+         'flex': '1',
+         'max-width': 'calc(94%/15*1)'
+     });*/
 });
 $(document).ready(function () {
     cusFieldSet(true);
@@ -107,18 +121,19 @@ $('#cusAdd').click(function () {
     generateCustomerId();
     setClBtn();
 });
+
 function cusFieldSet(state) {
-    var ids = ["cusId", "cusGender", "cusName","cusDob","cusBuildNo", "cusLane", "cusCity","cusState","cusPostalCode",
-        "cusEmail", "cusContactNo","loyaltyDate","totalPoints", "lastPurchaseDate","rating"];
-    ids.forEach(function(id) {
+    var ids = ["cusId", "cusGender", "cusName", "cusDob", "cusBuildNo", "cusLane", "cusCity", "cusState", "cusPostalCode",
+        "cusEmail", "cusContactNo", "loyaltyDate", "totalPoints", "lastPurchaseDate", "rating"];
+    ids.forEach(function (id) {
         $("#" + id).prop('disabled', state);
     });
-     $(this).find("#cusId").focus();
-     generateCustomerId();
-     setClBtn();
+    $(this).find("#cusId").focus();
+    generateCustomerId();
+    setClBtn();
 }
 
-function returnAllCusVal(){
+function returnAllCusVal() {
 
     var rating = $("input[name='rating']:checked").val();
     var image = $("#cusCapturedImage");
@@ -145,9 +160,8 @@ function returnAllCusVal(){
     };
     return formData;
 }
-function setAllCusVal(ar){
-    /*var rating = $("input[name='rating']:checked").val();*/
-    switch (ar.level) {
+function setLevel(value) {
+    switch (value) {
         case 'GOLD':
             $('#star4').prop('checked', true);
             break;
@@ -161,6 +175,10 @@ function setAllCusVal(ar){
             $('#star1').prop('checked', true);
             break;
     }
+}
+function setAllCusVal(ar) {
+    /*var rating = $("input[name='rating']:checked").val();*/
+    setLevel(ar.level);
     $("#cusName").val(ar.customerName);
     $("#cusGender").val(ar.gender);
     $("#loyaltyDate").val(ar.loyaltyDate);
@@ -177,7 +195,8 @@ function setAllCusVal(ar){
     $("#cusCapturedImage").attr('src', ar.proPic);
 
 }
-//getAllCustomers();
+
+getAllCustomers();
 $("#cusSave").click(function () {
 
     if (checkAll()) {
@@ -202,6 +221,7 @@ function generateCustomerId() {
         console.error("Error loading customer Id:", error);
     });
 }
+
 function loadCusId() {
     return new Promise(function (resolve, reject) {
         performAuthenticatedRequest();
@@ -249,30 +269,55 @@ function loadCusAr() {
 }
 
 
-/*function bindTrrEvents() {
+function bindTrrEvents() {
     $('#customerTable>tr').click(function () {
 
-        let id = $(this).children().eq(0).text();
-        let name = $(this).children().eq(1).text();
-        let address = $(this).children().eq(2).text();
+        let customerId = $(this).children().eq(0).text();
+        let customerName = $(this).children().eq(1).text();
+        let gender = $(this).children().eq(2).text();
+        let loyaltyDate = $(this).children().eq(3).text();
+        let level = $(this).children().eq(4).text();
+        let totalPoints = $(this).children().eq(5).text();
+        let customerDob = $(this).children().eq(6).text();
+        let buildNo = $(this).children().eq(7).text();
+        let lane = $(this).children().eq(8).text();
+        let city = $(this).children().eq(9).text();
+        let state = $(this).children().eq(10).text();
+        let postalCode = $(this).children().eq(11).text();
+        let contactNo = $(this).children().eq(12).text();
+        let email = $(this).children().eq(13).text();
+        let recentPurchase = $(this).children().eq(14).text();
 
 
-        $("#customerID").val(id);
-        $("#customerName").val(name);
-        $("#customerAddress").val(address);
+        $("#cusId").val(customerId);
+        $("#cusName").val(customerName);
+        $("#cusGender").val(gender);
+        $("#loyaltyDate").val(loyaltyDate);
+        $("#totalPoints").val(totalPoints);
+        $("#cusDob").val(customerDob);
+        $("#cusBuildNo").val(buildNo);
+        $("#cusLane").val(lane);
+        $("#cusCity").val(city);
+        $("#cusState").val(state);
+        $("#cusPostalCode").val(postalCode);
+        $("#cusContactNo").val(contactNo);
+        $("#cusEmail").val(email);
+        $("#lastPurchaseDate").val(recentPurchase);
+        setLevel(level);
 
-        $("#customerID").prop('disabled', false);
+
+        /*$("#customerID").prop('disabled', false);
         $("#customerName").prop('disabled', false);
         $("#customerAddress").prop('disabled', false);
         $("#cusUpdate").prop('disabled', false);
-        $("#cusDelete").prop('disabled', false);
+        $("#cusDelete").prop('disabled', false);*/
         setBtn();
-        searchCustomer(id).then(function (res){
+        searchCustomer(customerId).then(function (res){
             captureClear();
-            $("#capturedImage").attr('src', res.proPic);
+            $("#cusCapturedImage").attr('src', res.proPic);
         });
     });
-}*/
+}
 
 $("#cusDelete").click(function () {
     let id = $("#cusId").val();
@@ -352,9 +397,9 @@ $("#cusUpdate").click(function () {
                     $.ajax({
                         url: "http://localhost:8080/helloshoes/api/v1/customer",
                         method: "PUT",
-                            headers: {
-                                'Authorization': 'Bearer ' + accessToken
-                            },
+                        headers: {
+                            'Authorization': 'Bearer ' + accessToken
+                        },
                         data: JSON.stringify(data),
                         contentType: "application/json",
                         success: function (res) {
@@ -369,10 +414,10 @@ $("#cusUpdate").click(function () {
                             swal("Error", textStatus + "Error Customer Not Update", "error");
                         }
                     });
-                   /* $("#customerID").prop('disabled', true);
-                    $("#customerName").prop('disabled', true);
-                    $("#customerAddress").prop('disabled', true);
-                    clearCustomerInputFields();*/
+                    /* $("#customerID").prop('disabled', true);
+                     $("#customerName").prop('disabled', true);
+                     $("#customerAddress").prop('disabled', true);
+                     clearCustomerInputFields();*/
                 }
             });
 
@@ -425,39 +470,68 @@ function saveCustomer() {
     });
 }
 
-/*function getAllCustomers() {
-
+function getAllCustomers() {
+    performAuthenticatedRequest();
+    const accessToken = localStorage.getItem('accessToken');
+    console.log(accessToken);
     $("#customerTable").empty();
     $.ajax({
-        url: "http://localhost:8080/BackEnd/customer/getAll",
+        url: "http://localhost:8080/helloshoes/api/v1/customer/getAll",
         method: "GET",
+        headers: {
+            'Authorization': 'Bearer ' + accessToken
+        },
         success: function (res) {
             console.log(res);
             for (var r of res) {
                 let row = `<tr>
-                     <td>${r.id}</td>
-                     <td>${r.name}</td>
-                     <td>${r.address}</td>
+                    <th scope="row">${r.customerId}</th>
+                    <td>${r.customerName}</td>
+                    <td>${r.gender}</td>
+                    <td>${r.loyaltyDate}</td>
+                    <td>${r.level}</td>
+                    <td>${r.totalPoints}</td>
+                    <td>${r.customerDob}</td>
+                    <td>${r.address.buildNo}</td>
+                    <td>${r.address.lane}</td>
+                    <td>${r.address.city}</td>
+                    <td>${r.address.state}</td>
+                    <td>${r.address.postalCode}</td>
+                    <td>${r.contactNo}</td>
+                    <td>${r.email}</td>
+                    <td>${r.recentPurchase}</td>
                     </tr>`;
                 $("#customerTable").append(row);
-                $('#customerTable').css({
+               /* $('#customerTable').css({
                     'max-height': '370px',
-                    'overflow-y': 'auto',
+                    'overflow-y': 'none',
                     'display': 'table-caption'
                 });
                 $('#customerTable>tr').css({
-                    'width': '600px',
+                    'width': '94vw',
                     'display': 'flex'
-                });
+                });                                       <td>${r.customerId}</td>
                 $('#customerTable>tr>td').css({
                     'flex': '1',
-                    'max-width': 'calc(100%/3*1)'
+                    'max-width': 'calc(94%/15*1)',
+                    'font-family': 'Arial, sans-serif',
+                    'text-align': 'center'
                 });
+                $('#customerTable>tr>td').eq(14).css({
+                    'position': 'absolute',
+                    'width': '1px',
+                    'height': '1px',
+                    'margin': '-1px',
+                    'padding': '0',
+                    'overflow': 'hidden',
+                    'clip': 'rect(0, 0, 0, 0)',
+                    'border': '0'
+                });*/
                 bindTrrEvents();
             }
         }
     });
-}*/
+}
 
 function validCustomer(id) {
     return new Promise(function (resolve, reject) {
