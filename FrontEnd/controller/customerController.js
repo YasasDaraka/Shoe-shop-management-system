@@ -1,9 +1,9 @@
 $(document).ready(function () {
     // setTime();
     // setDate();
-    $("#customerID").prop('disabled', true);
+ /*   $("#customerID").prop('disabled', true);
     $("#customerName").prop('disabled', true);
-    $("#customerAddress").prop('disabled', true);
+    $("#customerAddress").prop('disabled', true);*/
 
     /*$('#cusThead').css({
         'width': '600px',
@@ -29,6 +29,7 @@ $(document).ready(function () {
 });
 $(document).ready(function () {
     cusFieldSet(true);
+    $("#cusGender").val("");
     var targetNode = document.getElementById('customer-container');
     var config = {attributes: true, attributeFilter: ['style']};
     var callback = function (mutationsList, observer) {
@@ -110,6 +111,7 @@ function cusCaptureClear() {
     $('#cusCaptureButton').css("border-color", "#007bff");
     $('#cusCaptureButton').text("Capture");
     $("#cusCapturedImage").attr('src', "assets/images/admin.gif");
+    $('#cusCapturedImage').css("width", "200");
 }
 
 $('#cusAdd').click(function () {
@@ -196,13 +198,13 @@ $("#cusSave").click(function () {
         var imageUrl = image.attr('src');
         if (!imageUrl) {
             //alert("Error");
-            swal("Error", "Take Customer Photo.!", "error");
+            Swal.fire("Error", "Take Customer Photo.!", "error");
         } else {
             saveCustomer();
         }
     } else {
         alert("Error");
-        swal("Error", "Error Customer Save.!", "error");
+        Swal.fire("Error", "Error Customer Save.!", "error");
     }
 });
 
@@ -290,11 +292,11 @@ $("#cusDelete").click(function () {
 
     validCustomer(id).then(function (isValid) {
         if (isValid == false) {
-            swal("Error", "No such Customer..please check the ID", "error");
+            swal.fire("Error", "No such Customer..please check the ID", "error");
             clearCustomerInputFields();
         } else {
 
-            swal("Do you want to delete this customer.?", {
+            Swal.fire("Do you want to delete this customer.?", {
                 buttons: {
                     cancel1: {
                         text: "Cancel",
@@ -305,8 +307,9 @@ $("#cusDelete").click(function () {
                         value: "confirm",
                         className: "custom-ok-btn",
                     }
-                },
-            }).then((value) => {
+                }
+
+        }).then((value) => {
                 if (value === "confirm") {
                     performAuthenticatedRequest();
                     const accessToken = localStorage.getItem('accessToken');
@@ -318,13 +321,13 @@ $("#cusDelete").click(function () {
                         },
                         success: function (res) {
                             console.log(res);
-                            swal("Deleted", "Customer Delete Successfully", "success");
+                            Swal.fire("Deleted", "Customer Delete Successfully", "success");
                             clearCustomerInputFields();
-                            captureClear();
+                            cusCaptureClear();
                             //getAllCustomers();
                         },
                         error: function (ob, textStatus, error) {
-                            swal("Error", textStatus + "Error Customer Not Delete", "error");
+                            Swal.fire("Error", textStatus + "Error Customer Not Delete", "error");
                         }
                     });
                 }
@@ -342,7 +345,7 @@ $("#cusUpdate").click(function () {
     let id = $("#cusId").val();
     validCustomer(id).then(function (isValid) {
         if (isValid) {
-            swal("Do you really want to update this customer.?", {
+            Swal.fire("Do you want to update this customer.?", {
                 buttons: {
                     cancel1: {
                         text: "Cancel",
@@ -370,13 +373,13 @@ $("#cusUpdate").click(function () {
                         contentType: "application/json",
                         success: function (res) {
                             console.log(res);
-                            swal("Updated", "Customer Update Successfully", "success");
+                            Swal.fire("Updated", "Customer Update Successfully", "success");
                             //captureClear();
                             //getAllCustomers();
                         },
                         error: function (ob, textStatus, error) {
                             //alert(textStatus+" : Error Customer Not Update");
-                            swal("Error", textStatus + "Error Customer Not Update", "error");
+                            Swal.fire("Error", textStatus + "Error Customer Not Update", "error");
                         }
                     });
                    /* $("#customerID").prop('disabled', true);
@@ -387,7 +390,7 @@ $("#cusUpdate").click(function () {
             });
 
         } else {
-            swal("Error", "No such Customer..please check the ID", "error");
+            Swal.fire("Error", "No such Customer..please check the ID", "error");
             /*alert("No such Customer..please check the ID");*/
         }
     });
@@ -416,13 +419,13 @@ function saveCustomer() {
                 success: function (res, textStatus, jsXH) {
                     console.log(res);
                     // alert("Customer Added Successfully");
-                    swal("Saved", "Customer Added Successfully", "success");
+                    Swal.fire("Saved", "Customer Added Successfully", "success");
                     //getAllCustomers();
 
                 },
                 error: function (ob, textStatus, error) {
                     //alert(textStatus + " : Error Customer Not Added")
-                    swal("Error", textStatus + " : Error Customer Not Added", "error");
+                    Swal.fire("Error", textStatus + " : Error Customer Not Added", "error");
                 }
             });
 
@@ -524,7 +527,7 @@ $('#cusSearch').click(function () {
     let id = $("#cusId").val();
     searchCustomer(id).then(function (res) {
         setAllCusVal(res);
-        captureClear();
+        cusCaptureClear();
         $("#cusCapturedImage").attr('src', res.proPic);
     });
     setClBtn();

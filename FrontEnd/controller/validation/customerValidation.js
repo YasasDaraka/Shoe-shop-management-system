@@ -29,13 +29,14 @@ function clearCustomerInputFields() {
     $("#cusId,#cusName,#cusBuildNo,#cusLane,#cusCity,#cusState,#cusPostalCode,#cusEmail,#cusDob,#cusGender,#cusContactNo").val("");
     $("#cusId,#cusName,#cusBuildNo,#cusLane,#cusCity,#cusState,#cusPostalCode,#cusEmail,#cusDob,#cusGender,#cusContactNo").css("border", "1px solid #ced4da");
     $("#cusId").focus();
+    $('input[name="rating"]').prop('checked', false);
     setBtn();
 }
 setBtn();
 function setClBtn(){
     var any = false;
     $("#cusId,#cusName,#cusBuildNo,#cusLane,#cusCity,#cusState,#cusPostalCode,#cusEmail,#cusDob,#loyaltyDate,#cusContactNo").each(function () {
-        if ($(this).val().trim() !== "") {
+        if ($(this).val().trim() !== ""||$('input[name="rating"]:checked').prop('checked') == true) {
             any= true;
             return false;
         }
@@ -186,22 +187,16 @@ function setBtn() {
 }
 
 $("#cusClear").click(function () {
+    var ids = ["cusId", "cusGender", "cusName","cusDob","cusBuildNo", "cusLane", "cusCity","cusState","cusPostalCode",
+        "cusEmail", "cusContactNo","loyaltyDate","totalPoints", "lastPurchaseDate","rating"];
+    ids.forEach(function(id) {
+        $("#" + id +"Error").val("");
+    });
     clearCustomerInputFields();
     c_vArray.forEach(function(item) {
         item.error.val("");
     });
     stopWebcamStream();
     $('#cusVideo').hide();
-    cusCaptureClear();
+    //captureClear();
 });
-
-function captureClear() {
-    stopWebcamStream();
-    $('#video').hide();
-    $("#capturedImage").show();
-    $('#captureButton').css("background-color", "#007bff");
-    $('#captureButton').css("border-color", "#007bff");
-    $('#captureButton').text("Capture");
-    $("#cusCapturedImage").attr('src', "assets/images/walk.gif");
-    $('#cusCapturedImage').css("width", "200");
-}

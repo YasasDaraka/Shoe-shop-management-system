@@ -1,4 +1,5 @@
 $("#btnSignIn").click(function () {
+    showAlert();
     signIn();
     /*allContainerHide();
     adminPage.css('display','block');
@@ -61,3 +62,36 @@ function performAuthenticatedRequest() {
     }
 }
 
+function showAlert() {
+    let timerInterval;
+    Swal.fire({
+        title: "Auto close alert with custom styles!",
+        html: "I will close in <b></b> milliseconds.",
+        timer: 8000, // Set the timer duration in milliseconds
+        timerProgressBar: true, // Display a progress bar indicating the remaining time
+        width: 600, // Set the width of the modal
+        padding: "3em", // Set the padding of the modal content
+        color: "#716add", // Set the text color
+        background: "#fff url(/images/trees.png)", // Set the background color or image
+        backdrop: `
+      rgba(0,0,123,0.4)
+      url("/images/nyan-cat.gif")
+      left top
+      no-repeat
+    `,
+        didOpen: () => {
+            Swal.showLoading();
+            const timer = Swal.getPopup().querySelector("b");
+            timerInterval = setInterval(() => {
+                timer.textContent = `${Swal.getTimerLeft()}`;
+            }, 100);
+        },
+        willClose: () => {
+            clearInterval(timerInterval);
+        }
+    }).then((result) => {
+        if (result.dismiss === Swal.DismissReason.timer) {
+            console.log("closed timer");
+        }
+    });
+}

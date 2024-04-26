@@ -31,3 +31,48 @@ html {
     position: relative;
 
 }
+.swal-modal {
+    background-color: rgba(106, 135, 135, 0.7);
+    border: 3px solid #7bb4c2;
+}
+
+.swal-overlay {
+    background-color: rgba(0, 0, 0, 0.70);
+}
+
+.swal-text {
+    color: #ffffff;
+    font-size: 20px;
+}
+
+.swal-title {
+    color: #ffffff;
+    font-size: 30px;
+}
+
+.swal-button {
+    color: #ffffff;
+    background-color: #406668;
+}
+
+.swal-button:hover {
+    background-color: #7bb4c2 !important;
+}
+
+.custom-cancel-btn{
+    color: #ffffff;
+    background-color: #731010;
+}
+
+.custom-cancel-btn:hover{
+    background-color: #340606 !important;
+}
+
+.swal-icon--success:after, .swal-icon--success:before, .swal-icon--success__hide-corners{
+    display: none;
+}
+
+.custom-tooltip {
+    --bs-tooltip-bg: rgb(21, 21, 21);
+    --bs-tooltip-color: rgb(123, 180, 194);
+}

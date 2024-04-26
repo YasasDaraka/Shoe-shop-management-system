@@ -96,3 +96,39 @@ $("#btnCustomer, #btnInventory, #btnSupplier, #btnEmployee, #btnSales,#btnAdminP
             break;
     }
 });
+// Function to show the SweetAlert2 modal
+function showAlert() {
+    let timerInterval;
+    Swal.fire({
+        title: "Auto close alert with custom styles!",
+        html: "I will close in <b></b> milliseconds.",
+        timer: 2000, // Set the timer duration in milliseconds
+        timerProgressBar: true, // Display a progress bar indicating the remaining time
+        width: 600, // Set the width of the modal
+        padding: "3em", // Set the padding of the modal content
+        color: "#716add", // Set the text color
+        background: "#fff url(/images/trees.png)", // Set the background color or image
+        backdrop: `
+      rgba(0,0,123,0.4)
+      url("/images/nyan-cat.gif")
+      left top
+      no-repeat
+    `,
+        didOpen: () => {
+            Swal.showLoading(); // Show loading animation when the modal is opened
+            const timer = Swal.getPopup().querySelector("b"); // Get the reference to the <b> tag inside the modal
+            timerInterval = setInterval(() => {
+                timer.textContent = `${Swal.getTimerLeft()}`; // Update the content of the <b> tag with the remaining time
+            }, 100); // Update every 100 milliseconds
+        },
+        willClose: () => {
+            clearInterval(timerInterval); // Clear the interval when the modal is closed
+        }
+    }).then((result) => {
+        /* Read more about handling dismissals below */
+        if (result.dismiss === Swal.DismissReason.timer) {
+            console.log("I was closed by the timer");
+        }
+    });
+}
+
