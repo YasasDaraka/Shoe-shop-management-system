@@ -9,7 +9,7 @@ const CUS_EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const CUS_GENDER_REGEX = /^[A-Z\s]*$/;
 /*const CUS_POINTS_REGEX = /^\d+$/;*/
-const CUS_CONTACT_REGEX = /^[A-Za-z0-9 ]{10,}$/;
+const CUS_CONTACT_REGEX = /^[^\p{L}]{10,}$/u;
 const CUS_DOB_REGEX = /^\d{4}-\d{2}-\d{2}$/;
 
 let c_vArray = new Array();
@@ -27,8 +27,8 @@ c_vArray.push({ field: $("#cusDob"), regEx: CUS_DOB_REGEX, error: $("#cusDobErro
 c_vArray.push({ field: $("#cusContactNo"), regEx: CUS_CONTACT_REGEX, error: $("#cusContactNoError") });
 
 function clearCustomerInputFields() {
-    $("#cusId,#cusName,#cusBuildNo,#cusLane,#cusCity,#cusState,#cusPostalCode,#cusEmail").val("");
-    $("#cusId,#cusName,#cusBuildNo,#cusLane,#cusCity,#cusState,#cusPostalCode,#cusEmail").css("border", "1px solid #ced4da");
+    $("#cusId,#cusName,#cusBuildNo,#cusLane,#cusCity,#cusState,#cusPostalCode,#cusEmail,#cusDob,#cusGender,#cusContactNo").val("");
+    $("#cusId,#cusName,#cusBuildNo,#cusLane,#cusCity,#cusState,#cusPostalCode,#cusEmail,#cusDob,#cusGender,#cusContactNo").css("border", "1px solid #ced4da");
     $("#cusId").focus();
     setBtn();
 }
@@ -74,7 +74,7 @@ function events(e) {
     }
 }
 
-$("#cusName,#cusBuildNo,#cusLane,#cusCity,#cusState,#cusPostalCode,#cusEmail").on("keydown keyup", function (e) {
+$("#cusName,#cusBuildNo,#cusLane,#cusCity,#cusState,#cusPostalCode,#cusEmail,#cusContactNo").on("keydown keyup", function (e) {
     events(e);
 });
 $("#cusGender, #cusDob, #loyaltyDate").on("change", function(e) {
@@ -86,6 +86,9 @@ $("input[name='rating']").on("change", function(e) {
 $("#cusId").on("keydown keyup", function (e) {
     events(e);
     searchCustomer($("#cusId").val()).then(function (res){
+        $("#cusId,#cusName,#cusBuildNo,#cusLane,#cusCity,#cusState" +
+            ",#cusPostalCode,#cusEmail,#cusDob,#cusGender,#cusContactNo").css("border", "1px solid #ced4da");
+        setBtn();
         setAllCusVal(res);
         captureClear();
         $("#cusCapturedImage").attr('src', res.proPic);

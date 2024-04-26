@@ -97,57 +97,83 @@ function cusFieldSet(state) {
     // generateCustomerId();
     // setClBtn();
 }*/
-$("#cusSave").click(function () {
-
-
-        var image = $("#cusCapturedImage");
-        var imageUrl = image.attr('src');
-        if (!imageUrl) {
-            alert("Error");
-        } else {
-            saveCustomer();
-        }
-
-});
 
 function returnAllCusVal(){
-    var formData = {};
-    var address = {};
+
     var rating = $("input[name='rating']:checked").val();
 
-    formData.customerId = $("#cusId").val();
-    formData.customerName = $("#cusName").val();
-    formData.gender = $("#cusGender").val();
-    formData.loyaltyDate = $("#loyaltyDate").val();
-    formData.level = rating;
-    formData.totalPoints = $("#totalPoints").val();
-    formData.customerDob = $("#cusDob").val();
-    address.buildNo = $("#cusBuildNo").val();
-    address.lane = $("#cusLane").val();
-    address.city = $("#cusCity").val();
-    address.state = $("#cusState").val();
-    address.postalCode = $("#cusPostalCode").val();
-    formData.contactNo = $("#cusContactNo").val();
-    formData.email = $("#cusEmail").val();
-    formData.recentPurchase = $("#lastPurchaseDate").val();
-
+    /*var formData = [
+        { name: "customerId", value: $("#cusId").val() },
+        { name: "customerName", value: $("#cusName").val() },
+        { name: "gender", value: $("#cusGender").val() },
+        { name: "loyaltyDate", value: $("#loyaltyDate").val() },
+        { name: "level", value: $("input[name='rating']:checked").val() },
+        { name: "totalPoints", value: $("#totalPoints").val() },
+        { name: "customerDob", value: $("#cusDob").val() },
+        { name: "contactNo", value: $("#cusContactNo").val() },
+        { name: "email", value: $("#cusEmail").val() },
+        { name: "recentPurchase", value: $("#lastPurchaseDate").val() }
+    ];
+    var address = [
+        { name: "buildNo", value: $("#cusBuildNo").val() },
+        { name: "lane", value: $("#cusLane").val() },
+        { name: "city", value: $("#cusCity").val() },
+        { name: "state", value: $("#cusState").val() },
+        { name: "postalCode", value: $("#cusPostalCode").val() }]
+    formData.push(address);
+    return formData;
+    };*/
+    var image = $("#cusCapturedImage");
+    var imageUrl = image.attr('src');
+    var formData = {
+        customerId: $("#cusId").val(),
+        customerName: $("#cusName").val(),
+        gender: $("#cusGender").val(),
+        loyaltyDate: $("#loyaltyDate").val(),
+        level: $("input[name='rating']:checked").val(),
+        totalPoints: $("#totalPoints").val(),
+        customerDob: $("#cusDob").val(),
+        address: {
+            buildNo: $("#cusBuildNo").val(),
+            lane: $("#cusLane").val(),
+            city: $("#cusCity").val(),
+            state: $("#cusState").val(),
+            postalCode: $("#cusPostalCode").val()
+        },
+        contactNo: $("#cusContactNo").val(),
+        email: $("#cusEmail").val(),
+        recentPurchase: $("#lastPurchaseDate").val(),
+        proPic: imageUrl
+    };
     return formData;
 
 }
 function setAllCusVal(ar){
-    var rating = $("input[name='rating']:checked").val();
-
-    $("#cusId").val(ar.customerId);
+    /*var rating = $("input[name='rating']:checked").val();*/
+    switch (ar.level) {
+        case 'GOLD':
+            $('#star4').prop('checked', true);
+            break;
+        case 'SILVER':
+            $('#star3').prop('checked', true);
+            break;
+        case 'BRONZE':
+            $('#star2').prop('checked', true);
+            break;
+        case 'NEW':
+            $('#star1').prop('checked', true);
+            break;
+    }
     $("#cusName").val(ar.customerName);
     $("#cusGender").val(ar.gender);
     $("#loyaltyDate").val(ar.loyaltyDate);
     $("#totalPoints").val(ar.totalPoints);
     $("#cusDob").val(ar.customerDob);
-    $("#cusBuildNo").val(ar.buildNo);
-    $("#cusLane").val(ar.lane);
-    $("#cusCity").val(ar.city);
-    $("#cusState").val(ar.state);
-    $("#cusPostalCode").val(ar.postalCode);
+    $("#cusBuildNo").val(ar.address.buildNo);
+    $("#cusLane").val(ar.address.lane);
+    $("#cusCity").val(ar.address.city);
+    $("#cusState").val(ar.address.state);
+    $("#cusPostalCode").val(ar.address.postalCode);
     $("#cusContactNo").val(ar.contactNo);
     $("#cusEmail").val(ar.email);
     $("#lastPurchaseDate").val(ar.recentPurchase);
@@ -162,7 +188,7 @@ getAllCustomers();
 $("#cusSave").click(function () {
 
     if (checkAll()) {
-        var image = $("#capturedImage");
+        var image = $("#cusCapturedImage");
         var imageUrl = image.attr('src');
         if (!imageUrl) {
             //alert("Error");
@@ -217,7 +243,7 @@ function loadCusId() {
     return new Promise(function (resolve, reject) {
         var ar;
         $.ajax({
-            url: "http://localhost:8080/BackEnd/customer/getGenId",
+            url: "http://localhost:8080/helloshoes/api/v1/customer/getGenId",
             method: "GET",
             success: function (res) {
                 console.log(res);
@@ -235,7 +261,7 @@ function loadCusAr() {
     return new Promise(function (resolve, reject) {
         var ar;
         $.ajax({
-            url: "http://localhost:8080/BackEnd/customer/getAll",
+            url: "http://localhost:8080/helloshoes/api/v1/customer/getAll",
             method: "GET",
             success: function (res) {
                 console.log(res);
@@ -310,7 +336,7 @@ $("#cusDelete").click(function () {
             }).then((value) => {
                 if (value === "confirm") {
                     $.ajax({
-                        url: "http://localhost:8080/BackEnd/customer?cusId=" + id,
+                        url: "http://localhost:8080/helloshoes/api/v1/customer?cusId=" + id,
                         method: "DELETE",
                         success: function (res) {
                             console.log(res);
@@ -367,7 +393,7 @@ $("#cusUpdate").click(function () {
                     }
                     console.log(data)
                     $.ajax({
-                        url: "http://localhost:8080/BackEnd/customer",
+                        url: "http://localhost:8080/helloshoes/api/v1/customer",
                         method: "PUT",
                         data: JSON.stringify(data),
                         contentType: "application/json",
@@ -405,9 +431,6 @@ function saveCustomer() {
         if (!isValid) {
             console.log(isValid);
             var formData = returnAllCusVal();
-            var image = $("#cusCapturedImage");
-            var imageUrl = image.attr('src');
-            formData.push({name: 'proPic', value: imageUrl});
             performAuthenticatedRequest();
             const accessToken = localStorage.getItem('accessToken');
             console.log(formData);
@@ -418,8 +441,8 @@ function saveCustomer() {
                 headers: {
                     'Authorization': 'Bearer ' + accessToken
                 },
-                data: formData,
-                /*contentType: "application/x-www-form-urlencoded",*/
+                data: JSON.stringify(formData),
+                contentType: "application/json",
                 success: function (res, textStatus, jsXH) {
                     console.log(res);
                     // alert("Customer Added Successfully");
@@ -482,7 +505,7 @@ function validCustomer(id) {
         const accessToken = localStorage.getItem('accessToken');
         console.log(accessToken);
         $.ajax({
-            url: "http://localhost:8080/BackEnd/customer/search/" + id,
+            url: "http://localhost:8080/helloshoes/api/v1/customer/search/" + id,
             method: "GET",
             headers: {
                 'Authorization': 'Bearer ' + accessToken
@@ -510,7 +533,7 @@ function searchCustomer(id) {
         const accessToken = localStorage.getItem('accessToken');
         console.log(accessToken);
         $.ajax({
-            url: "http://localhost:8080/BackEnd/customer/search/" + id,
+            url: "http://localhost:8080/helloshoes/api/v1/customer/search/" + id,
             method: "GET",
             headers: {
                 'Authorization': 'Bearer ' + accessToken
