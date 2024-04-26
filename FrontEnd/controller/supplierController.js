@@ -17,8 +17,8 @@ $('#supIdAdd').click(function () {
 });
 
 function supFieldSet(state) {
-    var ids = ["#supId", "#supCategory", "#supName", "#supBuildNo", "#supLane",
-        "#supCity","#supState", "#supPostalCode", "#supCountry", "#supEmail", "#supMobileNo", "#supLandNo"];
+    var ids = ["supId", "supCategory", "supName", "supBuildNo", "upLane",
+        "supCity","supState", "supPostalCode", "supCountry", "supEmail", "supMobileNo", "supLandNo"];
     ids.forEach(function (id) {
         $("#" + id).prop('disabled', state);
     });
@@ -38,7 +38,7 @@ function returnAllSupVal() {
             city: $("#supCity").val(),
             state: $("#supState").val(),
             postalCode: $("#supPostalCode").val(),
-            country: $("#supCountry").val()
+            supCountry: $("#supCountry").val()
         },
         contact: {
             mobileNo: $("#supMobileNo").val(),
@@ -50,7 +50,7 @@ function returnAllSupVal() {
     return formData;
 }
 function setAllSupVal(ar) {
-    $("#supId").val(ar.supplierCode);
+    console.log("add "+ar)
     $("#supName").val(ar.supplierName);
     $("#supCategory").val(ar.category);
     $("#supBuildNo").val(ar.address.buildNo);
@@ -58,13 +58,13 @@ function setAllSupVal(ar) {
     $("#supCity").val(ar.address.city);
     $("#supState").val(ar.address.state);
     $("#supPostalCode").val(ar.address.postalCode);
-    $("#supCountry").val(ar.address.country);
+    $("#supCountry").val(ar.address.supCountry);
     $("#supEmail").val(ar.email);
     $("#supMobileNo").val(ar.contact.mobileNo);
     $("#supLandNo").val(ar.contact.landNo);
 }
 
-getAllSupplier();
+//getAllSupplier();
 $("#supSave").click(function () {
 
     if (checkAllSup()) {
@@ -389,7 +389,7 @@ function searchSupplier(id) {
         const accessToken = localStorage.getItem('accessToken');
         console.log(accessToken);
         $.ajax({
-            url: "http://localhost:8080/helloshoes/api/v1/supplier/" + id,
+            url: "http://localhost:8080/helloshoes/api/v1/supplier/search/" + id,
             method: "GET",
             headers: {
                 'Authorization': 'Bearer ' + accessToken
@@ -408,7 +408,7 @@ function searchSupplier(id) {
 
 $('#supSearch').click(function () {
     let id = $("#supId").val();
-    searchSup(id).then(function (res) {
+    searchSupplier(id).then(function (res) {
         setAllSupVal(res);
     });
     setSupClBtn();

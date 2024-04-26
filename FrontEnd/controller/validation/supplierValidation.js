@@ -1,4 +1,4 @@
-const SUP_ID_REGEX = /^C00-(0*[1-9]\d{0,2})$/;
+const SUP_ID_REGEX = /^S00-(0*[1-9]\d{0,2})$/;
 const SUP_NAME_REGEX = /^[A-Za-z ]{5,}$/;
 const SUP_ADDRESS_BUILD_REGEX = /^[A-Za-z0-9 ]{3,}$/;
 const SUP_ADDRESS_LANE_REGEX = /^[A-Za-z0-9 ]{3,}$/;
@@ -58,7 +58,7 @@ function supEvents(e) {
 
     checkSupValidations(sp_vArray[indexNo]);
 
-    setBtn();
+    setSupBtn();
 
     if (e.key == "Enter") {
 
@@ -74,7 +74,7 @@ function supEvents(e) {
     }
 }
 
-$("#supId, #supCategory, #supName, #supBuildNo, #supLane, #supCity, #supState, #supPostalCode, #supCountry, #supEmail, #supMobileNo, #supLandNo").on("keydown keyup change", function (e) {
+$("#supCategory, #supName, #supBuildNo, #supLane, #supCity, #supState, #supPostalCode, #supCountry, #supEmail, #supMobileNo, #supLandNo").on("keydown keyup change", function (e) {
     supEvents(e);
 });
 /*$("#cusGender, #cusDob, #loyaltyDate").on("", function(e) {
@@ -113,7 +113,7 @@ function setSupBorder(bol, ob) {
             ob.field.css("border", "2px solid red");
             let check = ob.field.attr('id');
             switch (check) {
-                case "supId" : ob.error.text("sup-Id is a required field: C00-"); break
+                case "supId" : ob.error.text("sup-Id is a required field: S00-"); break
                 case "supName" : ob.error.text("sup-Name is a required field: Minimum 5,Max 20,Spaces Allowed"); break
                 case "supBuildNo" : ob.error.text("BuildNo is a required field: Minimum 3"); break
                 case "supLane" : ob.error.text("Lane is a required field: Minimum 3"); break
@@ -157,15 +157,15 @@ function setSupBtn() {
             if (isValid) {
                 $("#supDelete").prop("disabled", false);
                 if (checkAllSup()) {
-                    $("#SUPUpdate").prop("disabled", false);
-                    $("#SUPDelete").prop("disabled", false);
+                    $("#supUpdate").prop("disabled", false);
+                    $("#supDelete").prop("disabled", false);
                 } else {
-                    $("#SUPUpdate").prop("disabled", true);
+                    $("#supUpdate").prop("disabled", true);
                 }
             }else {
-                $("#SUPDelete").prop("disabled", true);
-                $("#SUPUpdate").prop("disabled", true);
-                if (checkAll()) {
+                $("#supDelete").prop("disabled", true);
+                $("#supUpdate").prop("disabled", true);
+                if (checkAllSup()) {
                     $("#supSave").prop("disabled", false);
                 } else {
                     $("#supSave").prop("disabled", true);
@@ -182,10 +182,9 @@ function setSupBtn() {
             }
         });
 }
-    $("")
 $("#supClear").click(function () {
-    var ids = ["#supId", "#supCategory", "#supName", "#supBuildNo", "#supLane",
-        "#supCity","#supState", "#supPostalCode", "#supCountry", "#supEmail", "#supMobileNo", "#supLandNo"];
+    var ids = ["supId", "supCategory", "supName", "supBuildNo", "upLane",
+        "supCity","supState", "supPostalCode", "supCountry", "supEmail", "supMobileNo", "supLandNo"];
     ids.forEach(function(id) {
         $("#" + id +"Error").val("");
     });
