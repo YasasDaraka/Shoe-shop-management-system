@@ -198,5 +198,15 @@ $("#cusClear").click(function () {
     });
     stopWebcamStream();
     $('#cusVideo').hide();
-    //captureClear();
+    captureClear();
 });
+
+function captureClear() {
+    stopWebcamStream();
+    $('#video').hide();
+    $("#cusCapturedImage").show();
+    $('#cusCaptureButton').css("background-color", "#007bff");
+    $('#cusCaptureButton').css("border-color", "#007bff");
+    $('#cusCaptureButton').text("Capture");
+    $("#cusCapturedImage").attr('src', "assets/images/walk.gif");
+}

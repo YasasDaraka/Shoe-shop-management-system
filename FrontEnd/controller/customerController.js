@@ -1,9 +1,9 @@
 $(document).ready(function () {
     // setTime();
     // setDate();
- /*   $("#customerID").prop('disabled', true);
+    $("#customerID").prop('disabled', true);
     $("#customerName").prop('disabled', true);
-    $("#customerAddress").prop('disabled', true);*/
+    $("#customerAddress").prop('disabled', true);
 
     /*$('#cusThead').css({
         'width': '600px',
@@ -29,7 +29,6 @@ $(document).ready(function () {
 });
 $(document).ready(function () {
     cusFieldSet(true);
-    $("#cusGender").val("");
     var targetNode = document.getElementById('customer-container');
     var config = {attributes: true, attributeFilter: ['style']};
     var callback = function (mutationsList, observer) {
@@ -44,7 +43,6 @@ $(document).ready(function () {
                     $('#cusCaptureButton').css("border-color", "#007bff");
                     $('#cusCaptureButton').text("Capture");
                     $("#cusCapturedImage").attr('src', "assets/images/walk.gif");
-                    $('#cusCapturedImage').css("width", "200");
                 }
             }
         }
@@ -101,17 +99,6 @@ function stopWebcamStream() {
         tracks.forEach(track => track.stop());
         videoStream = null;
     }
-}
-
-function cusCaptureClear() {
-    stopWebcamStream();
-    $('#video').hide();
-    $("#cusCapturedImage").show();
-    $('#cusCaptureButton').css("background-color", "#007bff");
-    $('#cusCaptureButton').css("border-color", "#007bff");
-    $('#cusCaptureButton').text("Capture");
-    $("#cusCapturedImage").attr('src', "assets/images/admin.gif");
-    $('#cusCapturedImage').css("width", "200");
 }
 
 $('#cusAdd').click(function () {
@@ -198,13 +185,13 @@ $("#cusSave").click(function () {
         var imageUrl = image.attr('src');
         if (!imageUrl) {
             //alert("Error");
-            Swal.fire("Error", "Take Customer Photo.!", "error");
+            swal("Error", "Take Customer Photo.!", "error");
         } else {
             saveCustomer();
         }
     } else {
         alert("Error");
-        Swal.fire("Error", "Error Customer Save.!", "error");
+        swal("Error", "Error Customer Save.!", "error");
     }
 });
 
@@ -292,11 +279,11 @@ $("#cusDelete").click(function () {
 
     validCustomer(id).then(function (isValid) {
         if (isValid == false) {
-            swal.fire("Error", "No such Customer..please check the ID", "error");
+            swal("Error", "No such Customer..please check the ID", "error");
             clearCustomerInputFields();
         } else {
 
-            Swal.fire("Do you want to delete this customer.?", {
+            swal("Do you want to delete this customer.?", {
                 buttons: {
                     cancel1: {
                         text: "Cancel",
@@ -307,9 +294,8 @@ $("#cusDelete").click(function () {
                         value: "confirm",
                         className: "custom-ok-btn",
                     }
-                }
-
-        }).then((value) => {
+                },
+            }).then((value) => {
                 if (value === "confirm") {
                     performAuthenticatedRequest();
                     const accessToken = localStorage.getItem('accessToken');
@@ -321,13 +307,13 @@ $("#cusDelete").click(function () {
                         },
                         success: function (res) {
                             console.log(res);
-                            Swal.fire("Deleted", "Customer Delete Successfully", "success");
+                            swal("Deleted", "Customer Delete Successfully", "success");
                             clearCustomerInputFields();
-                            cusCaptureClear();
+                            captureClear();
                             //getAllCustomers();
                         },
                         error: function (ob, textStatus, error) {
-                            Swal.fire("Error", textStatus + "Error Customer Not Delete", "error");
+                            swal("Error", textStatus + "Error Customer Not Delete", "error");
                         }
                     });
                 }
@@ -345,7 +331,7 @@ $("#cusUpdate").click(function () {
     let id = $("#cusId").val();
     validCustomer(id).then(function (isValid) {
         if (isValid) {
-            Swal.fire("Do you want to update this customer.?", {
+            swal("Do you really want to update this customer.?", {
                 buttons: {
                     cancel1: {
                         text: "Cancel",
@@ -373,24 +359,25 @@ $("#cusUpdate").click(function () {
                         contentType: "application/json",
                         success: function (res) {
                             console.log(res);
-                            Swal.fire("Updated", "Customer Update Successfully", "success");
-                            //captureClear();
+                            //alert("Customer Update Successfully")
+                            swal("Updated", "Customer Update Successfully", "success");
+                            captureClear();
                             //getAllCustomers();
                         },
                         error: function (ob, textStatus, error) {
                             //alert(textStatus+" : Error Customer Not Update");
-                            Swal.fire("Error", textStatus + "Error Customer Not Update", "error");
+                            swal("Error", textStatus + "Error Customer Not Update", "error");
                         }
                     });
                    /* $("#customerID").prop('disabled', true);
                     $("#customerName").prop('disabled', true);
-                    $("#customerAddress").prop('disabled', true);*/
-                    clearCustomerInputFields();
+                    $("#customerAddress").prop('disabled', true);
+                    clearCustomerInputFields();*/
                 }
             });
 
         } else {
-            Swal.fire("Error", "No such Customer..please check the ID", "error");
+            swal("Error", "No such Customer..please check the ID", "error");
             /*alert("No such Customer..please check the ID");*/
         }
     });
@@ -419,13 +406,13 @@ function saveCustomer() {
                 success: function (res, textStatus, jsXH) {
                     console.log(res);
                     // alert("Customer Added Successfully");
-                    Swal.fire("Saved", "Customer Added Successfully", "success");
+                    swal("Saved", "Customer Added Successfully", "success");
                     //getAllCustomers();
 
                 },
                 error: function (ob, textStatus, error) {
                     //alert(textStatus + " : Error Customer Not Added")
-                    Swal.fire("Error", textStatus + " : Error Customer Not Added", "error");
+                    swal("Error", textStatus + " : Error Customer Not Added", "error");
                 }
             });
 
@@ -527,8 +514,20 @@ $('#cusSearch').click(function () {
     let id = $("#cusId").val();
     searchCustomer(id).then(function (res) {
         setAllCusVal(res);
-        cusCaptureClear();
+        captureClear();
         $("#cusCapturedImage").attr('src', res.proPic);
     });
     setClBtn();
 });
+
+
+/*
+function cusCaptureClear() {
+    stopWebcamStream();
+    $('#video').hide();
+    $("#cusCapturedImage").show();
+    $('#cusCaptureButton').css("background-color", "#007bff");
+    $('#cusCaptureButton').css("border-color", "#007bff");
+    $('#cusCaptureButton').text("Capture");
+    $("#cusCapturedImage").attr('src', "assets/images/admin.gif");
+}*/

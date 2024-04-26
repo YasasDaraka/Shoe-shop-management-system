@@ -67,12 +67,12 @@ function showAlert() {
     Swal.fire({
         title: "Auto close alert with custom styles!",
         html: "I will close in <b></b> milliseconds.",
-        timer: 8000, // Set the timer duration in milliseconds
-        timerProgressBar: true, // Display a progress bar indicating the remaining time
-        width: 600, // Set the width of the modal
-        padding: "3em", // Set the padding of the modal content
-        color: "#716add", // Set the text color
-        background: "#fff url(/images/trees.png)", // Set the background color or image
+        timer: 500, //8000
+        timerProgressBar: true,
+        width: 600,
+        padding: "3em",
+        color: "#716add",
+        background: "#fff url(/images/trees.png)",
         backdrop: `
       rgba(0,0,123,0.4)
       url("/images/nyan-cat.gif")
