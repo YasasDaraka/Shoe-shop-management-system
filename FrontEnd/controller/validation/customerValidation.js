@@ -8,7 +8,6 @@ const CUS_ADDRESS_CODE_REGEX = /^[A-Za-z0-9 ]{3,}$/;
 const CUS_EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 const CUS_GENDER_REGEX = /^[A-Z\s]*$/;
-/*const CUS_POINTS_REGEX = /^\d+$/;*/
 const CUS_CONTACT_REGEX = /^[^\p{L}]{10,}$/u;
 const CUS_DOB_REGEX = /^\d{4}-\d{2}-\d{2}$/;
 
@@ -74,12 +73,12 @@ function events(e) {
     }
 }
 
-$("#cusName,#cusBuildNo,#cusLane,#cusCity,#cusState,#cusPostalCode,#cusEmail,#cusContactNo").on("keydown keyup", function (e) {
+$("#cusName,#cusBuildNo,#cusLane,#cusCity,#cusState,#cusPostalCode,#cusEmail,#cusContactNo,#cusGender, #cusDob,#loyaltyDate").on("keydown keyup change", function (e) {
     events(e);
 });
-$("#cusGender, #cusDob, #loyaltyDate").on("change", function(e) {
+/*$("#cusGender, #cusDob, #loyaltyDate").on("", function(e) {
     events(e);
-});
+});*/
 $("input[name='rating']").on("change", function(e) {
     setBtn();
 });
@@ -89,9 +88,8 @@ $("#cusId").on("keydown keyup", function (e) {
         $("#cusId,#cusName,#cusBuildNo,#cusLane,#cusCity,#cusState" +
             ",#cusPostalCode,#cusEmail,#cusDob,#cusGender,#cusContactNo").css("border", "1px solid #ced4da");
         setBtn();
-        setAllCusVal(res);
         captureClear();
-        $("#cusCapturedImage").attr('src', res.proPic);
+        setAllCusVal(res);
     });
 });
 
@@ -204,5 +202,6 @@ function captureClear() {
     $('#captureButton').css("background-color", "#007bff");
     $('#captureButton').css("border-color", "#007bff");
     $('#captureButton').text("Capture");
-    $("#capturedImage").attr('src', "assets/images/defaultCusPic.gif");
+    $("#cusCapturedImage").attr('src', "assets/images/walk.gif");
+    $('#cusCapturedImage').css("width", "200");
 }

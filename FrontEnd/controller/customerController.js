@@ -1,4 +1,34 @@
 $(document).ready(function () {
+    // setTime();
+    // setDate();
+    $("#customerID").prop('disabled', true);
+    $("#customerName").prop('disabled', true);
+    $("#customerAddress").prop('disabled', true);
+
+    /*$('#cusThead').css({
+        'width': '600px',
+        'display': 'flex'
+    });
+    $('#cusThead>th').css({
+        'flex': '1',
+        'max-width': 'calc(100%/3*1)'
+    });
+    $('#customerTable').css({
+        'max-height': '370px',
+        'overflow-y': 'auto',
+        'display': 'table-caption'
+    });
+    $('#customerTable>tr').css({
+        'width': '600px',
+        'display': 'flex'
+    });
+    $('#customerTable>tr>td').css({
+        'flex': '1',
+        'max-width': 'calc(100%/3*1)'
+    });*/
+});
+$(document).ready(function () {
+    cusFieldSet(true);
     var targetNode = document.getElementById('customer-container');
     var config = {attributes: true, attributeFilter: ['style']};
     var callback = function (mutationsList, observer) {
@@ -13,6 +43,7 @@ $(document).ready(function () {
                     $('#cusCaptureButton').css("border-color", "#007bff");
                     $('#cusCaptureButton').text("Capture");
                     $("#cusCapturedImage").attr('src', "assets/images/walk.gif");
+                    $('#cusCapturedImage').css("width", "200");
                 }
             }
         }
@@ -78,14 +109,14 @@ function cusCaptureClear() {
     $('#cusCaptureButton').css("background-color", "#007bff");
     $('#cusCaptureButton').css("border-color", "#007bff");
     $('#cusCaptureButton').text("Capture");
-    $("#cusCapturedImage").attr('src', "assets/images/defaultCusPic.gif");
+    $("#cusCapturedImage").attr('src', "assets/images/admin.gif");
 }
 
-/*$('#cusAdd').click(function () {
-    cusFieldSet(true);
+$('#cusAdd').click(function () {
+    cusFieldSet(false);
     $(this).find("#cusId").focus();
-    /!*generateCustomerId();
-    setClBtn();*!/
+    generateCustomerId();
+    setClBtn();
 });
 function cusFieldSet(state) {
     var ids = ["cusId", "cusGender", "cusName","cusDob","cusBuildNo", "cusLane", "cusCity","cusState","cusPostalCode",
@@ -93,36 +124,14 @@ function cusFieldSet(state) {
     ids.forEach(function(id) {
         $("#" + id).prop('disabled', state);
     });
-    // $(this).find("#customerID").focus();
-    // generateCustomerId();
-    // setClBtn();
-}*/
+     $(this).find("#cusId").focus();
+     generateCustomerId();
+     setClBtn();
+}
 
 function returnAllCusVal(){
 
     var rating = $("input[name='rating']:checked").val();
-
-    /*var formData = [
-        { name: "customerId", value: $("#cusId").val() },
-        { name: "customerName", value: $("#cusName").val() },
-        { name: "gender", value: $("#cusGender").val() },
-        { name: "loyaltyDate", value: $("#loyaltyDate").val() },
-        { name: "level", value: $("input[name='rating']:checked").val() },
-        { name: "totalPoints", value: $("#totalPoints").val() },
-        { name: "customerDob", value: $("#cusDob").val() },
-        { name: "contactNo", value: $("#cusContactNo").val() },
-        { name: "email", value: $("#cusEmail").val() },
-        { name: "recentPurchase", value: $("#lastPurchaseDate").val() }
-    ];
-    var address = [
-        { name: "buildNo", value: $("#cusBuildNo").val() },
-        { name: "lane", value: $("#cusLane").val() },
-        { name: "city", value: $("#cusCity").val() },
-        { name: "state", value: $("#cusState").val() },
-        { name: "postalCode", value: $("#cusPostalCode").val() }]
-    formData.push(address);
-    return formData;
-    };*/
     var image = $("#cusCapturedImage");
     var imageUrl = image.attr('src');
     var formData = {
@@ -146,7 +155,6 @@ function returnAllCusVal(){
         proPic: imageUrl
     };
     return formData;
-
 }
 function setAllCusVal(ar){
     /*var rating = $("input[name='rating']:checked").val();*/
@@ -177,14 +185,10 @@ function setAllCusVal(ar){
     $("#cusContactNo").val(ar.contactNo);
     $("#cusEmail").val(ar.email);
     $("#lastPurchaseDate").val(ar.recentPurchase);
+    $("#cusCapturedImage").attr('src', ar.proPic);
 
 }
-
-
-
-getAllCustomers();
-
-
+//getAllCustomers();
 $("#cusSave").click(function () {
 
     if (checkAll()) {
@@ -202,36 +206,6 @@ $("#cusSave").click(function () {
     }
 });
 
-$(document).ready(function () {
-   // setTime();
-   // setDate();
-    $("#customerID").prop('disabled', true);
-    $("#customerName").prop('disabled', true);
-    $("#customerAddress").prop('disabled', true);
-
-    /*$('#cusThead').css({
-        'width': '600px',
-        'display': 'flex'
-    });
-    $('#cusThead>th').css({
-        'flex': '1',
-        'max-width': 'calc(100%/3*1)'
-    });
-    $('#customerTable').css({
-        'max-height': '370px',
-        'overflow-y': 'auto',
-        'display': 'table-caption'
-    });
-    $('#customerTable>tr').css({
-        'width': '600px',
-        'display': 'flex'
-    });
-    $('#customerTable>tr>td').css({
-        'flex': '1',
-        'max-width': 'calc(100%/3*1)'
-    });*/
-});
-
 function generateCustomerId() {
     loadCusId().then(function (id) {
         $("#cusId").val(id);
@@ -241,10 +215,15 @@ function generateCustomerId() {
 }
 function loadCusId() {
     return new Promise(function (resolve, reject) {
+        performAuthenticatedRequest();
+        const accessToken = localStorage.getItem('accessToken');
         var ar;
         $.ajax({
             url: "http://localhost:8080/helloshoes/api/v1/customer/getGenId",
             method: "GET",
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
             success: function (res) {
                 console.log(res);
                 ar = res;
@@ -260,9 +239,14 @@ function loadCusId() {
 function loadCusAr() {
     return new Promise(function (resolve, reject) {
         var ar;
+        performAuthenticatedRequest();
+        const accessToken = localStorage.getItem('accessToken');
         $.ajax({
             url: "http://localhost:8080/helloshoes/api/v1/customer/getAll",
             method: "GET",
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
             success: function (res) {
                 console.log(res);
                 ar = res;
@@ -275,16 +259,7 @@ function loadCusAr() {
     });
 }
 
-$('#cusAdd').click(function () {
-    disableAllCusFields(false);
-    $(this).find("#cusId").focus();
-    generateCustomerId();
-    setClBtn();
-});
-function disableAllCusFields(value) {
-    $("#cusId, #cusName, #cusBuildNo, #cusLane, #cusCity, #cusState," +
-        " #cusPostalCode, #cusEmail, #cusDob, #loyaltyDate, #cusContactNo").prop("disabled", value);
-}
+
 /*function bindTrrEvents() {
     $('#customerTable>tr').click(function () {
 
@@ -311,16 +286,14 @@ function disableAllCusFields(value) {
 }*/
 
 $("#cusDelete").click(function () {
-    let id = $("#customerID").val();
+    let id = $("#cusId").val();
 
     validCustomer(id).then(function (isValid) {
         if (isValid == false) {
-            //alert("No such Customer..please check the ID");
             swal("Error", "No such Customer..please check the ID", "error");
             clearCustomerInputFields();
         } else {
-            /*let consent = confirm("Do you want to delete.?");
-            if (consent) {}*/
+
             swal("Do you want to delete this customer.?", {
                 buttons: {
                     cancel1: {
@@ -335,19 +308,22 @@ $("#cusDelete").click(function () {
                 },
             }).then((value) => {
                 if (value === "confirm") {
+                    performAuthenticatedRequest();
+                    const accessToken = localStorage.getItem('accessToken');
                     $.ajax({
                         url: "http://localhost:8080/helloshoes/api/v1/customer?cusId=" + id,
                         method: "DELETE",
+                        headers: {
+                            'Authorization': 'Bearer ' + accessToken
+                        },
                         success: function (res) {
                             console.log(res);
-                            // alert("Customer Delete Successfully");
                             swal("Deleted", "Customer Delete Successfully", "success");
                             clearCustomerInputFields();
                             captureClear();
-                            getAllCustomers();
+                            //getAllCustomers();
                         },
                         error: function (ob, textStatus, error) {
-                            //alert(textStatus + " : Error Customer Not Delete")
                             swal("Error", textStatus + "Error Customer Not Delete", "error");
                         }
                     });
@@ -356,18 +332,16 @@ $("#cusDelete").click(function () {
         }
     });
 
-    $("#customerID").prop('disabled', true);
+    /*$("#customerID").prop('disabled', true);
     $("#customerName").prop('disabled', true);
-    $("#customerAddress").prop('disabled', true);
+    $("#customerAddress").prop('disabled', true);*/
 
 });
 
 $("#cusUpdate").click(function () {
-    let id = $("#customerID").val();
+    let id = $("#cusId").val();
     validCustomer(id).then(function (isValid) {
         if (isValid) {
-            /*let consent = confirm("Do you really want to update this customer.?");
-            if (consent) {}*/
             swal("Do you really want to update this customer.?", {
                 buttons: {
                     cancel1: {
@@ -382,36 +356,32 @@ $("#cusUpdate").click(function () {
                 },
             }).then((value) => {
                 if (value === "confirm") {
-                    var array = $("#CusForm").serializeArray();
-                    var data = {};
-                    array.forEach(function (field) {
-                        data[field.name] = field.value;
-                    });
-                    let haveImg = $("#capturedImage").attr('src');
-                    if (haveImg.startsWith("data:image/png;base64,")){
-                        data["proPic"] = haveImg;
-                    }
+                    var data = returnAllCusVal();
+                    performAuthenticatedRequest();
+                    const accessToken = localStorage.getItem('accessToken');
                     console.log(data)
                     $.ajax({
                         url: "http://localhost:8080/helloshoes/api/v1/customer",
                         method: "PUT",
+                            headers: {
+                                'Authorization': 'Bearer ' + accessToken
+                            },
                         data: JSON.stringify(data),
                         contentType: "application/json",
                         success: function (res) {
                             console.log(res);
-                            //alert("Customer Update Successfully")
                             swal("Updated", "Customer Update Successfully", "success");
-                            captureClear();
-                            getAllCustomers();
+                            //captureClear();
+                            //getAllCustomers();
                         },
                         error: function (ob, textStatus, error) {
                             //alert(textStatus+" : Error Customer Not Update");
                             swal("Error", textStatus + "Error Customer Not Update", "error");
                         }
                     });
-                    $("#customerID").prop('disabled', true);
+                   /* $("#customerID").prop('disabled', true);
                     $("#customerName").prop('disabled', true);
-                    $("#customerAddress").prop('disabled', true);
+                    $("#customerAddress").prop('disabled', true);*/
                     clearCustomerInputFields();
                 }
             });
@@ -465,7 +435,7 @@ function saveCustomer() {
     });
 }
 
-function getAllCustomers() {
+/*function getAllCustomers() {
 
     $("#customerTable").empty();
     $.ajax({
@@ -497,7 +467,7 @@ function getAllCustomers() {
             }
         }
     });
-}
+}*/
 
 function validCustomer(id) {
     return new Promise(function (resolve, reject) {
@@ -555,7 +525,7 @@ $('#cusSearch').click(function () {
     searchCustomer(id).then(function (res) {
         setAllCusVal(res);
         captureClear();
-        $("#capturedImage").attr('src', res.proPic);
+        $("#cusCapturedImage").attr('src', res.proPic);
     });
     setClBtn();
 });

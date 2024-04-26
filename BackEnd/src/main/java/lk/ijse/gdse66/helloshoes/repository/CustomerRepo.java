@@ -5,6 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 public interface CustomerRepo extends JpaRepository<Customer,String> {
-    @Query(value = "SELECT CAST(SUBSTRING(customerId, 5) AS SIGNED) AS customerId FROM Customer ORDER BY customerId DESC LIMIT 1",nativeQuery = true)
+    @Query(value = "SELECT CAST(SUBSTRING(customer_id, 5) AS SIGNED) AS customer_id FROM Customer ORDER BY customer_id DESC LIMIT 1",nativeQuery = true)
     String getCusId();
 }
