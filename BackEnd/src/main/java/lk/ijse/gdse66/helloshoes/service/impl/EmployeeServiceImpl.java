@@ -66,7 +66,7 @@ public class EmployeeServiceImpl implements EmployeeService {
                 customer -> {
                     String proPic = dto.getProPic();
                     if (proPic != null) {
-                        employeeRepo.save(tranformer.convert(dto, Tranformer.ClassType.CUS_ENTITY));
+                        employeeRepo.save(tranformer.convert(dto, Tranformer.ClassType.EMP_ENTITY));
                     } else {
                         throw new NotFoundException("Employee ProPic Not Exist");
                     }

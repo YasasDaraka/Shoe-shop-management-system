@@ -128,8 +128,8 @@ function setEmpBorder(bol, ob) {
             ob.field.css("border", "2px solid red");
             let check = ob.field.attr('id');
             switch (check) {
-                case "empId" : ob.error.text("cus-Id is a required field: C00-"); break
-                case "empName" : ob.error.text("cus-Name is a required field: Minimum 5,Max 20,Spaces Allowed"); break
+                case "empId" : ob.error.text("emp-Id is a required field: C00-"); break
+                case "empName" : ob.error.text("emp-Name is a required field: Minimum 5,Max 20,Spaces Allowed"); break
                 case "empBuildNo" : ob.error.text("BuildNo is a required field: Minimum 3"); break
                 case "empLane" : ob.error.text("Lane is a required field: Minimum 3"); break
                 case "empCity" : ob.error.text("City is a required field: Minimum 3"); break

@@ -221,48 +221,53 @@ function loadEmpAr() {
 
 function bindEmpTrrEvents() {
     $('#employeeTable>tr').click(function () {
+        var employeeId = $(this).children().eq(0).text();
+        var employeeName = $(this).children().eq(1).text();
+        var gender = $(this).children().eq(2).text();
+        var employeeDob = $(this).children().eq(3).text();
+        var employeeStatus = $(this).children().eq(4).text();
+        var contactNo = $(this).children().eq(5).text();
+        var email = $(this).children().eq(6).text();
+        var branch = $(this).children().eq(7).text();
+        var designation = $(this).children().eq(8).text();
+        var role = $(this).children().eq(9).text();
+        var joinDate = $(this).children().eq(10).text();
+        var guardianName = $(this).children().eq(11).text();
+        var emergencyContact = $(this).children().eq(12).text();
+        var buildNo = $(this).children().eq(13).text();
+        var lane = $(this).children().eq(14).text();
+        var city = $(this).children().eq(15).text();
+        var state = $(this).children().eq(16).text();
+        var postalCode = $(this).children().eq(17).text();
 
-        let customerId = $(this).children().eq(0).text();
-        let customerName = $(this).children().eq(1).text();
-        let gender = $(this).children().eq(2).text();
-        let loyaltyDate = $(this).children().eq(3).text();
-        let level = $(this).children().eq(4).text();
-        let totalPoints = $(this).children().eq(5).text();
-        let customerDob = $(this).children().eq(6).text();
-        let buildNo = $(this).children().eq(7).text();
-        let lane = $(this).children().eq(8).text();
-        let city = $(this).children().eq(9).text();
-        let state = $(this).children().eq(10).text();
-        let postalCode = $(this).children().eq(11).text();
-        let contactNo = $(this).children().eq(12).text();
-        let email = $(this).children().eq(13).text();
-        let recentPurchase = $(this).children().eq(14).text();
 
-
-        $("#cusId").val(customerId);
-        $("#cusName").val(customerName);
-        $("#cusGender").val(gender);
-        $("#loyaltyDate").val(loyaltyDate);
-        $("#totalPoints").val(totalPoints);
-        $("#cusDob").val(customerDob);
-        $("#cusBuildNo").val(buildNo);
-        $("#cusLane").val(lane);
-        $("#cusCity").val(city);
-        $("#cusState").val(state);
-        $("#cusPostalCode").val(postalCode);
-        $("#cusContactNo").val(contactNo);
-        $("#cusEmail").val(email);
-        $("#lastPurchaseDate").val(recentPurchase);
+        $("#empId").val(employeeId);
+        $("#empName").val(employeeName);
+        $("#empBuildNo").val(buildNo);
+        $("#empLane").val(lane);
+        $("#empCity").val(city);
+        $("#empState").val(state);
+        $("#empPostalCode").val(postalCode);
+        $("#empEmail").val(email);
+        $("#empDob").val(employeeDob);
+        $("#empGender").val(gender);
+        $("#empContactNo").val(contactNo);
+        $("#empStatus").val(employeeStatus);
+        $("#designation").val(designation);
+        $("#empRole").val(role);
+        $("#joinDate").val(joinDate);
+        $("#empBranch").val(branch);
+        $("#guardianName").val(guardianName);
+        $("#emergencyContact").val(emergencyContact);
         /*$("#customerID").prop('disabled', false);
         $("#customerName").prop('disabled', false);
         $("#customerAddress").prop('disabled', false);
         $("#cusUpdate").prop('disabled', false);
         $("#cusDelete").prop('disabled', false);*/
-        setBtn();
-        searchCustomer(customerId).then(function (res){
-            captureClear();
-            setLevel(res.level);
-            $("#cusCapturedImage").attr('src', res.proPic);
+        setEmpBtn();
+        searchEmployee(employeeId).then(function (res){
+            empCaptureClear();
+            $("#empCapturedImage").attr('src', res.proPic);
 
         });
     });
@@ -434,22 +439,26 @@ function getAllEmployees() {
             console.log(res);
             for (var r of res) {
                 let row = `<tr>
-                    <th scope="row">${r.customerId}</th>
-                    <td>${r.customerName}</td>
+                    <th scope="row">${r.employeeId}</th>
+                    <td>${r.employeeName}</td>
                     <td>${r.gender}</td>
-                    <td>${r.loyaltyDate}</td>
-                    <td>${r.level}</td>
-                    <td>${r.totalPoints}</td>
-                    <td>${r.customerDob}</td>
+                    <td>${r.employeeDob}</td> 
+                    <td>${r.employeeStatus}</td>
+                    <td>${r.contactNo}</td>
+                    <td>${r.email}</td>
+                    <td>${r.branch}</td>
+                    <td>${r.designation}</td>
+                    <td>${r.role}</td>
+                    <td>${r.joinDate}</td>
+                    <td>${r.guardianName}</td>
+                    <td>${r.emergencyContact}</td>
                     <td>${r.address.buildNo}</td>
                     <td>${r.address.lane}</td>
                     <td>${r.address.city}</td>
                     <td>${r.address.state}</td>
                     <td>${r.address.postalCode}</td>
-                    <td>${r.contactNo}</td>
-                    <td>${r.email}</td>
-                    <td>${r.recentPurchase}</td>
-                    </tr>`;
+                </tr>`;
+
                 $("#employeeTable").append(row);
                 bindEmpTrrEvents();
             }
