@@ -32,11 +32,12 @@ function clearCustomerInputFields() {
     $('input[name="rating"]').prop('checked', false);
     setBtn();
 }
-setBtn();
+//setBtn();
 function setClBtn(){
     var any = false;
     $("#cusId,#cusName,#cusBuildNo,#cusLane,#cusCity,#cusState,#cusPostalCode,#cusEmail,#cusDob,#loyaltyDate,#cusContactNo").each(function () {
-        if ($(this).val().trim() !== ""||$('input[name="rating"]:checked').prop('checked') == true) {
+        var value = $(this).val();
+        if (value !== undefined && value !== null||$('input[name="rating"]:checked').prop('checked') == true) {
             any= true;
             return false;
         }
@@ -47,7 +48,7 @@ function setClBtn(){
         $("#cusClear").prop("disabled", true);
     }
 }
-setClBtn();
+//setClBtn();
 function events(e) {
     setClBtn();
     let indexNo = c_vArray.indexOf(c_vArray.find((c) => c.field.attr("id") == e.target.id));
@@ -199,6 +200,8 @@ $("#cusClear").click(function () {
     stopWebcamStream();
     $('#cusVideo').hide();
     captureClear();
+    setClBtn();
+    $("#cusClear").prop("disabled", true);
 });
 
 function captureClear() {

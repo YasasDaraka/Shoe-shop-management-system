@@ -1,15 +1,12 @@
 $(document).ready(function () {
     // setTime();
     // setDate();
-
-    /*$("#customerID").prop('disabled', true);
-    $("#customerName").prop('disabled', true);
-    $("#customerAddress").prop('disabled', true);
-*/
-
-});
-$(document).ready(function () {
     cusFieldSet(true);
+    $("#cusSave").prop("disabled", true);
+    $("#cusDelete").prop("disabled", true);
+    $("#cusUpdate").prop("disabled", true);
+    $("#cusSearch").prop("disabled", true);
+    $("#cusClear").prop("disabled", true);
     var targetNode = document.getElementById('customer-container');
     var config = {attributes: true, attributeFilter: ['style']};
     var callback = function (mutationsList, observer) {
@@ -86,7 +83,8 @@ $('#cusAdd').click(function () {
     cusFieldSet(false);
     $(this).find("#cusId").focus();
     generateCustomerId();
-    setClBtn();
+    $("#cusClear").prop("disabled", false);
+    //setClBtn();
 });
 
 function cusFieldSet(state) {
