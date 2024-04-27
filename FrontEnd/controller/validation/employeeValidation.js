@@ -51,8 +51,13 @@ function clearEmpInputFields() {
 }
 setEmpBtn();
 function setEmpClBtn(){
-    var any = em_vArray.some(function(item) {
-        return item.field.val().trim() !== "";
+    var any = false;
+    $("#empId,#empName,#empBuildNo,#empLane,#empCity,#empState,#empPostalCode,#empEmail,#empDob,#empGender,#empContactNo,#empStatus,#designation,#empRole,#joinDate,#empBranch,#guardianName,#emergencyContact").each(function () {
+        var value = $(this).val();
+        if (value !== undefined && value !== null && value.trim() !== "") {
+            any = true;
+            return false;
+        }
     });
     if (any) {
         $("#empClear").prop("disabled", false);

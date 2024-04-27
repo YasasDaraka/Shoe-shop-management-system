@@ -1,4 +1,7 @@
 $(document).ready(function () {
+    // setTime();
+    // setDate();
+    empFieldSet(true);
     var targetNode = document.getElementById('employee-container');
     var config = {attributes: true, attributeFilter: ['style']};
     var callback = function (mutationsList, observer) {
@@ -71,16 +74,6 @@ function stopEmpWebcamStream() {
     }
 }
 
-$(document).ready(function () {
-    // setTime();
-    // setDate();
-
-    /*$("#customerID").prop('disabled', true);
-    $("#customerName").prop('disabled', true);
-    $("#customerAddress").prop('disabled', true);
-*/
-
-});
 $('#empAdd').click(function () {
     empFieldSet(false);
     $(this).find("#empId").focus();
@@ -103,7 +96,8 @@ function empFieldSet(state) {
 }
 
 function returnAllEmpVal() {
-
+    var image = $("#empCapturedImage");
+    var imageUrl = image.attr('src');
     var formData = {
         employeeId: $("#empId").val(),
         employeeName: $("#empName").val(),
@@ -124,7 +118,8 @@ function returnAllEmpVal() {
         contactNo: $("#empContactNo").val(),
         email: $("#empEmail").val(),
         guardianName: $("#guardianName").val(),
-        emergencyContact: $("#emergencyContact").val()
+        emergencyContact: $("#emergencyContact").val(),
+        proPic: imageUrl
     };
 
     return formData;
@@ -148,7 +143,7 @@ function setAllEmpVal(ar) {
     $("#empBranch").val(ar.branch);
     $("#guardianName").val(ar.guardianName);
     $("#emergencyContact").val(ar.emergencyContact);
-
+    $("#empCapturedImage").attr('src', ar.proPic);
 }
 
 //getAllEmployees();

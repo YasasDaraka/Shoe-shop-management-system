@@ -514,7 +514,10 @@
 
                     <div class="col">
                       <label for="empStatus" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Status</label>
-                      <select aria-label="Default select example" class="form-select" id="empStatus" style="width: 16vw"></select>
+                      <select aria-label="Default select example" class="form-select" id="empStatus" style="width: 16vw">
+                        <option value="ADMIN"selected>Married</option>
+                        <option value="USER">Unmarried</option>
+                      </select>
                     </div>
                     <p><small class="text-danger position-absolute mt-1" id="empStatusError"></small></p>
                   </div>
@@ -609,7 +612,10 @@
 
                       <div class="col">
                         <label for="empRole" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Access Role</label>
-                        <select aria-label="Default select example" class="form-select" id="empRole" style="width: 10vw"></select>
+                        <select aria-label="Default select example" class="form-select" id="empRole" style="width: 10vw">
+                          <option value="ADMIN">Admin</option>
+                          <option value="USER"selected>User</option>
+                        </select>
                         <p><small class="text-danger position-absolute mt-1" id="empRoleError"></small></p>
                       </div>
 
