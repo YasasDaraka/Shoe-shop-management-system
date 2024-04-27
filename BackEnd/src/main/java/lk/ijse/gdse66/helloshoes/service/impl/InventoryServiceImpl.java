@@ -1,7 +1,10 @@
 package lk.ijse.gdse66.helloshoes.service.impl;
 
+import jakarta.persistence.EntityNotFoundException;
 import lk.ijse.gdse66.helloshoes.dto.InventoryDTO;
+import lk.ijse.gdse66.helloshoes.entity.Supplier;
 import lk.ijse.gdse66.helloshoes.repository.InventoryRepo;
+import lk.ijse.gdse66.helloshoes.repository.SupplierRepo;
 import lk.ijse.gdse66.helloshoes.service.InventoryService;
 import lk.ijse.gdse66.helloshoes.service.exception.DuplicateRecordException;
 import lk.ijse.gdse66.helloshoes.service.exception.NotFoundException;
@@ -16,6 +19,8 @@ import java.util.List;
 public class InventoryServiceImpl implements InventoryService {
     @Autowired
     InventoryRepo inventoryRepo;
+    @Autowired
+    SupplierRepo supplierRepo;
     @Autowired
     Tranformer tranformer;
     @Override
@@ -37,7 +42,15 @@ public class InventoryServiceImpl implements InventoryService {
                     throw new DuplicateRecordException("Item Already Exist");
                 },
                 () -> {
-                    inventoryRepo.save(tranformer.convert(dto, Tranformer.ClassType.ITEM_ENTITY));
+                    String proPic = dto.getItemPicture();
+                    if (proPic != null) {
+                        Supplier supplier = supplierRepo.findById(dto.getSupplier().getSupplierCode())
+                                .orElseThrow(() -> new NotFoundException("Supplier not found"));
+                        dto.setSupplierName(supplier.getSupplierName());
+                        inventoryRepo.save(tranformer.convert(dto, Tranformer.ClassType.ITEM_ENTITY));
+                    } else {
+                        throw new NotFoundException("Item Pic Not Exist");
+                    }
                 });
     }
 
