@@ -116,8 +116,6 @@ function checkEmpValidations(object) {
     return false;
 }
 
-
-
 function checkAllEmp() {
     for (let i = 0; i < em_vArray.length; i++) {
         if (!checkEmpValidations(em_vArray[i])) return false;

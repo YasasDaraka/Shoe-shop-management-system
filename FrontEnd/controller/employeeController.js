@@ -77,7 +77,7 @@ function stopEmpWebcamStream() {
 $('#empAdd').click(function () {
     empFieldSet(false);
     $(this).find("#empId").focus();
-    generateEmployeeId();
+    //generateEmployeeId();
     setEmpClBtn();
 });
 
@@ -402,7 +402,7 @@ function saveEmployee() {
                     // alert("Customer Added Successfully");
                     swal("Saved", "Employee Added Successfully", "success");
                     //getAllCustomers();
-
+                    generateEmployeeId();
                 },
                 error: function (ob, textStatus, error) {
                     //alert(textStatus + " : Error Customer Not Added")

@@ -6,6 +6,7 @@ const CUS_ADDRESS_CITY_REGEX = /^[A-Za-z0-9 ]{3,}$/;
 const CUS_ADDRESS_STATE_REGEX = /^[A-Za-z0-9 ]{3,}$/;
 const CUS_ADDRESS_CODE_REGEX = /^[A-Za-z0-9 ]{3,}$/;
 const CUS_EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 const CUS_GENDER_REGEX = /^[A-Z\s]*$/;
 const CUS_CONTACT_REGEX = /^[^\p{L}]{10,}$/u;
 const CUS_DOB_REGEX = /^\d{4}-\d{2}-\d{2}$/;

@@ -36,7 +36,8 @@ setSupBtn();
 function setSupClBtn(){
     var any = false;
     $("#supId, #supCategory, #supName, #supBuildNo, #supLane, #supCity, #supState, #supPostalCode, #supCountry, #supEmail, #supMobileNo, #supLandNo").each(function () {
-        if ($(this).val().trim() !== "") {
+        var value = $(this).val();
+        if (value !== undefined && value !== null && value.trim() !== "") {
             any= true;
             return false;
         }
@@ -192,4 +193,6 @@ $("#supClear").click(function () {
     sp_vArray.forEach(function(item) {
         item.error.val("");
     });
+    setSupBtn();
+    setSupClBtn();
 });

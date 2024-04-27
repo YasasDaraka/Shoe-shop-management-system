@@ -1,7 +1,8 @@
 $(document).ready(function () {
+
     // setTime();
     // setDate();
-
+    supFieldSet(true);
     /*$("#customerID").prop('disabled', true);
     $("#customerName").prop('disabled', true);
     $("#customerAddress").prop('disabled', true);
@@ -23,7 +24,7 @@ function supFieldSet(state) {
         $("#" + id).prop('disabled', state);
     });
     $(this).find("#cusId").focus();
-    generateSupplierId();
+    //generateSupplierId();
     setSupClBtn();
 }
 
@@ -300,7 +301,7 @@ function saveSupplier() {
                     // alert("Customer Added Successfully");
                     swal("Saved", "Supplier Added Successfully", "success");
                     //getAllCustomers();
-
+                    generateSupplierId();
                 },
                 error: function (ob, textStatus, error) {
                     //alert(textStatus + " : Error Customer Not Added")

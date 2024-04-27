@@ -97,7 +97,7 @@ $("#btnCustomer, #btnInventory, #btnSupplier, #btnEmployee, #btnSales,#btnAdminP
             break;
     }
 });
-// Function to show the SweetAlert2 modal
+
 function showAlert() {
     let timerInterval;
     Swal.fire({

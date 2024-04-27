@@ -96,7 +96,7 @@ function cusFieldSet(state) {
         $("#" + id).prop('disabled', state);
     });
     $(this).find("#cusId").focus();
-    generateCustomerId();
+    //generateCustomerId();
     setClBtn();
 }
 
@@ -420,7 +420,7 @@ function saveCustomer() {
                     // alert("Customer Added Successfully");
                     swal("Saved", "Customer Added Successfully", "success");
                     //getAllCustomers();
-
+                    generateCustomerId();
                 },
                 error: function (ob, textStatus, error) {
                     //alert(textStatus + " : Error Customer Not Added")
