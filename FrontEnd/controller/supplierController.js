@@ -19,7 +19,7 @@ $('#supIdAdd').click(function () {
 });
 
 function supFieldSet(state) {
-    var ids = ["supId", "supCategory", "supName", "supBuildNo", "upLane",
+    var ids = ["supId", "supCategory", "supName", "supBuildNo", "supLane",
         "supCity","supState", "supPostalCode", "supCountry", "supEmail", "supMobileNo", "supLandNo"];
     ids.forEach(function (id) {
         $("#" + id).prop('disabled', state);
@@ -133,39 +133,33 @@ function loadSupAr() {
 
 
 function bindSupTrrEvents() {
-    $('#customerTable>tr').click(function () {
+    $('#supplierTable>tr').click(function () {
 
-        let customerId = $(this).children().eq(0).text();
-        let customerName = $(this).children().eq(1).text();
-        let gender = $(this).children().eq(2).text();
-        let loyaltyDate = $(this).children().eq(3).text();
-        let level = $(this).children().eq(4).text();
-        let totalPoints = $(this).children().eq(5).text();
-        let customerDob = $(this).children().eq(6).text();
-        let buildNo = $(this).children().eq(7).text();
-        let lane = $(this).children().eq(8).text();
-        let city = $(this).children().eq(9).text();
-        let state = $(this).children().eq(10).text();
-        let postalCode = $(this).children().eq(11).text();
-        let contactNo = $(this).children().eq(12).text();
-        let email = $(this).children().eq(13).text();
-        let recentPurchase = $(this).children().eq(14).text();
+        let id = $(this).children().eq(0).text();
+        let name = $(this).children().eq(1).text();
+        let category = $(this).children().eq(2).text();
+        let buildNo = $(this).children().eq(3).text();
+        let lane = $(this).children().eq(4).text();
+        let city = $(this).children().eq(5).text();
+        let state = $(this).children().eq(6).text();
+        let postalCode = $(this).children().eq(7).text();
+        let country = $(this).children().eq(8).text();
+        let mobileNo = $(this).children().eq(9).text();
+        let landNo = $(this).children().eq(10).text();
+        let email = $(this).children().eq(11).text();
 
-
-        $("#cusId").val(customerId);
-        $("#cusName").val(customerName);
-        $("#cusGender").val(gender);
-        $("#loyaltyDate").val(loyaltyDate);
-        $("#totalPoints").val(totalPoints);
-        $("#cusDob").val(customerDob);
-        $("#cusBuildNo").val(buildNo);
-        $("#cusLane").val(lane);
-        $("#cusCity").val(city);
-        $("#cusState").val(state);
-        $("#cusPostalCode").val(postalCode);
-        $("#cusContactNo").val(contactNo);
-        $("#cusEmail").val(email);
-        $("#lastPurchaseDate").val(recentPurchase);
+        $("#supId").val(id);
+        $("#supName").val(name);
+        $("#supCategory").val(category);
+        $("#supBuildNo").val(buildNo);
+        $("#supLane").val(lane);
+        $("#supCity").val(city);
+        $("#supState").val(state);
+        $("#supPostalCode").val(postalCode);
+        $("#supCountry").val(country);
+        $("#supEmail").val(email);
+        $("#supMobileNo").val(mobileNo);
+        $("#supLandNo").val(landNo);
         setSupBtn();
     });
 }
@@ -319,11 +313,11 @@ function saveSupplier() {
     });
 }
 
-function getAllSupplier() {
+function getAllSuppliers() {
     performAuthenticatedRequest();
     const accessToken = localStorage.getItem('accessToken');
     console.log(accessToken);
-    $("#customerTable").empty();
+    $("#supplierTable").empty();
     $.ajax({
         url: "http://localhost:8080/helloshoes/api/v1/supplier/getAll",
         method: "GET",
@@ -334,23 +328,20 @@ function getAllSupplier() {
             console.log(res);
             for (var r of res) {
                 let row = `<tr>
-                    <th scope="row">${r.customerId}</th>
-                    <td>${r.customerName}</td>
-                    <td>${r.gender}</td>
-                    <td>${r.loyaltyDate}</td>
-                    <td>${r.level}</td>
-                    <td>${r.totalPoints}</td>
-                    <td>${r.customerDob}</td>
+                     <th scope="row">${r.supplierCode}</th>
+                    <td>${r.supplierName}</td>
+                    <td>${r.category}</td>
                     <td>${r.address.buildNo}</td>
                     <td>${r.address.lane}</td>
                     <td>${r.address.city}</td>
                     <td>${r.address.state}</td>
                     <td>${r.address.postalCode}</td>
-                    <td>${r.contactNo}</td>
+                    <td>${r.address.supCountry}</td>
+                    <td>${r.contact.mobileNo}</td>
+                    <td>${r.contact.landNo}</td>
                     <td>${r.email}</td>
-                    <td>${r.recentPurchase}</td>
                     </tr>`;
-                $("#customerTable").append(row);
+                $("#supplierTable").append(row);
                 bindSupTrrEvents();
             }
         }

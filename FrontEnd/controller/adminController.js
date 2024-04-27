@@ -64,6 +64,7 @@ $("#getAllCus, #getAllItm, #getAllEmp, #getAllSup").click(function () {
             break;
         case 'getAllSup':
             supList.css('display', 'block');
+            getAllSuppliers();
             break;
     }
 });
