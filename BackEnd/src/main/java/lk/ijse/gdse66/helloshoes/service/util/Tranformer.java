@@ -1,13 +1,7 @@
 package lk.ijse.gdse66.helloshoes.service.util;
 
-import lk.ijse.gdse66.helloshoes.dto.CustomerDTO;
-import lk.ijse.gdse66.helloshoes.dto.EmployeeDTO;
-import lk.ijse.gdse66.helloshoes.dto.SupplierDTO;
-import lk.ijse.gdse66.helloshoes.dto.UserDTO;
-import lk.ijse.gdse66.helloshoes.entity.Customer;
-import lk.ijse.gdse66.helloshoes.entity.Employee;
-import lk.ijse.gdse66.helloshoes.entity.Supplier;
-import lk.ijse.gdse66.helloshoes.entity.User;
+import lk.ijse.gdse66.helloshoes.dto.*;
+import lk.ijse.gdse66.helloshoes.entity.*;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +29,6 @@ public class Tranformer {
         SUP_DTO,
         SUP_ENTITY,
         SUP_DTO_LIST,
-        CUS_ENTITY_LIST,
         ITEM_DTO,
         ITEM_ENTITY,
         ITEM_DTO_LIST,
@@ -156,15 +149,13 @@ public class Tranformer {
                 return Supplier.class;
             case SUP_DTO_LIST:
                 return new TypeToken<ArrayList<SupplierDTO>>() {}.getType();
-            /*case CUS_ENTITY_LIST:
-                return new TypeToken<ArrayList<Customer>>() {}.getType();
             case ITEM_DTO:
-                return ItemDTO.class;
+                return InventoryDTO.class;
             case ITEM_ENTITY:
-                return Item.class;
+                return Inventory.class;
             case ITEM_DTO_LIST:
-                return new TypeToken<ArrayList<ItemDTO>>() {}.getType();
-            case ITEM_ENTITY_LIST:
+                return new TypeToken<ArrayList<InventoryDTO>>() {}.getType();
+            /*case ITEM_ENTITY_LIST:
                 return new TypeToken<ArrayList<Item>>() {}.getType();
             case ORDER_DETAILS_DTO:
                 return OrderDetailsDTO.class;
