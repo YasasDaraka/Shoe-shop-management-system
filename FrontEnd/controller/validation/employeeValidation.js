@@ -1,4 +1,4 @@
-const EMP_ID_REGEX = /^C00-(0*[1-9]\d{0,2})$/;
+const EMP_ID_REGEX = /^E00-(0*[1-9]\d{0,2})$/;
 const EMP_NAME_REGEX = /^[A-Za-z ]{5,}$/;
 const EMP_GENDER_REGEX = /^[A-Z\s]*$/;
 const EMP_STATUS_REGEX = /^[A-Z\s]*$/;
@@ -15,7 +15,7 @@ const EMP_EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const EMP_CONTACT_REGEX = /^[^\p{L}]{10,}$/u;
 const EMP_DOB_REGEX = /^\d{4}-\d{2}-\d{2}$/;
 const EMP_GUARDIAN_REGEX = /^[A-Za-z ]{5,}$/;
-const EMP_GURDIAN_CONTACT_REGEX = /^[^\p{L}]{10,}$/u;
+const EMP_GUARDIAN_CONTACT_REGEX = /^[^\p{L}]{10,}$/u;
 
 let em_vArray = new Array();
 em_vArray.push({ field: $("#empId"), regEx: EMP_ID_REGEX, error: $("#empIdError") });
@@ -28,118 +28,120 @@ em_vArray.push({ field: $("#empPostalCode"), regEx: EMP_ADDRESS_CODE_REGEX, erro
 em_vArray.push({ field: $("#empEmail"), regEx: EMP_EMAIL_REGEX, error: $("#empEmailError") });
 em_vArray.push({ field: $("#empGender"), regEx: EMP_GENDER_REGEX, error: $("#empGenderError") });
 em_vArray.push({ field: $("#empDob"), regEx: EMP_DOB_REGEX, error: $("#empDobError") });
-
 em_vArray.push({ field: $("#empStatus"), regEx: EMP_STATUS_REGEX , error: $("#empStatusError") });
 em_vArray.push({ field: $("#designation"), regEx: EMP_DESIGNATION_REGEX, error: $("#designationError") });
 em_vArray.push({ field: $("#empRole"), regEx: EMP_ROLE_REGEX , error: $("#empRoleError") });
 em_vArray.push({ field: $("#joinDate"), regEx: EMP_JOIN_REGEX , error: $("#joinDateError") });
-em_vArray.push({ field: $("#branc"), regEx: EMP_BRANCH_REGEX, error: $("#empContactNoError") });
+em_vArray.push({ field: $("#empBranch"), regEx: EMP_BRANCH_REGEX, error: $("#empBranchError") });
 em_vArray.push({ field: $("#empContactNo"), regEx: EMP_CONTACT_REGEX, error: $("#empContactNoError") });
-em_vArray.push({ field: $("#empContactNo"), regEx: EMP_GUARDIAN_REGEX , error: $("#empContactNoError") });
-em_vArray.push({ field: $("#empContactNo"), regEx: EMP_GURDIAN_CONTACT_REGEX , error: $("#empContactNoError") });
+em_vArray.push({ field: $("#guardianName"), regEx: EMP_GUARDIAN_REGEX , error: $("#guardianNameError") });
+em_vArray.push({ field: $("#emergencyContact"), regEx: EMP_GUARDIAN_CONTACT_REGEX , error: $("#emergencyContactError") });
 
-function clearCustomerInputFields() {
-    $("#cusId,#cusName,#cusBuildNo,#cusLane,#cusCity,#cusState,#cusPostalCode,#cusEmail,#cusDob,#cusGender,#cusContactNo").val("");
-    $("#cusId,#cusName,#cusBuildNo,#cusLane,#cusCity,#cusState,#cusPostalCode,#cusEmail,#cusDob,#cusGender,#cusContactNo").css("border", "1px solid #ced4da");
-    $("#cusId").focus();
-    $('input[name="rating"]').prop('checked', false);
-    setBtn();
+function clearEmpInputFields() {
+    em_vArray.forEach(function(item) {
+        item.field.val("");
+        item.field.css("border", "1px solid #ced4da");
+    });
+    /*$("#empId,#empName,#empBuildNo,#empLane,#empCity,#empState,#empPostalCode,#empEmail,#empDob,#empGender" +
+        ",#empContactNo,#empStatus,#designation,#empRole,#joinDate,#empBranch,#empContactNo,#guardianName,#emergencyContact").val("");
+    $("#empId,#empName,#empBuildNo,#empLane,#empCity,#empState,#empPostalCode,#empEmail,#empDob,#empGender" +
+        ",#empContactNo,#empStatus,#designation,#empRole,#joinDate,#empBranch,#empContactNo,#guardianName,#emergencyContact").css("border", "1px solid #ced4da");
+    */$("#empId").focus();
+    setEmpBtn();
 }
-setBtn();
-function setClBtn(){
-    var any = false;
-    $("#cusId,#cusName,#cusBuildNo,#cusLane,#cusCity,#cusState,#cusPostalCode,#cusEmail,#cusDob,#loyaltyDate,#cusContactNo").each(function () {
-        if ($(this).val().trim() !== ""||$('input[name="rating"]:checked').prop('checked') == true) {
-            any= true;
-            return false;
-        }
+setEmpBtn();
+function setEmpClBtn(){
+    var any = em_vArray.some(function(item) {
+        return item.field.val().trim() !== "";
     });
     if (any) {
-        $("#cusClear").prop("disabled", false);
+        $("#empClear").prop("disabled", false);
     } else {
-        $("#cusClear").prop("disabled", true);
+        $("#empClear").prop("disabled", true);
     }
 }
-setClBtn();
-function events(e) {
-    setClBtn();
-    let indexNo = c_vArray.indexOf(c_vArray.find((c) => c.field.attr("id") == e.target.id));
+setEmpClBtn();
+function empEvents(e) {
+    setEmpClBtn();
+    let indexNo = em_vArray.indexOf(em_vArray.find((c) => c.field.attr("id") == e.target.id));
 
     if (e.key == "Tab") {
         e.preventDefault();
     }
 
-    checkValidations(c_vArray[indexNo]);
+    checkEmpValidations(em_vArray[indexNo]);
 
-    setBtn();
+    setEmpBtn();
 
     if (e.key == "Enter") {
 
-        if (e.target.id != c_vArray[c_vArray.length - 1].field.attr("id")) {
-            if (checkValidations(c_vArray[indexNo])) {
-                c_vArray[indexNo + 1].field.focus();
+        if (e.target.id != em_vArray[em_vArray.length - 1].field.attr("id")) {
+            if (checkEmpValidations(em_vArray[indexNo])) {
+                em_vArray[indexNo + 1].field.focus();
             }
         } else {
-            if (checkValidations(c_vArray[indexNo])) {
-                saveCustomer();
+            if (checkEmpValidations(em_vArray[indexNo])) {
+                saveEmployee();
             }
         }
     }
 }
 
-$("#cusName,#cusBuildNo,#cusLane,#cusCity,#cusState,#cusPostalCode,#cusEmail,#cusContactNo,#cusGender, #cusDob,#loyaltyDate").on("keydown keyup change", function (e) {
-    events(e);
+$("#empName,#empBuildNo,#empLane,#empCity,#empState,#empPostalCode,#empEmail,#empDob,#empGender" +
+    ",#empContactNo,#empStatus,#designation,#empRole,#joinDate,#empBranch,#empContactNo,#guardianName,#emergencyContact").on("keydown keyup change", function (e) {
+    empEvents(e);
 });
-/*$("#cusGender, #cusDob, #loyaltyDate").on("", function(e) {
-    events(e);
-});*/
-$("input[name='rating']").on("change", function(e) {
-    setBtn();
-});
-$("#cusId").on("keydown keyup", function (e) {
-    events(e);
-    searchCustomer($("#cusId").val()).then(function (res){
-        $("#cusId,#cusName,#cusBuildNo,#cusLane,#cusCity,#cusState" +
-            ",#cusPostalCode,#cusEmail,#cusDob,#cusGender,#cusContactNo").css("border", "1px solid #ced4da");
-        setBtn();
-        captureClear();
-        setAllCusVal(res);
+$("#empId").on("keydown keyup", function (e) {
+    empEvents(e);
+    searchEmployee($("#empId").val()).then(function (res){
+        $("#empId,#empName,#empBuildNo,#empLane,#empCity,#empState,#empPostalCode,#empEmail,#empDob,#empGender" +
+            ",#empContactNo,#empStatus,#designation,#empRole,#joinDate,#empBranch,#empContactNo,#guardianName,#emergencyContact").css("border", "1px solid #ced4da");
+        setEmpBtn();
+        empCaptureClear();
+        setAllEmpVal(res);
     });
 });
 
-function checkValidations(object) {
+function checkEmpValidations(object) {
     if (object.regEx.test(object.field.val())) {
-        setBorder(true, object)
+        setEmpBorder(true, object)
         return true;
     }
-    setBorder(false, object)
+    setEmpBorder(false, object)
     return false;
 }
 
 
 
-function checkAll() {
-    for (let i = 0; i < c_vArray.length; i++) {
-        if (!checkValidations(c_vArray[i])) return false;
+function checkAllEmp() {
+    for (let i = 0; i < em_vArray.length; i++) {
+        if (!checkEmpValidations(em_vArray[i])) return false;
     }
     return true;
 }
-function setBorder(bol, ob) {
+function setEmpBorder(bol, ob) {
     if (!bol) {
         if (ob.field.val().length >= 1) {
             ob.field.css("border", "2px solid red");
             let check = ob.field.attr('id');
             switch (check) {
-                case "cusId" : ob.error.text("cus-Id is a required field: C00-"); break
-                case "cusName" : ob.error.text("cus-Name is a required field: Minimum 5,Max 20,Spaces Allowed"); break
-                case "cusBuildNo" : ob.error.text("BuildNo is a required field: Minimum 3"); break
-                case "cusLane" : ob.error.text("Lane is a required field: Minimum 3"); break
-                case "cusCity" : ob.error.text("City is a required field: Minimum 3"); break
-                case "cusState" : ob.error.text("State is a required field: Minimum 3"); break
-                case "cusPostalCode" : ob.error.text("PostalCode is a required field: Minimum 3"); break
-                case "cusEmail" : ob.error.text("Email is not valid"); break;
-                case "cusDob" : ob.error.text("Dob is not valid"); break
-                case "cusContactNo" : ob.error.text("ContactNo is not valid: Minimum 10"); break
+                case "empId" : ob.error.text("cus-Id is a required field: C00-"); break
+                case "empName" : ob.error.text("cus-Name is a required field: Minimum 5,Max 20,Spaces Allowed"); break
+                case "empBuildNo" : ob.error.text("BuildNo is a required field: Minimum 3"); break
+                case "empLane" : ob.error.text("Lane is a required field: Minimum 3"); break
+                case "empCity" : ob.error.text("City is a required field: Minimum 3"); break
+                case "empState" : ob.error.text("State is a required field: Minimum 3"); break
+                case "empPostalCode" : ob.error.text("PostalCode is a required field: Minimum 3"); break
+                case "empEmail" : ob.error.text("Email is not valid"); break;
+                case "empDob" : ob.error.text("Dob is not valid"); break
+                case "empContactNo" : ob.error.text("ContactNo is not valid: Minimum 10"); break
+                case "empStatus":ob.error.text("Status is required field: Minimum 3");break;
+                case "designation":ob.error.text("Designation is required field: Minimum 3");break;
+                case "joinDate":ob.error.text("Date is not valid");break;
+                case "empBranch":ob.error.text("Branch is required field: Minimum 3");break;
+                case "guardianName":ob.error.text("Name is required field: Minimum 3");break;
+                case "emergencyContact":ob.error.text("Contact is not valid: Minimum 10");break;
+
             }
         } else {
             ob.field.css("border", "1px solid #ced4da");
@@ -156,71 +158,75 @@ function setBorder(bol, ob) {
     }
 
 }
-function setBtn() {
-    setClBtn();
-    $("#cusSave").prop("disabled", true);
-    $("#cusDelete").prop("disabled", true);
-    $("#cusUpdate").prop("disabled", true);
-    $("#cusSearch").prop("disabled", true);
-    let id = $("#cusId").val();
-    if ($("#cusId").val() != "" && CUS_ID_REGEX.test($("#cusId").val())){
-        $("#cusSearch").prop("disabled", false);
+function setEmpBtn() {
+    setEmpClBtn();
+    $("#empSave").prop("disabled", true);
+    $("#empDelete").prop("disabled", true);
+    $("#empUpdate").prop("disabled", true);
+    $("#empSearch").prop("disabled", true);
+    let id = $("#empId").val();
+    if ($("#empId").val() != "" && EMP_ID_REGEX.test($("#empId").val())){
+        $("#empSearch").prop("disabled", false);
     }else {
-        $("#cusSearch").prop("disabled", true);
+        $("#empSearch").prop("disabled", true);
     }
-    validCustomer(id)
+    validEmployee(id)
         .then(function (isValid) {
             if (isValid) {
-                $("#cusDelete").prop("disabled", false);
-                if (checkAll()) {
-                    $("#cusUpdate").prop("disabled", false);
-                    $("#cusDelete").prop("disabled", false);
+                $("#empDelete").prop("disabled", false);
+                if (checkAllEmp()) {
+                    $("#empUpdate").prop("disabled", false);
+                    $("#empDelete").prop("disabled", false);
                 } else {
-                    $("#cusUpdate").prop("disabled", true);
+                    $("#empUpdate").prop("disabled", true);
                 }
             }else {
-                $("#cusDelete").prop("disabled", true);
-                $("#cusUpdate").prop("disabled", true);
-                if (checkAll()) {
-                    $("#cusSave").prop("disabled", false);
+                $("#empDelete").prop("disabled", true);
+                $("#empUpdate").prop("disabled", true);
+                if (checkAllEmp()) {
+                    $("#empSave").prop("disabled", false);
                 } else {
-                    $("#cusSave").prop("disabled", true);
+                    $("#empSave").prop("disabled", true);
                 }
             }
         })
         .catch(function () {
-            $("#cusDelete").prop("disabled", true);
-            $("#cusUpdate").prop("disabled", true);
-            if (checkAll()) {
-                $("#cusSave").prop("disabled", false);
+            $("#empDelete").prop("disabled", true);
+            $("#empUpdate").prop("disabled", true);
+            if (checkAllEmp()) {
+                $("#empSave").prop("disabled", false);
             } else {
-                $("#cusSave").prop("disabled", true);
+                $("#empSave").prop("disabled", true);
             }
         });
 }
 
-$("#cusClear").click(function () {
-    var ids = ["cusId", "cusGender", "cusName","cusDob","cusBuildNo", "cusLane", "cusCity","cusState","cusPostalCode",
+$("#empClear").click(function () {
+    em_vArray.forEach(function(item) {
+        item.field.val("");
+        item.field.css("border", "1px solid #ced4da");
+    });
+    /*var ids = ["cusId", "cusGender", "cusName","cusDob","cusBuildNo", "cusLane", "cusCity","cusState","cusPostalCode",
         "cusEmail", "cusContactNo","loyaltyDate","totalPoints", "lastPurchaseDate","rating"];
     ids.forEach(function(id) {
         $("#" + id +"Error").val("");
-    });
-    clearCustomerInputFields();
-    c_vArray.forEach(function(item) {
+    });*/
+    clearEmpInputFields();
+    em_vArray.forEach(function(item) {
         item.error.val("");
     });
-    stopWebcamStream();
-    $('#cusVideo').hide();
-    captureClear();
+    stopEmpWebcamStream();
+    $('#empVideo').hide();
+    empCaptureClear();
 });
 
-function captureClear() {
-    stopWebcamStream();
-    $('#video').hide();
-    $("#cusCapturedImage").show();
-    $('#cusCaptureButton').css("background-color", "#007bff");
-    $('#cusCaptureButton').css("border-color", "#007bff");
-    $('#cusCaptureButton').text("Capture");
-    $("#cusCapturedImage").attr('src', "assets/images/walk.gif");
-    $('input[name="rating"]:checked').prop('checked', false);
+function empCaptureClear() {
+    stopEmpWebcamStream();
+    $('#empVideo').hide();
+    $("#empCapturedImage").show();
+    $('#empCaptureButton').css("background-color", "#007bff");
+    $('#empCaptureButton').css("border-color", "#007bff");
+    $('#empCaptureButton').text("Capture");
+    $("#empCapturedImage").attr('src', "assets/images/walk.gif");
+
 }

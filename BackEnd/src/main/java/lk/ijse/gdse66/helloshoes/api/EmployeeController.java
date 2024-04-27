@@ -53,7 +53,7 @@ public class EmployeeController {
     }
 
     @DeleteMapping(params = "empId")
-    public ResponseEntity<Void> deleteEmployee(@RequestParam("cusId") String cusId) {
+    public ResponseEntity<Void> deleteEmployee(@RequestParam("empId") String cusId) {
         empService.deleteEmployee(cusId);
         return ResponseEntity.noContent().build();
     }

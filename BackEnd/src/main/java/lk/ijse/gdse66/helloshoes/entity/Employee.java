@@ -25,10 +25,13 @@ public class Employee {
     @Enumerated(EnumType.STRING)
     private Gender gender;
     private String employeeStatus;
+    private String branch;
     private String designation;
     @Enumerated(EnumType.STRING)
     private Role role;
+    @Temporal(TemporalType.DATE)
     private Date employeeDob;
+    @Temporal(TemporalType.DATE)
     private Date joinDate;
     @Embedded
     private Address address;

@@ -18,6 +18,7 @@ public class EmployeeDTO {
     private String proPic;
     private Gender gender;
     private String employeeStatus;
+    private String branch;
     private String designation;
     private Role role;
     private Date employeeDob;
