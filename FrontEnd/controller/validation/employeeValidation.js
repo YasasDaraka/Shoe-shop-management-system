@@ -49,7 +49,7 @@ function clearEmpInputFields() {
     */$("#empId").focus();
     setEmpBtn();
 }
-setEmpBtn();
+//setEmpBtn();
 function setEmpClBtn(){
     var any = false;
     $("#empId,#empName,#empBuildNo,#empLane,#empCity,#empState,#empPostalCode,#empEmail,#empDob,#empGender,#empContactNo,#empStatus,#designation,#empRole,#joinDate,#empBranch,#guardianName,#emergencyContact").each(function () {
@@ -65,7 +65,7 @@ function setEmpClBtn(){
         $("#empClear").prop("disabled", true);
     }
 }
-setEmpClBtn();
+//setEmpClBtn();
 function empEvents(e) {
     setEmpClBtn();
     let indexNo = em_vArray.indexOf(em_vArray.find((c) => c.field.attr("id") == e.target.id));
@@ -209,11 +209,6 @@ $("#empClear").click(function () {
         item.field.val("");
         item.field.css("border", "1px solid #ced4da");
     });
-    /*var ids = ["cusId", "cusGender", "cusName","cusDob","cusBuildNo", "cusLane", "cusCity","cusState","cusPostalCode",
-        "cusEmail", "cusContactNo","loyaltyDate","totalPoints", "lastPurchaseDate","rating"];
-    ids.forEach(function(id) {
-        $("#" + id +"Error").val("");
-    });*/
     clearEmpInputFields();
     em_vArray.forEach(function(item) {
         item.error.val("");
@@ -221,6 +216,8 @@ $("#empClear").click(function () {
     stopEmpWebcamStream();
     $('#empVideo').hide();
     empCaptureClear();
+    setEmpBtn();
+    setEmpClBtn();
 });
 
 function empCaptureClear() {

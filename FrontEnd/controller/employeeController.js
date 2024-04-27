@@ -2,6 +2,11 @@ $(document).ready(function () {
     // setTime();
     // setDate();
     empFieldSet(true);
+    $("#empSave").prop("disabled", true);
+    $("#empDelete").prop("disabled", true);
+    $("#empUpdate").prop("disabled", true);
+    $("#empSearch").prop("disabled", true);
+    $("#empClear").prop("disabled", true);
     var targetNode = document.getElementById('employee-container');
     var config = {attributes: true, attributeFilter: ['style']};
     var callback = function (mutationsList, observer) {
@@ -77,21 +82,16 @@ function stopEmpWebcamStream() {
 $('#empAdd').click(function () {
     empFieldSet(false);
     $(this).find("#empId").focus();
-    //generateEmployeeId();
-    setEmpClBtn();
+    generateEmployeeId();
+    //setEmpClBtn();
 });
 
 function empFieldSet(state) {
     em_vArray.forEach(function(item) {
         item.field.prop('disabled', state);
     });
-    /*var ids = ["cusId", "cusGender", "cusName", "cusDob", "cusBuildNo", "cusLane", "cusCity", "cusState", "cusPostalCode",
-        "cusEmail", "cusContactNo", "loyaltyDate", "totalPoints", "lastPurchaseDate", "rating"];
-    ids.forEach(function (id) {
-        $("#" + id).prop('disabled', state);
-    });*/
     $(this).find("#empId").focus();
-    generateEmployeeId();
+    //generateEmployeeId();
     setEmpClBtn();
 }
 

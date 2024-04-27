@@ -3,10 +3,11 @@ $(document).ready(function () {
     // setTime();
     // setDate();
     supFieldSet(true);
-    /*$("#customerID").prop('disabled', true);
-    $("#customerName").prop('disabled', true);
-    $("#customerAddress").prop('disabled', true);
-*/
+    $("#supSave").prop("disabled", true);
+    $("#supDelete").prop("disabled", true);
+    $("#supUpdate").prop("disabled", true);
+    $("#supSearch").prop("disabled", true);
+    $("#supClear").prop("disabled", true);
 
 });
 
@@ -14,7 +15,7 @@ $('#supIdAdd').click(function () {
     supFieldSet(false);
     $(this).find("#supId").focus();
     generateSupplierId();
-    setSupClBtn();
+    //setSupClBtn();
 });
 
 function supFieldSet(state) {

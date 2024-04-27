@@ -32,7 +32,7 @@ function clearSupInputFields() {
     $("#supId").focus();
     setSupBtn();
 }
-setSupBtn();
+//setSupBtn();
 function setSupClBtn(){
     var any = false;
     $("#supId, #supCategory, #supName, #supBuildNo, #supLane, #supCity, #supState, #supPostalCode, #supCountry, #supEmail, #supMobileNo, #supLandNo").each(function () {
@@ -48,7 +48,7 @@ function setSupClBtn(){
         $("#supClear").prop("disabled", true);
     }
 }
-setSupClBtn();
+//setSupClBtn();
 function supEvents(e) {
     setSupClBtn();
     let indexNo = sp_vArray.indexOf(sp_vArray.find((c) => c.field.attr("id") == e.target.id));
