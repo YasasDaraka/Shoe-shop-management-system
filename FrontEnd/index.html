@@ -487,7 +487,7 @@
                 <div class="col-md-12 p-0 d-flex justify-content-center justify-content-evenly" style="width: 24.4vw">
                   <div class="container row mt-4">
 
-                    <div class="col pb-3">
+                    <div class="col">
                       <label for="empId" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px;width: 20vw;">Employee ID</label>
                       <div class="row m-0 p-0">
                         <input type="text" class="form-control" id="empId" style="width: 12vw">
@@ -495,7 +495,7 @@
                       <p class="position-absolute mt-1"><small class="text-danger" id="empIdError"></small></p>
                     </div>
 
-                    <div class="col">
+                    <div class="col pb-3">
                       <label for="empGender" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Gender</label>
                       <select aria-label="Default select example" class="form-select" id="empGender" style="width: 16vw">
                         <option value="MALE"selected>Male</option>
@@ -516,23 +516,28 @@
                       <label for="empStatus" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Status</label>
                       <select aria-label="Default select example" class="form-select" id="empStatus" style="width: 16vw"></select>
                     </div>
-
+                    <p><small class="text-danger position-absolute mt-1" id="empStatusError"></small></p>
                   </div>
                 </div>
               </div>
               <div class="row h-50 m-0">
                 <div class="col-md-12 p-0">
                   <div class="container row ">
+                    <div class="col">
+                      <label for="empBranch" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Branch</label>
+                      <input type="text" class="form-control" id="empBranch" style="width: 13.5vw">
+                      <p><small class="text-danger position-absolute mt-1" id="empBranchError"></small></p>
+                    </div>
 
                     <div class="col">
                       <label for="empBuildNo" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Building No or Name</label>
-                      <input type="text" class="form-control" id="empBuildNo">
+                      <input type="text" class="form-control" id="empBuildNo" style="width: 13.5vw">
                       <p><small class="text-danger position-absolute mt-1" id="empBuildNoError"></small></p>
                     </div>
 
                     <div class="col">
                       <label for="empLane" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Lane</label>
-                      <input type="text" class="form-control" id="empLane" style="width: 20vw">
+                      <input type="text" class="form-control" id="empLane" style="width: 10vw">
                       <p><small class="text-danger position-absolute mt-1" id="empLaneError"></small></p>
                     </div>
 
@@ -605,6 +610,7 @@
                       <div class="col">
                         <label for="empRole" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Access Role</label>
                         <select aria-label="Default select example" class="form-select" id="empRole" style="width: 10vw"></select>
+                        <p><small class="text-danger position-absolute mt-1" id="empRoleError"></small></p>
                       </div>
 
                       <div class="col">
