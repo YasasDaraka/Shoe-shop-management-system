@@ -26,7 +26,7 @@ public class SalesController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping(path = "/search/{id:OID-0*[1-9]\\d{0,2}}")
+    @GetMapping(path = "/search/{id}")
     public SalesDTO getSales(@PathVariable("id") String id) {
         return saleService.searchSales(id);
     }

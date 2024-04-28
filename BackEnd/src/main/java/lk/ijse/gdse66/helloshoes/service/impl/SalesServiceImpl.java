@@ -26,13 +26,15 @@ public class SalesServiceImpl implements SaleService {
 
     @Override
     public SalesDTO searchSales(String id) {
-        return null;
+        return (SalesDTO) saleRepo.findById(id)
+                .map(sales -> tranformer.convert(sales, Tranformer.ClassType.ORDER_DTO))
+                .orElseThrow(() -> new NotFoundException("Order Not Exist"));
     }
 
     @Override
     public void saveSales(SalesDTO dto) {
         saleRepo.findById(dto.getOrderNo()).ifPresentOrElse(
-                customer -> {
+                sales -> {
                     throw new DuplicateRecordException("Order Already Exist");
                 },
                 () -> {
@@ -43,7 +45,7 @@ public class SalesServiceImpl implements SaleService {
     @Override
     public void updateSales(SalesDTO dto) {
         saleRepo.findById(dto.getOrderNo()).ifPresentOrElse(
-                customer -> {
+                sales -> {
                     saleRepo.save(tranformer.convert(dto, Tranformer.ClassType.ORDER_ENTITY));
                 },
                 () -> {
