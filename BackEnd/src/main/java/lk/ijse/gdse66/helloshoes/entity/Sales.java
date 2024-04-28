@@ -5,8 +5,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -20,8 +23,8 @@ public class Sales {
     @Id
     private String orderNo;
 
-    @Temporal(TemporalType.DATE)
-    private Date purchaseDate;
+    @CreationTimestamp
+    private LocalDateTime purchaseDate;
 
     private Double total;
 

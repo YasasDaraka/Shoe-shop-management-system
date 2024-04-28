@@ -1,9 +1,9 @@
 $("#btnSignIn").click(function () {
     //showAlert();
-    signIn();
-   /* allContainerHide();
+    //signIn();
+    allContainerHide();
     adminPage.css('display','block');
-    logInPage.css('display','none');*/
+    logInPage.css('display','none');
 });
 function signIn() {
     let value = {

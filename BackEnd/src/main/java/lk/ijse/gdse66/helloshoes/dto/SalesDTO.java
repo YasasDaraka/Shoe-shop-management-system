@@ -6,6 +6,7 @@ import lk.ijse.gdse66.helloshoes.entity.SaleDetails;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,7 +19,7 @@ public class SalesDTO {
 
     private String orderNo;
 
-    private Date purchaseDate;
+    private LocalDateTime purchaseDate;
 
     private Double total;
 
