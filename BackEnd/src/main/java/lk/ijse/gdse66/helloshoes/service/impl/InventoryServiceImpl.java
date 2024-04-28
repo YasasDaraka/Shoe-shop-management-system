@@ -1,6 +1,5 @@
 package lk.ijse.gdse66.helloshoes.service.impl;
 
-import jakarta.persistence.EntityNotFoundException;
 import lk.ijse.gdse66.helloshoes.dto.InventoryDTO;
 import lk.ijse.gdse66.helloshoes.entity.Supplier;
 import lk.ijse.gdse66.helloshoes.repository.InventoryRepo;
@@ -60,6 +59,9 @@ public class InventoryServiceImpl implements InventoryService {
                 customer -> {
                     String proPic = dto.getItemPicture();
                     if (proPic != null) {
+                        Supplier supplier = supplierRepo.findById(dto.getSupplier().getSupplierCode())
+                                .orElseThrow(() -> new NotFoundException("Supplier not found"));
+                        dto.setSupplierName(supplier.getSupplierName());
                         inventoryRepo.save(tranformer.convert(dto, Tranformer.ClassType.ITEM_ENTITY));
                     } else {
                         throw new NotFoundException("Item Pic Not Exist");

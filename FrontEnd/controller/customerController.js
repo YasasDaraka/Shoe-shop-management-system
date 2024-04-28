@@ -320,7 +320,8 @@ $("#cusDelete").click(function () {
                             swal("Deleted", "Customer Delete Successfully", "success");
                             clearCustomerInputFields();
                             captureClear();
-                            //getAllCustomers();
+                            getAllCustomers();
+                            setBtn();
                         },
                         error: function (ob, textStatus, error) {
                             swal("Error", textStatus + "Error Customer Not Delete", "error");
@@ -372,7 +373,8 @@ $("#cusUpdate").click(function () {
                             //alert("Customer Update Successfully")
                             swal("Updated", "Customer Update Successfully", "success");
                             captureClear();
-                            //getAllCustomers();
+                            getAllCustomers();
+                            setBtn();
                         },
                         error: function (ob, textStatus, error) {
                             //alert(textStatus+" : Error Customer Not Update");
@@ -417,8 +419,9 @@ function saveCustomer() {
                     console.log(res);
                     // alert("Customer Added Successfully");
                     swal("Saved", "Customer Added Successfully", "success");
-                    //getAllCustomers();
+                    getAllCustomers();
                     generateCustomerId();
+                    setBtn();
                 },
                 error: function (ob, textStatus, error) {
                     //alert(textStatus + " : Error Customer Not Added")
@@ -532,4 +535,5 @@ $('#cusSearch').click(function () {
         $("#cusCapturedImage").attr('src', res.proPic);
     });
     setClBtn();
+    setBtn();
 });

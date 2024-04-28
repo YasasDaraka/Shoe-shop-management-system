@@ -309,7 +309,8 @@ $("#empDelete").click(function () {
                             swal("Deleted", "Employee Delete Successfully", "success");
                             clearEmpInputFields();
                             empCaptureClear();
-                            //getAllCustomers();
+                            getAllEmployees();
+                            setEmpBtn();
                         },
                         error: function (ob, textStatus, error) {
                             swal("Error", textStatus + "Error Employee Not Delete", "error");
@@ -361,7 +362,8 @@ $("#empUpdate").click(function () {
                             //alert("Customer Update Successfully")
                             swal("Updated", "Employee Update Successfully", "success");
                             empCaptureClear();
-                            //getAllCustomers();
+                            getAllEmployees();
+                            setEmpBtn();
                         },
                         error: function (ob, textStatus, error) {
                             //alert(textStatus+" : Error Customer Not Update");
@@ -406,8 +408,9 @@ function saveEmployee() {
                     console.log(res);
                     // alert("Customer Added Successfully");
                     swal("Saved", "Employee Added Successfully", "success");
-                    //getAllCustomers();
                     generateEmployeeId();
+                    getAllEmployees();
+                    setEmpBtn();
                 },
                 error: function (ob, textStatus, error) {
                     //alert(textStatus + " : Error Customer Not Added")
@@ -525,4 +528,5 @@ $('#empSearch').click(function () {
         $("#empCapturedImage").attr('src', res.proPic);
     });
     setEmpClBtn();
+    setEmpBtn();
 });

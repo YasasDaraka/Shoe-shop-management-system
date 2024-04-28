@@ -129,7 +129,7 @@ $("#itmSave").click(function () {
     if (checkAllItm()) {
         var image = $("#itmCapturedImage");
         var imageUrl = image.attr('src');
-        if (!imageUrl) {
+        if (!imageUrl || imageUrl === 'assets/images/walk.gif') {
             //alert("Error");
             swal("Error", "Take Item Photo.!", "error");
         } else {
@@ -200,7 +200,7 @@ $("#itmDelete").click(function () {
                             swal("Deleted", "Item Delete Successfully", "success");
                             clearItmInputFields();
                             itmCaptureClear();
-                            //getAllCustomers();
+                            getAllItems();
                         },
                         error: function (ob, textStatus, error) {
                             swal("Error", textStatus + "Error Employee Not Delete", "error");
@@ -252,7 +252,7 @@ $("#itmUpdate").click(function () {
                             //alert("Customer Update Successfully")
                             swal("Updated", "Item Update Successfully", "success");
                             itmCaptureClear();
-                            //getAllCustomers();
+                            getAllItems();
                         },
                         error: function (ob, textStatus, error) {
                             //alert(textStatus+" : Error Customer Not Update");
@@ -297,7 +297,8 @@ function saveItem() {
                     console.log(res);
                     // alert("Customer Added Successfully");
                     swal("Saved", "Item Added Successfully", "success");
-                    //getAllCustomers();
+                    getAllItems();
+                    setItmBtn();
                 },
                 error: function (ob, textStatus, error) {
                     //alert(textStatus + " : Error Customer Not Added")
@@ -444,4 +445,5 @@ $('#itmSearch').click(function () {
         $("#itmCapturedImage").attr('src', res.proPic);
     });
     setItmClBtn();
+    setItmBtn();
 });

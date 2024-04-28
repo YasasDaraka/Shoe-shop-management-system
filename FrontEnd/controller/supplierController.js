@@ -204,7 +204,8 @@ $("#supDelete").click(function () {
                             console.log(res);
                             swal("Deleted", "Supplier Delete Successfully", "success");
                             clearSupInputFields();
-                            //getAllCustomers();
+                            getAllSuppliers();
+                            setSupBtn();
                         },
                         error: function (ob, textStatus, error) {
                             swal("Error", textStatus + "Error Supplier Not Delete", "error");
@@ -255,7 +256,8 @@ $("#supUpdate").click(function () {
                             console.log(res);
                             //alert("Customer Update Successfully")
                             swal("Updated", "Supplier Update Successfully", "success");;
-                            //getAllCustomers();
+                            getAllSuppliers();
+                            setSupBtn();
                         },
                         error: function (ob, textStatus, error) {
                             //alert(textStatus+" : Error Customer Not Update");
@@ -300,8 +302,9 @@ function saveSupplier() {
                     console.log(res);
                     // alert("Customer Added Successfully");
                     swal("Saved", "Supplier Added Successfully", "success");
-                    //getAllCustomers();
                     generateSupplierId();
+                    getAllSuppliers();
+                    setSupBtn();
                 },
                 error: function (ob, textStatus, error) {
                     //alert(textStatus + " : Error Customer Not Added")
@@ -410,4 +413,5 @@ $('#supSearch').click(function () {
         setAllSupVal(res);
     });
     setSupClBtn();
+    setSupBtn();
 });
