@@ -1,6 +1,7 @@
 package lk.ijse.gdse66.helloshoes.service.impl;
 
-import lk.ijse.gdse66.helloshoes.dto.SalesDTO;
+import lk.ijse.gdse66.helloshoes.dto.*;
+import lk.ijse.gdse66.helloshoes.entity.SaleDetails;
 import lk.ijse.gdse66.helloshoes.repository.SaleRepo;
 import lk.ijse.gdse66.helloshoes.service.SaleService;
 import lk.ijse.gdse66.helloshoes.service.exception.DuplicateRecordException;
@@ -10,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
+
 @Service
 @Transactional
 public class SalesServiceImpl implements SaleService {
@@ -26,9 +29,38 @@ public class SalesServiceImpl implements SaleService {
 
     @Override
     public SalesDTO searchSales(String id) {
-        return (SalesDTO) saleRepo.findById(id)
-                .map(sales -> tranformer.convert(sales, Tranformer.ClassType.ORDER_DTO))
-                .orElseThrow(() -> new NotFoundException("Order Not Exist"));
+        return (SalesDTO) saleRepo.findById(id).map(sales -> {
+            SalesDTO salesDTO = new SalesDTO();
+            salesDTO.setCashier(sales.getCashier());
+            salesDTO.setOrderNo(sales.getOrderNo());
+            salesDTO.setPaymentMethod(sales.getPaymentMethod());
+            salesDTO.setTotal(sales.getTotal());
+            salesDTO.setTotalPoints(sales.getTotalPoints());
+            CustomerDTO cus = new CustomerDTO();
+            cus.setCustomerName(sales.getCustomerName().getCustomerName());
+            cus.setCustomerId(sales.getCustomerName().getCustomerId());
+            salesDTO.setCustomerName(cus);
+            List<SaleDetails> details = sales.getSaleDetails();
+            List<SaleDetailsDTO> saleDetails = new ArrayList<>();
+            for (SaleDetails detail : details) {
+                SaleDetailsDTO detailsDTO = new SaleDetailsDTO();
+                detailsDTO.setOrderDetailPK(new SaleDetailPKDTO(detail.getOrderDetailPK().getOrderNo(), detail.getOrderDetailPK().getItemCode()));
+
+                detailsDTO.setItmQTY(detail.getItmQTY());
+
+                InventoryDTO item = new InventoryDTO();
+                item.setItemCode(detail.getInventory().getItemCode());
+                item.setItemDesc(detail.getInventory().getItemDesc());
+                item.setSalePrice(detail.getInventory().getSalePrice());
+                item.setSize(detail.getInventory().getSize());
+                detailsDTO.setInventory(item);
+
+                saleDetails.add(detailsDTO);
+            }
+            salesDTO.setSaleDetails(saleDetails);
+            salesDTO.setPurchaseDate(sales.getPurchaseDate());
+            return salesDTO;
+        }).orElseThrow(() -> new NotFoundException("Order Not Exist"));
     }
 
     @Override

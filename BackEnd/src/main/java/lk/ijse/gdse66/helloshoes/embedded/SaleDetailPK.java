@@ -15,6 +15,6 @@ import java.io.Serializable;
 public class SaleDetailPK implements Serializable {
     @Column(name = "order_no")
     private String orderNo;
-    @Column(name = "item_Code")
+    @Column(name = "item_code")
     private String itemCode;
 }

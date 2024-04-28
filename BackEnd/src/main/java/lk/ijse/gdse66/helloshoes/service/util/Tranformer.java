@@ -87,22 +87,7 @@ public class Tranformer {
 
         return orderDTO;
     }
-    public Order toOrderEntity(OrderDTO orderDTO) {
-        Order order = mapper.typeMap(OrderDTO.class, Order.class)
-                .addMapping(src -> src.getOid(), Order::setOid)
-                .addMapping(src -> src.getDate(), Order::setDate)
-                .addMappings(mapper ->
-                    mapper.map(OrderDTO::getCusID, (dest, value) -> dest.getCustomer().setId((String) value))
-                 )
-                .addMappings(mapper -> mapper.skip(Order::setOrderDetails))
-                .map(orderDTO);
-        List<OrderDetails> orderDetails = orderDTO.getOrderDetails().stream()
-                .map(this::toOrderDetailsEntity)
-                .collect(Collectors.toList());
-        order.setOrderDetails(orderDetails);
 
-        return order;
-    }
     public OrderDetailsDTO toOrderDetailsDTO(OrderDetails orderDetail) {
         return mapper.typeMap(OrderDetails.class, OrderDetailsDTO.class)
                 .addMapping(src -> src.getOrderDetailPK().getOid(), OrderDetailsDTO::setOid)
@@ -112,17 +97,6 @@ public class Tranformer {
                 .map(orderDetail);
     }
 
-    public OrderDetails toOrderDetailsEntity(OrderDetailsDTO detailsDTO) {
-        return mapper.typeMap(OrderDetailsDTO.class, OrderDetails.class)
-                .addMappings(mapper -> {
-                    mapper.map(OrderDetailsDTO::getItmCode, (dest, value) -> dest.getOrderDetailPK().setItmCode((String)value));
-                    mapper.map(OrderDetailsDTO::getOid, (dest, value) -> dest.getOrderDetailPK().setOid((String)value));
-                    mapper.map(OrderDetailsDTO::getOid, (dest, value) -> dest.getOrder().setOid((String) value));
-                    mapper.map(OrderDetailsDTO::getItmCode, (dest, value) -> dest.getItem().setItmCode((String) value));
-                })
-                .addMapping(src -> src.getItmQTY(), OrderDetails::setItmQTY)
-                .map(detailsDTO);
-    }
 */
     private Type getType(ClassType type) {
         switch (type) {

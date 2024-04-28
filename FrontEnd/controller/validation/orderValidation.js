@@ -1,17 +1,10 @@
 const QTY_REGEX = /^[1-9]\d*$/;
-let o_Array = new Array();
-o_Array.push({field: $("#cName"), regEx: CUS_NAME_REGEX });
-o_Array.push({field: $("#cAddress"), regEx: CUS_ADDRESS_REGEX});
-o_Array.push({field: $("#itemName"), regEx: Item_NAME_REGEX });
-o_Array.push({field: $("#price"), regEx: UNIT_PRICE_REGEX });
-o_Array.push({field: $("#qtyOnHand"), regEx: Item_QTY_REGEX});
-o_Array.push({field: $("#orderQty"), regEx: QTY_REGEX });
-
 const itm_ID_REGEX = /^[A-Za-z0-9 ]{3,}$/;
-const itm_SALE_PRICE_REGEX = /^[1-9]\d*(\.\d+)?$/;
-const itm_SIZE_REGEX = /^[0-9]+$/;
-const CUS_REGEX = /^[0-9]+$/;
-const CUS_NAME_REGEX = /^[A-Za-z ]{5,}$/;
+const CUS_ID_REGEX = /^C00-(0*[1-9]\d{0,2})$/;
+let o_Array = new Array();
+o_Array.push({field: $("#ordItmQty"), regEx: QTY_REGEX });
+o_Array.push({field: $("#OrdItm"), regEx: itm_ID_REGEX });
+o_Array.push({field: $("#OrdItmDes"), regEx: CUS_ID_REGEX });
 
 const inputChangeEvent = new Event('input', { bubbles: true });
 
@@ -20,43 +13,29 @@ function setAndTriggerValue($element, value) {
     $element[0].dispatchEvent(inputChangeEvent);
 }
 
-$("#itemName,#price,#qtyOnHand,#orderQty").on("keydown keyup input", function (e){
+$("#ordItmQty").on("keydown keyup input", function (e){
     let indexNo = o_Array.indexOf(o_Array.find((c) => c.field.attr("id") == e.target.id));
     checkOrderValidations(o_Array[indexNo]);
     setAddItemBtn();
+    setOrderBtn();
 });
 function setAddItemBtn() {
-    let nm =  Item_NAME_REGEX.test($("#itemName").val());
+    /*let nm =  Item_NAME_REGEX.test($("#itemName").val());
     let pr =  UNIT_PRICE_REGEX.test($("#price").val());
-    let qh =  Item_QTY_REGEX.test($("#qtyOnHand").val());
+    let qh =  Item_QTY_REGEX.test($("#qtyOnHand").val());*/
     let oq =  QTY_REGEX.test($("#orderQty").val());
 
-    if(nm && pr && qh && oq){
-        if (QTYValidate){
+    if(oq){
+
             $("#order-add-item").prop("disabled", false);
-        }else {
-            $("#order-add-item").prop("disabled", true);
-        }
+
+            //$("#order-add-item").prop("disabled", true);          use id search
+
     }else {
         $("#order-add-item").prop("disabled", true);
     }
 }
-function QTYValidate() {
-    let qty = parseInt($("#qtyOnHand").val());
-    let orderQty = parseInt($("#orderQty").val());
-    if (qty<orderQty) {
-        return false;
-    }
-    return true;
-}
-$("#cName,#cAddress,#itemName,#price,#qtyOnHand,#orderQty").on("keydown keyup input", function (e) {
 
-    let indexNo = o_Array.indexOf(o_Array.find((c) => c.field.attr("id") == e.target.id));
-
-    checkOrderValidations(o_Array[indexNo]);
-    setOrderBtn();
-
-});
 function checkOrderValidations(object) {
     if (object.regEx.test(object.field.val())) {
         setOrderBorder(true, object)
@@ -82,7 +61,7 @@ function setOrderBorder(bol, ob) {
 
 }
 function setOrderBtn() {
-    let id = $("#order-id").val();
+    let id = $("#orderId").val();
     searchOrder(id).then(function (order) {
         if (Object.keys(order).length === 0) {
             if (checkAllOrder()) {
@@ -124,7 +103,7 @@ function cashValidate() {
     return false;
 }
 
-$("#orderQty").on("keydown keyup input", function (e){
+/*$("#orderQty").on("keydown keyup input", function (e){
     let qty = parseInt($("#qtyOnHand").val());
     let orderQty = parseInt($("#orderQty").val());
     console.log(qty,orderQty);
@@ -153,21 +132,22 @@ $("#orderQty").on("keydown keyup input", function (e){
     }else{
         $("#QtyError").text("");
     }
-});
+});*/
 function clearAll() {
-    $("#cName,#cAddress,#itemName,#price,#qtyOnHand,#orderQty,#orderDate,#txtCash,#txtDiscount,#txtBalance").val("");
-    $("#cName,#cAddress,#itemName,#price,#qtyOnHand,#orderQty,#orderDate,#txtCash").css("border", "1px solid #ced4da");
-    $("#QtyError").text("");
+    $("#orderId,#OrdItmDes, #OrdItm, #ordItmPrice, #ordItmSize, #ordItmQty, #ordDate, #ordCusId, #ordCusName, #ordPoints,#txtCash,#txtDiscount,#txtBalance").val("");
+    $("#orderId,#OrdItmDes, #OrdItm, #ordItmPrice, #ordItmSize, #ordItmQty, #ordDate, #ordCusId, #ordCusName, #ordPoints,#txtCash").css("border", "1px solid #ced4da");
+
+    $("#ordItmQty").text("");
     $("#total,#subtotal").text("0");
     $("#order-add-item").prop("disabled", true);
     $("#btnSubmitOrder").prop("disabled", true);
     $("#order-table").empty();
-    $("#cusImage").attr('src', "");
-    $('#cusImage').css('display', 'none');
+    /*$("#cusImage").attr('src', "");
+    $('#cusImage').css('display', 'none');*/
 }
-$("#cName,#cAddress,#itemName,#price,#qtyOnHand,#orderQty,#orderDate,#txtCash,#txtDiscount,#txtBalance,#QtyError").on("keydown keyup input", function (e){
+$("#OrdItmDes, #OrdItm, #ordItmPrice, #ordItmSize, #ordItmQty, #ordDate, #ordCusId, #ordCusName, #ordPoints,#txtCash").on("keydown keyup input change", function (e){
     var empty = true;
-    $("#cName, #cAddress, #itemName, #price, #qtyOnHand, #orderQty, #orderDate, #txtCash, #txtDiscount, #txtBalance").each(function() {
+    $("#OrdItmDes, #OrdItm, #ordItmPrice, #ordItmSize, #ordItmQty, #ordDate, #ordCusId, #ordCusName, #ordPoints,#txtCash").each(function() {
         if ($(this).val() !== "") {
             empty = false;
             return true;

@@ -1177,7 +1177,7 @@
 
                     <div class="col">
                       <label for="OrdItmDes" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Item Description</label>
-                      <input type="text" class="form-control" id="OrdItmDes">
+                      <input type="text" class="form-control" id="OrdItmDes"readonly>
                     </div>
 
                   </div>
@@ -1191,7 +1191,7 @@
 
                     <div class="col">
                       <label for="ordItmPrice" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Unit price</label>
-                      <input type="text" class="form-control" id="ordItmPrice"style="width: 16vw">
+                      <input type="text" class="form-control" id="ordItmPrice"style="width: 16vw" readonly>
                     </div>
 
                   </div>
@@ -1199,7 +1199,7 @@
 
                     <div class="col">
                       <label for="ordItmSize" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Size</label>
-                      <input type="text" class="form-control" id="ordItmSize" style="width: 10vw">
+                      <input type="text" class="form-control" id="ordItmSize" style="width: 10vw"readonly>
                       <p><small class="text-danger position-absolute mt-1" id="ordItmSizeError"></small></p>
                     </div>
 
@@ -1209,17 +1209,20 @@
                       <p><small class="text-danger position-absolute mt-1" id="ordItmQtyError"></small></p>
                     </div>
 
+                    <div class="col">
+                      <label for="ordDate" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Order Date</label>
+                      <input type="text" class="form-control" id="ordDate" style="width: 10vw">
+                    </div>
                   </div>
                   <div class="container row">
 
                     <div class="col">
-                      <label for="ordDate" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Order Date</label>
-                      <input type="text" class="form-control" id="ordDate" style="width: 13.5vw">
+                      <label for="ordCusId" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Customer ID</label>
+                      <input type="text" class="form-control" id="ordCusId" style="width: 13.5vw">
                     </div>
-
                     <div class="col">
-                      <label for="ordTime" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Order Time</label>
-                      <input type="text" class="form-control" id="ordTime" style="width: 13.5vw">
+                      <label for="ordCusName" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Customer Name</label>
+                      <input type="text" class="form-control" id="ordCusName" style="width: 13.5vw">
                     </div>
                     <div class="col">
                       <label for="ordPoints" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Points</label>
