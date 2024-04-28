@@ -51,7 +51,7 @@ public class Customer {
     @Column(columnDefinition = "LONGTEXT")
     private String proPic;
 
-    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "customer_name")
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "customerName")
     private List<Sales> sales = new ArrayList<>();
 }
 

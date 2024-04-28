@@ -21,10 +21,10 @@ public class SaleDetails {
     private int itmQTY;
 
     @ManyToOne
-    @JoinColumn(name = "order_no")
+    @JoinColumn(name = "order_no",insertable=false, updatable=false)
     private Sales orderNo;
 
     @ManyToOne
-    @JoinColumn(name = "item_code")
+    @JoinColumn(name = "item_code",insertable=false, updatable=false)
     private Inventory inventory;
 }

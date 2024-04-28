@@ -1,6 +1,5 @@
 package lk.ijse.gdse66.helloshoes.api;
 
-import jakarta.validation.Valid;
 import lk.ijse.gdse66.helloshoes.dto.CustomerDTO;
 import lk.ijse.gdse66.helloshoes.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;

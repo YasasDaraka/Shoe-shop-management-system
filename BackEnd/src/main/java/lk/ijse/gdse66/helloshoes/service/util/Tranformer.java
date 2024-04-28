@@ -37,7 +37,6 @@ public class Tranformer {
         ORDER_DETAILS_DTO,
         ORDER_ENTITY,
         ORDER_DTO,
-        ORDER_ENTITY_LIST,
         ORDER_DTO_LIST,
         ORDER_DETAILS_DTO_LIST
     }
@@ -155,21 +154,17 @@ public class Tranformer {
                 return Inventory.class;
             case ITEM_DTO_LIST:
                 return new TypeToken<ArrayList<InventoryDTO>>() {}.getType();
-            /*case ITEM_ENTITY_LIST:
-                return new TypeToken<ArrayList<Item>>() {}.getType();
-            case ORDER_DETAILS_DTO:
+            /*case ORDER_DETAILS_DTO:
                 return OrderDetailsDTO.class;
             case ORDER_DETAILS_ENTITY:
-                return OrderDetails.class;
+                return OrderDetails.class;*/
             case ORDER_ENTITY:
-                return Order.class;
+                return Sales.class;
             case ORDER_DTO:
-                return OrderDTO.class;
-            case ORDER_ENTITY_LIST:
-                return new TypeToken<ArrayList<Order>>() {}.getType();
+                return SalesDTO.class;
             case ORDER_DTO_LIST:
-                return new TypeToken<ArrayList<OrderDTO>>() {}.getType();
-            case ORDER_DETAILS_DTO_LIST:
+                return new TypeToken<ArrayList<SalesDTO>>() {}.getType();
+            /*case ORDER_DETAILS_DTO_LIST:
                 return new TypeToken<ArrayList<OrderDetailsDTO>>() {}.getType();*/
             default:
                 throw new IllegalArgumentException("Unsupported ClassType: " + type);

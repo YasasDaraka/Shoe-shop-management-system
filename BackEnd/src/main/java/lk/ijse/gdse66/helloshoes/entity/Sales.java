@@ -31,10 +31,9 @@ public class Sales {
 
     private String cashier;
     @ManyToOne
-    @Column(name = "customer_name")
     @JoinColumn(name = "customer_name", nullable = false)
     private Customer customerName;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "order_no")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "orderNo")
     private List<SaleDetails> saleDetails = new ArrayList<>();
 }

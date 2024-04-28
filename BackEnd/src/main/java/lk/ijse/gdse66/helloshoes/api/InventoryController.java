@@ -1,6 +1,5 @@
 package lk.ijse.gdse66.helloshoes.api;
 
-import lk.ijse.gdse66.helloshoes.dto.EmployeeDTO;
 import lk.ijse.gdse66.helloshoes.dto.InventoryDTO;
 import lk.ijse.gdse66.helloshoes.service.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,33 +21,33 @@ public class InventoryController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(path = "/getAll")
-    public List<InventoryDTO> getAllEmployees() {
+    public List<InventoryDTO> getAllInventory() {
         return itemService.getAllInventory();
     }
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(path = "/search/{id}")
-    public InventoryDTO getEmployee(@PathVariable("id") String id) {
+    public InventoryDTO getInventory(@PathVariable("id") String id) {
         return itemService.searchInventory(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Void> saveEmployee(@RequestBody InventoryDTO dto) {
-        System.out.println("Received employee data: " + dto.toString());
+    public ResponseEntity<Void> saveInventory(@RequestBody InventoryDTO dto) {
+        System.out.println("Received Inventory data: " + dto.toString());
         itemService.saveInventory(dto);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping
-    public ResponseEntity<Void> updateEmployee(@RequestBody InventoryDTO dto) {
-        System.out.println("Received employee data: " + dto.toString());
+    public ResponseEntity<Void> updateInventory(@RequestBody InventoryDTO dto) {
+        System.out.println("Received Inventory data: " + dto.toString());
         itemService.updateInventory(dto);
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping(params = "itmId")
-    public ResponseEntity<Void> deleteEmployee(@RequestParam("itmId") String cusId) {
+    public ResponseEntity<Void> deleteInventory(@RequestParam("itmId") String cusId) {
         itemService.deleteInventory(cusId);
         return ResponseEntity.noContent().build();
     }
