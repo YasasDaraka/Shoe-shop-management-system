@@ -1012,8 +1012,8 @@
                       <p><small class="text-danger position-absolute mt-1" id="itmSalePriceError"></small></p>
                     </div>
                     <div class="col">
-                      <label for="itemExcProfit" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Expected Profit</label>
-                      <input type="text" class="form-control" id="itemExcProfit"style="width: 10vw">
+                      <label for="itmProfit" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Expected Profit</label>
+                      <input type="text" class="form-control" id="itmProfit"style="width: 10vw">
                       <p><small class="text-danger position-absolute mt-1" id="itemExcProfitError"></small></p>
                     </div>
 
@@ -1050,8 +1050,12 @@
                       </div>
 
                       <div class="col">
-                        <label for="itemStatus" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Status</label>
-                        <select aria-label="Default select example" class="form-select" id="itemStatus" style="width: 10vw"></select>
+                        <label for="itmStatus" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Status</label>
+                        <select aria-label="Default select example" class="form-select" id="itmStatus" style="width: 10vw">
+                          <option value="Available">Available</option>
+                          <option value="Not Available">Not Available</option>
+                          <option value="Low">Low</option>
+                        </select>
                       </div>
 
                     </div>
@@ -1671,7 +1675,8 @@
 <script src="controller/validation/supplierValidation.js"></script>
 <script src="controller/employeeController.js"></script>
 <script src="controller/validation/employeeValidation.js"></script>
-<script src="controller/orderController.js"></script>
+<script src="controller/inventoryController.js"></script>
+<script src="controller/validation/inventoryValidation.js"></script>
 <script src="assets/sweetalerts/sweetalert2@10.js"></script>
 <script src="assets/sweetalerts/sweetalert.min.js"></script>
 <script src="assets/sweetalerts/popper.min.js"></script>

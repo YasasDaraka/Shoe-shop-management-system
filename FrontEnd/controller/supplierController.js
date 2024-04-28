@@ -17,7 +17,12 @@ $('#supIdAdd').click(function () {
     generateSupplierId();
     //setSupClBtn();
 });
-
+$('#supIdAdd').click(function () {
+    supFieldSet(false);
+    $(this).find("#supId").focus();
+    generateSupplierId();
+    //setSupClBtn();
+});
 function supFieldSet(state) {
     var ids = ["supId", "supCategory", "supName", "supBuildNo", "supLane",
         "supCity","supState", "supPostalCode", "supCountry", "supEmail", "supMobileNo", "supLandNo"];

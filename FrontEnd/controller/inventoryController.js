@@ -1,26 +1,27 @@
 $(document).ready(function () {
     // setTime();
     // setDate();
-    empFieldSet(true);
-    $("#empSave").prop("disabled", true);
-    $("#empDelete").prop("disabled", true);
-    $("#empUpdate").prop("disabled", true);
-    $("#empSearch").prop("disabled", true);
-    $("#empClear").prop("disabled", true);
-    var targetNode = document.getElementById('employee-main');
+    /*itmFieldSet(false);*/
+    $("#itmSave").prop("disabled", true);
+    $("#itmDelete").prop("disabled", true);
+    $("#itmUpdate").prop("disabled", true);
+    $("#itmSearch").prop("disabled", true);
+    $("#itmClear").prop("disabled", true);
+    //setItmClBtn();
+    var targetNode = document.getElementById('inventory-main');
     var config = {attributes: true, attributeFilter: ['style']};
     var callback = function (mutationsList, observer) {
         for (var mutation of mutationsList) {
             if (mutation.attributeName === 'style') {
                 var displayStyle = window.getComputedStyle(targetNode).getPropertyValue('display');
                 if (displayStyle === 'none') {
-                    stopEmpWebcamStream();
-                    $('#empVideo').hide();
-                    $("#empCapturedImage").show();
-                    $('#empCaptureButton').css("background-color", "#007bff");
-                    $('#empCaptureButton').css("border-color", "#007bff");
-                    $('#empCaptureButton').text("Capture");
-                    $("#empCapturedImage").attr('src', "assets/images/walk.gif");
+                    stopItmWebcamStream();
+                    $('#itmVideo').hide();
+                    $("#itmCapturedImage").show();
+                    $('#itmCaptureButton').css("background-color", "#007bff");
+                    $('#itmCaptureButton').css("border-color", "#007bff");
+                    $('#itmCaptureButton').text("Capture");
+                    $("#itmCapturedImage").attr('src', "assets/images/walk.gif");
                 }
             }
         }
@@ -28,19 +29,19 @@ $(document).ready(function () {
     var observer = new MutationObserver(callback);
     observer.observe(targetNode, config);
 });
-let empVideoStream;
-$('#empCaptureButton').click(function () {
+let itmVideoStream;
+$('#itmCaptureButton').click(function () {
     let text = $(this).text();
-    var video = $('#empVideo')[0];
-    var canvas = $('#empCanvas')[0];
-    var capturedImage = $('#empCapturedImage');
+    var video = $('#itmVideo')[0];
+    var canvas = $('#itmCanvas')[0];
+    var capturedImage = $('#itmCapturedImage');
 
     var constraints = {
         video: true
     };
 
     if (text === "Capture") {
-        $("#empClear").prop("disabled", false);
+        $("#itmClear").prop("disabled", false);
         $(this).text("Take Picture");
         $(this).css("background-color", "#dc3545");
         $(this).css("border-color", "#dc3545");
@@ -49,14 +50,14 @@ $('#empCaptureButton').click(function () {
 
         navigator.mediaDevices.getUserMedia(constraints)
             .then((stream) => {
-                empVideoStream = stream;
+                videoStream = stream;
                 video.srcObject = stream;
             })
             .catch((error) => {
                 console.error('Error accessing webcam:', error);
             });
     } else if (text === "Take Picture") {
-        $("#empClear").prop("disabled", false);
+        $("#itmClear").prop("disabled", false);
         const context = canvas.getContext('2d');
         context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
@@ -66,142 +67,87 @@ $('#empCaptureButton').click(function () {
         $(this).css("background-color", "#007bff");
         $(this).css("border-color", "#007bff");
         $(this).text("Capture");
-        stopEmpWebcamStream();
+        stopItmWebcamStream();
         $(video).hide();
     }
 });
 
-function stopEmpWebcamStream() {
-    if (empVideoStream) {
-        const tracks = empVideoStream.getTracks();
+function stopItmWebcamStream() {
+    if (itmVideoStream) {
+        const tracks = itmVideoStream.getTracks();
         tracks.forEach(track => track.stop());
-        empVideoStream = null;
+        itmVideoStream = null;
     }
 }
 
-$('#empAdd').click(function () {
-    empFieldSet(false);
-    $(this).find("#empId").focus();
-    generateEmployeeId();
-    //setEmpClBtn();
-});
-
-function empFieldSet(state) {
-    em_vArray.forEach(function(item) {
+function itmFieldSet(state) {
+    itm_vArray.forEach(function(item) {
         item.field.prop('disabled', state);
     });
-    $(this).find("#empId").focus();
+    $(this).find("#itmCode").focus();
     //generateEmployeeId();
-    setEmpClBtn();
+    setItmClBtn();
 }
 
-function returnAllEmpVal() {
-    var image = $("#empCapturedImage");
+function returnAllItmVal() {
+    var image = $("#itmCapturedImage");
     var imageUrl = image.attr('src');
     var formData = {
-        employeeId: $("#empId").val(),
-        employeeName: $("#empName").val(),
-        gender: $("#empGender").val(),
-        employeeStatus: $("#empStatus").val(),
-        designation: $("#designation").val(),
-        role: $("#empRole").val(),
-        employeeDob: $("#empDob").val(),
-        joinDate: $("#joinDate").val(),
-        branch: $("#empBranch").val(),
-        address: {
-            buildNo: $("#empBuildNo").val(),
-            lane: $("#empLane").val(),
-            city: $("#empCity").val(),
-            state: $("#empState").val(),
-            postalCode: $("#empPostalCode").val()
-        },
-        contactNo: $("#empContactNo").val(),
-        email: $("#empEmail").val(),
-        guardianName: $("#guardianName").val(),
-        emergencyContact: $("#emergencyContact").val(),
-        proPic: imageUrl
+        itemCode: $("#itmCode").val(),
+        itemDesc: $("#itmName").val(),
+        itemPicture: imageUrl,
+        category: $("#itmCat").val(),
+        size: parseInt($("#itmSize").val()),
+        supplier: { supplierCode: $("#itmSupId").val() },
+        salePrice: parseFloat($("#itmSalePrice").val()),
+        buyPrice: parseFloat($("#itmBuyPrice").val()),
+        expectedProfit: parseFloat($("#itmProfit").val()),
+        profitMargin: parseFloat($("#itmProfitMargin").val()),
+        status: $("#itmStatus").val(),
     };
 
     return formData;
 }
-function setAllEmpVal(ar) {
+function setAllItmVal(ar) {
     console.log(ar)
-    $("#empName").val(ar.employeeName);
-    $("#empBuildNo").val(ar.address.buildNo);
-    $("#empLane").val(ar.address.lane);
-    $("#empCity").val(ar.address.city);
-    $("#empState").val(ar.address.state);
-    $("#empPostalCode").val(ar.address.postalCode);
-    $("#empEmail").val(ar.email);
-    $("#empDob").val(ar.employeeDob);
-    $("#empGender").val(ar.gender);
-    $("#empContactNo").val(ar.contactNo);
-    $("#empStatus").val(ar.employeeStatus);
-    $("#designation").val(ar.designation);
-    $("#empRole").val(ar.role);
-    $("#joinDate").val(ar.joinDate);
-    $("#empBranch").val(ar.branch);
-    $("#guardianName").val(ar.guardianName);
-    $("#emergencyContact").val(ar.emergencyContact);
-    $("#empCapturedImage").attr('src', ar.proPic);
+    $("#itmName").val(ar.itemDesc);
+    $("#itmCat").val(ar.category);
+    $("#itmSize").val(ar.size);
+    $("#itmSupId").val(ar.supplier.supplierCode);
+    $("#itmSupName").val(ar.supplier.supplierName);
+    $("#itmSalePrice").val(ar.salePrice);
+    $("#itmBuyPrice").val(ar.buyPrice);
+    $("#itmProfit").val(ar.expectedProfit);
+    $("#itmProfitMargin").val(ar.profitMargin);
+    $("#itmStatus").val(ar.status);
+    $("#itmCapturedImage").attr('src', ar.itemPicture);
 }
 
 //getAllEmployees();
-$("#empSave").click(function () {
+$("#itmSave").click(function () {
 
-    if (checkAllEmp()) {
-        var image = $("#empCapturedImage");
+    if (checkAllItm()) {
+        var image = $("#itmCapturedImage");
         var imageUrl = image.attr('src');
         if (!imageUrl) {
             //alert("Error");
-            swal("Error", "Take Employee Photo.!", "error");
+            swal("Error", "Take Item Photo.!", "error");
         } else {
-            saveEmployee();
+            saveItem();
         }
     } else {
         alert("Error");
-        swal("Error", "Error Employee Save.!", "error");
+        swal("Error", "Error Item Save.!", "error");
     }
 });
 
-function generateEmployeeId() {
-    loadEmpId().then(function (id) {
-        $("#empId").val(id);
-    }).catch(function (error) {
-        console.error("Error loading Employee Id:", error);
-    });
-}
-
-function loadEmpId() {
-    return new Promise(function (resolve, reject) {
-        performAuthenticatedRequest();
-        const accessToken = localStorage.getItem('accessToken');
-        var ar;
-        $.ajax({
-            url: "http://localhost:8080/helloshoes/api/v1/employee/getGenId",
-            method: "GET",
-            headers: {
-                'Authorization': 'Bearer ' + accessToken
-            },
-            success: function (res) {
-                console.log(res);
-                ar = res;
-                resolve(ar);
-            },
-            error: function (error) {
-                reject(error);
-            }
-        });
-    });
-}
-
-function loadEmpAr() {
+function loadItmAr() {
     return new Promise(function (resolve, reject) {
         var ar;
         performAuthenticatedRequest();
         const accessToken = localStorage.getItem('accessToken');
         $.ajax({
-            url: "http://localhost:8080/helloshoes/api/v1/employee/getAll",
+            url: "http://localhost:8080/helloshoes/api/v1/inventory/getAll",
             method: "GET",
             headers: {
                 'Authorization': 'Bearer ' + accessToken
@@ -219,7 +165,7 @@ function loadEmpAr() {
 }
 
 
-function bindEmpTrrEvents() {
+/*function bindEmpTrrEvents() {
     $('#employeeTable>tr').click(function () {
         var employeeId = $(this).children().eq(0).text();
         var employeeName = $(this).children().eq(1).text();
@@ -259,11 +205,11 @@ function bindEmpTrrEvents() {
         $("#empBranch").val(branch);
         $("#guardianName").val(guardianName);
         $("#emergencyContact").val(emergencyContact);
-        /*$("#customerID").prop('disabled', false);
+        /!*$("#customerID").prop('disabled', false);
         $("#customerName").prop('disabled', false);
         $("#customerAddress").prop('disabled', false);
         $("#cusUpdate").prop('disabled', false);
-        $("#cusDelete").prop('disabled', false);*/
+        $("#cusDelete").prop('disabled', false);*!/
         setEmpBtn();
         searchEmployee(employeeId).then(function (res){
             empCaptureClear();
@@ -271,18 +217,18 @@ function bindEmpTrrEvents() {
 
         });
     });
-}
+}*/
 
-$("#empDelete").click(function () {
-    let id = $("#empId").val();
+$("#itmDelete").click(function () {
+    let id = $("#itmCode").val();
 
-    validEmployee(id).then(function (isValid) {
+    validItem(id).then(function (isValid) {
         if (isValid == false) {
-            swal("Error", "No such Employee..please check the ID", "error");
-            clearEmpInputFields();
+            swal("Error", "No such Item..please check the ID", "error");
+            clearItmInputFields();
         } else {
 
-            swal("Do you want to delete this Employee.?", {
+            swal("Do you want to delete this Item.?", {
                 buttons: {
                     cancel1: {
                         text: "Cancel",
@@ -299,16 +245,16 @@ $("#empDelete").click(function () {
                     performAuthenticatedRequest();
                     const accessToken = localStorage.getItem('accessToken');
                     $.ajax({
-                        url: "http://localhost:8080/helloshoes/api/v1/employee?empId=" + id,
+                        url: "http://localhost:8080/helloshoes/api/v1/inventory?itmId=" + id,
                         method: "DELETE",
                         headers: {
                             'Authorization': 'Bearer ' + accessToken
                         },
                         success: function (res) {
                             console.log(res);
-                            swal("Deleted", "Employee Delete Successfully", "success");
-                            clearEmpInputFields();
-                            empCaptureClear();
+                            swal("Deleted", "Item Delete Successfully", "success");
+                            clearItmInputFields();
+                            itmCaptureClear();
                             //getAllCustomers();
                         },
                         error: function (ob, textStatus, error) {
@@ -326,11 +272,11 @@ $("#empDelete").click(function () {
 
 });
 
-$("#empUpdate").click(function () {
-    let id = $("#empId").val();
-    validEmployee(id).then(function (isValid) {
+$("#itmUpdate").click(function () {
+    let id = $("#itmCode").val();
+    validItem(id).then(function (isValid) {
         if (isValid) {
-            swal("Do you really want to update this employee.?", {
+            swal("Do you really want to update this Item.?", {
                 buttons: {
                     cancel1: {
                         text: "Cancel",
@@ -344,12 +290,12 @@ $("#empUpdate").click(function () {
                 },
             }).then((value) => {
                 if (value === "confirm") {
-                    var data = returnAllEmpVal();
+                    var data = returnAllItmVal();
                     performAuthenticatedRequest();
                     const accessToken = localStorage.getItem('accessToken');
                     console.log(data)
                     $.ajax({
-                        url: "http://localhost:8080/helloshoes/api/v1/employee",
+                        url: "http://localhost:8080/helloshoes/api/v1/inventory",
                         method: "PUT",
                         headers: {
                             'Authorization': 'Bearer ' + accessToken
@@ -359,13 +305,13 @@ $("#empUpdate").click(function () {
                         success: function (res) {
                             console.log(res);
                             //alert("Customer Update Successfully")
-                            swal("Updated", "Employee Update Successfully", "success");
-                            empCaptureClear();
+                            swal("Updated", "Item Update Successfully", "success");
+                            itmCaptureClear();
                             //getAllCustomers();
                         },
                         error: function (ob, textStatus, error) {
                             //alert(textStatus+" : Error Customer Not Update");
-                            swal("Error", textStatus + "Error Employee Not Update", "error");
+                            swal("Error", textStatus + "Error Item Not Update", "error");
                         }
                     });
                     /* $("#customerID").prop('disabled', true);
@@ -376,26 +322,26 @@ $("#empUpdate").click(function () {
             });
 
         } else {
-            swal("Error", "No such Employee..please check the ID", "error");
+            swal("Error", "No such Item..please check the ID", "error");
             /*alert("No such Customer..please check the ID");*/
         }
     });
 
 });
 
-function saveEmployee() {
-    let id = $("#empId").val();
-    validEmployee(id).then(function (isValid) {
+function saveItem() {
+    let id = $("#itmCode").val();
+    validItem(id).then(function (isValid) {
         console.log(isValid)
         if (!isValid) {
             console.log(isValid);
-            var formData = returnAllEmpVal();
+            var formData = returnAllItmVal();
             performAuthenticatedRequest();
             const accessToken = localStorage.getItem('accessToken');
             console.log(formData);
             console.log(accessToken);
             $.ajax({
-                url: "http://localhost:8080/helloshoes/api/v1/employee",
+                url: "http://localhost:8080/helloshoes/api/v1/inventory",
                 method: "POST",
                 headers: {
                     'Authorization': 'Bearer ' + accessToken
@@ -405,9 +351,8 @@ function saveEmployee() {
                 success: function (res, textStatus, jsXH) {
                     console.log(res);
                     // alert("Customer Added Successfully");
-                    swal("Saved", "Employee Added Successfully", "success");
+                    swal("Saved", "Item Added Successfully", "success");
                     //getAllCustomers();
-                    generateEmployeeId();
                 },
                 error: function (ob, textStatus, error) {
                     //alert(textStatus + " : Error Customer Not Added")
@@ -419,18 +364,18 @@ function saveEmployee() {
         } else {
             //alert("Customer already exits.!");
             swal("Error", "Employee already exits.!", "error");
-            clearEmpInputFields();
+            clearItmInputFields();
         }
     });
 }
 
-function getAllEmployees() {
+function getAllItems() {
     performAuthenticatedRequest();
     const accessToken = localStorage.getItem('accessToken');
     console.log(accessToken);
-    $("#employeeTable").empty();
+    $("#itemTable").empty();
     $.ajax({
-        url: "http://localhost:8080/helloshoes/api/v1/employee/getAll",
+        url: "http://localhost:8080/helloshoes/api/v1/inventory/getAll",
         method: "GET",
         headers: {
             'Authorization': 'Bearer ' + accessToken
@@ -459,20 +404,20 @@ function getAllEmployees() {
                     <td>${r.address.postalCode}</td>
                 </tr>`;
 
-                $("#employeeTable").append(row);
-                bindEmpTrrEvents();
+                $("#itemTable").append(row);
+                bindItmTrrEvents();
             }
         }
     });
 }
 
-function validEmployee(id) {
+function validItem(id) {
     return new Promise(function (resolve, reject) {
         performAuthenticatedRequest();
         const accessToken = localStorage.getItem('accessToken');
         console.log(accessToken);
         $.ajax({
-            url: "http://localhost:8080/helloshoes/api/v1/employee/search/" + id,
+            url: "http://localhost:8080/helloshoes/api/v1/inventory/search/" + id,
             method: "GET",
             headers: {
                 'Authorization': 'Bearer ' + accessToken
@@ -493,14 +438,14 @@ function validEmployee(id) {
     });
 }
 
-function searchEmployee(id) {
+function searchItem(id) {
     console.log(id);
     return new Promise(function (resolve, reject) {
         performAuthenticatedRequest();
         const accessToken = localStorage.getItem('accessToken');
         console.log(accessToken);
         $.ajax({
-            url: "http://localhost:8080/helloshoes/api/v1/employee/search/" + id,
+            url: "http://localhost:8080/helloshoes/api/v1/inventory/search/" + id,
             method: "GET",
             headers: {
                 'Authorization': 'Bearer ' + accessToken
@@ -517,12 +462,12 @@ function searchEmployee(id) {
     });
 }
 
-$('#empSearch').click(function () {
-    let id = $("#empId").val();
-    searchEmployee(id).then(function (res) {
-        setAllEmpVal(res);
-        empCaptureClear();
-        $("#empCapturedImage").attr('src', res.proPic);
+$('#itmSearch').click(function () {
+    let id = $("#itmCode").val();
+    searchItem(id).then(function (res) {
+        setAllItmVal(res);
+        itmCaptureClear();
+        $("#itmCapturedImage").attr('src', res.proPic);
     });
-    setEmpClBtn();
+    setItmClBtn();
 });

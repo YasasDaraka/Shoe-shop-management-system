@@ -7,7 +7,7 @@ $(document).ready(function () {
     $("#cusUpdate").prop("disabled", true);
     $("#cusSearch").prop("disabled", true);
     $("#cusClear").prop("disabled", true);
-    var targetNode = document.getElementById('customer-container');
+    var targetNode = document.getElementById('customer-main');
     var config = {attributes: true, attributeFilter: ['style']};
     var callback = function (mutationsList, observer) {
         for (var mutation of mutationsList) {
