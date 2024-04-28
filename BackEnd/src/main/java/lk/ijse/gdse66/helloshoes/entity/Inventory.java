@@ -6,6 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,4 +31,6 @@ public class Inventory {
     private Double expectedProfit;
     private Double profitMargin;
     private String status;
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "inventory")
+    private List<SaleDetails> saleDetails = new ArrayList<>();
 }

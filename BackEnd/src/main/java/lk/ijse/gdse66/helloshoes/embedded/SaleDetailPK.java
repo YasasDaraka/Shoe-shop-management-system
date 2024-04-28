@@ -13,8 +13,8 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Embeddable
 public class SaleDetailPK implements Serializable {
-    @Column(name = "oid")
-    private String oid;
+    @Column(name = "order_no")
+    private String orderNo;
     @Column(name = "item_Code")
     private String itemCode;
 }

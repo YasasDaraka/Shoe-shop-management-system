@@ -8,6 +8,7 @@ import lombok.ToString;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 @Data
 @AllArgsConstructor
@@ -18,9 +19,17 @@ public class Sales {
 
     @Id
     private String orderNo;
-    @Temporal(TemporalType.DATE)
-    private LocalDate purchaseDate;
 
+    @Temporal(TemporalType.DATE)
+    private Date purchaseDate;
+
+    private Double total;
+
+    private String paymentMethod;
+
+    private Integer totalPoints;
+
+    private String cashier;
     @ManyToOne
     @Column(name = "customer_name")
     @JoinColumn(name = "customer_name", nullable = false)
