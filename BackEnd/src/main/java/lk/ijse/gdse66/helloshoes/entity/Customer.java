@@ -10,7 +10,9 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -48,5 +50,8 @@ public class Customer {
 
     @Column(columnDefinition = "LONGTEXT")
     private String proPic;
+
+    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "customer_name")
+    private List<Sales> sales = new ArrayList<>();
 }
 
