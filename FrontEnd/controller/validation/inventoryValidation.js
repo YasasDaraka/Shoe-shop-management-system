@@ -102,16 +102,20 @@ $("#itmSupId").on("keydown keyup", function (e) {
     });
 });
 $('#itemImgFile').change(function() {
-
     var fileInput = $('#itemImgFile')[0];
     var file = fileInput.files[0];
 
     if (file && (file.type.includes('image') || file.type === 'image/gif')) {
         var reader = new FileReader();
         reader.onload = function (e) {
+            stopItmWebcamStream();
+            $('#itmVideo').hide();
+            itmCaptureClear();
             $('#itmCapturedImage').attr('src', e.target.result);
         };
         reader.readAsDataURL(file);
+        $("#itmClear").prop("disabled", false);
+        $(this).val("");
     } else {
         $('#itemImgFileError').text('Please upload an image or GIF.');
         $('#itemImgFileError').css("border", "1px solid #ced4da");

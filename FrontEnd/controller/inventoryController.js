@@ -50,7 +50,7 @@ $('#itmCaptureButton').click(function () {
 
         navigator.mediaDevices.getUserMedia(constraints)
             .then((stream) => {
-                videoStream = stream;
+                itmVideoStream = stream;
                 video.srcObject = stream;
             })
             .catch((error) => {
