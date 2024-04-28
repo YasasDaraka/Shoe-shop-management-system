@@ -164,61 +164,6 @@ function loadItmAr() {
     });
 }
 
-
-/*function bindEmpTrrEvents() {
-    $('#employeeTable>tr').click(function () {
-        var employeeId = $(this).children().eq(0).text();
-        var employeeName = $(this).children().eq(1).text();
-        var gender = $(this).children().eq(2).text();
-        var employeeDob = $(this).children().eq(3).text();
-        var employeeStatus = $(this).children().eq(4).text();
-        var contactNo = $(this).children().eq(5).text();
-        var email = $(this).children().eq(6).text();
-        var branch = $(this).children().eq(7).text();
-        var designation = $(this).children().eq(8).text();
-        var role = $(this).children().eq(9).text();
-        var joinDate = $(this).children().eq(10).text();
-        var guardianName = $(this).children().eq(11).text();
-        var emergencyContact = $(this).children().eq(12).text();
-        var buildNo = $(this).children().eq(13).text();
-        var lane = $(this).children().eq(14).text();
-        var city = $(this).children().eq(15).text();
-        var state = $(this).children().eq(16).text();
-        var postalCode = $(this).children().eq(17).text();
-
-
-        $("#empId").val(employeeId);
-        $("#empName").val(employeeName);
-        $("#empBuildNo").val(buildNo);
-        $("#empLane").val(lane);
-        $("#empCity").val(city);
-        $("#empState").val(state);
-        $("#empPostalCode").val(postalCode);
-        $("#empEmail").val(email);
-        $("#empDob").val(employeeDob);
-        $("#empGender").val(gender);
-        $("#empContactNo").val(contactNo);
-        $("#empStatus").val(employeeStatus);
-        $("#designation").val(designation);
-        $("#empRole").val(role);
-        $("#joinDate").val(joinDate);
-        $("#empBranch").val(branch);
-        $("#guardianName").val(guardianName);
-        $("#emergencyContact").val(emergencyContact);
-        /!*$("#customerID").prop('disabled', false);
-        $("#customerName").prop('disabled', false);
-        $("#customerAddress").prop('disabled', false);
-        $("#cusUpdate").prop('disabled', false);
-        $("#cusDelete").prop('disabled', false);*!/
-        setEmpBtn();
-        searchEmployee(employeeId).then(function (res){
-            empCaptureClear();
-            $("#empCapturedImage").attr('src', res.proPic);
-
-        });
-    });
-}*/
-
 $("#itmDelete").click(function () {
     let id = $("#itmCode").val();
 
@@ -384,24 +329,17 @@ function getAllItems() {
             console.log(res);
             for (var r of res) {
                 let row = `<tr>
-                    <th scope="row">${r.employeeId}</th>
-                    <td>${r.employeeName}</td>
-                    <td>${r.gender}</td>
-                    <td>${r.employeeDob}</td> 
-                    <td>${r.employeeStatus}</td>
-                    <td>${r.contactNo}</td>
-                    <td>${r.email}</td>
-                    <td>${r.branch}</td>
-                    <td>${r.designation}</td>
-                    <td>${r.role}</td>
-                    <td>${r.joinDate}</td>
-                    <td>${r.guardianName}</td>
-                    <td>${r.emergencyContact}</td>
-                    <td>${r.address.buildNo}</td>
-                    <td>${r.address.lane}</td>
-                    <td>${r.address.city}</td>
-                    <td>${r.address.state}</td>
-                    <td>${r.address.postalCode}</td>
+                    <th scope="row">${r.itemCode}</th>
+                    <td>${r.itemDesc}</td>             
+                    <td>${r.category}</td>            
+                    <td>${r.size}</td>                
+                    <td>${r.supplier.supplierCode}</td>            
+                    <td>${r.supplierName}</td>           
+                    <td>${r.salePrice}</td>           
+                    <td>${r.buyPrice}</td>            
+                    <td>${r.expectedProfit}</td>      
+                    <td>${r.profitMargin}</td>        
+                    <td>${r.status}</td>              
                 </tr>`;
 
                 $("#itemTable").append(row);
@@ -410,7 +348,43 @@ function getAllItems() {
         }
     });
 }
+function bindItmTrrEvents() {
+    $('#itemTable>tr').click(function () {
+        var itemCode = $(this).children().eq(0).text();
+        var itemDesc = $(this).children().eq(1).text();
+        var category = $(this).children().eq(2).text();
+        var size = $(this).children().eq(3).text();
+        var supplierCode = $(this).children().eq(4).text();
+        var supplierName = $(this).children().eq(5).text();
+        var salePrice = $(this).children().eq(6).text();
+        var buyPrice = $(this).children().eq(7).text();
+        var expectedProfit = $(this).children().eq(8).text();
+        var profitMargin = $(this).children().eq(9).text();
+        var status = $(this).children().eq(10).text();
 
+        $("#itmCode").val(itemCode);
+        $("#itmName").val(itemDesc);
+        $("#itmCat").val(category);
+        $("#itmSize").val(size);
+        $("#itmSupId").val(supplierCode);
+        $("#itmSupName").val(supplierName);
+        $("#itmSalePrice").val(salePrice);
+        $("#itmBuyPrice").val(buyPrice);
+        $("#itmProfit").val(expectedProfit);
+        $("#itmProfitMargin").val(profitMargin);
+        $("#itmStatus").val(status);
+        /*$("#customerID").prop('disabled', false);
+        $("#customerName").prop('disabled', false);
+        $("#customerAddress").prop('disabled', false);
+        $("#cusUpdate").prop('disabled', false);
+        $("#cusDelete").prop('disabled', false);*/
+        setItmBtn();
+        searchItem(itemCode).then(function (res){
+            itmCaptureClear();
+            $("#itmCapturedImage").attr('src', res.itemPicture);
+        });
+    });
+}
 function validItem(id) {
     return new Promise(function (resolve, reject) {
         performAuthenticatedRequest();

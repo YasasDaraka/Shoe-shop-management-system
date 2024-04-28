@@ -1124,26 +1124,26 @@
         <div class="container m-0" style=" padding: 1.9vw 1.9vw 1.5vw 7vw;">
           <div class="row h-100 m-0" style="box-shadow: 0px 1px 10px #909090; border-radius: 10px;">
             <div class="row">
-              <div class="row mt-1 mt-md-2 mt-lg-5 justify-content-around">
+              <div class="row mt-1 mt-lg-5 justify-content-start">
                 <div class="col-10">
-                  <div class="inventoryTableDiv">
-                    <table class="table bg-light table-bordered w-100 h-100 table-hover">
-                      <thead class="bg-success text-light text-center">
-                      <tr class="table-secondary" style="border: 1px solid #FFA633FF; box-shadow: inset 1px 1px #FFA633, 0 0 4px #FFA633;"id="inventory-thead">
-                        <th scope="col">Item Code</th>
-                        <th scope="col">Item Desc</th>
+                  <div class="itemTableDiv" style="width: 89.4vw;">
+                    <table style="font-size: small;" class="table table-bordered rounded bg-light table-hover ">
+                      <thead class="table-secondary text-light text-center">
+                      <tr class="" style="border: 1px solid #FFA633FF; box-shadow: inset 1px 1px #FFA633, 0 0 4px #FFA633;"id="item-thead">
+                        <th scope="col">Item ID</th>
+                        <th scope="col">Desc</th>
                         <th scope="col">Category</th>
                         <th scope="col">Size</th>
-                        <th scope="col">Sup Id</th>
-                        <th scope="col">Sup Name</th>
-                        <th scope="col">Buy Price</th>
+                        <th scope="col">Supplier ID</th>
+                        <th scope="col">Supplier Name</th>
                         <th scope="col">Sale Price</th>
-                        <th scope="col">Profit</th>
-                        <th scope="col">Profit Margin</th>
-                        <th scope="col">Status</th>
+                        <th scope="col">Buy Price</th>
+                        <th scope="col">expectedProfit</th>
+                        <th scope="col">profitMargin</th>
+                        <th scope="col">status</th>
                       </tr>
                       </thead>
-                      <tbody id="inventory-table" style="width: 101.8%;">
+                      <tbody id="itemTable">
 
                       </tbody>
                     </table>

@@ -57,6 +57,7 @@ $("#getAllCus, #getAllItm, #getAllEmp, #getAllSup").click(function () {
             break;
         case 'getAllItm':
             itmList.css('display', 'block');
+            getAllItems();
             break;
         case 'getAllEmp':
             empList.css('display', 'block');

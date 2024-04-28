@@ -1,9 +1,6 @@
 package lk.ijse.gdse66.helloshoes.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,6 +15,7 @@ public class Inventory {
     @Id
     private String itemCode;
     private String itemDesc;
+    @Column(columnDefinition = "LONGTEXT")
     private String itemPicture;
     private String category;
     private Integer size;

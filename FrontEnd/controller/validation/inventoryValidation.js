@@ -89,17 +89,23 @@ $("#itmName,#itmCat,#itmSize,#itmSalePrice,#itmBuyPrice,#itmProfit,#itmProfitMar
     events(e);
 });*/
 $("#itmSupId").on("keydown keyup", function (e) {
-    itmEvents(e);
-    searchSupplier($("#itmSupId").val()).then(function (res){
-        if (res != null || res != undefined){
-            $("#itmStatus").css("border", "1px solid #ced4da");
-            $("#itmSupName").val(res.supplierName);
-            setItmBtn();
-        }else {
-            setItmBorder(false, $("#itmSupId"));
-        }
-
-    });
+    let indexNo = itm_vArray.indexOf(itm_vArray.find((c) => c.field.attr("id") == e.target.id));
+    if (itm_vArray[indexNo].regEx.test($("#itmSupId").val())) {
+        searchSupplier($("#itmSupId").val()).then(function (res){
+            if (res != null || res != undefined){
+                setItmBorder(true, itm_vArray[indexNo])
+                $("#itmSupName").val(res.supplierName);
+            }
+            if( $("#itmSupName").val() == "" || $("#itmSupName").val() == null){
+                $("#itmSupIdError").text("Supplier is not Exist");
+                $("#itmSupId").css("border", "2px solid red");
+            }
+        });
+    }else {
+        setItmBorder(false, itm_vArray[indexNo])
+    }
+    setItmBtn();
+    setItmClBtn();
 });
 $('#itemImgFile').change(function() {
     var fileInput = $('#itemImgFile')[0];
@@ -227,6 +233,7 @@ $("#itmClear").click(function () {
     itm_vArray.forEach(function(item) {
         item.error.val("");
     });
+    $("#itmSupName").val("");
     stopItmWebcamStream();
     $('#itmVideo').hide();
     itmCaptureClear();
