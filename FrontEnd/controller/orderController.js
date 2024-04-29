@@ -90,9 +90,14 @@ function loadOrderId() {
 function searchOrder(id) {
     console.log(id);
     return new Promise(function (resolve, reject) {
+        performAuthenticatedRequest();
+        const accessToken = localStorage.getItem('accessToken');
         $.ajax({
-            url: "http://localhost:8080/BackEnd/order/search/"+id,
+            url: "http://localhost:8080/helloshoes/api/v1/sales/search/"+id,
             method: "GET",
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
             dataType: "json",
             success: function (res) {
                 console.log(res);
@@ -314,13 +319,10 @@ $("#orderId").on("keydown", async function (e) {
                         if (info.orderDetailPK.orderNo == id) {
                             code = info.orderDetailPK.itemCode;
                             qty = info.itmQTY;
-                            unitPrice = info.inventory.;
+                            unitPrice = info.inventory.salePrice;
                             let res = await searchItem(code);
+                            itemName = info.inventory.itemDesc;
 
-                            if (Object.keys(res).length !== 0) {
-                                itemName = res.itmName;
-                                console.log(itemName);
-                            }
 
                             let total = parseFloat(unitPrice) * parseFloat(qty);
                             let row = `<tr>

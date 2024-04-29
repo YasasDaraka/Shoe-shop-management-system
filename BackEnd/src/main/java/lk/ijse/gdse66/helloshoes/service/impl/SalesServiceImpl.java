@@ -70,6 +70,9 @@ public class SalesServiceImpl implements SaleService {
                     throw new DuplicateRecordException("Order Already Exist");
                 },
                 () -> {
+                    if (dto.getSaleDetails().isEmpty()){
+                        throw new NotFoundException("Items not added to save Order");
+                    }
                     saleRepo.save(tranformer.convert(dto, Tranformer.ClassType.ORDER_ENTITY));
                 });
     }
