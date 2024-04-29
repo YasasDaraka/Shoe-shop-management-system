@@ -27,4 +27,6 @@ public class SaleDetails {
     @ManyToOne
     @JoinColumn(name = "item_code",insertable=false, updatable=false)
     private Inventory inventory;
+
+    private Double itmTotal;
 }

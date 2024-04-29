@@ -22,7 +22,6 @@ $("#paymentCash").click(function () {
     purchaseBtnHide(false);
 });
 
-
 function data() {
     var data = {
         orderNo: "ORD001",
@@ -165,68 +164,66 @@ function searchOrder(id) {
     });
 }
 
-function placeOrder() {
+function placeOrder(payment) {
     let order = {
-        "orderNo": "ORD003",
-        "total": 100.0,
-        "paymentMethod": "Credit Card",
-        "totalPoints": 50,
-        "cashier": "John Doe",
-        "customerName": {
-            "customerId": "C00-3",
-            "customerName": "Yasas"
+        orderNo: "",
+        total: 0.0,
+        paymentMethod: "",
+        totalPoints: 0,
+        cashier: "",
+        customerName: {
+            customerId: "",
+            customerName: ""
         },
-        "saleDetails": [
-            {
-                "orderDetailPK": {
-                    "orderNo": "ORD003",
-                    "itemCode": "ITEM001"
-                },
-                "itmQTY": 2
-            },
-            {
-                "orderDetailPK": {
-                    "orderNo": "ORD003",
-                    "itemCode": "ITEM002"
-                },
-                "itmQTY": 2
-            }
+        saleDetails: [
         ]
     }
 
-    let cusId = $("#cId").val();
-    let date = $("#orderDate").val();
-    let OId = $("#orderID").val();
+    let cusId = $("#ordCusId").val();
+    let oId = $("#orderId").val();
+    let cusPoints = $("#ordPoints").val();
+    let cusName = $("#ordCusName").val();
+
 
     $('#order-table>tr').each(function () {
-        let code = $(this).children().eq(0).text();
-        let qty = $(this).children().eq(3).text();
-        let price = $(this).children().eq(2).text();
+        let code = $(this).children().eq(1).text();
+        let qty = $(this).children().eq(5).text();
+        let price = $(this).children().eq(6).text();
         let orderDetails = {
-            oid: OId,
-            itmCode: code,
+            orderDetailPK: {
+                orderNo: oId,
+                itemCode: code
+            },
             itmQTY: parseInt(qty),
-            itmPrice: parseFloat(price)
+            itmTotal: parseFloat(price)
         };
 
         order.saleDetails.push(orderDetails);
     });
-
-    order.oid = OId;
-    order.date = date;
-    order.cusID = cusId;
-
+    order.orderNo = oId;
+    order.paymentMethod = payment;
+    order.totalPoints = cusPoints;
+    order.cashier = "John Doe";
+    order.customerName.customerId = cusId;
+    order.customerName.customerName = cusName;
+    
     console.log(order)
+    performAuthenticatedRequest();
+    const accessToken = localStorage.getItem('accessToken');
+    console.log(accessToken);
     $.ajax({
-        url: "http://localhost:8080/BackEnd/order",
+        url: "http://localhost:8080/helloshoes/api/v1/sales",
         method: "POST",
+        headers: {
+            'Authorization': 'Bearer ' + accessToken
+        },
         data: JSON.stringify(order),
         contentType: "application/json",
         success: function (res, textStatus, jsXH) {
             console.log(res);
             //alert("Order Added Successfully");
             swal("Saved", "Order Added Successfully", "success");
-            generateOrderId();
+            //generateOrderId();
         },
         error: function (ob, textStatus, error) {
             //alert(textStatus + " : Error Order Not Added")
@@ -342,7 +339,7 @@ $("#btnSubmitOrder").click(function () {
         searchOrder(oId).then(function (order) {
             if (Object.keys(order).length === 0) {
                 if (cashValidate()) {
-                        placeOrder();
+                        placeOrder("Cash");
                         clearAll();
                         //generateOrderId();
                 } else {

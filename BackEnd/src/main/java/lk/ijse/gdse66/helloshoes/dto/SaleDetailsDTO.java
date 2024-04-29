@@ -16,4 +16,6 @@ public class SaleDetailsDTO {
     private SalesDTO orderNo;
 
     private InventoryDTO inventory;
+
+    private Double itmTotal;
 }
