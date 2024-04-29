@@ -81,6 +81,7 @@ public class SalesServiceImpl implements SaleService {
     public void updateSales(SalesDTO dto) {
         saleRepo.findById(dto.getOrderNo()).ifPresentOrElse(
                 sales -> {
+                    saleRepo.deleteById(dto.getOrderNo());
                     saleRepo.save(tranformer.convert(dto, Tranformer.ClassType.ORDER_ENTITY));
                 },
                 () -> {
@@ -90,6 +91,11 @@ public class SalesServiceImpl implements SaleService {
 
     @Override
     public void deleteSales(String id) {
-
+        saleRepo.findById(id).ifPresentOrElse(
+                customer -> saleRepo.deleteById(id),
+                () -> {
+                    throw new NotFoundException("Order Not Exist");
+                }
+        );
     }
 }

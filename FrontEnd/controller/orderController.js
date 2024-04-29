@@ -206,7 +206,7 @@ function placeOrder(payment) {
     order.cashier = "John Doe";
     order.customerName.customerId = cusId;
     order.customerName.customerName = cusName;
-    
+
     console.log(order)
     performAuthenticatedRequest();
     const accessToken = localStorage.getItem('accessToken');
@@ -231,6 +231,63 @@ function placeOrder(payment) {
         }
     });
 }
+$("#empUpdate").click(function () {
+    let id = $("#empId").val();
+    validEmployee(id).then(function (isValid) {
+        if (isValid) {
+            swal("Do you really want to update this employee.?", {
+                buttons: {
+                    cancel1: {
+                        text: "Cancel",
+                        className: "custom-cancel-btn",
+                    },
+                    ok: {
+                        text: "OK",
+                        value: "confirm",
+                        className: "custom-ok-btn",
+                    }
+                },
+            }).then((value) => {
+                if (value === "confirm") {
+                    var data = returnAllEmpVal();
+                    performAuthenticatedRequest();
+                    const accessToken = localStorage.getItem('accessToken');
+                    console.log(data)
+                    $.ajax({
+                        url: "http://localhost:8080/helloshoes/api/v1/employee",
+                        method: "PUT",
+                        headers: {
+                            'Authorization': 'Bearer ' + accessToken
+                        },
+                        data: JSON.stringify(data),
+                        contentType: "application/json",
+                        success: function (res) {
+                            console.log(res);
+                            //alert("Customer Update Successfully")
+                            swal("Updated", "Employee Update Successfully", "success");
+                            empCaptureClear();
+                            getAllEmployees();
+                            setEmpBtn();
+                        },
+                        error: function (ob, textStatus, error) {
+                            //alert(textStatus+" : Error Customer Not Update");
+                            swal("Error", textStatus + "Error Employee Not Update", "error");
+                        }
+                    });
+                    /* $("#customerID").prop('disabled', true);
+                     $("#customerName").prop('disabled', true);
+                     $("#customerAddress").prop('disabled', true);
+                     clearCustomerInputFields();*/
+                }
+            });
+
+        } else {
+            swal("Error", "No such Employee..please check the ID", "error");
+            /*alert("No such Customer..please check the ID");*/
+        }
+    });
+
+});
 
 $("#order-add-item").click(function () {
     let id = $("#OrdItm").val();
