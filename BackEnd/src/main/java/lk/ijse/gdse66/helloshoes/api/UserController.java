@@ -68,4 +68,10 @@ public class UserController {
         userService.updateUser(dto,"ADMIN");
         return ResponseEntity.noContent().build();
     }
+    @PutMapping(path = "/user")
+    public ResponseEntity<Void> updateUser(@RequestBody UserDTO dto) {
+        System.out.println("Received user data: " + dto.toString());
+        userService.updateUser(dto,"USER");
+        return ResponseEntity.noContent().build();
+    }
 }

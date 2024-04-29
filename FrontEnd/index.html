@@ -170,7 +170,7 @@
             </form>
   </section>
 
-  <section4 dfn id="admin-container">
+  <section id="admin-container">
     <header id="admin-header">
       <nav class="navbar navbar-expand-lg bg-white nav-bar container-fluid d-flex " style="height: 60px; padding-right: 20px;padding-left: 50px">
         <div class="d-flex justify-content-center align-items-center"style="display: inline-block; box-shadow: 0px 1px 10px #909090; background-color: white; z-index: 4; width: 32px; height: 33px; border-radius: 25%"><img class="admin-icon" style="width: 60px; padding-right:10px; z-index: 5" src="assets/images/arrow.gif"></div>
@@ -204,8 +204,8 @@
       </div>
     </div>
 
-  </section4>
-  <section dfn id="user-container">
+  </section>
+  <section id="user-container">
     <header id="user-header">
       <nav class="navbar navbar-expand-lg bg-white nav-bar container-fluid d-flex " style="height: 60px; padding-right: 20px;padding-left: 50px">
         <div class="d-flex justify-content-center align-items-center"style="display: inline-block; box-shadow: 0px 1px 10px #909090; background-color: white; z-index: 4; width: 32px; height: 33px; border-radius: 25%"><img class="admin-icon" style="width: 60px; padding-right:10px; z-index: 5" src="assets/images/arrow.gif"></div>
@@ -1418,90 +1418,117 @@
       <div class="row h-100 m-0 w-100">
         <div class="container m-0" style=" padding: 1.9vw 1.9vw 1.5vw 7vw;">
           <div class="row h-100 m-0" style="box-shadow: 0px 1px 10px #909090; border-radius: 10px;">
-            <div class="col-md-6 "style="padding: 0 0 0 0.9vw;">
-              <div class="row h-50 m-0">
+            <div class="col-md-6 m-0"style="padding: 0 0 0 0.9vw;">
+              <div class="row h-50 m-0 m-lg-4">
                 <div class="col-md-12 p-0 d-flex justify-content-center justify-content-evenly" style="width: 24.4vw">
-                  <!--<div class="container row mt-4">
 
-                    <div class="col pb-3">
-                      <label for="empId" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px;width: 20vw;">Employee ID</label>
+                  <div class="container row mt-4">
+
+                    <div class="col">
+                      <label for="adminId" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px;width: 20vw;">Customer ID</label>
                       <div class="row m-0 p-0">
-                        <input type="text" class="form-control" id="empId" style="width: 12vw">
-                        <img class="admin-icon" id="empAdd" style="width: 4.5vw; z-index: 10;" src="assets/images/add-icon.gif"></div>
-                      <p class="position-absolute mt-1"><small class="text-danger" id="empIdError"></small></p>
+                        <input type="text" class="form-control" id="adminId" style="width: 12vw">
+                        <img class="admin-icon" id="adminAdd" style="width: 4.5vw; z-index: 10;" src="assets/images/add-icon.gif"></div>
+                      <p class="position-absolute mt-1"><small class="text-danger" id="adminIdError"></small></p>
                     </div>
 
                     <div class="col">
-                      <label for="empGender" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Gender</label>
-                      <select aria-label="Default select example" class="form-select" id="empGender" style="width: 16vw">
+                      <label for="adminGender" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Gender</label>
+                      <select aria-label="Default select example" class="form-select" id="adminGender" style="width: 16vw">
                         <option value="MALE"selected>Male</option>
                         <option value="FEMALE">Female</option>
                       </select>
+                      <p class="position-absolute mt-1"><small class="text-danger" id="adminGenderError"></small></p>
                     </div>
 
                   </div>
                   <div class="container row mt-4">
 
                     <div class="col">
-                      <label for="empName" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Employee Name</label>
-                      <input type="text" class="form-control" id="empName">
-                      <p><small class="text-danger position-absolute mt-1" id="empNameError"></small></p>
+                      <label for="adminName" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Customer Name</label>
+                      <input type="text" class="form-control" id="adminName">
+                      <p class="position-absolute mt-1"><small class="text-danger" id="adminNameError"></small></p>
                     </div>
 
                     <div class="col">
-                      <label for="empStatus" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Status</label>
-                      <select aria-label="Default select example" class="form-select" id="empStatus" style="width: 16vw"></select>
+                      <label for="adminDob" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Date of Birth</label>
+                      <input type="date" class="form-control" id="adminDob" style="width: 20vw">
                     </div>
 
-                  </div>-->
+                  </div>
+
+                </div>
+              </div>
+              <div class="row h-50 m-0">
+                <div class="col-md-12 p-0">
+                  <div class="container row m-lg-4">
+
+
+                    <div class="row m-0">
+                      <div class="col-12 d-flex justify-content-evenly"style="padding-right: 2vw" >
+                        <button type="button" class="btn btn-primary" style="font-weight: bold;" id="adminSave">Save</button>
+                        <button type="button" class="btn btn-success" style="font-weight: bold;" id="adminUpdate">Update</button>
+                        <button type="button" class="btn btn-secondary"
+                                style="font-weight: bold;" id="adminSearch">Search</button>
+                        <button type="button" class="btn btn-danger"
+                                style="width: 66px;" id="adminDelete">Delete</button>
+                        <button type="button" class="btn btn-warning" id="adminClear">Clear</button>
+                        <button type="button" class="btn btn-secondary" id="getAllAdmins">All Admins</button>
+
+                      </div>
+
+                    </div>
+
+                  </div>
                 </div>
               </div>
               <!--<div class="row h-50 m-0">
                 <div class="col-md-12 p-0">
+
                   <div class="container row ">
 
                     <div class="col">
-                      <label for="empBuildNo" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Building No or Name</label>
-                      <input type="text" class="form-control" id="empBuildNo">
-                      <p><small class="text-danger position-absolute mt-1" id="empBuildNoError"></small></p>
+                      <label for="cusBuildNo" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Building No or Name</label>
+                      <input type="text" class="form-control" id="cusBuildNo">
+                      <p class="position-absolute mt-1"><small class="text-danger" id="cusBuildNoError"></small></p>
                     </div>
 
                     <div class="col">
-                      <label for="empLane" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Lane</label>
-                      <input type="text" class="form-control" id="empLane" style="width: 20vw">
-                      <p><small class="text-danger position-absolute mt-1" id="empLaneError"></small></p>
+                      <label for="cusLane" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Lane</label>
+                      <input type="text" class="form-control" id="cusLane" style="width: 20vw">
+                      <p class="position-absolute mt-1"><small class="text-danger" id="cusLaneError"></small></p>
                     </div>
 
                   </div>
                   <div class="container row mt-4">
 
                     <div class="col">
-                      <label for="empCity" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">City</label>
-                      <input type="text" class="form-control" id="empCity" style="width: 13.5vw">
-                      <p><small class="text-danger position-absolute mt-1" id="empCityError"></small></p>
+                      <label for="cusCity" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">City</label>
+                      <input type="text" class="form-control" id="cusCity" style="width: 13.5vw">
+                      <p class="position-absolute mt-1"><small class="text-danger" id="cusCityError"></small></p>
                     </div>
 
                     <div class="col">
-                      <label for="empState" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">State</label>
-                      <input type="text" class="form-control" id="empState" style="width: 13.5vw">
-                      <p><small class="text-danger position-absolute mt-1" id="empStateError"></small></p>
+                      <label for="cusState" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">State</label>
+                      <input type="text" class="form-control" id="cusState" style="width: 13.5vw">
+                      <p class="position-absolute mt-1"><small class="text-danger" id="cusStateError"></small></p>
                     </div>
                     <div class="col">
-                      <label for="empPostalCode" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Postal Code</label>
-                      <input type="text" class="form-control" id="empPostalCode"style="width: 10vw">
-                      <p><small class="text-danger position-absolute mt-1" id="empPostalCodeError"></small></p>
+                      <label for="cusPostalCode" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Postal Code</label>
+                      <input type="text" class="form-control" id="cusPostalCode"style="width: 10vw">
+                      <p class="position-absolute mt-1"><small class="text-danger" id="cusPostalCodeError"></small></p>
                     </div>
 
-                    <div class="row mt-2">
+                    <div class="row mt-4">
                       <div class="col-12">
-                        <button type="button" class="btn btn-primary" style="font-weight: bold;" id="empSave">Save</button>
-                        <button type="button" class="btn btn-success" style="font-weight: bold;" id="empUpdate">Update</button>
+                        <button type="button" class="btn btn-primary" style="font-weight: bold;" id="cusSave">Save</button>
+                        <button type="button" class="btn btn-success" style="font-weight: bold;" id="cusUpdate">Update</button>
                         <button type="button" class="btn btn-secondary"
-                                style="font-weight: bold;" id="empSearch">Search</button>
+                                style="font-weight: bold;" id="cusSearch">Search</button>
                         <button type="button" class="btn btn-danger"
-                                style="width: 66px;" id="empDelete">Delete</button>
-                        <button type="button" class="btn btn-warning" id="empClear">Clear</button>
-                        <button type="button" class="btn btn-secondary" id="getAllEmp">All Employees</button>
+                                style="width: 66px;" id="cusDelete">Delete</button>
+                        <button type="button" class="btn btn-warning" id="cusClear">Clear</button>
+                        <button type="button" class="btn btn-secondary" id="getAllCus">All Customers</button>
 
                       </div>
 
@@ -1512,120 +1539,16 @@
                 </div>
               </div>-->
             </div>
-            <!--<div class="col-md-6 p-0">
+
+            <div class="col-md-6 p-0">
               <div class="row h-50 m-0">
                 <div class="col-md-12 p-0">
-                  <div class="row h-100 m-0 p-0 d-flex justify-content-center">
-                    <div class="container row mt-4">
-
-                      <div class="col">
-                        <label for="empDob" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Date of Birth</label>
-                        <input type="date" class="form-control" id="empDob" style="width: 20vw">
-                        <p><small class="text-danger position-absolute mt-1" id="empDobError"></small></p>
-                      </div>
-
-                      <div class="col">
-                        <label for="joinDate" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Date of Join</label>
-                        <input type="date" class="form-control" id="joinDate" style="width: 20vw">
-                        <p><small class="text-danger position-absolute mt-1" id="joinDateError"></small></p>
-                      </div>
-
-                    </div>
-                    <div class="container row">
-                      <div class="col">
-                        <label for="designation" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Designation</label>
-                        <input type="text" class="form-control" id="designation" style="width: 10vw">
-                        <p><small class="text-danger position-absolute mt-1" id="designationError"></small></p>
-                      </div>
-
-                      <div class="col">
-                        <label for="empRole" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Access Role</label>
-                        <select aria-label="Default select example" class="form-select" id="empRole" style="width: 10vw"></select>
-                      </div>
-
-                      <div class="col">
-                        <label for="empContactNo" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Contact No</label>
-                        <input type="text" class="form-control" id="empContactNo" style="width: 18vw">
-                        <p><small class="text-danger position-absolute mt-1" id="empContactNoError"></small></p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row h-50 m-0">
-                <div class="col-md-6 p-0">
-                  <div class="row h-50">
-                    <div class="container h-100" style="padding-left: 3.5vw;">
-                      <div class="row h-100">
-                        <div class="col p-0">
-                          <div class="h-100 w-100">
-
-                            <div class="col">
-                              <label for="empEmail" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Email</label>
-                              <input type="email" class="form-control" id="empEmail" style="width: 18vw">
-                              <p><small class="text-danger position-absolute mt-1" id="empEmailError"></small></p>
-                            </div>
-
-                            <div class="col mt-1">
-                              <label for="guardianName" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Name of Guardian</label>
-                              <input type="text" class="form-control" id="guardianName" >
-                              <p><small class="text-danger position-absolute mt-1" id="guardianNameError"></small></p>
-                            </div>
-
-                            <div class="col mt-1">
-                              <label for="emergencyContact" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Emergency Contact</label>
-                              <input type="text" class="form-control" id="emergencyContact" >
-                              <p><small class="text-danger position-absolute mt-1" id="emergencyContactError"></small></p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row h-50">
-
-                  </div>
-                </div>
-                <div class="col-md-6 p-0">
-                  <div class="container h-100">
-                    <label class="form-label" style="padding-left: 6.6vw; font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 16px;">Capture Image</label>
-                    <div class="row h-100">
-                      <div class="col p-0">
-                        <div class=" h-100 w-100 ">
-                          <div class="row">
-                            <div class="col-12 d-flex justify-content-center">
-                              <video id="empVideo" class="web" width="200" height="150" style="display:none;" autoplay></video>
-                              <canvas id="empCanvas" class="web" width="200" height="150" style="display:none;"></canvas>
-                              <img src="assets/images/walk.gif" id="empCapturedImage" class="web" width="200"  style="display:block;">
-                            </div>
-                            <div class="col-12 d-flex justify-content-center">
-                              <button id="empCaptureButton" class="btn btn-primary mt-3" style="display:block;" type="button">Capture</button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                 <!---->
                 </div>
               </div>
 
-            </div>-->
-            <!--<div class="customeTableDiv">
-                     <table class="table bg-light table-bordered w-100 h-100 table-hover">
-                       <thead class="bg-success text-light text-center">
-                       <tr class="table-secondary" style="border: 1px solid #FFA633FF; box-shadow: inset 1px 1px #FFA633, 0 0 4px #FFA633;"id="order-thead">
-                         <th scope="col">Item Code</th>
-                         <th scope="col">Item Name</th>
-                         <th scope="col">Price</th>
-                         <th scope="col">Quantity</th>
-                         <th scope="col">Total</th>
-                       </tr>
-                       </thead>
-                       <tbody id="order-table" style="width: 101.8%;">
-
-                       </tbody>
-                     </table>
-                   </div>-->
+              <!---->
+            </div>
           </div>
         </div>
       </div>
