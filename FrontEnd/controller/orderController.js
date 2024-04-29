@@ -47,6 +47,8 @@ $(document).ready(function () {
     $("#order-add-item").prop("disabled", true);
     $("#btnSubmitOrder").prop("disabled", true);
     $("#order-clear").prop("disabled", true);
+    $("#order-update").prop("disabled", true);
+    $("#order-delete").prop("disabled", true);
     generateOrderId();
     $('#order-thead').css({
         'width': '100%',
@@ -297,7 +299,7 @@ function loadOrderDetailAr() {
     });
 }
 
-$("#orderId").on("keydown", async function (e) {
+$("#orderId").on("keyup input change", async function (e) {
     $("#order-table").empty();
     if (e.keyCode === 13) {
         let id = $("#orderId").val();
@@ -361,10 +363,12 @@ $("#orderId").on("keydown", async function (e) {
                         }
                     }
                 }
-
+            $("#order-delete").prop("disabled", false);
+            setOrdUpdateBtn();
         }
 
     }
+    setOrdClBtn();
 });
 function bindRemove() {
     $('#order-table>tr>td').click(function () {
@@ -392,5 +396,61 @@ function bindRemove() {
                 'display': 'flex'
             });
         }
+        setOrdUpdateBtn();
     });
+}
+async function setOrdUpdateBtn() {
+    let id = $("#orderId").val();
+    let order = await searchOrder(id);
+    if ($("#order-table>tr").length != order.saleDetails.length) {
+        $("#btnSubmitOrder").prop("disabled", true);
+        $("#order-update").prop("disabled", false);
+
+        //updateAddedItemTable(order);
+    }else {
+        $("#btnSubmitOrder").prop("disabled", false);
+        $("#order-update").prop("disabled", true);
+    }
+    setOrdClBtn();
+}
+
+function updateAddedItemTable(order) {
+    $("#order-table").empty();
+    order.saleDetails.forEach(saleDetail => {
+        let row = `<tr>
+                       <td><img class="rounded mx-auto d-block" src="assets/images/delete.gif" alt="Card" style="width: 36px; z-index: 5;" /></td>
+                       <td>${saleDetail.orderDetailPK.itemCode}</td>
+                       <td>${saleDetail.inventory.itemDesc}</td>
+                       <td>${saleDetail.inventory.size}</td>
+                       <td>${saleDetail.inventory.salePrice}</td>
+                       <td>${saleDetail.itmQTY}</td>
+                       <td>${saleDetail.total}</td>
+                   </tr>`;
+        $("#order-table").append(row);
+    });
+}
+function setOrdClBtn(){
+    var empty = true;
+    $("#orderId,#OrdItmDes, #OrdItm, #ordItmPrice, #ordItmSize, #ordItmQty, #ordDate, #ordCusId, #ordCusName, #ordPoints,#txtCash").each(function() {
+        if ($(this).val() !== "") {
+            empty = false;
+            return true;
+        }
+    });
+    $("#order-clear").prop("disabled", empty);
+}
+function clearAll() {
+    $("#orderId,#OrdItmDes, #OrdItm, #ordItmPrice, #ordItmSize, #ordItmQty, #ordDate, #ordCusId, #ordCusName, #ordPoints,#txtCash,#txtDiscount,#txtBalance").val("");
+    $("#orderId,#OrdItmDes, #OrdItm, #ordItmPrice, #ordItmSize, #ordItmQty, #ordDate, #ordCusId, #ordCusName, #ordPoints,#txtCash").css("border", "1px solid #ced4da");
+
+    $("#ordItmQty").text("");
+    $("#total,#subtotal").text("0");
+    $("#order-add-item").prop("disabled", true);
+    $("#btnSubmitOrder").prop("disabled", true);
+    $("#order-update").prop("disabled", true);
+    $("#order-clear").prop("disabled", true);
+    $("#order-delete").prop("disabled", true);
+    $("#order-table").empty();
+    /*$("#cusImage").attr('src', "");
+    $('#cusImage').css('display', 'none');*/
 }

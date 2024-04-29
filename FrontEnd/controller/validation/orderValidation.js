@@ -68,7 +68,6 @@ function setOrderBtn() {
                 $("#btnSubmitOrder").prop("disabled", false);
             } else {
                 $("#btnSubmitOrder").prop("disabled", true);
-
             }
         }
     });
@@ -133,25 +132,7 @@ function cashValidate() {
         $("#QtyError").text("");
     }
 });*/
-function clearAll() {
-    $("#orderId,#OrdItmDes, #OrdItm, #ordItmPrice, #ordItmSize, #ordItmQty, #ordDate, #ordCusId, #ordCusName, #ordPoints,#txtCash,#txtDiscount,#txtBalance").val("");
-    $("#orderId,#OrdItmDes, #OrdItm, #ordItmPrice, #ordItmSize, #ordItmQty, #ordDate, #ordCusId, #ordCusName, #ordPoints,#txtCash").css("border", "1px solid #ced4da");
 
-    $("#ordItmQty").text("");
-    $("#total,#subtotal").text("0");
-    $("#order-add-item").prop("disabled", true);
-    $("#btnSubmitOrder").prop("disabled", true);
-    $("#order-table").empty();
-    /*$("#cusImage").attr('src', "");
-    $('#cusImage').css('display', 'none');*/
-}
-$("#OrdItmDes, #OrdItm, #ordItmPrice, #ordItmSize, #ordItmQty, #ordDate, #ordCusId, #ordCusName, #ordPoints,#txtCash").on("keydown keyup input change", function (e){
-    var empty = true;
-    $("#OrdItmDes, #OrdItm, #ordItmPrice, #ordItmSize, #ordItmQty, #ordDate, #ordCusId, #ordCusName, #ordPoints,#txtCash").each(function() {
-        if ($(this).val() !== "") {
-            empty = false;
-            return true;
-        }
-    });
-    $("#order-clear").prop("disabled", empty);
+$("#OrdItmDes, #OrdItm, #ordItmPrice, #ordItmSize, #ordItmQty, #ordDate, #ordCusId, #ordCusName, #ordPoints,#txtCash,#txtDiscount,#txtBalance").on("keydown keyup input change", function (e){
+    setOrdClBtn();
 });
