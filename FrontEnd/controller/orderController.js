@@ -232,7 +232,7 @@ function placeOrder(payment) {
     });
 }
 $("#order-update").click(function () {
-    let id = $("#ord").val();
+    let id = $("#orderId").val();
     searchOrder(id).then(function (isValid) {
         if (Object.keys(isValid).length !== 0) {
             swal("Do you really want to update this employee.?", {
@@ -249,7 +249,6 @@ $("#order-update").click(function () {
                 },
             }).then((value) => {
                 if (value === "confirm") {
-                    let oId = $("#orderId").val();
 
                     if (itemValidate()) {
 
@@ -276,7 +275,7 @@ $("#order-update").click(function () {
 });
 
 $("#order-delete").click(function () {
-    let id = $("#ord").val();
+    let id = $("#orderId").val();
 
     searchOrder(id).then(function (isValid) {
         if (Object.keys(isValid).length === 0) {
@@ -426,29 +425,27 @@ function setBalance() {
 
 $("#btnSubmitOrder").click(function () {
     let oId = $("#orderId").val();
-
-    if (itemValidate()) {
-        searchOrder(oId).then(function (order) {
-            if (Object.keys(order).length === 0) {
-                if (cashValidate()) {
-                        placeOrder("Cash");
-                        clearAll();
-                        //generateOrderId();
-                } else {
-                    //alert("Insuficent Credit : Check Cash!");
-                    swal("Error", "Insufficient Credit : Check Cash!", "error");
-                }
+    searchOrder(oId).then(function (order) {
+        if (Object.keys(order).length === 0) {
+            if (itemValidate()) {
+                        if (cashValidate()) {
+                            placeOrder("Cash");
+                            clearAll();
+                            //generateOrderId();
+                        } else {
+                            //alert("Insuficent Credit : Check Cash!");
+                            swal("Error", "Insufficient Credit : Check Cash!", "error");
+                        }
             } else {
+                //alert("Please Add Items to Place Order");
+                swal("Error", "Please Add Items to Place Order", "error");
+            }
+        }else {
                 //alert("Order Already Registered");
                 swal("Error", "Order Already Registered", "error");
             }
-        });
-    } else {
-        //alert("Please Add Items to Place Order");
-        swal("Error", "Please Add Items to Place Order", "error");
-    }
 });
-
+});
 function loadOrderDetailAr() {
     return new Promise(function (resolve, reject) {
         var ar;

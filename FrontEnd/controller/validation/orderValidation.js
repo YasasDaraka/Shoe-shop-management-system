@@ -60,20 +60,18 @@ function setOrderBtn() {
         searchOrder(id).then(function (order) {
             if (Object.keys(order).length === 0) {
                 if (checkAllOrder()) {
-                    $("#btnSubmitOrder").prop("disabled", false);
+                    if ($("#txtCash").prop("disabled")!== true && $("#txtCash").val()!== ""){
+                        $("#btnSubmitOrder").prop("disabled", false);
+                    }else {
+                        $("#btnSubmitOrder").prop("disabled", true);
+                    }
                 } else {
                     $("#btnSubmitOrder").prop("disabled", true);
                 }
             }
         });
     }else {
-        if (Object.keys(order).length === 0) {
-            if (checkAllOrder()) {
-                $("#btnSubmitOrder").prop("disabled", false);
-            } else {
-                $("#btnSubmitOrder").prop("disabled", true);
-            }
-        }
+         $("#btnSubmitOrder").prop("disabled", true);
     }
 
 }

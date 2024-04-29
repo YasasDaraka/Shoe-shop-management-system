@@ -8,6 +8,6 @@ public interface UserService {
     void Save(UserDTO userDTO);
     UserDTO searchUser(String id);
     void updateUser(UserDTO dto);
-    void deleteUser(String id);
+    void deleteUser(UserDTO dto,String role);
     boolean checkPassword(UserDTO req);
 }

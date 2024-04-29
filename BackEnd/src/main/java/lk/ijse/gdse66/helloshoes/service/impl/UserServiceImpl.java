@@ -59,9 +59,20 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUser(String id) {
-        userRepo.findByEmail(id).ifPresentOrElse(
-                customer -> userRepo.deleteByEmail(id),
+    public void deleteUser(UserDTO dto,String role) {
+        userRepo.findByEmail(dto.getEmail()).ifPresentOrElse(
+                user -> {
+                    if (user.getRole().equals(role)) {
+                        boolean matches = passwordEncoder.matches(dto.getPassword(), user.getPassword());
+                        if (matches) {
+                            userRepo.deleteByEmailAndRole(dto.getEmail(), role);
+                        } else {
+                            throw new NotFoundException("Incorrect Password");
+                        }
+                    }else {
+                        throw new NotFoundException("User Role Not Match");
+                    }
+                },
                 () -> {
                     throw new NotFoundException("User Not Exist");
                 }
