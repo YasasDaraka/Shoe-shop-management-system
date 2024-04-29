@@ -230,7 +230,7 @@ $("#order-add-item").click(function () {
             let upQty = parseInt(liQty) + parseInt(qty);
 
             $(this).children().eq(2).text(name);
-            $(this).children().eq(3).text(price);
+            $(this).children().eq(3).text(size);
             $(this).children().eq(5).text(upQty);
             $(this).children().eq(6).text(upQty * parseFloat(price));
             itemExists = true;
@@ -267,7 +267,7 @@ $("#order-add-item").click(function () {
             });
         } else {
             $('#order-table>tr').css({
-                'width': '925px',
+                'width': '98.2%',
                 'display': 'flex'
             });
         }
