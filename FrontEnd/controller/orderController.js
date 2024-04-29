@@ -71,13 +71,13 @@ $("#order-clear,.order-nav").click(function () {
     clearAll();
 });
 
-function generateOrderId() {
+/*function generateOrderId() {
     loadOrderId().then(function (id) {
         $("#orderID").val(id);
     }).catch(function (error) {
         console.error("Error loading order Id:", error);
     });
-}
+}*/
 function loadOrderId() {
     return new Promise(function (resolve, reject) {
         var ar;

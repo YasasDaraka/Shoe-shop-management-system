@@ -56,7 +56,7 @@ function setOrderBorder(bol, ob) {
 }
 function setOrderBtn() {
     let id = $("#orderId").val();
-    if(id != "" || id != undefined){
+    if(id !== "" && id !== undefined){
         searchOrder(id).then(function (order) {
             if (Object.keys(order).length === 0) {
                 if (checkAllOrder()) {
