@@ -47,11 +47,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUser(UserDTO dto) {
+    public void updateUser(UserDTO dto, String role) {
         userRepo.findByEmail(dto.getEmail()).ifPresentOrElse(
                 user -> {
-                    System.out.println(user);
-                        userRepo.save(new User(user.getId(),dto.getEmail(),passwordEncoder.encode(dto.getPassword()),dto.getRole()));
+                    if (user.getRole().equals(role)) {
+                        userRepo.save(new User(user.getId(), dto.getEmail(), passwordEncoder.encode(dto.getPassword()), dto.getRole()));
+                    } else {
+                        throw new NotFoundException("Not : " + role + " role");
+                    }
                 },
                 () -> {
                     throw new NotFoundException("User Not Exist");
@@ -63,18 +66,22 @@ public class UserServiceImpl implements UserService {
         userRepo.findByEmail(dto.getEmail()).ifPresentOrElse(
                 user -> {
                     if (user.getRole().equals(role)) {
-                        boolean matches = passwordEncoder.matches(dto.getPassword(), user.getPassword());
-                        if (matches) {
+                        if (role.equals("USER")) {
                             userRepo.deleteByEmailAndRole(dto.getEmail(), role);
-                        } else {
-                            throw new NotFoundException("Incorrect Password");
+                        }else {
+                            boolean matches = passwordEncoder.matches(dto.getPassword(), user.getPassword());
+                            if (matches) {
+                                userRepo.deleteByEmailAndRole(dto.getEmail(), role);
+                            } else {
+                                throw new NotFoundException("Incorrect Password");
+                            }
                         }
                     }else {
-                        throw new NotFoundException("User Role Not Match");
+                        throw new NotFoundException("Not : "+role+" role");
                     }
                 },
                 () -> {
-                    throw new NotFoundException("User Not Exist");
+                    throw new NotFoundException(role+" Not Exist");
                 }
         );
     }

@@ -3,6 +3,7 @@ package lk.ijse.gdse66.helloshoes.api;
 import lk.ijse.gdse66.helloshoes.auth.request.SignInRequest;
 import lk.ijse.gdse66.helloshoes.auth.request.SignUpRequest;
 import lk.ijse.gdse66.helloshoes.auth.response.JwtAuthResponse;
+import lk.ijse.gdse66.helloshoes.dto.CustomerDTO;
 import lk.ijse.gdse66.helloshoes.dto.UserDTO;
 import lk.ijse.gdse66.helloshoes.service.AuthenticationService;
 import lk.ijse.gdse66.helloshoes.service.UserService;
@@ -43,13 +44,6 @@ public class UserController {
         return userService.searchUser(id);
     }
 
-    @PutMapping
-    public ResponseEntity<Void> updateUser(@RequestBody UserDTO dto) {
-        System.out.println("Received User data: " + dto.toString());
-        userService.updateUser(dto);
-        return ResponseEntity.noContent().build();
-    }
-
     @ResponseStatus(HttpStatus.OK)
     @PostMapping
     public ResponseEntity<Boolean> checkPassword(@RequestBody UserDTO dto) {
@@ -57,17 +51,21 @@ public class UserController {
         return ResponseEntity.ok(isCorrect);
     }
     @ResponseStatus(HttpStatus.OK)
-    @DeleteMapping(path = "/{admin}")
-    public ResponseEntity<Void> deleteUser(@PathVariable("admin") String admin,@RequestBody UserDTO dto) {
-        String role="";
-        if (admin.equals("ADMIN")){
-            role = "ADMIN";
-        }else if (admin.equals("USER")){
-            role = "USER";
-        }else {
-            throw new NotFoundException("Invalid Role");
-        }
-         userService.deleteUser(dto,role);
+    @DeleteMapping(path = "/admin")
+    public ResponseEntity<Void> deleteAdmin(@RequestBody UserDTO dto) {
+            userService.deleteUser(dto,"ADMIN");
+        return ResponseEntity.noContent().build();
+    }
+    @ResponseStatus(HttpStatus.OK)
+    @DeleteMapping(path = "/user")
+    public ResponseEntity<Void> deleteUser(@RequestBody UserDTO dto) {
+        userService.deleteUser(dto,"USER");
+        return ResponseEntity.noContent().build();
+    }
+    @PutMapping(path = "/admin")
+    public ResponseEntity<Void> updateAdmin(@RequestBody UserDTO dto) {
+        System.out.println("Received user data: " + dto.toString());
+        userService.updateUser(dto,"ADMIN");
         return ResponseEntity.noContent().build();
     }
 }
