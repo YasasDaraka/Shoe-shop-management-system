@@ -56,7 +56,17 @@ function setOrderBorder(bol, ob) {
 }
 function setOrderBtn() {
     let id = $("#orderId").val();
-    searchOrder(id).then(function (order) {
+    if(id != "" || id != undefined){
+        searchOrder(id).then(function (order) {
+            if (Object.keys(order).length === 0) {
+                if (checkAllOrder()) {
+                    $("#btnSubmitOrder").prop("disabled", false);
+                } else {
+                    $("#btnSubmitOrder").prop("disabled", true);
+                }
+            }
+        });
+    }else {
         if (Object.keys(order).length === 0) {
             if (checkAllOrder()) {
                 $("#btnSubmitOrder").prop("disabled", false);
@@ -64,7 +74,8 @@ function setOrderBtn() {
                 $("#btnSubmitOrder").prop("disabled", true);
             }
         }
-    });
+    }
+
 }
 function checkAllOrder() {
     for (let i = 0; i < o_Array.length; i++) {

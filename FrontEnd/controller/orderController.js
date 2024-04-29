@@ -100,7 +100,6 @@ $("#OrdItm").on("keydown keyup", function (e) {
     if (o_Array[indexNo].regEx.test($("#OrdItm").val())) {
         searchItem($("#OrdItm").val()).then(function (res){
             if (res != null || res != undefined){
-                setItmBorder(true, itm_vArray[indexNo])
                 $("#OrdItm").css("border", "2px solid green");
                 $("#OrdItmError").text("");
                 $("#OrdItmDes").val(res.itemDesc);
@@ -116,6 +115,29 @@ $("#OrdItm").on("keydown keyup", function (e) {
     }else {
         $("#OrdItmError").text("itm-Code is a required field: Minimum 5");
         $("#OrdItm").css("border", "2px solid red");
+    }
+    setOrderBtn();
+    setOrdClBtn();
+});
+$("#ordCusId").on("keydown keyup", function (e) {
+    let indexNo = o_Array.indexOf(o_Array.find((c) => c.field.attr("id") == e.target.id));
+    if (o_Array[indexNo].regEx.test($("#ordCusId").val())) {
+        searchCustomer($("#ordCusId").val()).then(function (res){
+            if (res != null || res != undefined){
+                $("#ordCusId").css("border", "2px solid green");
+                $("#ordCusIdError").text("");
+                $("#ordCusName").val(res.customerName);
+                $("#ordPoints").val(res.totalPoints);
+                setAddItemBtn();
+            }
+            if( $("#ordCusName").val() == "" || $("#ordCusName").val() == null){
+                $("#ordCusIdError").text("Customer is not Exist");
+                $("#ordCusId").css("border", "2px solid red");
+            }
+        });
+    }else {
+        $("#ordCusIdError").text("Cus-Id is a required field: C00-");
+        $("#ordCusId").css("border", "2px solid red");
     }
     setOrderBtn();
     setOrdClBtn();
