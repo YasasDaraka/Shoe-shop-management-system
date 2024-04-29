@@ -1,12 +1,11 @@
 package lk.ijse.gdse66.helloshoes.service.impl;
 
-import lk.ijse.gdse66.helloshoes.auth.request.SignInRequest;
-import lk.ijse.gdse66.helloshoes.auth.request.SignUpRequest;
 import lk.ijse.gdse66.helloshoes.dto.UserDTO;
 import lk.ijse.gdse66.helloshoes.entity.User;
 import lk.ijse.gdse66.helloshoes.repository.UserRepo;
 import lk.ijse.gdse66.helloshoes.service.UserService;
 import lk.ijse.gdse66.helloshoes.service.exception.NotFoundException;
+import lk.ijse.gdse66.helloshoes.service.util.Role;
 import lk.ijse.gdse66.helloshoes.service.util.Tranformer;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -50,7 +49,9 @@ public class UserServiceImpl implements UserService {
     public void updateUser(UserDTO dto, String role) {
         userRepo.findByEmail(dto.getEmail()).ifPresentOrElse(
                 user -> {
-                    if (user.getRole().equals(role)) {
+                    Role userRole = user.getRole();
+                    Role roleEnum = Role.valueOf(role);
+                    if (userRole == roleEnum) {
                         userRepo.save(new User(user.getId(), dto.getEmail(), passwordEncoder.encode(dto.getPassword()), dto.getRole()));
                     } else {
                         throw new NotFoundException("Not : " + role + " role");
