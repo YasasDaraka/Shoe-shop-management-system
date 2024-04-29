@@ -1,10 +1,4 @@
-const QTY_REGEX = /^[1-9]\d*$/;
-const itm_ID_REGEX = /^[A-Za-z0-9 ]{3,}$/;
-const CUS_ID_REGEX = /^C00-(0*[1-9]\d{0,2})$/;
-let o_Array = new Array();
-o_Array.push({field: $("#ordItmQty"), regEx: QTY_REGEX });
-o_Array.push({field: $("#OrdItm"), regEx: itm_ID_REGEX });
-o_Array.push({field: $("#OrdItmDes"), regEx: CUS_ID_REGEX });
+
 
 const inputChangeEvent = new Event('input', { bubbles: true });
 
@@ -23,7 +17,7 @@ function setAddItemBtn() {
     /*let nm =  Item_NAME_REGEX.test($("#itemName").val());
     let pr =  UNIT_PRICE_REGEX.test($("#price").val());
     let qh =  Item_QTY_REGEX.test($("#qtyOnHand").val());*/
-    let oq =  QTY_REGEX.test($("#orderQty").val());
+    let oq =  QTY_REGEX.test($("#ordItmQty").val());
 
     if(oq){
 
@@ -134,5 +128,12 @@ function cashValidate() {
 });*/
 
 $("#OrdItmDes, #OrdItm, #ordItmPrice, #ordItmSize, #ordItmQty, #ordDate, #ordCusId, #ordCusName, #ordPoints,#txtCash,#txtDiscount,#txtBalance").on("keydown keyup input change", function (e){
-    setOrdClBtn();
+    var empty = true;
+    $("#orderId,#OrdItmDes, #OrdItm, #ordItmPrice, #ordItmSize, #ordItmQty, #ordDate, #ordCusId, #ordCusName, #ordPoints,#txtCash").each(function() {
+        if ($(this).val() !== "") {
+            empty = false;
+            return true;
+        }
+    });
+    $("#order-clear").prop("disabled", empty);
 });

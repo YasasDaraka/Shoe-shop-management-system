@@ -1,3 +1,10 @@
+const QTY_REGEX = /^[1-9]\d*$/;
+const ord_itm_ID_REGEX = /^[A-Za-z0-9 ]{5,}$/;
+const ord_CUS_ID_REGEX = /^C00-(0*[1-9]\d{0,2})$/;
+let o_Array = new Array();
+o_Array.push({field: $("#ordItmQty"), regEx: QTY_REGEX });
+o_Array.push({field: $("#OrdItm"), regEx: ord_itm_ID_REGEX });
+o_Array.push({field: $("#ordCusId"), regEx: ord_CUS_ID_REGEX });
 $("#paymentCard").click(function () {
     purchaseBtnHide(true);
     allContainerHide();
@@ -88,7 +95,31 @@ function loadOrderId() {
         });
     });
 }
-
+$("#OrdItm").on("keydown keyup", function (e) {
+    let indexNo = o_Array.indexOf(o_Array.find((c) => c.field.attr("id") == e.target.id));
+    if (o_Array[indexNo].regEx.test($("#OrdItm").val())) {
+        searchItem($("#OrdItm").val()).then(function (res){
+            if (res != null || res != undefined){
+                setItmBorder(true, itm_vArray[indexNo])
+                $("#OrdItm").css("border", "2px solid green");
+                $("#OrdItmError").text("");
+                $("#OrdItmDes").val(res.itemDesc);
+                $("#ordItmSize").val(res.size);
+                $("#ordItmPrice").val(res.salePrice);
+                setAddItemBtn();
+            }
+            if( $("#OrdItmDes").val() == "" || $("#OrdItmDes").val() == null){
+                $("#OrdItmError").text("Supplier is not Exist");
+                $("#OrdItm").css("border", "2px solid red");
+            }
+        });
+    }else {
+        $("#OrdItmError").text("itm-Code is a required field: Minimum 5");
+        $("#OrdItm").css("border", "2px solid red");
+    }
+    setOrderBtn();
+    setOrdClBtn();
+});
 function searchOrder(id) {
     console.log(id);
     return new Promise(function (resolve, reject) {
@@ -114,11 +145,32 @@ function searchOrder(id) {
 
 function placeOrder() {
     let order = {
-        oid: "",
-        date: "",
-        cusID: "",
-        orderDetails: []
-    };
+        "orderNo": "ORD003",
+        "total": 100.0,
+        "paymentMethod": "Credit Card",
+        "totalPoints": 50,
+        "cashier": "John Doe",
+        "customerName": {
+            "customerId": "C00-3",
+            "customerName": "Yasas"
+        },
+        "saleDetails": [
+            {
+                "orderDetailPK": {
+                    "orderNo": "ORD003",
+                    "itemCode": "ITEM001"
+                },
+                "itmQTY": 2
+            },
+            {
+                "orderDetailPK": {
+                    "orderNo": "ORD003",
+                    "itemCode": "ITEM002"
+                },
+                "itmQTY": 2
+            }
+        ]
+    }
 
     let cusId = $("#cId").val();
     let date = $("#orderDate").val();
@@ -135,7 +187,7 @@ function placeOrder() {
             itmPrice: parseFloat(price)
         };
 
-        order.orderDetails.push(orderDetails);
+        order.saleDetails.push(orderDetails);
     });
 
     order.oid = OId;
@@ -162,23 +214,25 @@ function placeOrder() {
 }
 
 $("#order-add-item").click(function () {
-    let id = $("#icode").val();
-    let name = $("#itemName").val();
-    let price = $("#price").val();
-    let qty = $("#orderQty").val();
+    let id = $("#OrdItm").val();
+    let name = $("#OrdItmDes").val();
+    let size = $("#ordItmSize").val();
+    let price = $("#ordItmPrice").val();
+    let qty = $("#ordItmQty").val();
     let total = parseFloat(price) * parseFloat(qty);
     let allTotal = 0;
     let itemExists = false;
 
     $('#order-table>tr').each(function (e) {
-        let check = $(this).children().eq(0).text();
+        let check = $(this).children().eq(1).text();
         if (id === check) {
-            let liQty = $(this).children().eq(3).text();
+            let liQty = $(this).children().eq(5).text();
             let upQty = parseInt(liQty) + parseInt(qty);
-            $(this).children().eq(1).text(name);
-            $(this).children().eq(2).text(price);
-            $(this).children().eq(3).text(upQty);
-            $(this).children().eq(4).text(upQty * parseFloat(price));
+
+            $(this).children().eq(2).text(name);
+            $(this).children().eq(3).text(price);
+            $(this).children().eq(5).text(upQty);
+            $(this).children().eq(6).text(upQty * parseFloat(price));
             itemExists = true;
             return false;
         }
@@ -186,8 +240,10 @@ $("#order-add-item").click(function () {
 
     if (!itemExists) {
         let row = `<tr>
+                     <td><img class="rounded mx-auto d-block" src="assets/images/delete.gif" alt="Card" style="width: 36px; z-index: 5;" /></td>
                      <td>${id}</td>
                      <td>${name}</td>
+                     <td>${size}</td>
                      <td>${price}</td>
                      <td>${qty}</td>
                      <td>${total}</td>
@@ -202,7 +258,7 @@ $("#order-add-item").click(function () {
         });
         $('#order-table>tr>td').css({
             'flex': '1',
-            'max-width': 'calc(100%/5*1)'
+            'max-width': 'calc(100%/7*1)'
         });
         if ($("#order-table>tr").length > 1) {
             $('#order-table>tr').css({
@@ -215,10 +271,11 @@ $("#order-add-item").click(function () {
                 'display': 'flex'
             });
         }
+        bindRemove();
 
     }
     $('#order-table>tr').each(function (e) {
-        let full = $(this).children().eq(4).text();
+        let full = $(this).children().eq(6).text();
         allTotal += parseFloat(full);
     });
     $("#total").text(allTotal);
@@ -265,7 +322,7 @@ $("#btnSubmitOrder").click(function () {
                 if (cashValidate()) {
                         placeOrder();
                         clearAll();
-                        generateOrderId();
+                        //generateOrderId();
                 } else {
                     //alert("Insuficent Credit : Check Cash!");
                     swal("Error", "Insufficient Credit : Check Cash!", "error");
