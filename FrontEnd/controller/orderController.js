@@ -54,7 +54,7 @@ $(document).ready(function () {
     });
     $('#order-thead>th').css({
         'flex': '1',
-        'max-width': 'calc(100%/5*1)'
+        'max-width': 'calc(100%/7*1)'
     })
 });
 
@@ -313,6 +313,7 @@ $("#orderId").on("keydown", async function (e) {
             let qty;
             let unitPrice;
             let itemName;
+            let size;
 
                 if (order.saleDetails.length !== 0) {
                     for (var info of order.saleDetails) {
@@ -320,14 +321,16 @@ $("#orderId").on("keydown", async function (e) {
                             code = info.orderDetailPK.itemCode;
                             qty = info.itmQTY;
                             unitPrice = info.inventory.salePrice;
-                            let res = await searchItem(code);
+                            size = info.inventory.size;
                             itemName = info.inventory.itemDesc;
 
 
                             let total = parseFloat(unitPrice) * parseFloat(qty);
                             let row = `<tr>
+                     <td><img class="rounded mx-auto d-block" src="assets/images/delete.gif" alt="Card" style="width: 36px; z-index: 5;" /></td>
                      <td>${code}</td>
                      <td>${itemName}</td>
+                     <td>${size}</td>
                      <td>${unitPrice}</td>
                      <td>${qty}</td>
                      <td>${total}</td>
@@ -341,7 +344,7 @@ $("#orderId").on("keydown", async function (e) {
                             });
                             $('#order-table>tr>td').css({
                                 'flex': '1',
-                                'max-width': 'calc(100%/5*1)'
+                                'max-width': 'calc(100%/7*1)'
                             });
                             if ($("#order-table>tr").length > 1) {
                                 $('#order-table>tr').css({
@@ -354,6 +357,7 @@ $("#orderId").on("keydown", async function (e) {
                                     'display': 'flex'
                                 });
                             }
+                            bindRemove();
                         }
                     }
                 }
@@ -362,3 +366,31 @@ $("#orderId").on("keydown", async function (e) {
 
     }
 });
+function bindRemove() {
+    $('#order-table>tr>td').click(function () {
+        let row = $(this).closest('tr');
+        row.remove();
+
+        $('#order-table').css({
+            'width ': '101.8%',
+            'max-height': '80px',
+            'overflow-y': 'auto',
+            'display': 'table-caption'
+        });
+        $('#order-table>tr>td').css({
+            'flex': '1',
+            'max-width': 'calc(100%/7*1)'
+        });
+        if ($("#order-table>tr").length > 1) {
+            $('#order-table>tr').css({
+                'width': '100%',
+                'display': 'flex'
+            });
+        } else {
+            $('#order-table>tr').css({
+                'width': '98.2%',
+                'display': 'flex'
+            });
+        }
+    });
+}
