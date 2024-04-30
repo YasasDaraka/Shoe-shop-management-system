@@ -10,11 +10,13 @@ import lk.ijse.gdse66.helloshoes.service.util.Tranformer;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -96,5 +98,17 @@ public class UserServiceImpl implements UserService {
             }
         }
         return false;
+    }
+
+    @Override
+    public List<UserDTO> findAllByRole(String role) {
+        if ("USER".equals(role)) {
+            return tranformer.convert(userRepo.findAllByRole(Role.USER), Tranformer.ClassType.USER_DTO_LIST);
+        } else if ("ADMIN".equals(role)) {
+            return tranformer.convert(userRepo.findAllByRole(Role.ADMIN), Tranformer.ClassType.USER_DTO_LIST);
+        } else {
+            throw new NotFoundException("Not : "+role+" role");
+        }
+
     }
 }

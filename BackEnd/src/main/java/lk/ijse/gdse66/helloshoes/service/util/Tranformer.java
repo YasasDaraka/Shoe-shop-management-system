@@ -20,6 +20,7 @@ public class Tranformer {
     public enum ClassType {
         USER_DTO,
         USER_ENTITY,
+        USER_DTO_LIST,
         CUS_DTO,
         CUS_ENTITY,
         CUS_DTO_LIST,
@@ -104,6 +105,8 @@ public class Tranformer {
                 return UserDTO.class;
             case USER_ENTITY:
                 return User.class;
+            case USER_DTO_LIST:
+                return new TypeToken<ArrayList<UserDTO>>() {}.getType();
             case CUS_DTO:
                 return CustomerDTO.class;
             case CUS_ENTITY:

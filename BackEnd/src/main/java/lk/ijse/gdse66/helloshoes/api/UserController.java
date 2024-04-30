@@ -43,6 +43,19 @@ public class UserController {
     public UserDTO getUser(@PathVariable("id") String id) {
         return userService.searchUser(id);
     }
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping(path = "getall/{id}")
+    public ResponseEntity<List<UserDTO>> getAllUser(@PathVariable("id") String id) {
+        if ("user".equals(id)) {
+            List<UserDTO> users = userService.findAllByRole("USER");
+            return ResponseEntity.ok(users);
+        } else if ("admin".equals(id)) {
+            List<UserDTO> admins = userService.findAllByRole("ADMIN");
+            return ResponseEntity.ok(admins);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
     @ResponseStatus(HttpStatus.OK)
     @PostMapping
