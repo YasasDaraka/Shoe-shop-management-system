@@ -275,6 +275,54 @@ $("#adminNewPass").on("keydown keyup", function (e) {
         }
     });
 });
+$("#adminSave").on("keydown keyup", function (e) {
+    saveAdmin();
+});
+$("#adminUpdate").on("keydown keyup", function (e) {
+    console.log("update")
+    searchUser().then(function (user) {
+        if (user) {
+            swal("Do you really want to update this user.?", {
+                buttons: {
+                    cancel1: {
+                        text: "Cancel",
+                        className: "custom-cancel-btn",
+                    },
+                    ok: {
+                        text: "OK",
+                        value: "confirm",
+                        className: "custom-ok-btn",
+                    }
+                },
+            }).then((con) => {
+                if (con === "confirm") {
+                    let value = {
+                        email: $("#adminName").val(),
+                        password: $("#adminNewPassword").val(),
+                        role: $('#adminRole').val()
+                    }
+                    console.log(value);
+                    $.ajax({
+                        url: "http://localhost:8080/helloshoes/api/v1/auth//admin",
+                        method: "PUt",
+                        data: JSON.stringify(value),
+                        contentType: "application/json",
+                        success: function (res, textStatus, jsXH) {
+                            alert("User Added Successfully");
+                            swal("Saved", "User Added Successfully", "success");
+                            //getAllCustomers();
+                        },
+                        error: function (ob, textStatus, error) {
+                            swal("Error", textStatus + " : Error User Not Added", "error");
+                        }
+                    });
+                }
+            });
+        } else {
+            swal("Error", "User already exits.!", "error");
+        }
+    });
+});
 function saveAdmin() {
     searchUser().then(function (user) {
         if (!user) {
