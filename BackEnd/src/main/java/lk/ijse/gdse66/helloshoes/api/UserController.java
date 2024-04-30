@@ -58,7 +58,7 @@ public class UserController {
     }
 
     @ResponseStatus(HttpStatus.OK)
-    @PostMapping
+    @PostMapping(path = "/pass")
     public ResponseEntity<Boolean> checkPassword(@RequestBody UserDTO dto) {
         boolean isCorrect = userService.checkPassword(dto);
         return ResponseEntity.ok(isCorrect);

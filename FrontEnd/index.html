@@ -1425,34 +1425,54 @@
                   <div class="container row mt-4">
 
                     <div class="col">
-                      <label for="adminId" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px;width: 20vw;">Customer ID</label>
+                      <label for="adminName" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px;width: 20vw;">Admin Name</label>
                       <div class="row m-0 p-0">
-                        <input type="text" class="form-control" id="adminId" style="width: 12vw">
-                        <img class="admin-icon" id="adminAdd" style="width: 4.5vw; z-index: 10;" src="assets/images/add-icon.gif"></div>
+                        <input type="text" class="form-control" id="adminName" style="width: 15vw">
+                      </div>
                       <p class="position-absolute mt-1"><small class="text-danger" id="adminIdError"></small></p>
                     </div>
 
                     <div class="col">
-                      <label for="adminGender" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Gender</label>
-                      <select aria-label="Default select example" class="form-select" id="adminGender" style="width: 16vw">
-                        <option value="MALE"selected>Male</option>
-                        <option value="FEMALE">Female</option>
-                      </select>
-                      <p class="position-absolute mt-1"><small class="text-danger" id="adminGenderError"></small></p>
+                      <label for="adminOldPassword" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Password for update or delete</label>
+                      <input placeholder="Update or Delete" type="password" class="form-control" id="adminOldPassword">
+                      <p class="position-absolute mt-1"><small class="text-danger" id="adminOldPasswordError"style="width: 15vw"></small></p>
+                    </div>
+                    <div class="col">
+                      <label for="adminNewPass" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Password for update or delete</label>
+                      <input placeholder="Update or Delete" type="password" class="form-control" id="adminNewPass">
+                      <p class="position-absolute mt-1"><small class="text-danger" id="adminNewPassError"style="width: 15vw"></small></p>
                     </div>
 
                   </div>
                   <div class="container row mt-4">
 
                     <div class="col">
-                      <label for="adminName" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Customer Name</label>
-                      <input type="text" class="form-control" id="adminName">
-                      <p class="position-absolute mt-1"><small class="text-danger" id="adminNameError"></small></p>
+                      <label for="adminRole" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Role</label>
+                      <select aria-label="Default select example" class="form-select" id="adminRole" style="width: 16vw">
+                        <option value="ADMIN"selected>ADMIN</option>
+                        <option value="USER">USER</option>
+                      </select>
                     </div>
 
                     <div class="col">
-                      <label for="adminDob" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Date of Birth</label>
-                      <input type="date" class="form-control" id="adminDob" style="width: 20vw">
+                      <div class="col-md-12 p-0">
+                        <div class="container h-100 mt-4">
+                          <label class="form-label" style=" font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 16px;position: relative;left: 2.5vw;bottom: 1vw;">Capture Image</label>
+                          <div class="row h-100">
+                            <div class="col p-0">
+                              <div class=" h-100 w-100 ">
+                                <div class="row">
+                                  <div class="col-12 d-flex justify-content-center">
+                                    <video id="adminVideo" class="web" width="200" height="150" style="display:none;" autoplay></video>
+                                    <canvas id="adminCanvas" class="web" width="200" height="150" style="display:none;"></canvas>
+                                    <img src="assets/images/walk.gif" id="adminCapturedImage" class="web" width="200"  style="display:block;">
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
 
                   </div>
@@ -1461,10 +1481,10 @@
               </div>
               <div class="row h-50 m-0">
                 <div class="col-md-12 p-0">
-                  <div class="container row m-lg-4">
+                  <div class="container row mt-4">
 
 
-                    <div class="row m-0">
+                    <div class="row mt-5"></div>
                       <div class="col-12 d-flex justify-content-evenly"style="padding-right: 2vw" >
                         <button type="button" class="btn btn-primary" style="font-weight: bold;" id="adminSave">Save</button>
                         <button type="button" class="btn btn-success" style="font-weight: bold;" id="adminUpdate">Update</button>
@@ -1473,7 +1493,7 @@
                         <button type="button" class="btn btn-danger"
                                 style="width: 66px;" id="adminDelete">Delete</button>
                         <button type="button" class="btn btn-warning" id="adminClear">Clear</button>
-                        <button type="button" class="btn btn-secondary" id="getAllAdmins">All Admins</button>
+                        <button id="adminCaptureButton" class="btn btn-primary" style="display:block;" type="button">Capture</button>
 
                       </div>
 
@@ -1482,113 +1502,28 @@
                   </div>
                 </div>
               </div>
-              <!--<div class="row h-50 m-0">
-                <div class="col-md-12 p-0">
+            <div class="col-md-6 m-0 d-flex justify-content-center align-items-center"style="padding: 0 0 0 0.9vw;">
+              <div class="row h-50 m-0 m-lg-4 mt-4 d-flex justify-content-center">
+                <div class="col-md-12 p-0 d-flex justify-content-center justify-content-evenly" style="width: 24.4vw">
+                  <table style="font-size: xx-small;" class="table table-bordered rounded bg-light table-hover ">
+                    <thead class="table-secondary text-light text-center">
+                    <tr class="" style="border: 1px solid #FFA633FF; box-shadow: inset 1px 1px #FFA633, 0 0 4px #FFA633;"id="employee-thead">
+                      <th scope="col">Emp ID</th>
+                      <th scope="col">Name</th>
+                    </tr>
+                    </thead>
+                    <tbody id="employeeTable">
 
-                  <div class="container row ">
+                    </tbody>
+                  </table>
 
-                    <div class="col">
-                      <label for="cusBuildNo" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Building No or Name</label>
-                      <input type="text" class="form-control" id="cusBuildNo">
-                      <p class="position-absolute mt-1"><small class="text-danger" id="cusBuildNoError"></small></p>
-                    </div>
-
-                    <div class="col">
-                      <label for="cusLane" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Lane</label>
-                      <input type="text" class="form-control" id="cusLane" style="width: 20vw">
-                      <p class="position-absolute mt-1"><small class="text-danger" id="cusLaneError"></small></p>
-                    </div>
-
-                  </div>
-                  <div class="container row mt-4">
-
-                    <div class="col">
-                      <label for="cusCity" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">City</label>
-                      <input type="text" class="form-control" id="cusCity" style="width: 13.5vw">
-                      <p class="position-absolute mt-1"><small class="text-danger" id="cusCityError"></small></p>
-                    </div>
-
-                    <div class="col">
-                      <label for="cusState" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">State</label>
-                      <input type="text" class="form-control" id="cusState" style="width: 13.5vw">
-                      <p class="position-absolute mt-1"><small class="text-danger" id="cusStateError"></small></p>
-                    </div>
-                    <div class="col">
-                      <label for="cusPostalCode" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Postal Code</label>
-                      <input type="text" class="form-control" id="cusPostalCode"style="width: 10vw">
-                      <p class="position-absolute mt-1"><small class="text-danger" id="cusPostalCodeError"></small></p>
-                    </div>
-
-                    <div class="row mt-4">
-                      <div class="col-12">
-                        <button type="button" class="btn btn-primary" style="font-weight: bold;" id="cusSave">Save</button>
-                        <button type="button" class="btn btn-success" style="font-weight: bold;" id="cusUpdate">Update</button>
-                        <button type="button" class="btn btn-secondary"
-                                style="font-weight: bold;" id="cusSearch">Search</button>
-                        <button type="button" class="btn btn-danger"
-                                style="width: 66px;" id="cusDelete">Delete</button>
-                        <button type="button" class="btn btn-warning" id="cusClear">Clear</button>
-                        <button type="button" class="btn btn-secondary" id="getAllCus">All Customers</button>
-
-                      </div>
-
-                    </div>
-
-                  </div>
-
-                </div>
-              </div>-->
-            </div>
-
-            <div class="col-md-6 p-0">
-              <div class="row h-50 m-0">
-                <div class="col-md-12 p-0">
-                 <!---->
                 </div>
               </div>
-
-              <!---->
             </div>
-          </div>
+            </div>
         </div>
       </div>
     </div>
-    <!--<div class="container-fluid p-0" style="height: 90.5vh; z-index: 5;" id="employee-list">
-      <div class="row h-100 m-0 w-100">
-        <div class="container m-0" style=" padding: 1.9vw 1.9vw 1.5vw 7vw;">
-          <div class="row h-100 m-0" style="box-shadow: 0px 1px 10px #909090; border-radius: 10px;">
-            <div class="row">
-              <div class="row mt-1 mt-md-2 mt-lg-5 justify-content-around">
-                <div class="col-10">
-                  <div class="employeeTableDiv">
-                    <table class="table bg-light table-bordered w-100 h-100 table-hover">
-                      <thead class="bg-success text-light text-center">
-                      <tr class="table-secondary" style="border: 1px solid #FFA633FF; box-shadow: inset 1px 1px #FFA633, 0 0 4px #FFA633;"id="employee-thead">
-                        <th scope="col">Item Code</th>
-                        <th scope="col">Item Desc</th>
-                        <th scope="col">Category</th>
-                        <th scope="col">Size</th>
-                        <th scope="col">Sup Id</th>
-                        <th scope="col">Sup Name</th>
-                        <th scope="col">Buy Price</th>
-                        <th scope="col">Sale Price</th>
-                        <th scope="col">Profit</th>
-                        <th scope="col">Profit Margin</th>
-                        <th scope="col">Status</th>
-                      </tr>
-                      </thead>
-                      <tbody id="employee-table" style="width: 101.8%;">
-
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>-->
   </section>
 
 </main>
@@ -1610,6 +1545,8 @@
 <script src="controller/validation/inventoryValidation.js"></script>
 <script src="controller/orderController.js"></script>
 <script src="controller/validation/orderValidation.js"></script>
+<script src="controller/adminUserController.js"></script>
+<script src="controller/validation/adminValidation.js"></script>
 <script src="assets/sweetalerts/sweetalert2@10.js"></script>
 <script src="assets/sweetalerts/sweetalert.min.js"></script>
 <script src="assets/sweetalerts/popper.min.js"></script>
