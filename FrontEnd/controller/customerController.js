@@ -7,7 +7,7 @@ $(document).ready(function () {
     $("#cusUpdate").prop("disabled", true);
     $("#cusSearch").prop("disabled", true);
     $("#cusClear").prop("disabled", true);
-    var targetNode = document.getElementById('customer-main');
+/*    var targetNode = document.getElementById('customer-main');
     var config = {attributes: true, attributeFilter: ['style']};
     var callback = function (mutationsList, observer) {
         for (var mutation of mutationsList) {
@@ -26,7 +26,7 @@ $(document).ready(function () {
         }
     };
     var observer = new MutationObserver(callback);
-    observer.observe(targetNode, config);
+    observer.observe(targetNode, config);*/
 });
 let videoStream;
 $('#cusCaptureButton').click(function () {

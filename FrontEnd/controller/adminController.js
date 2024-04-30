@@ -76,31 +76,41 @@ $("#btnCustomer, #btnInventory, #btnSupplier, #btnEmployee, #btnSales,#btnAdminP
             cusList.css('display', 'none');
             cusMain.css('display', 'block');
             customerPage.css('display', 'block');
+            allCaptureClear();
             break;
         case 'btnInventory':
             itmList.css('display', 'none');
             itmMain.css('display', 'block');
             inventoryPage.css('display', 'block');
+            allCaptureClear();
             break;
         case 'btnSupplier':
             supList.css('display', 'none');
             supMain.css('display', 'block');
             supplierPage.css('display', 'block');
+            allCaptureClear();
             break;
         case 'btnEmployee':
             empList.css('display', 'none');
             empMain.css('display', 'block');
             employeePage.css('display', 'block');
+            allCaptureClear();
             break;
         case 'btnAdminPanel':
             adminEditPage.css('display', 'block');
+            allCaptureClear();
             break;
         case 'btnSales':
             paymentPage.css('display', 'block');
+            allCaptureClear();
             break;
     }
 });
-
+function allCaptureClear() {
+    captureClear();
+    itmCaptureClear();
+    empCaptureClear();
+}
 function showAlert() {
     let timerInterval;
     Swal.fire({

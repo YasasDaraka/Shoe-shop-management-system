@@ -7,7 +7,7 @@ $(document).ready(function () {
     $("#empUpdate").prop("disabled", true);
     $("#empSearch").prop("disabled", true);
     $("#empClear").prop("disabled", true);
-    var targetNode = document.getElementById('employee-main');
+/*    var targetNode = document.getElementById('employee-main');
     var config = {attributes: true, attributeFilter: ['style']};
     var callback = function (mutationsList, observer) {
         for (var mutation of mutationsList) {
@@ -26,7 +26,7 @@ $(document).ready(function () {
         }
     };
     var observer = new MutationObserver(callback);
-    observer.observe(targetNode, config);
+    observer.observe(targetNode, config);*/
 });
 let empVideoStream;
 $('#empCaptureButton').click(function () {

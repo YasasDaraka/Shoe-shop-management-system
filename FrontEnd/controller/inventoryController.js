@@ -8,7 +8,7 @@ $(document).ready(function () {
     $("#itmSearch").prop("disabled", true);
     $("#itmClear").prop("disabled", true);
     //setItmClBtn();
-    var targetNode = document.getElementById('inventory-main');
+/*    var targetNode = document.getElementById('inventory-main');
     var config = {attributes: true, attributeFilter: ['style']};
     var callback = function (mutationsList, observer) {
         for (var mutation of mutationsList) {
@@ -27,7 +27,7 @@ $(document).ready(function () {
         }
     };
     var observer = new MutationObserver(callback);
-    observer.observe(targetNode, config);
+    observer.observe(targetNode, config);*/
 });
 let itmVideoStream;
 $('#itmCaptureButton').click(function () {
