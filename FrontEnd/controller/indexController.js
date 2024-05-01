@@ -38,7 +38,8 @@ function allContainerHide(){
     cardPage.css('display','none');
     adminEditPage.css('display','none');
 }
-$(document).ready(function () {
+$(window).on('load',function (){
+    $("#loader").css('display','none');
     purchaseBtnHide(true);
     allContainerHide();
     header.css('display','block');
@@ -70,6 +71,9 @@ $(document).ready(function () {
         'flex': '1',
         'max-width': 'calc(100%/5*1)'
     })
+});
+$(document).ready(function () {
+
 });
 function purchaseBtnHide(value){
     $("#txtBalance").prop("disabled", value);
