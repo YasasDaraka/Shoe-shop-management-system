@@ -34,6 +34,8 @@ function hideAdminPages(){
     supplierPage.css('display','none');
     inventoryPage.css('display','none');
     paymentPage.css('display','none');
+    adminEditPage.css('display','none');
+    userEditPage.css('display','none');
 }
 function hideMainPages(){
     empMain.css('display','none');
