@@ -63,6 +63,7 @@ $("#userName").on("keydown keyup", function (e) {
 }else {
         $("#userIdError").text("");
         $("#userName").css("border", "1px solid #ced4da");
+        $("#userClear").prop("disabled", false);
     }
 });
 $("#userOldPassword").on("keydown keyup", function (e) {
@@ -90,6 +91,7 @@ $("#userOldPassword").on("keydown keyup", function (e) {
         $("#userSave").prop("disabled", false);
         $("#userOldPasswordError").text("");
         $("#userOldPassword").css("border", "1px solid #ced4da")
+        $("#userClear").prop("disabled", false);
     }
 });
 function searchUserPanel() {
@@ -337,7 +339,10 @@ function userClear() {
     ids.forEach(function(id) {
         $("#" + id).val("");
     });
+    $("#userIdError").text("");
+    $("#userOldPasswordError").text("");
     $("#userName").css("border", "1px solid #ced4da");
+    $("#userOldPassword").css("border", "1px solid #ced4da");
     $("#cusClear").prop("disabled", true);
     $("#userSave").prop("disabled", true);
     $("#userDelete").prop("disabled", true);
