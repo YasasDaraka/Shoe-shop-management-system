@@ -29,7 +29,6 @@ $(document).ready(function () {
     var observer = new MutationObserver(callback);
     observer.observe(targetNode, config);*/
 });
-let itmVideoStream;
 $('#itmCaptureButton').click(function () {
     let text = $(this).text();
     var video = $('#itmVideo')[0];

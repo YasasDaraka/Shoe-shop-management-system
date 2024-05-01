@@ -7,7 +7,7 @@ $(document).ready(function () {
     $("#cusUpdate").prop("disabled", true);
     $("#cusSearch").prop("disabled", true);
     $("#cusClear").prop("disabled", true);
-/*    var targetNode = document.getElementById('customer-main');
+    /*var targetNode = document.getElementById('customer-main');
     var config = {attributes: true, attributeFilter: ['style']};
     var callback = function (mutationsList, observer) {
         for (var mutation of mutationsList) {
@@ -28,7 +28,7 @@ $(document).ready(function () {
     var observer = new MutationObserver(callback);
     observer.observe(targetNode, config);*/
 });
-let videoStream;
+
 $('#cusCaptureButton').click(function () {
     let text = $(this).text();
     var video = $('#cusVideo')[0];
@@ -274,13 +274,14 @@ function bindTrrEvents() {
         $("#customerAddress").prop('disabled', false);
         $("#cusUpdate").prop('disabled', false);
         $("#cusDelete").prop('disabled', false);*/
-        setBtn();
+
         searchCustomer(customerId).then(function (res){
             captureClear();
             setLevel(res.level);
             $("#cusCapturedImage").attr('src', res.proPic);
 
         });
+        setBtn();
     });
 }
 
@@ -530,8 +531,8 @@ function searchCustomer(id) {
 $('#cusSearch').click(function () {
     let id = $("#cusId").val();
     searchCustomer(id).then(function (res) {
-        setAllCusVal(res);
         captureClear();
+        setAllCusVal(res);
         $("#cusCapturedImage").attr('src', res.proPic);
     });
     setClBtn();

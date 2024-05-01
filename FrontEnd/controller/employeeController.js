@@ -28,7 +28,6 @@ $(document).ready(function () {
     var observer = new MutationObserver(callback);
     observer.observe(targetNode, config);*/
 });
-let empVideoStream;
 $('#empCaptureButton').click(function () {
     let text = $(this).text();
     var video = $('#empVideo')[0];

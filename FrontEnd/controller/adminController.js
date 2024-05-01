@@ -107,9 +107,17 @@ $("#btnCustomer, #btnInventory, #btnSupplier, #btnEmployee, #btnSales,#btnAdminP
     }
 });
 function allCaptureClear() {
-    captureClear();
-    itmCaptureClear();
-    empCaptureClear();
+    if (videoStream) {
+        stopWebcamStream();
+        $('#cusVideo').hide();
+        captureClear();
+    }else if (empVideoStream) {
+        empCaptureClear();
+    }else if (itmVideoStream) {
+        itmCaptureClear();
+    }else if (adminUserVideoStream) {
+
+    }
 }
 function showAlert() {
     let timerInterval;

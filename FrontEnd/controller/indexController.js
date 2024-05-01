@@ -19,6 +19,10 @@ let paymentPage = $('#payment-container');
 let cardPage = $('#card-container');
 let adminEditPage = $('#admin-edit-container');
 
+let videoStream;
+let empVideoStream;
+let itmVideoStream;
+
 function allContainerHide(){
     header.css('display','none');
     mainPage.css('display','none');
