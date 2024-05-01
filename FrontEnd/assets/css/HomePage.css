@@ -98,3 +98,7 @@ html {
     --bs-tooltip-bg: rgb(21, 21, 21);
     --bs-tooltip-color: rgb(123, 180, 194);
 }
+.swal2-loading{
+    left: 5vw;
+    top: 1vw;
+}

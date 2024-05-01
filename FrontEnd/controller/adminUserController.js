@@ -254,6 +254,8 @@ $("#adminUpdate").click(function () {
                 },
             }).then((con) => {
                 if (con === "confirm") {
+                    performAuthenticatedRequest();
+                    const accessToken = localStorage.getItem('accessToken');
                     let value = {
                         email: $("#adminName").val(),
                         password: $("#adminNewPass").val(),
@@ -263,6 +265,9 @@ $("#adminUpdate").click(function () {
                     $.ajax({
                         url: "http://localhost:8080/helloshoes/api/v1/auth/admin",
                         method: "PUt",
+                        headers: {
+                            'Authorization': 'Bearer ' + accessToken
+                        },
                         data: JSON.stringify(value),
                         contentType: "application/json",
                         success: function (res, textStatus, jsXH) {

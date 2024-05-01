@@ -21,14 +21,40 @@ function signIn() {
             localStorage.setItem('password', value.password);
             localStorage.setItem('accessToken', res.token);
             console.log("User SignIn Successfully "+res.token);
+            performAuthenticatedRequest();
+            const accessToken = localStorage.getItem('accessToken');
             //need check admin or user
-            allContainerHide();
-            showAlert();
-            adminPage.css('display','block');
-            logInPage.css('display','none');
+            $.ajax({
+                url: "http://localhost:8080/helloshoes/api/v1/auth/search/" + value.email,
+                method: "GET",
+                headers: {
+                    'Authorization': 'Bearer ' + accessToken
+                },
+                dataType: "json",
+                success: function (res, textStatus, xhr) {
+                    localStorage.setItem('role', res.role);
+                    if (res.role === "ADMIN") {
+                        userlimitOff();
+                        allContainerHide();
+                        showAlert("Admin");
+                        adminPage.css('display','block');
+                        logInPage.css('display','none');
+                    } else if(res.role === "USER"){
+                        userLimits();
+                        allContainerHide();
+                        showAlert("User");
+                        userPage.css('display','block');
+                        logInPage.css('display','none');
+                    }
+                },
+                error: function (ob, textStatus, error) {
+                    swal("Error","Error Sign in", "error");
+                }
+            });
+
         },
         error: function (ob, textStatus, error) {
-            alert(textStatus + " : Error User Not Added")
+            swal("Error", "Error Sign in", "error");
         }
     });
 

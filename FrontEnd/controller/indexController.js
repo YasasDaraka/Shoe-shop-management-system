@@ -79,12 +79,54 @@ function purchaseBtnHide(value){
     $("#txtCash").prop("disabled", value);
     $("#btnSubmitOrder").prop("disabled", value);
 }
-function showAlert() {
+function userLimits(){
+    $("#cusUpdate").hide();
+    $("#cusDelete").hide();
+
+    $("#empSave").hide();
+    $("#empUpdate").hide();
+    $("#empDelete").hide();
+
+    $("#itmSave").hide();
+    $("#itmUpdate").hide();
+    $("#itmDelete").hide();
+
+    $("#supSave").hide();
+    $("#supUpdate").hide();
+    $("#supDelete").hide();
+
+    $("#order-update").hide()
+    $("#order-delete").hide();
+
+    $('#empCaptureButton').hide();
+    $('#itmCaptureButton').hide();
+
+}
+function userlimitOff(){
+    $("#cusUpdate").show();
+    $("#cusDelete").show();
+    $("#empSave").show();
+    $("#empUpdate").show();
+    $("#empDelete").show();
+    $("#itmSave").show();
+    $("#itmUpdate").show();
+    $("#itmDelete").show();
+    $("#supSave").show();
+    $("#supUpdate").show();
+    $("#supDelete").show();
+    $("#order-update").show();
+    $("#order-delete").show();
+
+    $('#empCaptureButton').show();
+    $('#itmCaptureButton').show();
+
+}
+function showAlert(name) {
     let timerInterval;
     Swal.fire({
-        title: "WELCOME!",
+        title: "Welcome "+name+" !",
         html: "",
-        timer: 3000, //8000
+        timer: 300000, //8000
       /*  timerProgressBar: true,*/
         width: 600,
         padding: "3em",

@@ -1,27 +1,27 @@
 $("#userBtnCustomer, #userBtnInventory, #userBtnSupplier, #userBtnEmployee, #userBtnSales").click(function () {
     hideAdminPages();
     switch ($(this).attr('id')) {
-        case 'btnCustomer':
+        case 'userBtnCustomer':
             cusList.css('display', 'none');
             cusMain.css('display', 'block');
             customerPage.css('display', 'block');
             break;
-        case 'btnInventory':
+        case 'userBtnInventory':
             itmList.css('display', 'none');
             itmMain.css('display', 'block');
             inventoryPage.css('display', 'block');
             break;
-        case 'btnSupplier':
+        case 'userBtnSupplier':
             supList.css('display', 'none');
             supMain.css('display', 'block');
             supplierPage.css('display', 'block');
             break;
-        case 'btnEmployee':
+        case 'userBtnEmployee':
             empList.css('display', 'none');
             empMain.css('display', 'block');
             employeePage.css('display', 'block');
             break;
-        case 'btnSales':
+        case 'userBtnSales':
             paymentPage.css('display', 'block');
             break;
     }
