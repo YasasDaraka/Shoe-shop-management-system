@@ -1458,7 +1458,7 @@
                         <option value="USER">USER</option>
                       </select>
                     </div>
-                    <div class="col">
+                    <!--<div class="col">
                       <div class="col-md-12 p-0">
                         <div class="container h-100 mt-4">
                           <label class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 16px;position: relative;left: 2.5vw;bottom: 1vw;">Capture Image</label>
@@ -1477,7 +1477,7 @@
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </div>-->
                   </div>
                 </div>
               </div>
@@ -1488,10 +1488,9 @@
                     <div class="col-12 d-flex justify-content-evenly" style="padding-right: 2vw">
                       <button type="button" class="btn btn-primary" style="font-weight: bold;" id="adminSave">Save</button>
                       <button type="button" class="btn btn-success" style="font-weight: bold;" id="adminUpdate">Update</button>
-                      <button type="button" class="btn btn-secondary" style="font-weight: bold;" id="adminSearch">Search</button>
                       <button type="button" class="btn btn-danger" style="width: 66px;" id="adminDelete">Delete</button>
                       <button type="button" class="btn btn-warning" id="adminClear">Clear</button>
-                      <button id="adminCaptureButton" class="btn btn-primary" style="display:block;" type="button">Capture</button>
+<!--                      <button id="adminCaptureButton" class="btn btn-primary" style="display:block;" type="button">Capture</button>-->
                     </div>
                   </div>
                 </div>
@@ -1529,7 +1528,7 @@
                 <div class="col-md-12 p-0 d-flex justify-content-center justify-content-evenly" style="width: 24.4vw">
                   <div class="container row mt-4">
                     <div class="col">
-                      <label for="adminName" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px;width: 20vw;">Admin Name</label>
+                      <label for="userName" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px;width: 20vw;">User Name</label>
                       <div class="row m-0 p-0">
                         <input type="text" class="form-control" id="userName" style="width: 15vw">
                       </div>
@@ -1537,7 +1536,7 @@
                     </div>
                     <div class="row">
                       <div>
-                        <label for="adminOldPassword" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Password for update or delete</label>
+                        <label for="userOldPassword" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Password</label>
                         <input placeholder="Update or Delete" type="password" class="form-control" id="userOldPassword">
                         <p class="position-absolute mt-1"><small class="text-danger" id="userOldPasswordError" style="width: 15vw"></small></p>
                       </div>
@@ -1547,7 +1546,7 @@
                     <div class="col">
                       <label for="adminRole" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Role</label>
                       <select aria-label="Default select example" class="form-select" id="userRole" style="width: 16vw">
-                        <option value="ADMIN" selected>ADMIN</option>
+<!--                        <option value="ADMIN" selected>ADMIN</option>-->
                         <option value="USER">USER</option>
                       </select>
                     </div>
@@ -1581,10 +1580,9 @@
                     <div class="col-12 d-flex justify-content-evenly" style="padding-right: 2vw">
                       <button type="button" class="btn btn-primary" style="font-weight: bold;" id="userSave">Save</button>
                       <button type="button" class="btn btn-success" style="font-weight: bold;" id="userUpdate">Update</button>
-                      <button type="button" class="btn btn-secondary" style="font-weight: bold;" id="userSearch">Search</button>
                       <button type="button" class="btn btn-danger" style="width: 66px;" id="userDelete">Delete</button>
                       <button type="button" class="btn btn-warning" id="userClear">Clear</button>
-                      <button id="userCaptureButton" class="btn btn-primary" style="display:block;" type="button">Capture</button>
+<!--                      <button id="userCaptureButton" class="btn btn-primary" style="display:block;" type="button">Capture</button>-->
                     </div>
                   </div>
                 </div>
@@ -1633,7 +1631,7 @@
 <script src="controller/orderController.js"></script>
 <script src="controller/validation/orderValidation.js"></script>
 <script src="controller/adminUserController.js"></script>
-<script src="controller/validation/adminValidation.js"></script>
+<script src="controller/adminUserPageController.js"></script>
 <script src="assets/sweetalerts/sweetalert2@10.js"></script>
 <script src="assets/sweetalerts/sweetalert.min.js"></script>
 <script src="assets/sweetalerts/popper.min.js"></script>

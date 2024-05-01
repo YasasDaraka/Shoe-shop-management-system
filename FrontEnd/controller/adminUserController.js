@@ -266,11 +266,11 @@ $("#adminUpdate").click(function () {
                         data: JSON.stringify(value),
                         contentType: "application/json",
                         success: function (res, textStatus, jsXH) {
-                            swal("Saved", "User Added Successfully", "success");
+                            swal("Saved", "User Update Successfully", "success");
                             getAllAdmins();
                         },
                         error: function (ob, textStatus, error) {
-                            swal("Error", textStatus + " : Error User Not Added", "error");
+                            swal("Error", textStatus + " : Error User Not Updated", "error");
                         }
                     });
                 }

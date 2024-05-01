@@ -2,13 +2,10 @@ $(document).ready(function () {
     // setTime();
     // setDate();
     //adminFieldSet(true);
-    $("#adminNewPass").hide();
-    $("#adminNewPassLabel").hide();
-    $("#adminSave").prop("disabled", true);
-    $("#adminDelete").prop("disabled", true);
-    $("#adminUpdate").prop("disabled", true);
-    $("#adminSearch").prop("disabled", true);
-    $("#adminClear").prop("disabled", true);
+    $("#userSave").prop("disabled", true);
+    $("#userDelete").prop("disabled", true);
+    $("#userUpdate").prop("disabled", true);
+    $("#userClear").prop("disabled", true);
 
 
     $('#userTable').css({
@@ -35,28 +32,66 @@ us_vArray.push({ field: $("#userName"), regEx: User_EMAIL_REGEX, error: $("#user
 us_vArray.push({ field: $("#userOldPassword"), regEx: User_PASS_REGEX, error: $("#userOldPasswordError") });
 
 $("#userName").on("keydown keyup", function (e) {
+    $("#userIdError").text("");
+    $("#userName").css("border", "1px solid #ced4da");
     //adminEvents(e);
-    searchUserPanel($("#userName").val()).then(function (res){
-        if (!res) {
-            if ($("#userOldPassword").val() !== ""){
-                if (User_PASS_REGEX.test($("#userOldPassword").val())) {
+    if ($("#userName").val() !== "") {
+    if (User_EMAIL_REGEX.test($("#userName").val())) {
+        searchUserPanel($("#userName").val()).then(function (res) {
+            $("#userIdError").text("");
+            $("#userName").css("border", "2px solid green");
+            if (!res) {
+                if ($("#userOldPassword").val() !== "") {
+                    if (User_PASS_REGEX.test($("#userOldPassword").val())) {
+                        $("#userSave").prop("disabled", false);
+                        $("#userOldPasswordError").text("");
+                    } else {
+                        $("#userOldPasswordError").text("8 Chars - Uppercase,Lowercase,numbers");
+                        $("#userSave").prop("disabled", true);
+                    }
+                }
+            } else {
+                userCheckToUpdate($("#userOldPassword").val());
+                $("#userDelete").prop("disabled", false);
+            }
+            //captureClear();
+        });
+    } else {
+        $("#userIdError").text("Not valid Email");
+        $("#userName").css("border", "2px solid red");
+    }
+}else {
+        $("#userIdError").text("");
+        $("#userName").css("border", "1px solid #ced4da");
+    }
+});
+$("#userOldPassword").on("keydown keyup", function (e) {
+    $("#userOldPasswordError").text("");
+    $("#userOldPassword").css("border", "1px solid #ced4da");
+    if ($("#userOldPassword").val() !== "") {
+        if (User_PASS_REGEX.test($("#userOldPassword").val())) {
+            searchUserPanel($("#userName").val()).then(function (res) {
+                if (!res) {
                     $("#userSave").prop("disabled", false);
                     $("#userOldPasswordError").text("");
-                }else {
-                    $("#userOldPasswordError").text("8 Chars - Uppercase,Lowercase,numbers");
-                    $("#userSave").prop("disabled", true);
+                    $("#userOldPassword").css("border", "1px solid #ced4da");
                 }
-            }else {
-                $("#userSave").prop("disabled", false);
-                $("#userOldPasswordError").text("");
-            }
-        }else {
-                userCheckToUpdate();
+                else {
+                    userCheckToUpdate($("#userOldPassword").val());
+                }
+            });
         }
-        //captureClear();
-    });
+        else {
+            $("#userOldPasswordError").text("8 Chars - Uppercase,Lowercase,numbers");
+            $("#userOldPassword").css("border", "2px solid red");
+            $("#userSave").prop("disabled", true);
+        }
+    } else {
+        $("#userSave").prop("disabled", false);
+        $("#userOldPasswordError").text("");
+        $("#userOldPassword").css("border", "1px solid #ced4da")
+    }
 });
-
 function searchUserPanel() {
     let name = $("#userName").val();
     return new Promise(function (resolve, reject) {
@@ -88,9 +123,9 @@ function searchUserPanel() {
 function userCheckToUpdate(oldPass) {
     searchUserPanel().then(function (user) {
         if (user) {
-                if (pass) {
+            if (User_PASS_REGEX.test($("#userOldPassword").val())) {
                     $("#userDelete").prop("disabled", false);
-                    $("#userUpdate").prop("disabled", true);
+                    $("#userUpdate").prop("disabled", false);
 
                 }else {
                     $("#userDelete").prop("disabled", true);
@@ -128,7 +163,7 @@ $("#userUpdate").click(function () {
                 if (con === "confirm") {
                     let value = {
                         email: $("#userName").val(),
-                        password: $("#userNewPass").val(),
+                        password: $("#userOldPassword").val(),
                         role: $('#userRole').val()
                     }
                     console.log(value);
@@ -138,11 +173,11 @@ $("#userUpdate").click(function () {
                         data: JSON.stringify(value),
                         contentType: "application/json",
                         success: function (res, textStatus, jsXH) {
-                            swal("Saved", "User Added Successfully", "success");
+                            swal("Saved", "User Update Successfully", "success");
                             getAllUsers();
                         },
                         error: function (ob, textStatus, error) {
-                            swal("Error", textStatus + " : Error User Not Added", "error");
+                            swal("Error", textStatus + " : Error User Not Update", "error");
                         }
                     });
                 }
@@ -170,6 +205,7 @@ function saveUser() {
                 success: function (res, textStatus, jsXH) {
                     swal("Saved", "User Added Successfully", "success");
                     getAllUsers();
+                    userClear();
                 },
                 error: function (ob, textStatus, error) {
                     swal("Error", textStatus + " : Error User Not Added", "error");
@@ -179,6 +215,19 @@ function saveUser() {
         } else {
             swal("Error", "User already exits.!", "error");
         }
+    });
+}
+
+function bindUserTrrEvents() {
+    $('#userTable>tr').click(function () {
+
+        let name = $(this).children().eq(0).text();
+        let role = $(this).children().eq(1).text();
+
+        $("#userName").val(name);
+        $("#userRole").val(role);
+
+        $("#userDelete").prop('disabled', false);
     });
 }
 
@@ -216,7 +265,7 @@ function getAllUsers() {
                     'display': 'inline-table',
                     'width': '100%'
                 });
-
+                bindUserTrrEvents();
             }
         }
     });
@@ -261,8 +310,9 @@ $("#userDelete").click(function () {
                         success: function (res) {
                             console.log(res);
                             swal("Deleted", "user Delete Successfully", "success");
+                            userClear();
+                            getAllUsers();
                             //captureClear();
-                            //getAllCustomers();
                             //setBtn();
                         },
                         error: function (ob, textStatus, error) {
@@ -279,3 +329,18 @@ $("#userDelete").click(function () {
     $("#customerAddress").prop('disabled', true);*/
 
 });
+$("#userClear").click(function () {
+   userClear();
+});
+function userClear() {
+    var ids = ["userName", "userIdError", "userOldPassword","userOldPasswordError"];
+    ids.forEach(function(id) {
+        $("#" + id).val("");
+    });
+    $("#userName").css("border", "1px solid #ced4da");
+    $("#cusClear").prop("disabled", true);
+    $("#userSave").prop("disabled", true);
+    $("#userDelete").prop("disabled", true);
+    $("#userUpdate").prop("disabled", true);
+    $("#userClear").prop("disabled", true);
+}
