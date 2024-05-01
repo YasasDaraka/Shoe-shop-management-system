@@ -3,11 +3,10 @@ package lk.ijse.gdse66.helloshoes.api;
 import lk.ijse.gdse66.helloshoes.auth.request.SignInRequest;
 import lk.ijse.gdse66.helloshoes.auth.request.SignUpRequest;
 import lk.ijse.gdse66.helloshoes.auth.response.JwtAuthResponse;
-import lk.ijse.gdse66.helloshoes.dto.CustomerDTO;
 import lk.ijse.gdse66.helloshoes.dto.UserDTO;
 import lk.ijse.gdse66.helloshoes.service.AuthenticationService;
 import lk.ijse.gdse66.helloshoes.service.UserService;
-import lk.ijse.gdse66.helloshoes.service.exception.NotFoundException;
+import lk.ijse.gdse66.helloshoes.service.util.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,7 +43,7 @@ public class UserController {
         return userService.searchUser(id);
     }
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping(path = "getall/{id}")
+    @GetMapping(path = "/getall/{id}")
     public ResponseEntity<List<UserDTO>> getAllUser(@PathVariable("id") String id) {
         if ("user".equals(id)) {
             List<UserDTO> users = userService.findAllByRole("USER");
@@ -66,13 +65,13 @@ public class UserController {
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping(path = "/admin")
     public ResponseEntity<Void> deleteAdmin(@RequestBody UserDTO dto) {
-            userService.deleteUser(dto,"ADMIN");
+            userService.deleteUser(dto, Role.ADMIN);
         return ResponseEntity.noContent().build();
     }
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping(path = "/user")
     public ResponseEntity<Void> deleteUser(@RequestBody UserDTO dto) {
-        userService.deleteUser(dto,"USER");
+        userService.deleteUser(dto,Role.USER);
         return ResponseEntity.noContent().build();
     }
     @PutMapping(path = "/admin")

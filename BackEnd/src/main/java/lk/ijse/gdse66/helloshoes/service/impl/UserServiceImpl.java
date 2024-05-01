@@ -15,12 +15,14 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
     private final UserRepo userRepo;
@@ -65,16 +67,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUser(UserDTO dto,String role) {
+    public void deleteUser(UserDTO dto,Role role) {
         userRepo.findByEmail(dto.getEmail()).ifPresentOrElse(
                 user -> {
-                    if (user.getRole().equals(role)) {
-                        if (role.equals("USER")) {
-                            userRepo.deleteByEmailAndRole(dto.getEmail(), role);
+
+                    if (role.equals(user.getRole())) {
+                        if (role.equals(Role.USER)) {
+                            userRepo.deleteByEmailAndRole(dto.getEmail(),Role.USER);
                         }else {
                             boolean matches = passwordEncoder.matches(dto.getPassword(), user.getPassword());
                             if (matches) {
-                                userRepo.deleteByEmailAndRole(dto.getEmail(), role);
+                                userRepo.deleteByEmailAndRole(dto.getEmail(), Role.ADMIN);
                             } else {
                                 throw new NotFoundException("Incorrect Password");
                             }

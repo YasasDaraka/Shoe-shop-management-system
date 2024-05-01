@@ -9,27 +9,76 @@ $(document).ready(function () {
     $("#adminUpdate").prop("disabled", true);
     $("#adminSearch").prop("disabled", true);
     $("#adminClear").prop("disabled", true);
-    /*    var targetNode = document.getElementById('admin-edit-container');
-        var config = {attributes: true, attributeFilter: ['style']};
-        var callback = function (mutationsList, observer) {
-            for (var mutation of mutationsList) {
-                if (mutation.attributeName === 'style') {
-                    var displayStyle = window.getComputedStyle(targetNode).getPropertyValue('display');
-                    if (displayStyle === 'none') {
-                        stopAdminWebcamStream();
-                        $('#adminVideo').hide();
-                        $("#adminCapturedImage").show();
-                        $('#adminCaptureButton').css("background-color", "#007bff");
-                        $('#adminCaptureButton').css("border-color", "#007bff");
-                        $('#adminCaptureButton').text("Capture");
-                        $("#adminCapturedImage").attr('src', "assets/images/walk.gif");
-                    }
-                }
-            }
-        };
-        var observer = new MutationObserver(callback);
-        observer.observe(targetNode, config);*/
+
+
+    $('#adminTable').css({
+        'max-height': '100px',
+        'overflow-y': 'auto',
+        'display': 'table-caption'
+    });
+    $('#admin-thead').css({
+        'width': '100%',
+    });
+    $('#admin-thead>th').css({
+        'width': 'calc(100%/2*1)'
+    })
+    $('#adminTable>tr>td').css({
+        'width': 'calc(100%/2*1)'
+    });
+
+
+
 });
+
+$('#adminCaptureButton').click(function () {
+    let text = $(this).text();
+    var video = $('#adminVideo')[0];
+    var canvas = $('#adminCanvas')[0];
+    var capturedImage = $('#adminCapturedImage');
+
+    var constraints = {
+        video: true
+    };
+
+    if (text === "Capture") {
+        $("#adminClear").prop("disabled", false);
+        $(this).text("Take Picture");
+        $(this).css("background-color", "#dc3545");
+        $(this).css("border-color", "#dc3545");
+        $(video).show();
+        capturedImage.hide();
+
+        navigator.mediaDevices.getUserMedia(constraints)
+            .then((stream) => {
+                adminUserVideoStream = stream;
+                video.srcObject = stream;
+            })
+            .catch((error) => {
+                console.error('Error accessing webcam:', error);
+            });
+    } else if (text === "Take Picture") {
+        $("#adminClear").prop("disabled", false);
+        const context = canvas.getContext('2d');
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        const imageDataUrl = canvas.toDataURL('image/png');
+        capturedImage.attr('src', imageDataUrl);
+        capturedImage.show();
+        $(this).css("background-color", "#007bff");
+        $(this).css("border-color", "#007bff");
+        $(this).text("Capture");
+        stopAdminWebcamStream();
+        $(video).hide();
+    }
+});
+
+function stopAdminWebcamStream() {
+    if (adminUserVideoStream) {
+        const tracks = adminUserVideoStream.getTracks();
+        tracks.forEach(track => track.stop());
+        adminUserVideoStream = null;
+    }
+}
 const ADMIN_EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const ADMIN_PASS_REGEX =  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{5,}$/;
 let ad_vArray = new Array();
@@ -93,69 +142,25 @@ function checkAdminValidations(object) {
     return false;
 }
 $("#adminName").on("keydown keyup", function (e) {
-    adminEvents(e);
+    //adminEvents(e);
     searchUser($("#adminName").val()).then(function (res){
         if (!res) {
-            let indexNo = ad_vArray.indexOf(ad_vArray.find(c => c.attr("id") === $("#adminOldPassword").attr("id")));
-            if (checkAdminValidations(ad_vArray[indexNo])) {
-                $("#adminSave").prop("disabled", false);
+            if ($("#adminOldPassword").val() !== ""){
+                if (ADMIN_PASS_REGEX.test($("#adminOldPassword").val())) {
+                    $("#adminSave").prop("disabled", false);
+                    $("#adminOldPasswordError").text("");
+                }else {
+                    $("#adminOldPasswordError").text("8 Chars - Uppercase,Lowercase,numbers");
+                    $("#adminSave").prop("disabled", true);
+                }
             }else {
-                $("#adminSave").prop("disabled", true);
+                $("#adminSave").prop("disabled", false);
+                $("#adminOldPasswordError").text("");
             }
         }else {}
         //captureClear();
     });
 });
-let adminUserVideoStream;
-$('#adminCaptureButton').click(function () {
-    let text = $(this).text();
-    var video = $('#adminVideo')[0];
-    var canvas = $('#adminCanvas')[0];
-    var capturedImage = $('#adminCapturedImage');
-
-    var constraints = {
-        video: true
-    };
-
-    if (text === "Capture") {
-        $("#adminClear").prop("disabled", false);
-        $(this).text("Take Picture");
-        $(this).css("background-color", "#dc3545");
-        $(this).css("border-color", "#dc3545");
-        $(video).show();
-        capturedImage.hide();
-
-        navigator.mediaDevices.getUserMedia(constraints)
-            .then((stream) => {
-                adminUserVideoStream = stream;
-                video.srcObject = stream;
-            })
-            .catch((error) => {
-                console.error('Error accessing webcam:', error);
-            });
-    } else if (text === "Take Picture") {
-        $("#adminClear").prop("disabled", false);
-        const context = canvas.getContext('2d');
-        context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-        const imageDataUrl = canvas.toDataURL('image/png');
-        capturedImage.attr('src', imageDataUrl);
-        capturedImage.show();
-        $(this).css("background-color", "#007bff");
-        $(this).css("border-color", "#007bff");
-        $(this).text("Capture");
-        stopAdminWebcamStream();
-        $(video).hide();
-    }
-});
-
-function stopAdminWebcamStream() {
-    if (adminUserVideoStream) {
-        const tracks = adminUserVideoStream.getTracks();
-        tracks.forEach(track => track.stop());
-        adminUserVideoStream = null;
-    }
-}
 
 function searchUser() {
     let name = $("#adminName").val();
@@ -171,10 +176,14 @@ function searchUser() {
                 },
                 dataType: "json",
                 success: function (res, textStatus, xhr) {
-                        resolve(res);
+                    if (xhr.status === 200) {
+                        resolve(true);
+                    } else {
+                        resolve(false);
+                    }
                 },
                 error: function (ob, textStatus, error) {
-                    resolve(null);
+                    resolve(false);
                 }
             });
         });
@@ -275,10 +284,10 @@ $("#adminNewPass").on("keydown keyup", function (e) {
         }
     });
 });
-$("#adminSave").on("keydown keyup", function (e) {
+$("#adminSave").click(function () {
     saveAdmin();
 });
-$("#adminUpdate").on("keydown keyup", function (e) {
+$("#adminUpdate").click(function () {
     console.log("update")
     searchUser().then(function (user) {
         if (user) {
@@ -298,19 +307,18 @@ $("#adminUpdate").on("keydown keyup", function (e) {
                 if (con === "confirm") {
                     let value = {
                         email: $("#adminName").val(),
-                        password: $("#adminNewPassword").val(),
+                        password: $("#adminNewPass").val(),
                         role: $('#adminRole').val()
                     }
                     console.log(value);
                     $.ajax({
-                        url: "http://localhost:8080/helloshoes/api/v1/auth//admin",
+                        url: "http://localhost:8080/helloshoes/api/v1/auth/admin",
                         method: "PUt",
                         data: JSON.stringify(value),
                         contentType: "application/json",
                         success: function (res, textStatus, jsXH) {
-                            alert("User Added Successfully");
                             swal("Saved", "User Added Successfully", "success");
-                            //getAllCustomers();
+                            getAllAdmins();
                         },
                         error: function (ob, textStatus, error) {
                             swal("Error", textStatus + " : Error User Not Added", "error");
@@ -325,6 +333,7 @@ $("#adminUpdate").on("keydown keyup", function (e) {
 });
 function saveAdmin() {
     searchUser().then(function (user) {
+        console.log("save 1")
         if (!user) {
             let value = {
                 email: $("#adminName").val(),
@@ -338,9 +347,8 @@ function saveAdmin() {
                 data: JSON.stringify(value),
                 contentType: "application/json",
                 success: function (res, textStatus, jsXH) {
-                    alert("User Added Successfully");
                     swal("Saved", "User Added Successfully", "success");
-                    //getAllCustomers();
+                    getAllAdmins();
                 },
                 error: function (ob, textStatus, error) {
                     swal("Error", textStatus + " : Error User Not Added", "error");
@@ -352,3 +360,101 @@ function saveAdmin() {
         }
     });
 }
+
+function getAllAdmins() {
+    performAuthenticatedRequest();
+    const accessToken = localStorage.getItem('accessToken');
+    console.log(accessToken);
+    $("#adminTable").empty();
+    $.ajax({
+        url: "http://localhost:8080/helloshoes/api/v1/auth/getall/admin",
+        method: "GET",
+        headers: {
+            'Authorization': 'Bearer ' + accessToken
+        },
+        success: function (res) {
+            console.log(res);
+            for (var r of res) {
+                let row = `<tr>
+                    <th scope="row">${r.email}</th>
+                    <td>${r.role}</td>
+                    </tr>`;
+                $("#adminTable").append(row);
+                $('#adminTable').css({
+                    'max-height': '100px',
+                    'overflow-y': 'auto',
+                    'display': 'table-caption'
+                });
+                $('#adminTable>tr>td').css({
+                    'width': 'calc(100%/2*1)'
+                });
+                $('#adminTable > tr > td:nth-child(1),#adminTable > tr > td:nth-child(1)').css({
+                    'width': '100%'
+                });
+                $('#adminTable>tr').css({
+                    'display': 'inline-table',
+                    'width': '100%'
+                });
+
+            }
+        }
+    });
+}
+$("#adminDelete").click(function () {
+    let id = $("#adminName").val();
+
+    searchUser(id).then(function (isValid) {
+        if (isValid == false) {
+            swal("Error", "No such admin..please check the ID", "error");
+        } else {
+
+            swal("Do you want to delete this admin.?", {
+                buttons: {
+                    cancel1: {
+                        text: "Cancel",
+                        className: "custom-cancel-btn",
+                    },
+                    ok: {
+                        text: "OK",
+                        value: "confirm",
+                        className: "custom-ok-btn",
+                    }
+                },
+            }).then((value) => {
+                if (value === "confirm") {
+                    performAuthenticatedRequest();
+                    const accessToken = localStorage.getItem('accessToken');
+                    let value = {
+                        email: $("#adminName").val(),
+                        password: $("#adminOldPassword").val(),
+                        role: "ADMIN"
+                    }
+                    $.ajax({
+                        url: "http://localhost:8080/helloshoes/api/v1/auth/admin",
+                        method: "DELETE",
+                        headers: {
+                            'Authorization': 'Bearer ' + accessToken
+                        },
+                        data: JSON.stringify(value),
+                        contentType: "application/json",
+                        success: function (res) {
+                            console.log(res);
+                            swal("Deleted", "Customer Delete Successfully", "success");
+                            //captureClear();
+                            //getAllCustomers();
+                            //setBtn();
+                        },
+                        error: function (ob, textStatus, error) {
+                            swal("Error", textStatus + "Error Customer Not Delete", "error");
+                        }
+                    });
+                }
+            });
+        }
+    });
+
+    /*$("#customerID").prop('disabled', true);
+    $("#customerName").prop('disabled', true);
+    $("#customerAddress").prop('disabled', true);*/
+
+});

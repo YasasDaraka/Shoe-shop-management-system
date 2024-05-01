@@ -22,7 +22,7 @@ let adminEditPage = $('#admin-edit-container');
 let videoStream;
 let empVideoStream;
 let itmVideoStream;
-
+let adminUserVideoStream;
 function allContainerHide(){
     header.css('display','none');
     mainPage.css('display','none');
