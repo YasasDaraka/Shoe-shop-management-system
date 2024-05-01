@@ -18,11 +18,11 @@ let inventoryPage = $('#inventory-container');
 let paymentPage = $('#payment-container');
 let cardPage = $('#card-container');
 let adminEditPage = $('#admin-edit-container');
+let userEditPage = $('#user-edit-container');
 
 let videoStream;
 let empVideoStream;
 let itmVideoStream;
-let adminUserVideoStream;
 function allContainerHide(){
     header.css('display','none');
     mainPage.css('display','none');
@@ -37,6 +37,7 @@ function allContainerHide(){
     paymentPage.css('display','none');
     cardPage.css('display','none');
     adminEditPage.css('display','none');
+    userEditPage.css('display','none');
 }
 $(window).on('load',function (){
     $("#loader").css('display','none');
@@ -72,12 +73,42 @@ $(window).on('load',function (){
         'max-width': 'calc(100%/5*1)'
     })
 });
-$(document).ready(function () {
-
-});
 function purchaseBtnHide(value){
     $("#txtBalance").prop("disabled", value);
     $("#txtDiscount").prop("disabled", value);
     $("#txtCash").prop("disabled", value);
     $("#btnSubmitOrder").prop("disabled", value);
+}
+function showAlert() {
+    let timerInterval;
+    Swal.fire({
+        title: "WELCOME!",
+        html: "",
+        timer: 3000, //8000
+      /*  timerProgressBar: true,*/
+        width: 600,
+        padding: "3em",
+        color: "rgba(233,197,74,0.4)",
+        background: "url(assets/images/users.gif) no-repeat",
+        backdrop: `
+      rgba(233,197,74,0.4)
+      url("/images/nyan-cat.gif")
+      left top
+      no-repeat
+    `,
+        didOpen: () => {
+            Swal.showLoading();//center loading
+            const timer = Swal.getPopup().querySelector("b");
+            timerInterval = setInterval(() => {
+               // timer.textContent = `${Swal.getTimerLeft()}`;
+            }, 100);
+        },
+        willClose: () => {
+            clearInterval(timerInterval);
+        }
+    }).then((result) => {
+        if (result.dismiss === Swal.DismissReason.timer) {
+            console.log("closed timer");
+        }
+    });
 }

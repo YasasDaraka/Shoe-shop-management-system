@@ -26,59 +26,8 @@ $(document).ready(function () {
         'width': 'calc(100%/2*1)'
     });
 
-
-
 });
 
-$('#adminCaptureButton').click(function () {
-    let text = $(this).text();
-    var video = $('#adminVideo')[0];
-    var canvas = $('#adminCanvas')[0];
-    var capturedImage = $('#adminCapturedImage');
-
-    var constraints = {
-        video: true
-    };
-
-    if (text === "Capture") {
-        $("#adminClear").prop("disabled", false);
-        $(this).text("Take Picture");
-        $(this).css("background-color", "#dc3545");
-        $(this).css("border-color", "#dc3545");
-        $(video).show();
-        capturedImage.hide();
-
-        navigator.mediaDevices.getUserMedia(constraints)
-            .then((stream) => {
-                adminUserVideoStream = stream;
-                video.srcObject = stream;
-            })
-            .catch((error) => {
-                console.error('Error accessing webcam:', error);
-            });
-    } else if (text === "Take Picture") {
-        $("#adminClear").prop("disabled", false);
-        const context = canvas.getContext('2d');
-        context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-        const imageDataUrl = canvas.toDataURL('image/png');
-        capturedImage.attr('src', imageDataUrl);
-        capturedImage.show();
-        $(this).css("background-color", "#007bff");
-        $(this).css("border-color", "#007bff");
-        $(this).text("Capture");
-        stopAdminWebcamStream();
-        $(video).hide();
-    }
-});
-
-function stopAdminWebcamStream() {
-    if (adminUserVideoStream) {
-        const tracks = adminUserVideoStream.getTracks();
-        tracks.forEach(track => track.stop());
-        adminUserVideoStream = null;
-    }
-}
 const ADMIN_EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const ADMIN_PASS_REGEX =  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{5,}$/;
 let ad_vArray = new Array();
@@ -439,13 +388,13 @@ $("#adminDelete").click(function () {
                         contentType: "application/json",
                         success: function (res) {
                             console.log(res);
-                            swal("Deleted", "Customer Delete Successfully", "success");
+                            swal("Deleted", "user Delete Successfully", "success");
                             //captureClear();
                             //getAllCustomers();
                             //setBtn();
                         },
                         error: function (ob, textStatus, error) {
-                            swal("Error", textStatus + "Error Customer Not Delete", "error");
+                            swal("Error", textStatus + "Error user Not Delete", "error");
                         }
                     });
                 }

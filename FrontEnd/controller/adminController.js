@@ -69,7 +69,7 @@ $("#getAllCus, #getAllItm, #getAllEmp, #getAllSup").click(function () {
             break;
     }
 });
-$("#btnCustomer, #btnInventory, #btnSupplier, #btnEmployee, #btnSales,#btnAdminPanel").click(function () {
+$("#btnCustomer, #btnInventory, #btnSupplier, #btnEmployee, #btnSales,#btnAdminPanel,#btnUsers").click(function () {
     hideAdminPages();
     switch ($(this).attr('id')) {
         case 'btnCustomer':
@@ -105,6 +105,11 @@ $("#btnCustomer, #btnInventory, #btnSupplier, #btnEmployee, #btnSales,#btnAdminP
             paymentPage.css('display', 'block');
             allCaptureClear();
             break;
+        case 'btnUsers':
+            userEditPage.css('display', 'block');
+            getAllUsers();
+            allCaptureClear();
+            break;
     }
 });
 function allCaptureClear() {
@@ -116,44 +121,9 @@ function allCaptureClear() {
         empCaptureClear();
     }else if (itmVideoStream) {
         itmCaptureClear();
-    }else if (adminUserVideoStream) {
-
     }
 }
-function showAlert() {
-    let timerInterval;
-    Swal.fire({
-        title: "Auto close alert with custom styles!",
-        html: "I will close in <b></b> milliseconds.",
-        timer: 2000, // Set the timer duration in milliseconds
-        timerProgressBar: true, // Display a progress bar indicating the remaining time
-        width: 600, // Set the width of the modal
-        padding: "3em", // Set the padding of the modal content
-        color: "#716add", // Set the text color
-        background: "#fff url(/images/trees.png)", // Set the background color or image
-        backdrop: `
-      rgba(0,0,123,0.4)
-      url("/images/nyan-cat.gif")
-      left top
-      no-repeat
-    `,
-        didOpen: () => {
-            Swal.showLoading(); // Show loading animation when the modal is opened
-            const timer = Swal.getPopup().querySelector("b"); // Get the reference to the <b> tag inside the modal
-            timerInterval = setInterval(() => {
-                timer.textContent = `${Swal.getTimerLeft()}`; // Update the content of the <b> tag with the remaining time
-            }, 100); // Update every 100 milliseconds
-        },
-        willClose: () => {
-            clearInterval(timerInterval); // Clear the interval when the modal is closed
-        }
-    }).then((result) => {
-        /* Read more about handling dismissals below */
-        if (result.dismiss === Swal.DismissReason.timer) {
-            console.log("I was closed by the timer");
-        }
-    });
-}
+
 $("#side-bar-icon").click(function () {
     /*var navBarWidth = parseFloat($("#nav-bar").css('width'));
     if (Math.abs(navBarWidth - 5) < 0.01) {

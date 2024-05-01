@@ -23,6 +23,7 @@ function signIn() {
             console.log("User SignIn Successfully "+res.token);
             //need check admin or user
             allContainerHide();
+            showAlert();
             adminPage.css('display','block');
             logInPage.css('display','none');
         },
@@ -62,36 +63,3 @@ function performAuthenticatedRequest() {
     }
 }
 
-function showAlert() {
-    let timerInterval;
-    Swal.fire({
-        title: "Auto close alert with custom styles!",
-        html: "I will close in <b></b> milliseconds.",
-        timer: 500, //8000
-        timerProgressBar: true,
-        width: 600,
-        padding: "3em",
-        color: "#716add",
-        background: "#fff url(/images/trees.png)",
-        backdrop: `
-      rgba(0,0,123,0.4)
-      url("/images/nyan-cat.gif")
-      left top
-      no-repeat
-    `,
-        didOpen: () => {
-            Swal.showLoading();
-            const timer = Swal.getPopup().querySelector("b");
-            timerInterval = setInterval(() => {
-                timer.textContent = `${Swal.getTimerLeft()}`;
-            }, 100);
-        },
-        willClose: () => {
-            clearInterval(timerInterval);
-        }
-    }).then((result) => {
-        if (result.dismiss === Swal.DismissReason.timer) {
-            console.log("closed timer");
-        }
-    });
-}

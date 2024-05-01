@@ -1469,7 +1469,7 @@
                                   <div class="col-12 d-flex justify-content-center">
                                     <video id="adminVideo" class="web" width="200" height="150" style="display:none;" autoplay></video>
                                     <canvas id="adminCanvas" class="web" width="200" height="150" style="display:none;"></canvas>
-                                    <img src="assets/images/walk.gif" id="adminCapturedImage" class="web" width="200" style="display:block;">
+                                    <img src="assets/images/walk.gif" id="adminCapturedImage" class="web" width="200" style="display:block; ">
                                   </div>
                                 </div>
                               </div>
@@ -1519,7 +1519,99 @@
       </div>
     </div>
   </section>
+  <section id="user-edit-container">
+    <div class="container-fluid p-0" style="height: 90.5vh; z-index: 5;" id="user-edit-main">
+      <div class="row h-100 m-0 w-100">
+        <div class="container m-0" style="padding: 1.9vw 1.9vw 1.5vw 7vw;">
+          <div class="row h-100 m-0" style="box-shadow: 0px 1px 10px #909090; border-radius: 10px;">
+            <div class="col-md-6 m-0" style="padding: 0 0 0 0.9vw;">
+              <div class="row h-50 m-0 m-lg-4">
+                <div class="col-md-12 p-0 d-flex justify-content-center justify-content-evenly" style="width: 24.4vw">
+                  <div class="container row mt-4">
+                    <div class="col">
+                      <label for="adminName" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px;width: 20vw;">Admin Name</label>
+                      <div class="row m-0 p-0">
+                        <input type="text" class="form-control" id="userName" style="width: 15vw">
+                      </div>
+                      <p class="position-absolute mt-1"><small class="text-danger" id="userIdError"></small></p>
+                    </div>
+                    <div class="row">
+                      <div>
+                        <label for="adminOldPassword" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Password for update or delete</label>
+                        <input placeholder="Update or Delete" type="password" class="form-control" id="userOldPassword">
+                        <p class="position-absolute mt-1"><small class="text-danger" id="userOldPasswordError" style="width: 15vw"></small></p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="container row mt-4">
+                    <div class="col">
+                      <label for="adminRole" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Role</label>
+                      <select aria-label="Default select example" class="form-select" id="userRole" style="width: 16vw">
+                        <option value="ADMIN" selected>ADMIN</option>
+                        <option value="USER">USER</option>
+                      </select>
+                    </div>
+                    <!--<div class="col">
+                      <div class="col-md-12 p-0">
+                        <div class="container h-100 mt-4">
+                          <label class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 16px;position: relative;left: 2.5vw;bottom: 1vw;">Capture Image</label>
+                          <div class="row h-100">
+                            <div class="col p-0">
+                              <div class=" h-100 w-100 ">
+                                <div class="row">
+                                  <div class="col-12 d-flex justify-content-center">
+                                    <video id="userVideo" class="web" width="200" height="150" style="display:none;" autoplay></video>
+                                    <canvas id="userCanvas" class="web" width="200" height="150" style="display:none;"></canvas>
+                                    <img src="assets/images/walk.gif" id="userCapturedImage" class="web" width="200" style="display:block; ">
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>-->
+                  </div>
+                </div>
+              </div>
+              <div class="row h-50 m-0">
+                <div class="col-md-12 p-0">
+                  <div class="container row mt-4">
+                    <div class="row mt-5"></div>
+                    <div class="col-12 d-flex justify-content-evenly" style="padding-right: 2vw">
+                      <button type="button" class="btn btn-primary" style="font-weight: bold;" id="userSave">Save</button>
+                      <button type="button" class="btn btn-success" style="font-weight: bold;" id="userUpdate">Update</button>
+                      <button type="button" class="btn btn-secondary" style="font-weight: bold;" id="userSearch">Search</button>
+                      <button type="button" class="btn btn-danger" style="width: 66px;" id="userDelete">Delete</button>
+                      <button type="button" class="btn btn-warning" id="userClear">Clear</button>
+                      <button id="userCaptureButton" class="btn btn-primary" style="display:block;" type="button">Capture</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 m-0 d-flex justify-content-center align-items-center" style="padding: 0 0 0 0.9vw;">
+              <div class="row h-50 m-0 m-lg-4 mt-4 d-flex justify-content-center">
+                <div class="col-md-12 p-0 d-flex justify-content-center justify-content-evenly" style="width: 24.4vw; height: 24vh;">
+                  <table style="font-size: small; height: 2%" class="table table-bordered rounded bg-light">
+                    <thead class="table-secondary text-light text-center">
+                    <tr class="" style="border: 1px solid #FFA633FF; box-shadow: inset 1px 1px #FFA633, 0 0 4px #FFA633;" id="user-thead">
+                      <th scope="col">User name</th>
+                      <th scope="col">Role</th>
+                    </tr>
+                    </thead>
+                    <tbody id="userTable">
 
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
 </main>
 <footer id="footer">
