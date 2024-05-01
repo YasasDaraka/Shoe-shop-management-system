@@ -126,7 +126,7 @@ function showAlert(name) {
     Swal.fire({
         title: "Welcome "+name+" !",
         html: "",
-        timer: 300000, //8000
+        timer: 3000, //8000
       /*  timerProgressBar: true,*/
         width: 600,
         padding: "3em",
@@ -139,7 +139,7 @@ function showAlert(name) {
       no-repeat
     `,
         didOpen: () => {
-            Swal.showLoading();//center loading
+            Swal.showLoading();
             const timer = Swal.getPopup().querySelector("b");
             timerInterval = setInterval(() => {
                // timer.textContent = `${Swal.getTimerLeft()}`;

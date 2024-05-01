@@ -2,6 +2,7 @@ package lk.ijse.gdse66.helloshoes.service.impl;
 
 import lk.ijse.gdse66.helloshoes.dto.*;
 import lk.ijse.gdse66.helloshoes.entity.SaleDetails;
+import lk.ijse.gdse66.helloshoes.repository.CustomerRepo;
 import lk.ijse.gdse66.helloshoes.repository.SaleRepo;
 import lk.ijse.gdse66.helloshoes.service.SaleService;
 import lk.ijse.gdse66.helloshoes.service.exception.DuplicateRecordException;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -20,6 +22,8 @@ public class SalesServiceImpl implements SaleService {
 
     @Autowired
     SaleRepo saleRepo;
+    @Autowired
+    CustomerRepo cusRepo;
     @Autowired
     Tranformer tranformer;
     @Override
@@ -73,7 +77,25 @@ public class SalesServiceImpl implements SaleService {
                     if (dto.getSaleDetails().isEmpty()){
                         throw new NotFoundException("Items not added to save Order");
                     }
-                    saleRepo.save(tranformer.convert(dto, Tranformer.ClassType.ORDER_ENTITY));
+                    cusRepo.findById(dto.getCustomerName().getCustomerId()).ifPresentOrElse(
+                            cus -> {
+                                if (cus.getLoyaltyDate() != null){
+                                    Double total = 0.0;
+                                    List<SaleDetailsDTO> itms = dto.getSaleDetails();
+                                    for (SaleDetailsDTO itm : itms) {
+                                         total += itm.getItmTotal();
+                                    }
+                                    if (total >= 800.00){
+                                        Integer points = cus.getTotalPoints();
+                                        points ++;
+                                        cus.setTotalPoints(points);
+                                        cusRepo.save(cus);
+                                    }
+                                }
+                            },
+                            () -> {
+                                    throw new NotFoundException("Customer not exist");
+                            });
                 });
     }
 
