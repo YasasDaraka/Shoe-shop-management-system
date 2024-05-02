@@ -76,11 +76,13 @@
       <div class="col-md-6 ms-5 mt-4">
         <label for="log-in-Username" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Username</label>
         <input type="username" class="form-control" id="log-in-Username" style="width: 350px">
+        <p class="position-absolute mt-1"><small class="text-danger" id="log-in-UsernameError"></small></p>
       </div>
 
       <div class="col-md-6 ms-5 mt-3">
         <label for="log-in-Password" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Password</label>
         <input type="password" class="form-control" id="log-in-Password" style="width: 350px">
+        <p class="position-absolute mt-1"><small class="text-danger" id="log-in-PasswordError"></small></p>
       </div>
 
       <h1 class="mt-3" style="color: #FFA633 ;font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 10px; margin-inline-start: 315px">Forgot Password ?</h1>
@@ -1226,7 +1228,8 @@
                     </div>
                     <div class="col">
                       <label for="ordPoints" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Points</label>
-                      <input type="text" class="form-control" id="ordPoints"style="width: 10vw">
+                      <input type="text" class="form-control" id="ordPoints"style="width: 10vw"readonly>
+                      <p><small class="text-danger position-absolute mt-1" id="ordPointsError"></small></p>
                     </div>
 
                   </div>
@@ -1388,7 +1391,7 @@
                       <div class="container mt-2">
                           <div class="row justify-content-center">
                               <div class="col"style="text-align: center;">
-                                  <label for="empId" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px;">Expiration Date</label>
+                                  <label class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px;">Expiration Date</label>
                                   <div class="d-flex align-items-center justify-content-center">
                                       <input type="month" placeholder="Month" class="form-control border border-info me-2" id="cardMonth" style="width: 125px;">
                                       <input type="text" placeholder="Year" class="form-control border border-info" id="cardYear" style="width: 125px;">

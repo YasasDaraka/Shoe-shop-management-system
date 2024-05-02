@@ -22,33 +22,6 @@ $("#paymentCash").click(function () {
     purchaseBtnHide(false);
 });
 
-function data() {
-    var data = {
-        orderNo: "ORD001",
-        purchaseDate: "2024-04-30",
-        total: 100.0,
-        paymentMethod: "Credit Card",
-        totalPoints: 50,
-        cashier: "John Doe",
-        customerName: {
-            customerId: "CUST001",
-            customerName: "Yasas"
-        },
-        saleDetails: [
-                {
-                orderDetailPK: {
-                    orderNo: "ORD001",
-                    itemCode: "ITEM001"
-                },
-                itmQTY: 2,
-                inventory: {
-                    itemCode: "ITEM001"
-                }
-            }
-        ]
-    }
-}
-
 $(document).ready(function () {
     $("#order-add-item").prop("disabled", true);
     $("#btnSubmitOrder").prop("disabled", true);
@@ -77,23 +50,6 @@ $("#order-clear,.order-nav").click(function () {
         console.error("Error loading order Id:", error);
     });
 }*/
-function loadOrderId() {
-    return new Promise(function (resolve, reject) {
-        var ar;
-        $.ajax({
-            url: "http://localhost:8080/BackEnd/order/getGenId",
-            method: "GET",
-            success: function (res) {
-                console.log(res);
-                ar = res;
-                resolve(ar);
-            },
-            error: function (error) {
-                reject(error);
-            }
-        });
-    });
-}
 $("#OrdItm").on("keydown keyup", function (e) {
     let indexNo = o_Array.indexOf(o_Array.find((c) => c.field.attr("id") == e.target.id));
     if (o_Array[indexNo].regEx.test($("#OrdItm").val())) {
@@ -126,7 +82,12 @@ $("#ordCusId").on("keydown keyup", function (e) {
                 $("#ordCusId").css("border", "2px solid green");
                 $("#ordCusIdError").text("");
                 $("#ordCusName").val(res.customerName);
-                $("#ordPoints").val(res.totalPoints);
+                if (res.loyaltyDate != null && res != undefined){
+                    $("#ordPointsError").text("No Register at Loyalty");
+                }else {
+                    $("#ordPointsError").text("");
+                }
+                //$("#ordPoints").val(res.totalPoints);
                 setAddItemBtn();
             }
             if( $("#ordCusName").val() == "" || $("#ordCusName").val() == null){
@@ -165,12 +126,13 @@ function searchOrder(id) {
 }
 
 function placeOrder(payment) {
+    const cahier = localStorage.getItem('cashier');
     let order = {
         orderNo: "",
         total: 0.0,
         paymentMethod: "",
         totalPoints: 0,
-        cashier: "",
+        cashier: cahier,
         customerName: {
             customerId: "",
             customerName: ""
@@ -203,7 +165,7 @@ function placeOrder(payment) {
     order.orderNo = oId;
     order.paymentMethod = payment;
     order.totalPoints = cusPoints;
-    order.cashier = "John Doe";
+    //order.cashier = "John Doe";
     order.customerName.customerId = cusId;
     order.customerName.customerName = cusName;
 
@@ -255,7 +217,7 @@ $("#order-update").click(function () {
                                 if (cashValidate()) {
                                     placeOrder("Cash");
                                     clearAll();
-                                    //generateOrderId();
+                                    generateOrderId();
                                 } else {
                                     swal("Error", "Insufficient Credit : Check Cash!", "error");
                                 }
@@ -309,9 +271,9 @@ $("#order-delete").click(function () {
                             console.log(res);
                             swal("Deleted", "Order Delete Successfully", "success");
                             clearAll();
-                            //getAllEmployees();
                             setOrderBtn();
                             setOrdClBtn();
+                            generateOrderId();
                         },
                         error: function (ob, textStatus, error) {
                             swal("Error","Error Order Not Delete", "error");
@@ -332,7 +294,7 @@ $("#order-add-item").click(function () {
     let total = parseFloat(price) * parseFloat(qty);
     let allTotal = 0;
     let itemExists = false;
-
+    let points = 0.0;
     $('#order-table>tr').each(function (e) {
         let check = $(this).children().eq(1).text();
         if (id === check) {
@@ -390,6 +352,23 @@ $("#order-add-item").click(function () {
     });
     $("#total").text(allTotal);
     $("#subtotal").text(allTotal);
+    points += Math.round(allTotal / 800);
+    searchCustomer($("#ordCusId").val()).then(function (res){
+        if (res != null || res != undefined){
+            if (res.loyaltyDate != null && res != undefined){
+                $("#ordPointsError").text("No Register at Loyalty");
+            }else {
+                $("#ordPointsError").text("");
+                $("#ordPoints").val(points);
+            }
+        }
+        if( $("#ordCusName").val() == "" || $("#ordCusName").val() == null){
+            $("#ordCusIdError").text("Customer is not Exist");
+            $("#ordCusId").css("border", "2px solid red");
+        }
+    });
+
+
 });
 $("#txtDiscount").on("keydown keyup input", function (e) {
     let total = parseFloat($("#total").text());
@@ -422,36 +401,24 @@ function setBalance() {
         $("#txtBalance").val("0");
     }
 }
-
-$("#btnSubmitOrder").click(function () {
-    let oId = $("#orderId").val();
-    searchOrder(oId).then(function (order) {
-        if (Object.keys(order).length === 0) {
-            if (itemValidate()) {
-                        if (cashValidate()) {
-                            placeOrder("Cash");
-                            clearAll();
-                            //generateOrderId();
-                        } else {
-                            //alert("Insuficent Credit : Check Cash!");
-                            swal("Error", "Insufficient Credit : Check Cash!", "error");
-                        }
-            } else {
-                //alert("Please Add Items to Place Order");
-                swal("Error", "Please Add Items to Place Order", "error");
-            }
-        }else {
-                //alert("Order Already Registered");
-                swal("Error", "Order Already Registered", "error");
-            }
-});
-});
-function loadOrderDetailAr() {
+function generateOrderId() {
+    loadOrderId().then(function (id) {
+        $("#orderId").val(id);
+    }).catch(function (error) {
+        console.error("Error loading Employee Id:", error);
+    });
+}
+function loadOrderId() {
     return new Promise(function (resolve, reject) {
+        performAuthenticatedRequest();
+        const accessToken = localStorage.getItem('accessToken');
         var ar;
         $.ajax({
-            url: "http://localhost:8080/BackEnd/orderDetail/getAll",
+            url: "http://localhost:8080/helloshoes/api/v1/sales/getGenId",
             method: "GET",
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
             success: function (res) {
                 console.log(res);
                 ar = res;
@@ -463,6 +430,35 @@ function loadOrderDetailAr() {
         });
     });
 }
+
+$("#btnSubmitOrder,#card-payment").click(function () {
+    let oId = $("#orderId").val();
+    searchOrder(oId).then(function (order) {
+        if (Object.keys(order).length === 0) {
+            if (itemValidate()) {
+                if (cashValidate()) {
+                    if ($(this).attr("id") == 'btnSubmitOrder'){
+                        placeOrder("Cash");
+                        clearAll();
+                        generateOrderId();
+                    }else {
+                        placeOrder("Card");
+                        clearAll();
+                        generateOrderId();
+                    }
+
+                } else {
+                    swal("Error", "Insufficient Credit : Check Cash!", "error");
+                }
+            } else {
+                swal("Error", "Please Add Items to Place Order", "error");
+            }
+        }else {
+            swal("Error", "Order Already Registered", "error");
+        }
+    });
+});
+
 
 $("#orderId").on("keyup input change", async function (e) {
     $("#order-table").empty();
@@ -618,4 +614,29 @@ function clearAll() {
     $("#order-table").empty();
     /*$("#cusImage").attr('src', "");
     $('#cusImage').css('display', 'none');*/
+}
+
+function checkCard() {
+    var any = false;
+    $("#cardNum,#bankName,#cardMonth,#cardYear,#verifyNum").each(function () {
+        var value = $(this).val();
+        if (value !== undefined && value !== null && value.trim() !== "") {
+            any = true;
+            return false;
+        }
+    });
+    if (any && $("#verifyNum").length < 4) {
+        $("#card-payment").prop("disabled", false);
+    } else {
+        $("#card-payment").prop("disabled", true);
+    }
+}
+
+
+
+function checkAll() {
+    for (let i = 0; i < $("#cardNum,#bankName,#cardMonth,#cardYear,#verifyNum").length; i++) {
+        if (!checkValidations(c_vArray[i])) return false;
+    }
+    return true;
 }

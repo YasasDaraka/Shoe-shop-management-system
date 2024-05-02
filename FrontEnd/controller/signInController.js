@@ -1,9 +1,68 @@
 $("#btnSignIn").click(function () {
     //showAlert();
     signIn();
+
     /*allContainerHide();
     adminPage.css('display','block');
     logInPage.css('display','none');*/
+});
+$("#log-in-Password").on("keydown keyup", function (e) {
+    $("#log-in-PasswordError").text("");
+    $("#log-in-Password").css("border", "1px solid #ced4da");
+    $("#btnSignIn").prop("disabled", true);
+    passwordCheck($("#log-in-Password").val()).then(function (pass) {
+    if (pass) {
+        if ($("#log-in-Username").val() !== "") {
+                searchUserPanel($("#userName").val()).then(function (res) {
+                    if (res) {
+                        $("#log-in-UsernameError").text("");
+                        $("#log-in-Username").css("border", "1px solid #ced4da");
+                        $("#btnSignIn").prop("disabled", false);
+                    }
+                    else {
+                        $("#log-in-UsernameError").text("Invalid password");
+                        $("#log-in-Username").css("border", "2px solid red");
+                    }
+
+                });
+        } else {
+            $("#log-in-UsernameError").text("Invalid Username");
+            $("#log-in-Username").css("border", "2px solid red");
+        }
+    }else {
+        $("#log-in-PasswordError").text("Invalid password");
+        $("#log-in-Password").css("border", "2px solid red");
+    }
+    });
+});
+$("#log-in-Username").on("keydown keyup", function (e) {
+    $("#log-in-UsernameError").text("");
+    $("#log-in-Username").css("border", "1px solid #ced4da");
+    $("#btnSignIn").prop("disabled", true);
+    if ($("#log-in-Username").val() !== "") {
+            searchUserPanel($("#userName").val()).then(function (res) {
+                if (res) {
+                    passwordCheck($("#log-in-Password").val()).then(function (pass) {
+                        if (pass) {
+                            $("#log-in-PasswordError").text("");
+                            $("#log-in-Password").css("border", "1px solid #ced4da");
+                            $("#btnSignIn").prop("disabled", false);
+
+                        }else {
+                            $("#log-in-PasswordError").text("Invalid password");
+                            $("#log-in-Password").css("border", "2px solid red");
+                        }
+                    });
+                }
+                else {
+                    $("#log-in-UsernameError").text("Invalid Username");
+                    $("#log-in-Username").css("border", "2px solid red");
+                }
+            });
+    } else {
+        $("#log-in-UsernameError").text("Invalid Username");
+        $("#log-in-Username").css("border", "2px solid red");
+    }
 });
 function signIn() {
     let value = {
@@ -33,6 +92,7 @@ function signIn() {
                 dataType: "json",
                 success: function (res, textStatus, xhr) {
                     localStorage.setItem('role', res.role);
+                    localStorage.setItem('cashier', value.email);
                     if (res.role === "ADMIN") {
                         userlimitOff();
                         allContainerHide();

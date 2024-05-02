@@ -31,11 +31,11 @@ public class SalesController {
         return saleService.searchSales(id);
     }
 
-    /*@ResponseStatus(HttpStatus.OK)
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping(path = "/getGenId")
     public String getCustomerGenId() {
-        return saleService.getCustomerGenId();
-    }*/
+        return saleService.getOrderGenId();
+    }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

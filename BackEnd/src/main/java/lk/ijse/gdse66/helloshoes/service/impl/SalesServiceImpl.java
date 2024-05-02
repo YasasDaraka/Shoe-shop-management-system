@@ -7,6 +7,7 @@ import lk.ijse.gdse66.helloshoes.repository.SaleRepo;
 import lk.ijse.gdse66.helloshoes.service.SaleService;
 import lk.ijse.gdse66.helloshoes.service.exception.DuplicateRecordException;
 import lk.ijse.gdse66.helloshoes.service.exception.NotFoundException;
+import lk.ijse.gdse66.helloshoes.service.util.IdGenerator;
 import lk.ijse.gdse66.helloshoes.service.util.Tranformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,8 @@ public class SalesServiceImpl implements SaleService {
     CustomerRepo cusRepo;
     @Autowired
     Tranformer tranformer;
+    @Autowired
+    IdGenerator generator;
     @Override
     public List<SalesDTO> getAllSales() {
         return null;
@@ -86,9 +89,10 @@ public class SalesServiceImpl implements SaleService {
                                          total += itm.getItmTotal();
                                     }
                                     if (total >= 800.00){
-                                        Integer points = cus.getTotalPoints();
-                                        points ++;
-                                        cus.setTotalPoints(points);
+                                        Integer point = (int) Math.round(total / 800.0);
+                                        Integer cusPoints = cus.getTotalPoints();
+                                        cusPoints += point;
+                                        cus.setTotalPoints(cusPoints);
                                         cusRepo.save(cus);
                                     }
                                 }
@@ -119,5 +123,9 @@ public class SalesServiceImpl implements SaleService {
                     throw new NotFoundException("Order Not Exist");
                 }
         );
+    }
+    @Override
+    public String getOrderGenId() {
+        return generator.getGenerateID(saleRepo.getOrderId(), IdGenerator.GenerateTypes.ORDER);
     }
 }
