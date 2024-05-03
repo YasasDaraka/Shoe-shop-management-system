@@ -6,6 +6,9 @@ $("#btnSignIn").click(function () {
     adminPage.css('display','block');
     logInPage.css('display','none');*/
 });
+$(document).ready(function () {
+    $("#btnSignIn").prop("disabled", true);
+});
 $("#log-in-Password").on("keydown keyup", function (e) {
     /*$("#log-in-PasswordError").text("");
     $("#log-in-Password").css("border", "1px solid #ced4da");*/

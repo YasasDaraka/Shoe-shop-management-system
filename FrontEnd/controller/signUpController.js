@@ -2,7 +2,9 @@ $("#signup-page-signup").click(function () {
     signUp();
 
 });
-
+$(document).ready(function () {
+    $("#signup-page-signup").prop("disabled", true);
+});
 function signUp() {
     let value = {
         email: $("#inputEmail").val(),
@@ -28,3 +30,157 @@ function signUp() {
 
 };
 
+$("#inputPassword").on("keydown keyup", function (e) {
+    /*$("#log-in-PasswordError").text("");
+    $("#log-in-Password").css("border", "1px solid #ced4da");*/
+    $("#signup-page-signup").prop("disabled", true);
+    if ($("#inputPassword").val() !== "") {
+        if (User_PASS_REGEX.test($("#inputPassword").val())) {
+                $("#inputPasswordError").text("");
+                $("#inputPassword").css("border", "2px solid green");
+
+                if ($("#inputEmail").val() !== "") {
+                    searchUserPanel($("#inputEmail").val()).then(function (res) {
+                        if (res) {
+                            $("#inputEmailError").text("Invalid User Name");
+                            $("#inputEmail").css("border", "2px solid red");
+                            $("#signup-page-signup").prop("disabled", true);
+                        } else {
+                            if ($("#reInputPassword").val() !== "") {
+                                if (User_PASS_REGEX.test($("#reInputPassword").val())) {
+                                    if ($("#reInputPassword").val() === $("#inputPassword").val()){
+                                        $("#reInputPasswordError").text("");
+                                        $("#reInputPassword").css("border", "2px solid green");
+                                        $("#signup-page-signup").prop("disabled", false);
+                                    }else {
+                                        $("#reInputPasswordError").text("Password not match");
+                                        $("#reInputPassword").css("border", "2px solid red");
+                                        $("#signup-page-signup").prop("disabled", true);
+                                    }
+
+                                } else {
+                                    $("#reInputPasswordError").text("Invalid password");
+                                    $("#reInputPassword").css("border", "2px solid red");
+                                    $("#signup-page-signup").prop("disabled", true);
+                                }
+                            }else {
+                                $("#reInputPasswordError").text("");
+                                $("#reInputPassword").css("border", "1px solid #ced4da");
+                            }
+                        }
+
+                    });
+                } else {
+                    $("#inputEmailError").text("");
+                    $("#inputEmail").css("border", "1px solid #ced4da");
+                }
+            } else {
+                $("#inputPasswordError").text("Invalid password");
+                $("#inputPassword").css("border", "2px solid red");
+                $("#signup-page-signup").prop("disabled", true);
+            }
+    }else {
+        $("#inputPasswordError").text("");
+        $("#inputPassword").css("border", "1px solid #ced4da");
+    }
+});
+$("#reInputPassword").on("keydown keyup", function (e) {
+    $("#signup-page-signup").prop("disabled", true);
+    if ($("#reInputPassword").val() !== "") {
+        if (User_PASS_REGEX.test($("#reInputPassword").val())) {
+            $("#reInputPasswordError").text("");
+            $("#reInputPassword").css("border", "2px solid green");
+
+            if ($("#inputEmail").val() !== "") {
+                searchUserPanel($("#inputEmail").val()).then(function (res) {
+                    if (res) {
+                        $("#inputEmailError").text("Invalid User Name");
+                        $("#inputEmail").css("border", "2px solid red");
+                        $("#signup-page-signup").prop("disabled", true);
+                    } else {
+                        if ($("#inputPassword").val() !== "") {
+                            if (User_PASS_REGEX.test($("#inputPassword").val())) {
+                                if ($("#reInputPassword").val() === $("#inputPassword").val()){
+                                    $("#inputPasswordError").text("");
+                                    $("#inputPassword").css("border", "2px solid green");
+                                    $("#signup-page-signup").prop("disabled", false);
+                                }else {
+                                    $("#inputPasswordError").text("Password not match");
+                                    $("#inputPassword").css("border", "2px solid red");
+                                    $("#signup-page-signup").prop("disabled", true);
+                                }
+
+                            } else {
+                                $("#inputPasswordError").text("Invalid password");
+                                $("#inputPassword").css("border", "2px solid red");
+                                $("#signup-page-signup").prop("disabled", true);
+                            }
+                        }else {
+                            $("#inputPasswordError").text("");
+                            $("#inputPassword").css("border", "1px solid #ced4da");
+                        }
+                    }
+
+                });
+            } else {
+                $("#inputEmailError").text("");
+                $("#inputEmail").css("border", "1px solid #ced4da");
+            }
+        } else {
+            $("#reInputPasswordError").text("Invalid password");
+            $("#reInputPassword").css("border", "2px solid red");
+            $("#signup-page-signup").prop("disabled", true);
+        }
+    }else {
+        $("#reInputPasswordError").text("");
+        $("#reInputPassword").css("border", "1px solid #ced4da");
+    }
+
+});
+$("#inputEmail").on("keydown keyup", function (e) {
+    $("#signup-page-signup").prop("disabled", true);
+    if ($("#inputEmail").val() !== "") {
+        if (User_PASS_REGEX.test($("#reInputPassword").val())) {
+            $("#inputEmailError").text("");
+            $("#inputEmail").css("border", "2px solid green");
+
+            searchUserPanel($("#inputEmail").val()).then(function (res) {
+                if (res) {
+                    $("#inputEmailError").text("Invalid User Name");
+                    $("#inputEmail").css("border", "2px solid red");
+                    $("#signup-page-signup").prop("disabled", true);
+                } else {
+                    if ($("#reInputPassword").val() !== "") {
+                        if (User_PASS_REGEX.test($("#reInputPassword").val())) {
+                            if ($("#reInputPassword").val() === $("#inputPassword").val()) {
+                                $("#reInputPasswordError").text("");
+                                $("#reInputPassword").css("border", "2px solid green");
+                                $("#signup-page-signup").prop("disabled", false);
+                            } else {
+                                $("#reInputPasswordError").text("Password not match");
+                                $("#reInputPassword").css("border", "2px solid red");
+                                $("#signup-page-signup").prop("disabled", true);
+                            }
+
+                        } else {
+                            $("#reInputPasswordError").text("Invalid password");
+                            $("#reInputPassword").css("border", "2px solid red");
+                            $("#signup-page-signup").prop("disabled", true);
+                        }
+                    } else {
+                        $("#reInputPasswordError").text("");
+                        $("#reInputPassword").css("border", "1px solid #ced4da");
+                    }
+                }
+
+            });
+        }else {
+            $("#inputEmailError").text("Invalid username");
+            $("#inputEmail").css("border", "2px solid red");
+            $("#signup-page-signup").prop("disabled", true);
+        }
+    } else {
+        $("#inputEmailError").text("");
+        $("#inputEmail").css("border", "1px solid #ced4da");
+    }
+});
