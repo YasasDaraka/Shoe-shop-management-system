@@ -81,4 +81,16 @@ public class InventoryServiceImpl implements InventoryService {
                 }
         );
     }
+    @Override
+    public List<InventoryDTO> getAllSortedInventory(String value) {
+
+        if (value.equals("SM") || value.equals("SW")){
+            return tranformer.convert(inventoryRepo.findByGender(value), Tranformer.ClassType.ITEM_DTO_LIST);
+        }else if (value.equals("FS") || value.equals("CS")){
+           return tranformer.convert(inventoryRepo.findByOccasion(value), Tranformer.ClassType.ITEM_DTO_LIST);
+        }
+        else{
+            return null;
+        }
+    }
 }

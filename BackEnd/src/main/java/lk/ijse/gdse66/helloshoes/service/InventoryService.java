@@ -9,4 +9,5 @@ public interface InventoryService {
     void saveInventory(InventoryDTO dto);
     void updateInventory(InventoryDTO dto);
     void deleteInventory(String id);
+    List<InventoryDTO> getAllSortedInventory(String value);
 }

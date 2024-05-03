@@ -17,7 +17,7 @@ public class AdminPanelController {
     SaleService saleService;
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping(path = "/panel")
+    @GetMapping(path = "/getAll")
     public AdminPanelDTO getAdminPanel(){
         return saleService.getAdminPanelDetails();
     }

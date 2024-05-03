@@ -52,4 +52,10 @@ public class InventoryController {
         return ResponseEntity.noContent().build();
     }
 
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping(path = "/getAll/{sort}")
+    public List<InventoryDTO> getAllSortedInventory(@PathVariable("sort") String sort) {
+        return itemService.getAllInventory();
+    }
+
 }
