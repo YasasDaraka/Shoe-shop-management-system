@@ -23,8 +23,7 @@ public class Inventory {
     private String category;
     private Integer size;
     @ManyToOne
-    @Column(unique = true)
-    @JoinColumn(name = "supplier_id", nullable = false)
+    @JoinColumn(name = "supplier_id", nullable = false, unique = true)
     private Supplier supplier;
     private String supplierName;
     private Double salePrice;

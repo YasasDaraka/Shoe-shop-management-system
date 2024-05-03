@@ -19,7 +19,7 @@ import java.util.List;
 @ToString
 @Builder
 public class SalesDTO {
-    
+
     @Pattern(regexp = "OID-0*[1-9]\\d{0,2}", message = "Order ID is not valid")
     private String orderNo;
 
