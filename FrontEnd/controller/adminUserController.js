@@ -120,9 +120,6 @@ function searchUser() {
             $.ajax({
                 url: "http://localhost:8080/helloshoes/api/v1/auth/search/" + name,
                 method: "GET",
-                headers: {
-                    'Authorization': 'Bearer ' + accessToken
-                },
                 dataType: "json",
                 success: function (res, textStatus, xhr) {
                     if (xhr.status === 200) {
@@ -139,10 +136,10 @@ function searchUser() {
 
 }
 
-function passwordCheck(pass) {
+function passwordCheck(mail,pass) {
     let value = {
-        email: $("#adminName").val(),
-        password:pass,
+        email: mail,
+        password:pass
     }
     return new Promise(function (resolve, reject) {
         performAuthenticatedRequest();
@@ -151,9 +148,6 @@ function passwordCheck(pass) {
         $.ajax({
             url: "http://localhost:8080/helloshoes/api/v1/auth/pass",
             method: "POST",
-            headers: {
-                'Authorization': 'Bearer ' + accessToken
-            },
             data: JSON.stringify(value),
             contentType: "application/json",
             success: function (res) {
@@ -174,7 +168,7 @@ function passwordCheck(pass) {
 function checkToUpdate(oldPass) {
     searchUser().then(function (user) {
         if (user) {
-            passwordCheck(oldPass).then(function (pass) {
+            passwordCheck($("#adminName").val(),oldPass).then(function (pass) {
                 if (pass) {
                     $("#adminNewPass").show();
                     $("#adminNewPassLabel").show();
@@ -217,9 +211,9 @@ $("#adminNewPass").on("keydown keyup", function (e) {
     var newPass = $("#adminNewPass").val();
     searchUser().then(function (user) {
         if (user) {
-            passwordCheck(oldPass).then(function (pass) {
+            passwordCheck($("#adminName").val(),oldPass).then(function (pass) {
                 if (pass) {
-                    passwordCheck(newPass).then(function (check) {
+                    passwordCheck($("#adminName").val(),newPass).then(function (check) {
                         console.log(check)
                         if (!check && newPass.length > 4) {
                             $("#adminDelete").prop("disabled", false);
@@ -265,9 +259,6 @@ $("#adminUpdate").click(function () {
                     $.ajax({
                         url: "http://localhost:8080/helloshoes/api/v1/auth/admin",
                         method: "PUt",
-                        headers: {
-                            'Authorization': 'Bearer ' + accessToken
-                        },
                         data: JSON.stringify(value),
                         contentType: "application/json",
                         success: function (res, textStatus, jsXH) {
@@ -323,9 +314,6 @@ function getAllAdmins() {
     $.ajax({
         url: "http://localhost:8080/helloshoes/api/v1/auth/getall/admin",
         method: "GET",
-        headers: {
-            'Authorization': 'Bearer ' + accessToken
-        },
         success: function (res) {
             console.log(res);
             for (var r of res) {
@@ -386,9 +374,6 @@ $("#adminDelete").click(function () {
                     $.ajax({
                         url: "http://localhost:8080/helloshoes/api/v1/auth/admin",
                         method: "DELETE",
-                        headers: {
-                            'Authorization': 'Bearer ' + accessToken
-                        },
                         data: JSON.stringify(value),
                         contentType: "application/json",
                         success: function (res) {

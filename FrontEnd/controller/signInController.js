@@ -7,50 +7,61 @@ $("#btnSignIn").click(function () {
     logInPage.css('display','none');*/
 });
 $("#log-in-Password").on("keydown keyup", function (e) {
-    $("#log-in-PasswordError").text("");
-    $("#log-in-Password").css("border", "1px solid #ced4da");
+    /*$("#log-in-PasswordError").text("");
+    $("#log-in-Password").css("border", "1px solid #ced4da");*/
     $("#btnSignIn").prop("disabled", true);
-    passwordCheck($("#log-in-Password").val()).then(function (pass) {
-    if (pass) {
-        if ($("#log-in-Username").val() !== "") {
-                searchUserPanel($("#userName").val()).then(function (res) {
-                    if (res) {
-                        $("#log-in-UsernameError").text("");
-                        $("#log-in-Username").css("border", "1px solid #ced4da");
-                        $("#btnSignIn").prop("disabled", false);
-                    }
-                    else {
-                        $("#log-in-UsernameError").text("Invalid password");
-                        $("#log-in-Username").css("border", "2px solid red");
-                    }
+    if ($("#log-in-Password").val() !== "") {
+        passwordCheck($("#log-in-Username").val(),$("#log-in-Password").val()).then(function (pass) {
+            if (pass) {
+                $("#log-in-PasswordError").text("");
+                $("#log-in-Password").css("border", "2px solid green");
 
-                });
-        } else {
-            $("#log-in-UsernameError").text("Invalid Username");
-            $("#log-in-Username").css("border", "2px solid red");
-        }
+                if ($("#log-in-Username").val() !== "") {
+                    searchUserPanel($("#log-in-Username").val()).then(function (res) {
+                        if (res) {
+                            $("#log-in-UsernameError").text("");
+                            $("#log-in-Username").css("border", "2px solid green");
+                            $("#btnSignIn").prop("disabled", false);
+                        } else {
+                            $("#log-in-UsernameError").text("Invalid User Name");
+                            $("#log-in-Username").css("border", "2px solid red");
+                            $("#btnSignIn").prop("disabled", true);
+                        }
+
+                    });
+                } else {
+                    $("#log-in-UsernameError").text("");
+                    $("#log-in-Username").css("border", "1px solid #ced4da");
+                }
+            } else {
+                $("#log-in-PasswordError").text("Invalid password");
+                $("#log-in-Password").css("border", "2px solid red");
+            }
+        });
     }else {
-        $("#log-in-PasswordError").text("Invalid password");
-        $("#log-in-Password").css("border", "2px solid red");
-    }
-    });
+            $("#log-in-PasswordError").text("");
+            $("#log-in-Password").css("border", "1px solid #ced4da");
+        }
 });
 $("#log-in-Username").on("keydown keyup", function (e) {
-    $("#log-in-UsernameError").text("");
-    $("#log-in-Username").css("border", "1px solid #ced4da");
+    /*$("#log-in-UsernameError").text("");
+    $("#log-in-Username").css("border", "1px solid #ced4da");*/
     $("#btnSignIn").prop("disabled", true);
     if ($("#log-in-Username").val() !== "") {
-            searchUserPanel($("#userName").val()).then(function (res) {
+            searchUserPanel($("#log-in-Username").val()).then(function (res) {
                 if (res) {
-                    passwordCheck($("#log-in-Password").val()).then(function (pass) {
+                    $("#log-in-UsernameError").text("");
+                    $("#log-in-Username").css("border", "2px solid green");
+                    passwordCheck($("#log-in-Username").val(),$("#log-in-Password").val()).then(function (pass) {
                         if (pass) {
                             $("#log-in-PasswordError").text("");
-                            $("#log-in-Password").css("border", "1px solid #ced4da");
+                            $("#log-in-Password").css("border", "2px solid green");
                             $("#btnSignIn").prop("disabled", false);
 
                         }else {
                             $("#log-in-PasswordError").text("Invalid password");
                             $("#log-in-Password").css("border", "2px solid red");
+                            $("#btnSignIn").prop("disabled", true);
                         }
                     });
                 }
@@ -60,8 +71,8 @@ $("#log-in-Username").on("keydown keyup", function (e) {
                 }
             });
     } else {
-        $("#log-in-UsernameError").text("Invalid Username");
-        $("#log-in-Username").css("border", "2px solid red");
+        $("#log-in-UsernameError").text("");
+        $("#log-in-Username").css("border", "1px solid #ced4da");
     }
 });
 function signIn() {
@@ -141,7 +152,7 @@ function performAuthenticatedRequest() {
                 console.log("User SignIn Successfully "+res.token);
             },
             error: function (ob, textStatus, error) {
-                console.log("token renew sign in error "+res.token);
+                console.log("token renew sign in error "+accessToken);
             }
         });
     } else {

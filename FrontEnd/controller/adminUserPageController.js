@@ -32,8 +32,8 @@ us_vArray.push({ field: $("#userName"), regEx: User_EMAIL_REGEX, error: $("#user
 us_vArray.push({ field: $("#userOldPassword"), regEx: User_PASS_REGEX, error: $("#userOldPasswordError") });
 
 $("#userName").on("keydown keyup", function (e) {
-    $("#userIdError").text("");
-    $("#userName").css("border", "1px solid #ced4da");
+    /*$("#userIdError").text("");
+    $("#userName").css("border", "1px solid #ced4da");*/
     //adminEvents(e);
     if ($("#userName").val() !== "") {
     if (User_EMAIL_REGEX.test($("#userName").val())) {
@@ -67,8 +67,8 @@ $("#userName").on("keydown keyup", function (e) {
     }
 });
 $("#userOldPassword").on("keydown keyup", function (e) {
-    $("#userOldPasswordError").text("");
-    $("#userOldPassword").css("border", "1px solid #ced4da");
+    /*$("#userOldPasswordError").text("");
+    $("#userOldPassword").css("border", "1px solid #ced4da");*/
     if ($("#userOldPassword").val() !== "") {
         if (User_PASS_REGEX.test($("#userOldPassword").val())) {
             searchUserPanel($("#userName").val()).then(function (res) {
@@ -94,8 +94,7 @@ $("#userOldPassword").on("keydown keyup", function (e) {
         $("#userClear").prop("disabled", false);
     }
 });
-function searchUserPanel() {
-    let name = $("#userName").val();
+function searchUserPanel(name) {
     return new Promise(function (resolve, reject) {
         performAuthenticatedRequest();
         const accessToken = localStorage.getItem('accessToken');
@@ -103,9 +102,6 @@ function searchUserPanel() {
         $.ajax({
             url: "http://localhost:8080/helloshoes/api/v1/auth/search/" + name,
             method: "GET",
-            headers: {
-                'Authorization': 'Bearer ' + accessToken
-            },
             dataType: "json",
             success: function (res, textStatus, xhr) {
                 if (xhr.status === 200) {
@@ -123,7 +119,7 @@ function searchUserPanel() {
 }
 
 function userCheckToUpdate(oldPass) {
-    searchUserPanel().then(function (user) {
+    searchUserPanel($("#userName").val()).then(function (user) {
         if (user) {
             if (User_PASS_REGEX.test($("#userOldPassword").val())) {
                     $("#userDelete").prop("disabled", false);
@@ -147,7 +143,7 @@ $("#userSave").click(function () {
 });
 $("#userUpdate").click(function () {
     console.log("update")
-    searchUserPanel().then(function (user) {
+    searchUserPanel($("#userName").val()).then(function (user) {
         if (user) {
             swal("Do you really want to update this user.?", {
                 buttons: {
@@ -190,7 +186,7 @@ $("#userUpdate").click(function () {
     });
 });
 function saveUser() {
-    searchUserPanel().then(function (user) {
+    searchUserPanel($("#userName").val()).then(function (user) {
         console.log("save 1")
         if (!user) {
             let value = {
@@ -241,9 +237,6 @@ function getAllUsers() {
     $.ajax({
         url: "http://localhost:8080/helloshoes/api/v1/auth/getall/user",
         method: "GET",
-        headers: {
-            'Authorization': 'Bearer ' + accessToken
-        },
         success: function (res) {
             console.log(res);
             for (var r of res) {
@@ -304,9 +297,6 @@ $("#userDelete").click(function () {
                     $.ajax({
                         url: "http://localhost:8080/helloshoes/api/v1/auth/user",
                         method: "DELETE",
-                        headers: {
-                            'Authorization': 'Bearer ' + accessToken
-                        },
                         data: JSON.stringify(value),
                         contentType: "application/json",
                         success: function (res) {
