@@ -36,6 +36,7 @@ $("#log-in-Password").on("keydown keyup", function (e) {
             } else {
                 $("#log-in-PasswordError").text("Invalid password");
                 $("#log-in-Password").css("border", "2px solid red");
+                $("#btnSignIn").prop("disabled", true);
             }
         });
     }else {

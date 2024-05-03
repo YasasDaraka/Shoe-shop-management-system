@@ -92,23 +92,31 @@ function checkAdminValidations(object) {
 }
 $("#adminName").on("keydown keyup", function (e) {
     //adminEvents(e);
-    searchUser($("#adminName").val()).then(function (res){
-        if (!res) {
-            if ($("#adminOldPassword").val() !== ""){
-                if (ADMIN_PASS_REGEX.test($("#adminOldPassword").val())) {
+    if ($("#adminName").val() !== "") {
+        $("#adminClear").prop("disabled", false);
+        searchUser($("#adminName").val()).then(function (res) {
+            if (!res) {
+                if ($("#adminOldPassword").val() !== "") {
+                    if (ADMIN_PASS_REGEX.test($("#adminOldPassword").val())) {
+                        $("#adminSave").prop("disabled", false);
+                        $("#adminOldPasswordError").text("");
+                    } else {
+                        $("#adminOldPasswordError").text("8 Chars - Uppercase,Lowercase,numbers");
+                        $("#adminSave").prop("disabled", true);
+                    }
+                } else {
                     $("#adminSave").prop("disabled", false);
                     $("#adminOldPasswordError").text("");
-                }else {
-                    $("#adminOldPasswordError").text("8 Chars - Uppercase,Lowercase,numbers");
-                    $("#adminSave").prop("disabled", true);
                 }
-            }else {
-                $("#adminSave").prop("disabled", false);
-                $("#adminOldPasswordError").text("");
+            } else {
             }
-        }else {}
-        //captureClear();
-    });
+            //captureClear();
+        });
+    }else {
+        $("#userIdError").text("");
+        $("#adminName").css("border", "1px solid #ced4da");
+        $("#adminClear").prop("disabled", true);
+    }
 });
 
 function searchUser() {
@@ -397,3 +405,23 @@ $("#adminDelete").click(function () {
     $("#customerAddress").prop('disabled', true);*/
 
 });
+$("#adminClear").click(function () {
+    adminClear();
+});
+function adminClear() {
+    var ids = ["adminName","adminOldPassword,adminNewPass"];
+    ids.forEach(function(id) {
+        $("#" + id).val("");
+    });
+    $("#adminNewPass").hide();
+    $("#adminNewPassLabel").hide();
+    $("#adminNewPassLabel").text("");
+    $("#adminIdError").text("");
+    $("#adminOldPasswordError").text("");
+    $("#adminName").css("border", "1px solid #ced4da");
+    $("#adminOldPassword").css("border", "1px solid #ced4da");
+    $("#adminSave").prop("disabled", true);
+    $("#adminDelete").prop("disabled", true);
+    $("#adminUpdate").prop("disabled", true);
+    $("#adminClear").prop("disabled", true);
+}

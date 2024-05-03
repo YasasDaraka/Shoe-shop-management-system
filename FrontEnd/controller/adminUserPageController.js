@@ -36,6 +36,7 @@ $("#userName").on("keydown keyup", function (e) {
     $("#userName").css("border", "1px solid #ced4da");*/
     //adminEvents(e);
     if ($("#userName").val() !== "") {
+        $("#userClear").prop("disabled", false);
     if (User_EMAIL_REGEX.test($("#userName").val())) {
         searchUserPanel($("#userName").val()).then(function (res) {
             $("#userIdError").text("");
@@ -63,13 +64,14 @@ $("#userName").on("keydown keyup", function (e) {
 }else {
         $("#userIdError").text("");
         $("#userName").css("border", "1px solid #ced4da");
-        $("#userClear").prop("disabled", false);
+        $("#userClear").prop("disabled", true);
     }
 });
 $("#userOldPassword").on("keydown keyup", function (e) {
     /*$("#userOldPasswordError").text("");
     $("#userOldPassword").css("border", "1px solid #ced4da");*/
     if ($("#userOldPassword").val() !== "") {
+        $("#userClear").prop("disabled", true);
         if (User_PASS_REGEX.test($("#userOldPassword").val())) {
             searchUserPanel($("#userName").val()).then(function (res) {
                 if (!res) {
@@ -88,10 +90,10 @@ $("#userOldPassword").on("keydown keyup", function (e) {
             $("#userSave").prop("disabled", true);
         }
     } else {
-        $("#userSave").prop("disabled", false);
+        $("#userSave").prop("disabled", true);
         $("#userOldPasswordError").text("");
         $("#userOldPassword").css("border", "1px solid #ced4da")
-        $("#userClear").prop("disabled", false);
+        $("#userClear").prop("disabled", true);
     }
 });
 function searchUserPanel(name) {
@@ -333,7 +335,6 @@ function userClear() {
     $("#userOldPasswordError").text("");
     $("#userName").css("border", "1px solid #ced4da");
     $("#userOldPassword").css("border", "1px solid #ced4da");
-    $("#cusClear").prop("disabled", true);
     $("#userSave").prop("disabled", true);
     $("#userDelete").prop("disabled", true);
     $("#userUpdate").prop("disabled", true);
