@@ -1,6 +1,9 @@
 package lk.ijse.gdse66.helloshoes.dto;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lk.ijse.gdse66.helloshoes.entity.Customer;
 import lk.ijse.gdse66.helloshoes.entity.SaleDetails;
 import lombok.*;
@@ -16,13 +19,17 @@ import java.util.List;
 @ToString
 @Builder
 public class SalesDTO {
-
+    
+    @Pattern(regexp = "OID-0*[1-9]\\d{0,2}", message = "Order ID is not valid")
     private String orderNo;
 
     private LocalDateTime purchaseDate;
 
+    @NotNull(message = "Total is required")
+    @DecimalMin(value = "1.00", message = "Buy Price must be greater than 0")
     private Double total;
 
+    @NotNull(message = "Payment Method ID is required")
     private String paymentMethod;
 
     private Integer totalPoints;

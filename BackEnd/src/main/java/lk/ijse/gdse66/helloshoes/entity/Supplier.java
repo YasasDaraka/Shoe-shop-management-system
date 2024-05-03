@@ -29,6 +29,7 @@ public class Supplier {
     private InAddress address;
     private Contact contact;
     @NotNull
+    @Column(unique = true)
     private String email;
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "supplier")
     List<Inventory> inventories = new ArrayList<>();

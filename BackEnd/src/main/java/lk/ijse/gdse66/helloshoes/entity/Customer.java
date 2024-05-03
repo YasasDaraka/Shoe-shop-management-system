@@ -44,6 +44,7 @@ public class Customer {
 
     private String contactNo;
 
+    @Column(unique = true)
     private String email;
 
     private Timestamp recentPurchase;

@@ -36,6 +36,7 @@ public class Employee {
     @Embedded
     private Address address;
     private String contactNo;
+    @Column(unique = true)
     private String email;
     private String guardianName;
     private String emergencyContact;
