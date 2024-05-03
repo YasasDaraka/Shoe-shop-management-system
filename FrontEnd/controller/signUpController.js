@@ -59,7 +59,7 @@ $("#inputPassword").on("keydown keyup", function (e) {
                                     }
 
                                 } else {
-                                    $("#reInputPasswordError").text("Invalid password");
+                                    $("#reInputPasswordError").text("8 Chars - Uppercase,Lowercase,numbers");
                                     $("#reInputPassword").css("border", "2px solid red");
                                     $("#signup-page-signup").prop("disabled", true);
                                 }
@@ -75,7 +75,7 @@ $("#inputPassword").on("keydown keyup", function (e) {
                     $("#inputEmail").css("border", "1px solid #ced4da");
                 }
             } else {
-                $("#inputPasswordError").text("Invalid password");
+                $("#inputPasswordError").text("8 Chars - Uppercase,Lowercase,numbers");
                 $("#inputPassword").css("border", "2px solid red");
                 $("#signup-page-signup").prop("disabled", true);
             }
@@ -101,17 +101,17 @@ $("#reInputPassword").on("keydown keyup", function (e) {
                         if ($("#inputPassword").val() !== "") {
                             if (User_PASS_REGEX.test($("#inputPassword").val())) {
                                 if ($("#reInputPassword").val() === $("#inputPassword").val()){
-                                    $("#inputPasswordError").text("");
-                                    $("#inputPassword").css("border", "2px solid green");
+                                    $("#reInputPasswordError").text("");
+                                    $("#reInputPassword").css("border", "2px solid green");
                                     $("#signup-page-signup").prop("disabled", false);
                                 }else {
-                                    $("#inputPasswordError").text("Password not match");
-                                    $("#inputPassword").css("border", "2px solid red");
+                                    $("#reInputPasswordError").text("Password not match");
+                                    $("#reInputPassword").css("border", "2px solid red");
                                     $("#signup-page-signup").prop("disabled", true);
                                 }
 
                             } else {
-                                $("#inputPasswordError").text("Invalid password");
+                                $("#inputPasswordError").text("8 Chars - Uppercase,Lowercase,numbers");
                                 $("#inputPassword").css("border", "2px solid red");
                                 $("#signup-page-signup").prop("disabled", true);
                             }
@@ -127,7 +127,7 @@ $("#reInputPassword").on("keydown keyup", function (e) {
                 $("#inputEmail").css("border", "1px solid #ced4da");
             }
         } else {
-            $("#reInputPasswordError").text("Invalid password");
+            $("#reInputPasswordError").text("8 Chars - Uppercase,Lowercase,numbers");
             $("#reInputPassword").css("border", "2px solid red");
             $("#signup-page-signup").prop("disabled", true);
         }
@@ -140,7 +140,7 @@ $("#reInputPassword").on("keydown keyup", function (e) {
 $("#inputEmail").on("keydown keyup", function (e) {
     $("#signup-page-signup").prop("disabled", true);
     if ($("#inputEmail").val() !== "") {
-        if (User_PASS_REGEX.test($("#reInputPassword").val())) {
+        if (User_EMAIL_REGEX.test($("#inputEmail").val())) {
             $("#inputEmailError").text("");
             $("#inputEmail").css("border", "2px solid green");
 
@@ -163,7 +163,7 @@ $("#inputEmail").on("keydown keyup", function (e) {
                             }
 
                         } else {
-                            $("#reInputPasswordError").text("Invalid password");
+                            $("#reInputPasswordError").text("8 Chars - Uppercase,Lowercase,numbers");
                             $("#reInputPassword").css("border", "2px solid red");
                             $("#signup-page-signup").prop("disabled", true);
                         }
