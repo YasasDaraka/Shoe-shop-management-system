@@ -1,9 +1,10 @@
 package lk.ijse.gdse66.helloshoes.service.impl;
 
 import lk.ijse.gdse66.helloshoes.dto.*;
+import lk.ijse.gdse66.helloshoes.entity.AdminPanel;
+import lk.ijse.gdse66.helloshoes.entity.Inventory;
 import lk.ijse.gdse66.helloshoes.entity.SaleDetails;
-import lk.ijse.gdse66.helloshoes.repository.CustomerRepo;
-import lk.ijse.gdse66.helloshoes.repository.SaleRepo;
+import lk.ijse.gdse66.helloshoes.repository.*;
 import lk.ijse.gdse66.helloshoes.service.SaleService;
 import lk.ijse.gdse66.helloshoes.service.exception.DuplicateRecordException;
 import lk.ijse.gdse66.helloshoes.service.exception.NotFoundException;
@@ -16,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional
@@ -26,12 +28,20 @@ public class SalesServiceImpl implements SaleService {
     @Autowired
     CustomerRepo cusRepo;
     @Autowired
+    InventoryRepo inventoryRepo;
+    @Autowired
+    SaleDetailRepo detailRepo;
+    @Autowired
+    AdminPanelRepo adminPanelRepo;
+    @Autowired
     Tranformer tranformer;
     @Autowired
     IdGenerator generator;
+
+
     @Override
-    public List<SalesDTO> getAllSales() {
-        return null;
+    public AdminPanelDTO getAdminPanelDetails() {
+        return tranformer.convert(getAdminPanel(), Tranformer.ClassType.PANNEL_DTO);
     }
 
     @Override
@@ -100,6 +110,8 @@ public class SalesServiceImpl implements SaleService {
                             () -> {
                                     throw new NotFoundException("Customer not exist");
                             });
+                    saleRepo.save(tranformer.convert(dto, Tranformer.ClassType.ORDER_ENTITY));
+                    adminPanelRepo.save(getAdminPanel());
                 });
     }
 
@@ -109,6 +121,7 @@ public class SalesServiceImpl implements SaleService {
                 sales -> {
                     saleRepo.deleteById(dto.getOrderNo());
                     saleRepo.save(tranformer.convert(dto, Tranformer.ClassType.ORDER_ENTITY));
+                    adminPanelRepo.save(getAdminPanel());
                 },
                 () -> {
                     throw new NotFoundException("Order Not Exist");
@@ -118,7 +131,11 @@ public class SalesServiceImpl implements SaleService {
     @Override
     public void deleteSales(String id) {
         saleRepo.findById(id).ifPresentOrElse(
-                customer -> saleRepo.deleteById(id),
+                sales -> {
+                    saleRepo.deleteById(id);
+                    adminPanelRepo.save(getAdminPanel());
+                }
+                ,
                 () -> {
                     throw new NotFoundException("Order Not Exist");
                 }
@@ -127,5 +144,23 @@ public class SalesServiceImpl implements SaleService {
     @Override
     public String getOrderGenId() {
         return generator.getGenerateID(saleRepo.getOrderId(), IdGenerator.GenerateTypes.ORDER);
+    }
+
+    private AdminPanel getAdminPanel(){
+        Map<String, Object> item = detailRepo.findTotalQtyAndTotalAmountByItemCode("ITEM001");
+        Object[] ar = new Object[item.size()];
+        int index = 0;
+        for (Object value : item.values()) {
+            ar[index++] = value;
+        }
+        String itemId = String.valueOf(ar[0]);
+        Long qty = (Long) ar[1];
+        Double salePrice = (Double) ar[2];
+
+        Inventory inventory = inventoryRepo.findById(itemId).get();
+        Double buyPrice = inventory.getBuyPrice();
+        Double cost = buyPrice*qty;
+        Double profit =salePrice-cost;
+        return new AdminPanel("dash",salePrice,profit,itemId,inventory.getItemPicture(), Math.toIntExact(qty));
     }
 }

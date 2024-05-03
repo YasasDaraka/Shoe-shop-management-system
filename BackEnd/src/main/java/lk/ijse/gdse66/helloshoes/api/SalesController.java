@@ -20,12 +20,6 @@ public class SalesController {
     SaleService saleService;
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping(path = "/getAll")
-    public List<SalesDTO> getAllSales() {
-        return saleService.getAllSales();
-    }
-
-    @ResponseStatus(HttpStatus.OK)
     @GetMapping(path = "/search/{id}")
     public SalesDTO getSales(@PathVariable("id") String id) {
         return saleService.searchSales(id);

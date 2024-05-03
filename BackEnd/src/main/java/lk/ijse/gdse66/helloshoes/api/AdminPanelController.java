@@ -1,11 +1,24 @@
 package lk.ijse.gdse66.helloshoes.api;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lk.ijse.gdse66.helloshoes.dto.AdminPanelDTO;
+import lk.ijse.gdse66.helloshoes.dto.SalesDTO;
+import lk.ijse.gdse66.helloshoes.service.SaleService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/panel")
 @CrossOrigin
 public class AdminPanelController {
+    @Autowired
+    SaleService saleService;
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping(path = "/panel")
+    public AdminPanelDTO getAdminPanel(){
+        return saleService.getAdminPanelDetails();
+    }
 }

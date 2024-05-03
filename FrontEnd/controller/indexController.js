@@ -45,13 +45,13 @@ $(window).on('load',function (){
     allContainerHide();
     header.css('display','block');
     mainPage.css('display','block');
-    $('#btn-log,#signIn').click(function (){
+    $('#btn-log,#signIn,#log-in-btn').click(function (){
         allContainerHide();
         header.css('display','block');
         logInPage.css('display','block');
         mainPage.css('display','none');
     });
-    $('#signUpBackToHome,#logInBackToHome,#adminLogOut').click(function (){
+    $('#signUpBackToHome,#logInBackToHome,#adminLogOut,#userLogOut').click(function (){
         allContainerHide();
         header.css('display','block');
         mainPage.css('display','block');

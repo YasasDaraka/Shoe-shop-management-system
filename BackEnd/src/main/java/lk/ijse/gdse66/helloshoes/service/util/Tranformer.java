@@ -39,66 +39,14 @@ public class Tranformer {
         ORDER_ENTITY,
         ORDER_DTO,
         ORDER_DTO_LIST,
-        ORDER_DETAILS_DTO_LIST
+        ORDER_DETAILS_DTO_LIST,
+        PANNEL_DTO
     }
 
     public <R> R convert(Object from, ClassType to) {
-        /*if (getType(to) instanceof OrderDetailsDTO) {
-            return (R) toOrderDetailsDTO((OrderDetails) from);
-        }
-        if (getType(to) instanceof OrderDetails) {
-            return (R) toOrderDetailsEntity((OrderDetailsDTO) from);
-        }
-        if (to.equals(ClassType.ORDER_ENTITY)) {
-            return (R) toOrderEntity((OrderDTO) from);
-        }
-        if (to.equals(ClassType.ORDER_DTO)) {
-            return (R) toOrderDTO((Order) from);
-        }
-        if (to.equals(ClassType.ORDER_DTO_LIST)){
-            return (R) toOrderDTOList((List<Order>) from);
-        }
-        if (to.equals(ClassType.ORDER_DETAILS_DTO_LIST)){
-            return (R) toOrderDetailDTOList((List<OrderDetails>) from);
-        }*/
         return (R) mapper.map(from, getType(to));
-
-    }
-    /*public List<OrderDTO> toOrderDTOList(List<Order> orders) {
-        return orders.stream()
-                .map(this::toOrderDTO)
-                .collect(Collectors.toList());
-    }
-    public List<OrderDetailsDTO> toOrderDetailDTOList(List<OrderDetails> orders) {
-        return orders.stream()
-                .map(this::toOrderDetailsDTO)
-                .collect(Collectors.toList());
-    }
-    public OrderDTO toOrderDTO(Order order) {
-        OrderDTO orderDTO = mapper.typeMap(Order.class, OrderDTO.class)
-                .addMapping(src -> src.getOid(), OrderDTO::setOid)
-                .addMapping(src -> src.getCustomer().getId(), OrderDTO::setCusID)
-                .addMapping(src -> src.getDate(), OrderDTO::setDate)
-                .addMappings(mapper -> mapper.skip(OrderDTO::setOrderDetails))
-                .map(order);
-        List<OrderDetailsDTO> orderDetailsDTOList = order.getOrderDetails().stream()
-                .map(this::toOrderDetailsDTO)
-                .collect(Collectors.toList());
-        orderDTO.setOrderDetails(orderDetailsDTOList);
-
-        return orderDTO;
     }
 
-    public OrderDetailsDTO toOrderDetailsDTO(OrderDetails orderDetail) {
-        return mapper.typeMap(OrderDetails.class, OrderDetailsDTO.class)
-                .addMapping(src -> src.getOrderDetailPK().getOid(), OrderDetailsDTO::setOid)
-                .addMapping(src -> src.getItem().getItmCode(), OrderDetailsDTO::setItmCode)
-                .addMapping(src -> src.getItem().getItmPrice(), OrderDetailsDTO::setItmPrice)
-                .addMapping(src -> src.getItmQTY(), OrderDetailsDTO::setItmQTY)
-                .map(orderDetail);
-    }
-
-*/
     private Type getType(ClassType type) {
         switch (type) {
             case USER_DTO:
@@ -131,18 +79,14 @@ public class Tranformer {
                 return Inventory.class;
             case ITEM_DTO_LIST:
                 return new TypeToken<ArrayList<InventoryDTO>>() {}.getType();
-            /*case ORDER_DETAILS_DTO:
-                return OrderDetailsDTO.class;
-            case ORDER_DETAILS_ENTITY:
-                return OrderDetails.class;*/
             case ORDER_ENTITY:
                 return Sales.class;
             case ORDER_DTO:
                 return SalesDTO.class;
             case ORDER_DTO_LIST:
                 return new TypeToken<ArrayList<SalesDTO>>() {}.getType();
-            /*case ORDER_DETAILS_DTO_LIST:
-                return new TypeToken<ArrayList<OrderDetailsDTO>>() {}.getType();*/
+            case PANNEL_DTO:
+                return AdminPanelDTO.class;
             default:
                 throw new IllegalArgumentException("Unsupported ClassType: " + type);
         }
