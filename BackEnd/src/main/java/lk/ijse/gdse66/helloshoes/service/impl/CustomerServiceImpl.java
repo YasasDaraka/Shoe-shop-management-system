@@ -1,11 +1,13 @@
 package lk.ijse.gdse66.helloshoes.service.impl;
 
+import jakarta.mail.MessagingException;
 import lk.ijse.gdse66.helloshoes.dto.CustomerDTO;
 import lk.ijse.gdse66.helloshoes.repository.CustomerRepo;
 import lk.ijse.gdse66.helloshoes.service.CustomerService;
 import lk.ijse.gdse66.helloshoes.service.exception.DuplicateRecordException;
 import lk.ijse.gdse66.helloshoes.service.exception.NotFoundException;
 import lk.ijse.gdse66.helloshoes.service.util.IdGenerator;
+import lk.ijse.gdse66.helloshoes.service.util.Sender;
 import lk.ijse.gdse66.helloshoes.service.util.Tranformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +27,8 @@ public class CustomerServiceImpl implements CustomerService {
     Tranformer tranformer;
     @Autowired
     IdGenerator generator;
+    @Autowired
+    Sender sender;
     @Override
     public List<CustomerDTO> getAllCustomer() {
         return tranformer.convert(customerRepo.findAll(), Tranformer.ClassType.CUS_DTO_LIST);
@@ -39,6 +43,20 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void saveCustomer(CustomerDTO dto) {
+        String mass ="Welcome to Hello Shoes!\n" +
+                "\n" +
+                "Hello,\n" +
+                "\n" +
+                "We're thrilled to welcome you to Hello Shoes, your one-stop destination for stylish and comfortable footwear!\n" +
+                "\n" +
+                "Whether you're looking for the latest trends or classic styles, we have something for everyone. From sneakers to sandals, boots to flats, our collection caters to all tastes and occasions.\n" +
+                "\n" +
+                "As a valued customer, we want to ensure you have the best shopping experience with us. If you have any questions about our products or need assistance with your order, feel free to reach out to our friendly customer support team at support@helloshoes.com.\n" +
+                "\n" +
+                "Thank you for choosing Hello Shoes. We look forward to serving you!\n" +
+                "\n" +
+                "Best regards,\n" +
+                "Hello Shoes Team";
         customerRepo.findById(dto.getCustomerId()).ifPresentOrElse(
                 customer -> {
                     throw new DuplicateRecordException("Customer Already Exist");
@@ -61,6 +79,15 @@ public class CustomerServiceImpl implements CustomerService {
                         Base64.getEncoder().encodeToString(profilePic.getBytes());
                     }*/
                     customerRepo.save(tranformer.convert(dto, Tranformer.ClassType.CUS_ENTITY));
+                    try {
+                        if (sender.checkConnection()) {
+                            sender.outMail(mass, dto.getEmail(), "Welcome to Hello Shoes!");
+                        } else {
+                            System.err.println("Failed connect mail server.");
+                        }
+                    } catch (MessagingException e) {
+                        e.printStackTrace();
+                    }
                 });
     }
 
