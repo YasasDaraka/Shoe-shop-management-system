@@ -71,7 +71,7 @@ $("#getAllCus, #getAllItm, #getAllEmp, #getAllSup").click(function () {
             break;
     }
 });
-$("#btnCustomer, #btnInventory, #btnSupplier, #btnEmployee, #btnSales,#btnAdminPanel,#btnUsers").click(function () {
+$("#btnCustomer, #btnInventory, #btnSupplier, #btnEmployee, #btnSales,#btnAdminPanel,#btnUsers,#btnDashboard").click(function () {
     hideAdminPages();
     switch ($(this).attr('id')) {
         case 'btnCustomer':
@@ -109,6 +109,11 @@ $("#btnCustomer, #btnInventory, #btnSupplier, #btnEmployee, #btnSales,#btnAdminP
             break;
         case 'btnUsers':
             userEditPage.css('display', 'block');
+            getAllUsers();
+            allCaptureClear();
+            break;
+        case 'btnDashboard':
+            adminDashboard.css('display', 'block');
             getAllUsers();
             allCaptureClear();
             break;

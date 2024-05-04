@@ -19,6 +19,8 @@ let paymentPage = $('#payment-container');
 let cardPage = $('#card-container');
 let adminEditPage = $('#admin-edit-container');
 let userEditPage = $('#user-edit-container');
+let adminDashboard = $('#admin-dashboard-container');
+let userDashboard = $('#user-dashboard-container');
 
 let videoStream;
 let empVideoStream;
@@ -38,6 +40,8 @@ function allContainerHide(){
     cardPage.css('display','none');
     adminEditPage.css('display','none');
     userEditPage.css('display','none');
+    adminDashboard.css('display','none');
+    userDashboard.css('display','none');
 }
 $(window).on('load',function (){
     $("#loader").css('display','none');
@@ -72,6 +76,8 @@ $(window).on('load',function (){
         'flex': '1',
         'max-width': 'calc(100%/5*1)'
     })
+    setDate();
+    setTime();
 });
 function purchaseBtnHide(value){
     $("#txtBalance").prop("disabled", value);
@@ -101,6 +107,9 @@ function userLimits(){
     $('#empCaptureButton').hide();
     $('#itmCaptureButton').hide();
 
+    $('#userUpdate').hide();
+    $('#userDelete').hide();
+
 }
 function userlimitOff(){
     $("#cusUpdate").show();
@@ -116,6 +125,8 @@ function userlimitOff(){
     $("#supDelete").show();
     $("#order-update").show();
     $("#order-delete").show();
+    $('#userUpdate').show();
+    $('#userDelete').show();
 
     $('#empCaptureButton').show();
     $('#itmCaptureButton').show();
@@ -153,4 +164,34 @@ function showAlert(name) {
             console.log("closed timer");
         }
     });
+}
+function setDate() {
+    let currentDate = new Date();
+    let year = currentDate.getFullYear();
+    let month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
+    let day = currentDate.getDate().toString().padStart(2, '0');
+    let formattedDate = year + '-' + month + '-' + day;
+    $('.currDate').text(` : ${formattedDate}`);
+}
+
+function setTime() {
+    setInterval(function (){
+        let currentTime = new Date();
+        let hours = currentTime.getHours();
+        let minutes = currentTime.getMinutes();
+        let seconds = currentTime.getSeconds();
+
+        if (hours < 10) {
+            hours = "0" + hours;
+        }
+        if (minutes < 10) {
+            minutes = "0" + minutes;
+        }
+        if (seconds < 10) {
+            seconds = "0" + seconds;
+        }
+
+        const formattedTime = hours + ":" + minutes + ":" + seconds;
+        $('.currTime').text(` : ${formattedTime}`);
+    },1000);
 }

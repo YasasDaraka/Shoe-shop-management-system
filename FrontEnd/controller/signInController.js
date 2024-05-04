@@ -113,12 +113,14 @@ function signIn() {
                         allContainerHide();
                         showAlert("Admin");
                         adminPage.css('display','block');
+                        adminDashboard.css('display','block');
                         logInPage.css('display','none');
                     } else if(res.role === "USER"){
                         userLimits();
                         allContainerHide();
                         showAlert("User");
                         userPage.css('display','block');
+                        userDashboard.css('display','block');
                         logInPage.css('display','none');
                     }
                 },

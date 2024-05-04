@@ -132,27 +132,27 @@
 
               <h1 id="txtCusID" class="ms-4 visually-hidden" style="color: #FFA633 ;font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">aaaa</h1>
 
-              <div class="ms-4 mt-4" style="width: 90%; height: 48vh">
+              <div class="ms-4 mt-3" style="width: 90%; height: 48vh">
                 <div class="col-sm">
-                  <label for="inputEmail" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Email</label>
+                  <label for="inputEmail" class="form-label m-0" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Email</label>
                   <input type="email" class="form-control" id="inputEmail"style="width: 18vw">
-                  <p class="position-absolute mt-1"><small class="text-danger" id="inputEmailError"></small></p>
+                  <p class="position-absolute m-0"><small class="text-danger" id="inputEmailError"></small></p>
                 </div>
                 <div class="">
                   <div class="row">
 
-                    <div class="col-sm">
-                      <label for="inputPassword" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Password</label>
+                    <div class="col-sm mt-3">
+                      <label for="inputPassword" class="form-label m-0" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Password</label>
                       <input type="password" class="form-control " id="inputPassword" style="width: 250px">
-                      <p class="position-absolute mt-1"><small class="text-danger" id="inputPasswordError"></small></p>
+                      <p class="position-absolute m-0"><small class="text-danger" id="inputPasswordError"></small></p>
                     </div>
-                    <div class="col-sm">
-                      <label for="reInputPassword" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Confirm Password</label>
+                    <div class="col-sm mt-3">
+                      <label for="reInputPassword" class="form-label m-0" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Confirm Password</label>
                       <input type="password" class="form-control " id="reInputPassword" style="width: 250px">
-                      <p class="position-absolute mt-1"><small class="text-danger" id="reInputPasswordError"></small></p>
+                      <p class="position-absolute m-0"><small class="text-danger" id="reInputPasswordError"></small></p>
                     </div>
-                    <div class="col-sm">
-                      <label for="inputRole" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Role</label>
+                    <div class="col-sm mt-3">
+                      <label for="inputRole" class="form-label m-0" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Role</label>
                       <select aria-label="Default select example" class="form-select " id="inputRole" style="width: 10vw">
                         <option value="ADMIN"selected>Admin</option>
                         <option value="USER">User</option>
@@ -178,9 +178,15 @@
     <header id="admin-header">
       <nav  class="navbar navbar-expand-lg bg-white nav-bar container-fluid d-flex " style="height: 60px; padding-right: 20px;padding-left: 50px">
         <div id="side-bar-icon" class="d-flex justify-content-center align-items-center"style="display: inline-block; box-shadow: 0px 1px 10px #909090; background-color: white; z-index: 4; width: 32px; height: 33px; border-radius: 25%"><img class="admin-icon" style="width: 60px; padding-right:10px; z-index: 5" src="assets/images/arrow.gif"></div>
-        <!-- <img src="" width="" class="me-3">-->
+        <div class="d-flex justify-content-evenly">
+          <div class="nav-item d-flex justify-content-center" style="padding-left:63vw ">
+            <span style="color: darkgoldenrod">Time : </span><div class="nav-link active currTime" aria-current="page" href="#" style="z-index:5; font-weight: 600; font-size: 16px;" ></div>
+          </div>
+          <div class="nav-item position-absolute d-flex justify-content-center" style="left: 80vw;">
+            <span style="color: darkgoldenrod">Date : </span><div class="nav-link active currDate" aria-current="page" href="#" style="z-index:5;font-weight: 600; font-size: 16px;"></div>
+          </div>
+        </div>
         <div class="ms-auto">
-          <!--<button type="button" class="btn" id="adminSignIn">Sign In</button>-->
           <button type="button" class="btn" id="adminLogOut" style="z-index: 5;">Log Out</button>
         </div>
       </nav>
@@ -213,9 +219,17 @@
     <header id="user-header">
       <nav class="navbar navbar-expand-lg bg-white nav-bar container-fluid d-flex " style="height: 60px; padding-right: 20px;padding-left: 50px">
         <div class="d-flex justify-content-center align-items-center"style="display: inline-block; box-shadow: 0px 1px 10px #909090; background-color: white; z-index: 4; width: 32px; height: 33px; border-radius: 25%"><img class="admin-icon" style="width: 60px; padding-right:10px; z-index: 5" src="assets/images/arrow.gif"></div>
-        <!-- <img src="" width="" class="me-3">-->
+
+        <div class="d-flex justify-content-evenly">
+          <div class="nav-item d-flex justify-content-center" style="padding-left:63vw ">
+            <span style="color: darkgoldenrod">Time : </span><div class="nav-link active currTime" aria-current="page" href="#" style="z-index:5; font-weight: 600; font-size: 16px;" ></div>
+          </div>
+          <div class="nav-item position-absolute d-flex justify-content-center" style="left: 80vw;">
+            <span style="color: darkgoldenrod">Date : </span><div class="nav-link active currDate" aria-current="page" href="#" style="z-index:5;font-weight: 600; font-size: 16px;"></div>
+          </div>
+        </div>
+
         <div class="ms-auto">
-          <!--<button type="button" class="btn" id="adminSignIn">Sign In</button>-->
           <button type="button" class="btn" id="userLogOut" style="z-index: 5;">Log Out</button>
         </div>
       </nav>
@@ -1613,6 +1627,32 @@
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="user-dashboard-container">
+    <div class="container-fluid p-0" style="height: 90.5vh; z-index: 5;" >
+      <div class="row h-100 m-0 w-100">
+        <div class="container m-0" style="padding: 1.9vw 1.9vw 1.5vw 7vw;">
+          <div class="row h-100 m-0" style="box-shadow: 0px 1px 10px #909090; border-radius: 10px;">
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="admin-dashboard-container">
+    <div class="container-fluid p-0" style="height: 90.5vh; z-index: 5;" >
+      <div class="row h-100 m-0 w-100">
+        <div class="container m-0" style="padding: 1.9vw 1.9vw 1.5vw 7vw;">
+          <div class="row h-100 m-0" style="box-shadow: 0px 1px 10px #909090; border-radius: 10px;">
+
+
           </div>
         </div>
       </div>

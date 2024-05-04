@@ -32,8 +32,6 @@ function signUp() {
 };
 
 $("#inputPassword").on("keydown keyup", function (e) {
-    /*$("#log-in-PasswordError").text("");
-    $("#log-in-Password").css("border", "1px solid #ced4da");*/
     $("#signup-page-signup").prop("disabled", true);
     if ($("#inputPassword").val() !== "") {
         if (User_PASS_REGEX.test($("#inputPassword").val())) {
@@ -43,7 +41,7 @@ $("#inputPassword").on("keydown keyup", function (e) {
                 if ($("#inputEmail").val() !== "") {
                     searchUserPanel($("#inputEmail").val()).then(function (res) {
                         if (res) {
-                            /*$("#inputEmailError").text("Invalid User Name");*/
+                            $("#inputEmailError").text("Invalid User Name");
                             $("#inputEmail").css("border", "2px solid red");
                             $("#signup-page-signup").prop("disabled", true);
                         } else {
@@ -54,13 +52,13 @@ $("#inputPassword").on("keydown keyup", function (e) {
                                         $("#reInputPassword").css("border", "2px solid green");
                                         $("#signup-page-signup").prop("disabled", false);
                                     }else {
-                                        /*$("#reInputPasswordError").text("Password not match");*/
+                                        $("#reInputPasswordError").text("Password not match");
                                         $("#reInputPassword").css("border", "2px solid red");
                                         $("#signup-page-signup").prop("disabled", true);
                                     }
 
                                 } else {
-                                    /*$("#reInputPasswordError").text("8 Chars - Uppercase,Lowercase,numbers");*/
+                                    $("#reInputPasswordError").text("8 Chars - Uppercase,Lowercase,numbers");
                                     $("#reInputPassword").css("border", "2px solid red");
                                     $("#signup-page-signup").prop("disabled", true);
                                 }
@@ -76,7 +74,7 @@ $("#inputPassword").on("keydown keyup", function (e) {
                     $("#inputEmail").css("border", "1px solid #ced4da");
                 }
             } else {
-                /*$("#inputPasswordError").text("8 Chars - Uppercase,Lowercase,numbers");*/
+                $("#inputPasswordError").text("8 Chars - Uppercase,Lowercase,numbers");
                 $("#inputPassword").css("border", "2px solid red");
                 $("#signup-page-signup").prop("disabled", true);
             }
@@ -95,7 +93,7 @@ $("#reInputPassword").on("keydown keyup", function (e) {
             if ($("#inputEmail").val() !== "") {
                 searchUserPanel($("#inputEmail").val()).then(function (res) {
                     if (res) {
-                        /*$("#inputEmailError").text("Invalid User Name");*/
+                        $("#inputEmailError").text("Invalid User Name");
                         $("#inputEmail").css("border", "2px solid red");
                         $("#signup-page-signup").prop("disabled", true);
                     } else {
@@ -106,13 +104,13 @@ $("#reInputPassword").on("keydown keyup", function (e) {
                                     $("#reInputPassword").css("border", "2px solid green");
                                     $("#signup-page-signup").prop("disabled", false);
                                 }else {
-                                    /*$("#reInputPasswordError").text("Password not match");*/
+                                    $("#reInputPasswordError").text("Password not match");
                                     $("#reInputPassword").css("border", "2px solid red");
                                     $("#signup-page-signup").prop("disabled", true);
                                 }
 
                             } else {
-                              /*  $("#inputPasswordError").text("8 Chars - Uppercase,Lowercase,numbers");*/
+                                $("#inputPasswordError").text("8 Chars - Uppercase,Lowercase,numbers");
                                 $("#inputPassword").css("border", "2px solid red");
                                 $("#signup-page-signup").prop("disabled", true);
                             }
@@ -128,7 +126,7 @@ $("#reInputPassword").on("keydown keyup", function (e) {
                 $("#inputEmail").css("border", "1px solid #ced4da");
             }
         } else {
-           /* $("#reInputPasswordError").text("8 Chars - Uppercase,Lowercase,numbers");*/
+            $("#reInputPasswordError").text("8 Chars - Uppercase,Lowercase,numbers");
             $("#reInputPassword").css("border", "2px solid red");
             $("#signup-page-signup").prop("disabled", true);
         }
@@ -147,7 +145,7 @@ $("#inputEmail").on("keydown keyup", function (e) {
 
             searchUserPanel($("#inputEmail").val()).then(function (res) {
                 if (res) {
-                    /*$("#inputEmailError").text("Invalid User Name");*/
+                    $("#inputEmailError").text("Invalid User Name");
                     $("#inputEmail").css("border", "2px solid red");
                     $("#signup-page-signup").prop("disabled", true);
                 } else {
@@ -158,13 +156,13 @@ $("#inputEmail").on("keydown keyup", function (e) {
                                 $("#reInputPassword").css("border", "2px solid green");
                                 $("#signup-page-signup").prop("disabled", false);
                             } else {
-                                /*$("#reInputPasswordError").text("Password not match");*/
+                                $("#reInputPasswordError").text("Password not match");
                                 $("#reInputPassword").css("border", "2px solid red");
                                 $("#signup-page-signup").prop("disabled", true);
                             }
 
                         } else {
-                           /* $("#reInputPasswordError").text("8 Chars - Uppercase,Lowercase,numbers");*/
+                            $("#reInputPasswordError").text("8 Chars - Uppercase,Lowercase,numbers");
                             $("#reInputPassword").css("border", "2px solid red");
                             $("#signup-page-signup").prop("disabled", true);
                         }
@@ -176,7 +174,7 @@ $("#inputEmail").on("keydown keyup", function (e) {
 
             });
         }else {
-           /* $("#inputEmailError").text("Invalid username");*/
+            $("#inputEmailError").text("Invalid username");
             $("#inputEmail").css("border", "2px solid red");
             $("#signup-page-signup").prop("disabled", true);
         }

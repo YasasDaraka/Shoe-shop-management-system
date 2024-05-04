@@ -1,4 +1,4 @@
-$("#userBtnCustomer, #userBtnInventory, #userBtnSupplier, #userBtnEmployee, #userBtnSales").click(function () {
+$("#userBtnCustomer, #userBtnInventory, #userBtnSupplier, #userBtnEmployee, #userBtnSales,#userBtnUsers").click(function () {
     hideAdminPages();
     switch ($(this).attr('id')) {
         case 'userBtnCustomer':
@@ -23,6 +23,9 @@ $("#userBtnCustomer, #userBtnInventory, #userBtnSupplier, #userBtnEmployee, #use
             break;
         case 'userBtnSales':
             paymentPage.css('display', 'block');
+            break;
+        case 'userBtnUsers':
+            userEditPage.css('display', 'block');
             break;
     }
 });
