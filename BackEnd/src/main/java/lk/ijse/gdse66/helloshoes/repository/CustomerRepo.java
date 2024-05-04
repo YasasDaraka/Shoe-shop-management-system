@@ -11,5 +11,5 @@ import java.util.List;
 public interface CustomerRepo extends JpaRepository<Customer,String> {
     @Query(value = "SELECT CAST(SUBSTRING(customer_id, 5) AS SIGNED) AS customer_id FROM Customer ORDER BY customer_id DESC LIMIT 1",nativeQuery = true)
     String getCusId();
-    List<Customer> findEmpByBirthday(Date date);
+    List<Customer> findByCustomerDob(Date date);
 }

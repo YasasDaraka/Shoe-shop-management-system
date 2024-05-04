@@ -107,8 +107,7 @@ function userLimits(){
     $('#empCaptureButton').hide();
     $('#itmCaptureButton').hide();
 
-    $('#userUpdate').hide();
-    $('#userDelete').hide();
+    $('#userSave').hide();
 
 }
 function userlimitOff(){
@@ -125,8 +124,7 @@ function userlimitOff(){
     $("#supDelete").show();
     $("#order-update").show();
     $("#order-delete").show();
-    $('#userUpdate').show();
-    $('#userDelete').show();
+    $('#userSave').show();
 
     $('#empCaptureButton').show();
     $('#itmCaptureButton').show();

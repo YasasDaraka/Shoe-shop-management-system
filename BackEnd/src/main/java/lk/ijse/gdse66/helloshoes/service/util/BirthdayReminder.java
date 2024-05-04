@@ -4,6 +4,7 @@ import jakarta.mail.MessagingException;
 import lk.ijse.gdse66.helloshoes.entity.Customer;
 import lk.ijse.gdse66.helloshoes.entity.Employee;
 import lk.ijse.gdse66.helloshoes.repository.CustomerRepo;
+import lk.ijse.gdse66.helloshoes.repository.EmployeeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.scheduling.annotation.Scheduled;
@@ -19,7 +20,8 @@ public class BirthdayReminder {
 
     @Autowired
     CustomerRepo customerRepo;
-
+    @Autowired
+    EmployeeRepo employeeRepo;
     @Autowired
     Sender sender;
 
@@ -27,20 +29,36 @@ public class BirthdayReminder {
     public void sendBirthdayWishes() {
         LocalDate localDate = LocalDate.now();
         Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-        List<Customer> cus = customerRepo.findEmpByBirthday(date);
+        List<Customer> cus = customerRepo.findByCustomerDob(date);
         for (Customer c : cus) {
-            sendEmail(c);
+            sendEmail(c,"cus");
+        }
+        List<Employee> emp = employeeRepo.findByEmployeeDob(date);
+        for (Employee e : emp) {
+            sendEmail(e,"emp");
         }
     }
-    private void sendEmail(Customer cus) {
+    public void sendEmail(Object ob,String type) {
+        String name = "";
+        String mail = "";
+        if (type.equals("cus")){
+            Customer cus = (Customer) ob;
+            name = cus.getCustomerName();
+            mail = cus.getEmail();
+        }
+        else if (type.equals("cus")){
+            Employee emp = (Employee) ob;
+            name = emp.getEmployeeName();
+            mail = emp.getEmail();
+        }
         try {
-          String mass= "Dear " + cus.getCustomerName() + ",\n\n" +
+          String mass= "Dear " + name + ",\n\n" +
                     "Wishing you a wonderful Birthday filled with joy and happiness!\n\n" +
                     "Best regards,\n" +
                     "Hello Shoes Team";
 
                 if (sender.checkConnection()) {
-                    sender.outMail(mass, cus.getEmail(), "Welcome to Hello Shoes!");
+                    sender.outMail(mass, mail, "Welcome to Hello Shoes!");
                 } else {
                     System.err.println("Failed connect mail server.");
                 }

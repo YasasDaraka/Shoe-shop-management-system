@@ -1554,13 +1554,20 @@
                       <div class="row m-0 p-0">
                         <input type="text" class="form-control" id="userName" style="width: 15vw">
                       </div>
-                      <p class="position-absolute mt-1"><small class="text-danger" id="userIdError"></small></p>
+                      <p class="position-absolute m-0"><small class="text-danger" id="userIdError"></small></p>
                     </div>
-                    <div class="row">
-                      <div>
+                    <div class="row" style="padding-top: 1.5vw;">
+                      <div >
                         <label for="userOldPassword" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Password</label>
                         <input placeholder="Update or Delete" type="password" class="form-control" id="userOldPassword">
-                        <p class="position-absolute mt-1"><small class="text-danger" id="userOldPasswordError" style="width: 15vw"></small></p>
+                        <p class="position-absolute m-0"><small class="text-danger" id="userOldPasswordError" style="width: 15vw"></small></p>
+                      </div>
+                      <div class="row"style="padding-top: 1.5vw;">
+                        <div >
+                          <label id="userNewPassLabel" for="userNewPass" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">New Password</label>
+                          <input placeholder="Update or Delete" type="password" class="form-control" id="userNewPass">
+                          <p class="position-absolute m-0"><small class="text-danger" id="userNewPassError" style="width: 15vw"></small></p>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -1572,26 +1579,6 @@
                         <option value="USER">USER</option>
                       </select>
                     </div>
-                    <!--<div class="col">
-                      <div class="col-md-12 p-0">
-                        <div class="container h-100 mt-4">
-                          <label class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 16px;position: relative;left: 2.5vw;bottom: 1vw;">Capture Image</label>
-                          <div class="row h-100">
-                            <div class="col p-0">
-                              <div class=" h-100 w-100 ">
-                                <div class="row">
-                                  <div class="col-12 d-flex justify-content-center">
-                                    <video id="userVideo" class="web" width="200" height="150" style="display:none;" autoplay></video>
-                                    <canvas id="userCanvas" class="web" width="200" height="150" style="display:none;"></canvas>
-                                    <img src="assets/images/walk.gif" id="userCapturedImage" class="web" width="200" style="display:block; ">
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>-->
                   </div>
                 </div>
               </div>
@@ -1604,7 +1591,6 @@
                       <button type="button" class="btn btn-success" style="font-weight: bold;" id="userUpdate">Update</button>
                       <button type="button" class="btn btn-danger" style="width: 66px;" id="userDelete">Delete</button>
                       <button type="button" class="btn btn-warning" id="userClear">Clear</button>
-<!--                      <button id="userCaptureButton" class="btn btn-primary" style="display:block;" type="button">Capture</button>-->
                     </div>
                   </div>
                 </div>

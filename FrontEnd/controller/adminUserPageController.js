@@ -2,6 +2,8 @@ $(document).ready(function () {
     // setTime();
     // setDate();
     //adminFieldSet(true);
+    $("#userNewPass").hide();
+    $("#userNewPassLabel").hide();
     $("#userSave").prop("disabled", true);
     $("#userDelete").prop("disabled", true);
     $("#userUpdate").prop("disabled", true);
@@ -74,10 +76,13 @@ $("#userOldPassword").on("keydown keyup", function (e) {
         $("#userClear").prop("disabled", true);
         if (User_PASS_REGEX.test($("#userOldPassword").val())) {
             searchUserPanel($("#userName").val()).then(function (res) {
+                const role = localStorage.getItem('role');
                 if (!res) {
-                    $("#userSave").prop("disabled", false);
-                    $("#userOldPasswordError").text("");
-                    $("#userOldPassword").css("border", "1px solid #ced4da");
+                    if (role == "ADMIN"){
+                        $("#userSave").prop("disabled", false);
+                        $("#userOldPasswordError").text("");
+                        $("#userOldPassword").css("border", "1px solid #ced4da");
+                    }
                 }
                 else {
                     userCheckToUpdate($("#userOldPassword").val());
@@ -95,6 +100,13 @@ $("#userOldPassword").on("keydown keyup", function (e) {
         $("#userOldPassword").css("border", "1px solid #ced4da")
         $("#userClear").prop("disabled", true);
     }
+});
+$("#userOldPassword").on("keydown keyup", function (e) {
+    if ($("#userNewPass").is(":visible")){
+        $("#userDelete").prop("disabled", false);
+    }
+    var password = $("#userOldPassword").val();
+    userCheckToUpdate(password);
 });
 function searchUserPanel(name) {
     return new Promise(function (resolve, reject) {
@@ -124,22 +136,68 @@ function userCheckToUpdate(oldPass) {
     searchUserPanel($("#userName").val()).then(function (user) {
         if (user) {
             if (User_PASS_REGEX.test($("#userOldPassword").val())) {
+                const role = localStorage.getItem('role');
+                if (role == "ADMIN"){
                     $("#userDelete").prop("disabled", false);
                     $("#userUpdate").prop("disabled", false);
+                }else if (role == "USER"){
+                    passwordCheck($("#userName").val(),oldPass).then(function (pass) {
+                        if (pass) {
+                            $("#userNewPass").show();
+                            $("#userNewPassLabel").show();
+                            $("#userDelete").prop("disabled", false);
+                            $("#userUpdate").prop("disabled", true);
 
+                        }else {
+                            $("#userNewPass").hide();
+                            $("#userNewPassLabel").hide();
+                            $("#userDelete").prop("disabled", true);
+                            $("#userUpdate").prop("disabled", true);
+                        }
+                    });
+                }
                 }else {
                     $("#userDelete").prop("disabled", true);
                     $("#userUpdate").prop("disabled", true);
                 }
         }else {
             if (User_PASS_REGEX.test($("#userOldPassword").val())) {
-                $("#userSave").prop("disabled", false);
+                const role = localStorage.getItem('role');
+                if (role == "ADMIN"){
+                    $("#userSave").prop("disabled", false);
+                }else if (role == "USER"){
+                    $("#userSave").prop("disabled", true);
+                }
             }else {
                 $("#userSave").prop("disabled", true);
             }
         }
     });
 }
+$("#userNewPass").on("keydown keyup", function (e) {
+
+    if ($("#userNewPass").val() !== "" && $("#userOldPassword").val() !== "") {
+        var oldPass = $("#userOldPassword").val();
+        var newPass = $("#userNewPass").val();
+        searchUserPanel($("#userName").val()).then(function (user) {
+            if (user) {
+                passwordCheck($("#userName").val(), oldPass).then(function (pass) {
+                    if (pass) {
+                        passwordCheck($("#userName").val(), newPass).then(function (check) {
+                            console.log(check)
+                            if (!check && ADMIN_PASS_REGEX.test($("#userNewPass").val())) {
+                                $("#userDelete").prop("disabled", false);
+                                $("#userUpdate").prop("disabled", false);
+                            } else {
+                                $("#userUpdate").prop("disabled", true);
+                            }
+                        });
+                    }
+                });
+            }
+        });
+    }
+});
 $("#userSave").click(function () {
     saveUser();
 });
