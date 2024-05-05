@@ -119,7 +119,9 @@ $("#btnConfirm").click(function () {
 $("#order-clear,.order-nav").click(function () {
     clearAll();
 });
-
+$("#orderIdAdd").click(function () {
+    generateOrderId();
+});
 $("#OrdItm").on("keydown keyup", function (e) {
     if ($("#OrdItm").val() !== "") {
         let indexNo = o_Array.indexOf(o_Array.find((c) => c.field.attr("id") == e.target.id));
