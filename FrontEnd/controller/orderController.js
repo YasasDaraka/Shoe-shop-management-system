@@ -22,6 +22,7 @@ $(document).ready(function () {
         'flex': '1',
         'max-width': 'calc(100%/7*1)'
     })
+    generateOrderId();
 });
 $("#paymentCard").click(function () {
     purchaseBtnHide(true);
@@ -119,13 +120,6 @@ $("#order-clear,.order-nav").click(function () {
     clearAll();
 });
 
-/*function generateOrderId() {
-    loadOrderId().then(function (id) {
-        $("#orderID").val(id);
-    }).catch(function (error) {
-        console.error("Error loading order Id:", error);
-    });
-}*/
 $("#OrdItm").on("keydown keyup", function (e) {
     if ($("#OrdItm").val() !== "") {
         let indexNo = o_Array.indexOf(o_Array.find((c) => c.field.attr("id") == e.target.id));
