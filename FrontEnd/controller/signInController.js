@@ -114,6 +114,7 @@ function signIn() {
                         showAlert("Admin");
                         adminPage.css('display','block');
                         adminDashboard.css('display','block');
+                        $("#formIcon").text("AdminPanel");
                         logInPage.css('display','none');
                     } else if(res.role === "USER"){
                         userLimits();
@@ -121,6 +122,7 @@ function signIn() {
                         showAlert("User");
                         userPage.css('display','block');
                         userDashboard.css('display','block');
+                        $("#formIcon").text("Dashboard");
                         logInPage.css('display','none');
                     }
                 },

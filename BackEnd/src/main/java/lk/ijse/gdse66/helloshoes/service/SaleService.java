@@ -14,4 +14,5 @@ public interface SaleService {
     void updateSales(SalesDTO dto);
     void deleteSales(String id);
     String getOrderGenId();
+    AdminPanel getAdminPanel();
 }

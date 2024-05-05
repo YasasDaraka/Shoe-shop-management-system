@@ -19,11 +19,11 @@ public class InventoryController {
     @Autowired
     InventoryService itemService;
 
-    @ResponseStatus(HttpStatus.OK)
+    /*@ResponseStatus(HttpStatus.OK)
     @GetMapping(path = "/getAll")
     public List<InventoryDTO> getAllInventory() {
         return itemService.getAllInventory();
-    }
+    }*/
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(path = "/search/{id}")
@@ -55,7 +55,8 @@ public class InventoryController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(path = "/getAll/{sort}")
     public List<InventoryDTO> getAllSortedInventory(@PathVariable("sort") String sort) {
-        return itemService.getAllInventory();
+        if (sort.equals("getAll")){return itemService.getAllInventory();}
+        return itemService.getAllSortedInventory(sort);
     }
 
 }

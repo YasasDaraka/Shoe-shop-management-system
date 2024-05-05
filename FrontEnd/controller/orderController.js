@@ -5,6 +5,24 @@ let o_Array = new Array();
 o_Array.push({field: $("#ordItmQty"), regEx: QTY_REGEX });
 o_Array.push({field: $("#OrdItm"), regEx: ord_itm_ID_REGEX });
 o_Array.push({field: $("#ordCusId"), regEx: ord_CUS_ID_REGEX });
+
+$(document).ready(function () {
+    $("#btnConfirm").prop("disabled", true);
+    $("#order-add-item").prop("disabled", true);
+    $("#btnSubmitOrder").prop("disabled", true);
+    $("#order-clear").prop("disabled", true);
+    $("#order-update").prop("disabled", true);
+    $("#order-delete").prop("disabled", true);
+    //generateOrderId();
+    $('#order-thead').css({
+        'width': '100%',
+        'display': 'flex'
+    });
+    $('#order-thead>th').css({
+        'flex': '1',
+        'max-width': 'calc(100%/7*1)'
+    })
+});
 $("#paymentCard").click(function () {
     purchaseBtnHide(true);
     allContainerHide();
@@ -21,22 +39,80 @@ $("#cancel").click(function () {
 $("#paymentCash").click(function () {
     purchaseBtnHide(false);
 });
+$("#backToPayment").click(function () {
+    $('#confirm-container').hide();
+});
+$("#confirmPassword").on("keydown keyup", function (e) {
+    $("#btnConfirm").prop("disabled", true);
+    if ($("#confirmPassword").val() !== "") {
+        passwordCheck($("#confirmUsername").val(),$("#confirmPassword").val()).then(function (pass) {
+            if (pass) {
+                $("#confirmPasswordError").text("");
+                $("#confirmPassword").css("border", "2px solid green");
 
-$(document).ready(function () {
-    $("#order-add-item").prop("disabled", true);
-    $("#btnSubmitOrder").prop("disabled", true);
-    $("#order-clear").prop("disabled", true);
-    $("#order-update").prop("disabled", true);
-    $("#order-delete").prop("disabled", true);
-    //generateOrderId();
-    $('#order-thead').css({
-        'width': '100%',
-        'display': 'flex'
-    });
-    $('#order-thead>th').css({
-        'flex': '1',
-        'max-width': 'calc(100%/7*1)'
-    })
+                if ($("#confirmUsername").val() !== "") {
+                    searchUserPanel($("#confirmUsername").val()).then(function (res) {
+                        if (res) {
+                            $("#confirmUsernameError").text("");
+                            $("#confirmUsername").css("border", "2px solid green");
+                            $("#btnConfirm").prop("disabled", false);
+                        } else {
+                            $("#confirmUsernameError").text("Invalid User Name");
+                            $("#confirmUsername").css("border", "2px solid red");
+                            $("#btnConfirm").prop("disabled", true);
+                        }
+
+                    });
+                } else {
+                    $("#confirmUsernameError").text("");
+                    $("#confirmUsername").css("border", "1px solid #ced4da");
+                }
+            } else {
+                $("#confirmPasswordError").text("Invalid password");
+                $("#confirmPassword").css("border", "2px solid red");
+                $("#btnConfirm").prop("disabled", true);
+            }
+        });
+    }else {
+        $("#confirmPasswordError").text("");
+        $("#confirmPassword").css("border", "1px solid #ced4da");
+    }
+});
+$("#confirmUsername").on("keydown keyup", function (e) {
+    /*$("#log-in-UsernameError").text("");
+    $("#log-in-Username").css("border", "1px solid #ced4da");*/
+    $("#btnConfirm").prop("disabled", true);
+    if ($("#confirmUsername").val() !== "") {
+        searchUserPanel($("#confirmUsername").val()).then(function (res) {
+            if (res) {
+                $("#confirmUsernameError").text("");
+                $("#confirmUsername").css("border", "2px solid green");
+                passwordCheck($("#confirmUsername").val(),$("#confirmPassword").val()).then(function (pass) {
+                    if (pass) {
+                        $("#confirmPasswordError").text("");
+                        $("#confirmPassword").css("border", "2px solid green");
+                        $("#btnConfirm").prop("disabled", false);
+
+                    }else {
+                        $("#confirmPasswordError").text("Invalid password");
+                        $("#confirmPassword").css("border", "2px solid red");
+                        $("#btnConfirm").prop("disabled", true);
+                    }
+                });
+            }
+            else {
+                $("#confirmUsernameError").text("Invalid Username");
+                $("#confirmUsername").css("border", "2px solid red");
+            }
+        });
+    } else {
+        $("#confirmUsernameError").text("");
+        $("#confirmUsername").css("border", "1px solid #ced4da");
+    }
+});
+
+$("#btnConfirm").click(function () {
+    deleteOrder();
 });
 
 $("#order-clear,.order-nav").click(function () {
@@ -194,6 +270,28 @@ function placeOrder(payment) {
     });
 }
 $("#order-update").click(function () {
+
+    const role = localStorage.getItem('role');
+    if (role == "USER") {
+        $('#confirm-container').show();
+    }
+    if (role == "ADMIN") {
+        updateOrder();
+    }
+
+});
+
+$("#order-delete").click(function () {
+
+    const role = localStorage.getItem('role');
+        if (role == "USER") {
+            $('#confirm-container').show();
+        }
+        if (role == "ADMIN") {
+            deleteOrder();
+        }
+});
+function updateOrder() {
     let id = $("#orderId").val();
     searchOrder(id).then(function (isValid) {
         if (Object.keys(isValid).length !== 0) {
@@ -214,13 +312,13 @@ $("#order-update").click(function () {
 
                     if (itemValidate()) {
 
-                                if (cashValidate()) {
-                                    placeOrder("Cash");
-                                    clearAll();
-                                    generateOrderId();
-                                } else {
-                                    swal("Error", "Insufficient Credit : Check Cash!", "error");
-                                }
+                        if (cashValidate()) {
+                            placeOrder("Cash");
+                            clearAll();
+                            generateOrderId();
+                        } else {
+                            swal("Error", "Insufficient Credit : Check Cash!", "error");
+                        }
                     } else {
                         swal("Error", "Please Add Items to Place Order", "error");
                     }
@@ -233,12 +331,9 @@ $("#order-update").click(function () {
             swal("Error", "No such Order..please check the ID", "error");
         }
     });
-
-});
-
-$("#order-delete").click(function () {
+}
+function deleteOrder(){
     let id = $("#orderId").val();
-
     searchOrder(id).then(function (isValid) {
         if (Object.keys(isValid).length === 0) {
             swal("Error", "No such Order..please check the ID", "error");
@@ -283,8 +378,7 @@ $("#order-delete").click(function () {
             });
         }
     });
-
-});
+}
 $("#order-add-item").click(function () {
     let id = $("#OrdItm").val();
     let name = $("#OrdItmDes").val();
@@ -575,21 +669,6 @@ async function setOrdUpdateBtn() {
     setOrdClBtn();
 }
 
-function updateAddedItemTable(order) {
-    $("#order-table").empty();
-    order.saleDetails.forEach(saleDetail => {
-        let row = `<tr>
-                       <td><img class="rounded mx-auto d-block" src="assets/images/delete.gif" alt="Card" style="width: 36px; z-index: 5;" /></td>
-                       <td>${saleDetail.orderDetailPK.itemCode}</td>
-                       <td>${saleDetail.inventory.itemDesc}</td>
-                       <td>${saleDetail.inventory.size}</td>
-                       <td>${saleDetail.inventory.salePrice}</td>
-                       <td>${saleDetail.itmQTY}</td>
-                       <td>${saleDetail.total}</td>
-                   </tr>`;
-        $("#order-table").append(row);
-    });
-}
 function setOrdClBtn(){
     var empty = true;
     $("#orderId,#OrdItmDes, #OrdItm, #ordItmPrice, #ordItmSize, #ordItmQty, #ordDate, #ordCusId, #ordCusName, #ordPoints,#txtCash").each(function() {

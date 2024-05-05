@@ -1,33 +1,10 @@
 $(document).ready(function () {
-    // setTime();
-    // setDate();
-    /*itmFieldSet(false);*/
     $("#itmSave").prop("disabled", true);
     $("#itmDelete").prop("disabled", true);
     $("#itmUpdate").prop("disabled", true);
     $("#itmSearch").prop("disabled", true);
     $("#itmClear").prop("disabled", true);
-    //setItmClBtn();
-/*    var targetNode = document.getElementById('inventory-main');
-    var config = {attributes: true, attributeFilter: ['style']};
-    var callback = function (mutationsList, observer) {
-        for (var mutation of mutationsList) {
-            if (mutation.attributeName === 'style') {
-                var displayStyle = window.getComputedStyle(targetNode).getPropertyValue('display');
-                if (displayStyle === 'none') {
-                    stopItmWebcamStream();
-                    $('#itmVideo').hide();
-                    $("#itmCapturedImage").show();
-                    $('#itmCaptureButton').css("background-color", "#007bff");
-                    $('#itmCaptureButton').css("border-color", "#007bff");
-                    $('#itmCaptureButton').text("Capture");
-                    $("#itmCapturedImage").attr('src', "assets/images/walk.gif");
-                }
-            }
-        }
-    };
-    var observer = new MutationObserver(callback);
-    observer.observe(targetNode, config);*/
+
 });
 $('#itmCaptureButton').click(function () {
     let text = $(this).text();
@@ -199,7 +176,7 @@ $("#itmDelete").click(function () {
                             swal("Deleted", "Item Delete Successfully", "success");
                             clearItmInputFields();
                             itmCaptureClear();
-                            getAllItems();
+                            getAllItems("/getAll");
                         },
                         error: function (ob, textStatus, error) {
                             swal("Error", textStatus + "Error Employee Not Delete", "error");
@@ -209,10 +186,6 @@ $("#itmDelete").click(function () {
             });
         }
     });
-
-    /*$("#customerID").prop('disabled', true);
-    $("#customerName").prop('disabled', true);
-    $("#customerAddress").prop('disabled', true);*/
 
 });
 
@@ -251,23 +224,19 @@ $("#itmUpdate").click(function () {
                             //alert("Customer Update Successfully")
                             swal("Updated", "Item Update Successfully", "success");
                             itmCaptureClear();
-                            getAllItems();
+                            getAllItems("/getAll");
                         },
                         error: function (ob, textStatus, error) {
                             //alert(textStatus+" : Error Customer Not Update");
                             swal("Error", textStatus + "Error Item Not Update", "error");
                         }
                     });
-                    /* $("#customerID").prop('disabled', true);
-                     $("#customerName").prop('disabled', true);
-                     $("#customerAddress").prop('disabled', true);
-                     clearCustomerInputFields();*/
                 }
             });
 
         } else {
             swal("Error", "No such Item..please check the ID", "error");
-            /*alert("No such Customer..please check the ID");*/
+
         }
     });
 
@@ -296,7 +265,7 @@ function saveItem() {
                     console.log(res);
                     // alert("Customer Added Successfully");
                     swal("Saved", "Item Added Successfully", "success");
-                    getAllItems();
+                    getAllItems("/getAll");
                     setItmBtn();
                 },
                 error: function (ob, textStatus, error) {
@@ -313,14 +282,53 @@ function saveItem() {
         }
     });
 }
+$("#itmFilter").on("change", function (e) {
+    let val = $("#itmFilter").val();
+    alert(val);
+    getAllItems("/"+val);
+});
+function getAllItems(val) {
 
-function getAllItems() {
     performAuthenticatedRequest();
     const accessToken = localStorage.getItem('accessToken');
     console.log(accessToken);
     $("#itemTable").empty();
     $.ajax({
-        url: "http://localhost:8080/helloshoes/api/v1/inventory/getAll",
+        url: "http://localhost:8080/helloshoes/api/v1/inventory/getAll"+val,
+        method: "GET",
+        headers: {
+            'Authorization': 'Bearer ' + accessToken
+        },
+        success: function (res) {
+            console.log(res);
+            for (var r of res) {
+                let row = `<tr>
+                    <th scope="row">${r.itemCode}</th>
+                    <td>${r.itemDesc}</td>             
+                    <td>${r.category}</td>            
+                    <td>${r.size}</td>                
+                    <td>${r.supplier.supplierCode}</td>            
+                    <td>${r.supplierName}</td>           
+                    <td>${r.salePrice}</td>           
+                    <td>${r.buyPrice}</td>            
+                    <td>${r.expectedProfit}</td>      
+                    <td>${r.profitMargin}</td>        
+                    <td>${r.status}</td>              
+                </tr>`;
+
+                $("#itemTable").append(row);
+                bindItmTrrEvents();
+            }
+        }
+    });
+}
+function getAllItemsBySort(val) {
+    performAuthenticatedRequest();
+    const accessToken = localStorage.getItem('accessToken');
+    console.log(accessToken);
+    $("#itemTable").empty();
+    $.ajax({
+        url: "http://localhost:8080/helloshoes/api/v1/inventory/getAll/"+val,
         method: "GET",
         headers: {
             'Authorization': 'Bearer ' + accessToken
@@ -373,11 +381,6 @@ function bindItmTrrEvents() {
         $("#itmProfit").val(expectedProfit);
         $("#itmProfitMargin").val(profitMargin);
         $("#itmStatus").val(status);
-        /*$("#customerID").prop('disabled', false);
-        $("#customerName").prop('disabled', false);
-        $("#customerAddress").prop('disabled', false);
-        $("#cusUpdate").prop('disabled', false);
-        $("#cusDelete").prop('disabled', false);*/
         setItmBtn();
         searchItem(itemCode).then(function (res){
             itmCaptureClear();

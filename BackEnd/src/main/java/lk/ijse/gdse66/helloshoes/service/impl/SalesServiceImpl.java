@@ -111,7 +111,7 @@ public class SalesServiceImpl implements SaleService {
                                     throw new NotFoundException("Customer not exist");
                             });
                     saleRepo.save(tranformer.convert(dto, Tranformer.ClassType.ORDER_ENTITY));
-                    adminPanelRepo.save(getAdminPanel());
+                    //adminPanelRepo.save(getAdminPanel());
                 });
     }
 
@@ -121,7 +121,7 @@ public class SalesServiceImpl implements SaleService {
                 sales -> {
                     saleRepo.deleteById(dto.getOrderNo());
                     saleRepo.save(tranformer.convert(dto, Tranformer.ClassType.ORDER_ENTITY));
-                    adminPanelRepo.save(getAdminPanel());
+                    //adminPanelRepo.save(getAdminPanel());
                 },
                 () -> {
                     throw new NotFoundException("Order Not Exist");
@@ -133,7 +133,7 @@ public class SalesServiceImpl implements SaleService {
         saleRepo.findById(id).ifPresentOrElse(
                 sales -> {
                     saleRepo.deleteById(id);
-                    adminPanelRepo.save(getAdminPanel());
+                    //adminPanelRepo.save(getAdminPanel());
                 }
                 ,
                 () -> {
@@ -145,13 +145,21 @@ public class SalesServiceImpl implements SaleService {
     public String getOrderGenId() {
         return generator.getGenerateID(saleRepo.getOrderId(), IdGenerator.GenerateTypes.ORDER);
     }
-
-    private AdminPanel getAdminPanel(){
-        Map<String, Object> item = detailRepo.findTotalQtyAndTotalAmountByItemCode("ITEM001");
+    @Override
+    public AdminPanel getAdminPanel(){
+        Map<String, Object> getItem = detailRepo.findMostPurchasedItem();
+        Object[] mostItem = new Object[getItem.size()];
+        int index1 = 0;
+        for (Object value : getItem.values()) {
+            mostItem[index1++] = value;
+        }
+        String code = String.valueOf(mostItem[0]);
+        System.out.println(code);
+        Map<String, Object> item = detailRepo.findTotalQtyAndTotalAmountByItemCode(code);
         Object[] ar = new Object[item.size()];
-        int index = 0;
+        int index2 = 0;
         for (Object value : item.values()) {
-            ar[index++] = value;
+            ar[index2++] = value;
         }
         String itemId = String.valueOf(ar[0]);
         Long qty = (Long) ar[1];

@@ -36,6 +36,7 @@ function hideAdminPages(){
     paymentPage.css('display','none');
     adminEditPage.css('display','none');
     userEditPage.css('display','none');
+    $("#formIcon").text("");
 }
 function hideMainPages(){
     empMain.css('display','none');
@@ -59,7 +60,7 @@ $("#getAllCus, #getAllItm, #getAllEmp, #getAllSup").click(function () {
             break;
         case 'getAllItm':
             itmList.css('display', 'block');
-            getAllItems();
+            getAllItems("/getAll");
             break;
         case 'getAllEmp':
             empList.css('display', 'block');
@@ -75,46 +76,54 @@ $("#btnCustomer, #btnInventory, #btnSupplier, #btnEmployee, #btnSales,#btnAdminP
     hideAdminPages();
     switch ($(this).attr('id')) {
         case 'btnCustomer':
+            $("#formIcon").text("Customer page");
             cusList.css('display', 'none');
             cusMain.css('display', 'block');
             customerPage.css('display', 'block');
             allCaptureClear();
             break;
         case 'btnInventory':
+            $("#formIcon").text("Inventory page");
             itmList.css('display', 'none');
             itmMain.css('display', 'block');
             inventoryPage.css('display', 'block');
             allCaptureClear();
             break;
         case 'btnSupplier':
+            $("#formIcon").text("Supplier page");
             supList.css('display', 'none');
             supMain.css('display', 'block');
             supplierPage.css('display', 'block');
             allCaptureClear();
             break;
         case 'btnEmployee':
+            $("#formIcon").text("Employee page");
             empList.css('display', 'none');
             empMain.css('display', 'block');
             employeePage.css('display', 'block');
             allCaptureClear();
             break;
         case 'btnAdminPanel':
+            $("#formIcon").text("Admin page");
             adminEditPage.css('display', 'block');
             getAllAdmins();
             allCaptureClear();
             break;
         case 'btnSales':
+            $("#formIcon").text("Sales page");
             paymentPage.css('display', 'block');
             allCaptureClear();
             break;
         case 'btnUsers':
+            $("#formIcon").text("Users page");
             userEditPage.css('display', 'block');
             getAllUsers();
             allCaptureClear();
             break;
         case 'btnDashboard':
+            $("#formIcon").text("AdminPanel");
             adminDashboard.css('display', 'block');
-            getAllUsers();
+           // getAllUsers();
             allCaptureClear();
             break;
     }

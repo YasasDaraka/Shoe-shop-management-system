@@ -224,11 +224,7 @@ function setItmBtn() {
         });
 }
 $("#itmClear").click(function () {
-    /*var ids = ["supId", "supCategory", "supName", "supBuildNo", "upLane",
-        "supCity","supState", "supPostalCode", "supCountry", "supEmail", "supMobileNo", "supLandNo"];
-    ids.forEach(function(id) {
-        $("#" + id +"Error").val("");
-    });*/
+    $("#itmNameError").text("");
     clearItmInputFields();
     itm_vArray.forEach(function(item) {
         item.error.val("");

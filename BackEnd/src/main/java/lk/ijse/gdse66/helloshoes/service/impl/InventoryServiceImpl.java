@@ -88,6 +88,8 @@ public class InventoryServiceImpl implements InventoryService {
             return tranformer.convert(inventoryRepo.findByGender(value), Tranformer.ClassType.ITEM_DTO_LIST);
         }else if (value.equals("FS") || value.equals("CS")){
            return tranformer.convert(inventoryRepo.findByOccasion(value), Tranformer.ClassType.ITEM_DTO_LIST);
+        }else if (value.equals("itemDesc") || value.equals("price")){
+            return tranformer.convert(inventoryRepo.orderBy(value), Tranformer.ClassType.ITEM_DTO_LIST);
         }
         else{
             return null;

@@ -110,12 +110,12 @@ $("#adminName").on("keydown keyup", function (e) {
                 }
             } else {
             }
-            //captureClear();
         });
     }else {
         $("#userIdError").text("");
         $("#adminName").css("border", "1px solid #ced4da");
         $("#adminClear").prop("disabled", true);
+        $("#adminDelete").prop("disabled", true);
     }
 });
 

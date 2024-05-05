@@ -21,6 +21,7 @@ let adminEditPage = $('#admin-edit-container');
 let userEditPage = $('#user-edit-container');
 let adminDashboard = $('#admin-dashboard-container');
 let userDashboard = $('#user-dashboard-container');
+let orderVerify = $('#confirm-container');
 
 let videoStream;
 let empVideoStream;
@@ -42,6 +43,7 @@ function allContainerHide(){
     userEditPage.css('display','none');
     adminDashboard.css('display','none');
     userDashboard.css('display','none');
+    orderVerify.css('display','none');
 }
 $(window).on('load',function (){
     $("#loader").css('display','none');
@@ -101,8 +103,8 @@ function userLimits(){
     $("#supUpdate").hide();
     $("#supDelete").hide();
 
-    $("#order-update").hide()
-    $("#order-delete").hide();
+    /*$("#order-update").hide()
+    $("#order-delete").hide();*/
 
     $('#empCaptureButton').hide();
     $('#itmCaptureButton').hide();
@@ -122,8 +124,8 @@ function userlimitOff(){
     $("#supSave").show();
     $("#supUpdate").show();
     $("#supDelete").show();
-    $("#order-update").show();
-    $("#order-delete").show();
+    /*$("#order-update").show();
+    $("#order-delete").show();*/
     $('#userSave').show();
 
     $('#empCaptureButton').show();

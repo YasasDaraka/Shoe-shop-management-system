@@ -178,6 +178,7 @@
     <header id="admin-header">
       <nav  class="navbar navbar-expand-lg bg-white nav-bar container-fluid d-flex " style="height: 60px; padding-right: 20px;padding-left: 50px">
         <div id="side-bar-icon" class="d-flex justify-content-center align-items-center"style="display: inline-block; box-shadow: 0px 1px 10px #909090; background-color: white; z-index: 4; width: 32px; height: 33px; border-radius: 25%"><img class="admin-icon" style="width: 60px; padding-right:10px; z-index: 5" src="assets/images/arrow.gif"></div>
+        <label id="formIcon" class="form-label m-0 position-absolute" style="left: 8vw; font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 20px;width: 20vw;"></label>
         <div class="d-flex justify-content-evenly">
           <div class="nav-item d-flex justify-content-center" style="padding-left:63vw ">
             <span style="color: darkgoldenrod">Time : </span><div class="nav-link active currTime" aria-current="page" href="#" style="z-index:5; font-weight: 600; font-size: 16px;" ></div>
@@ -988,7 +989,7 @@
                     <div class="col">
                       <label for="itmName" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Item Description</label>
                       <input type="text" class="form-control" id="itmName" style="width: 20vw">
-                      <p><small class="text-danger position-absolute mt-1" id="itmNameError"></small></p>
+                      <p><small id="itmNameError" class="text-danger position-absolute mt-1" ></small></p>
                     </div>
 
                     <div class="col">
@@ -1145,6 +1146,15 @@
               <div class="row mt-1 mt-lg-5 justify-content-start">
                 <div class="col-10">
                   <div class="itemTableDiv" style="width: 89.4vw;">
+                    <select aria-label="Default select example" class="form-select" id="itmFilter" style="width: 10vw">
+                      <option value="All">All</option>
+                      <option value="price">Price</option>
+                      <option value="itemDesc">Name</option>
+                      <option value="SM">Male</option>
+                      <option value="SW">Female</option>
+                      <option value="FS">Formal</option>
+                      <option value="CS">Casual</option>
+                    </select>
                     <table style="font-size: small;" class="table table-bordered rounded bg-light table-hover ">
                       <thead class="table-secondary text-light text-center">
                       <tr class="" style="border: 1px solid #FFA633FF; box-shadow: inset 1px 1px #FFA633, 0 0 4px #FFA633;"id="item-thead">
@@ -1438,6 +1448,35 @@
     </div>
     </div>
     </div></div></div></div>
+    <div id="confirm-container" class="container-fluid p-0" style="background-color:rgba(229,229,229,0.5); position:absolute; height: 91vh; z-index: 5;width: 95vw;left: 5vw; right:0; top: 4.4vw; bottom: 0; margin: auto">
+      <div style="background-color:white; box-shadow:  0px 1px 10px #FFA633; z-index: 15; height: 31vw; width: 27.6vw;position: absolute; left: 0; right:0; top: 0vw; bottom: 0; margin: auto">
+        <div id="confirmAdmin" style="background-color:white">
+
+          <button type="button" id="backToPayment" class="btn mt-3 ms-3" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 10px"><i class="fa-solid fa-arrow-left me-2"></i>Back</button>
+          <h1 class="mt-4 ms-5" style="font-family: 'Fira Sans', sans-serif; font-weight: 900; font-size: 2.95vw">Confirm Admin</h1>
+          <h1 class="ms-5" style="color: #FFA633 ;font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 10px">Confirm to Access the Portal</h1>
+
+          <h1 class="visually-hidden" style="color: #FFA633 ;font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">aaaa</h1>
+
+          <div class="col-md-6 ms-5 mt-4">
+            <label for="confirmUsername" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Username</label>
+            <input type="text" class="form-control" id="confirmUsername" style="width: 20vw">
+            <p class="position-absolute mt-1"><small class="text-danger" id="confirmUsernameError"></small></p>
+          </div>
+
+          <div class="col-md-6 ms-5 mt-3">
+            <label for="confirmPassword" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Password</label>
+            <input type="password" class="form-control" id="confirmPassword" style="width: 20vw">
+            <p class="position-absolute mt-1"><small class="text-danger" id="confirmPasswordError"></small></p>
+          </div>
+
+          <h1 class="mt-3" style="color: #FFA633 ;font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 10px; margin-inline-start: 10.5vw;">Forgot Password ?</h1>
+
+          <button id="btnConfirm" type="button" class="btn  ms-5" style="background-color: rgba(59, 59, 59, 0.9);color: #ffffff;width: 20vw;">Confirm Admin</button>
+
+        </div>
+      </div>
+    </div>
   </section>
 
   <section id="admin-edit-container">
@@ -1479,26 +1518,7 @@
                         <option value="USER">USER</option>
                       </select>
                     </div>
-                    <!--<div class="col">
-                      <div class="col-md-12 p-0">
-                        <div class="container h-100 mt-4">
-                          <label class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 16px;position: relative;left: 2.5vw;bottom: 1vw;">Capture Image</label>
-                          <div class="row h-100">
-                            <div class="col p-0">
-                              <div class=" h-100 w-100 ">
-                                <div class="row">
-                                  <div class="col-12 d-flex justify-content-center">
-                                    <video id="adminVideo" class="web" width="200" height="150" style="display:none;" autoplay></video>
-                                    <canvas id="adminCanvas" class="web" width="200" height="150" style="display:none;"></canvas>
-                                    <img src="assets/images/walk.gif" id="adminCapturedImage" class="web" width="200" style="display:block; ">
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>-->
+
                   </div>
                 </div>
               </div>
@@ -1511,7 +1531,6 @@
                       <button type="button" class="btn btn-success" style="font-weight: bold;" id="adminUpdate">Update</button>
                       <button type="button" class="btn btn-danger" style="width: 66px;" id="adminDelete">Delete</button>
                       <button type="button" class="btn btn-warning" id="adminClear">Clear</button>
-<!--                      <button id="adminCaptureButton" class="btn btn-primary" style="display:block;" type="button">Capture</button>-->
                     </div>
                   </div>
                 </div>
