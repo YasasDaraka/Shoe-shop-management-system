@@ -56,15 +56,6 @@ function stopItmWebcamStream() {
     }
 }
 
-function itmFieldSet(state) {
-    itm_vArray.forEach(function(item) {
-        item.field.prop('disabled', state);
-    });
-    $(this).find("#itmCode").focus();
-    //generateEmployeeId();
-    setItmClBtn();
-}
-
 function returnAllItmVal() {
     var image = $("#itmCapturedImage");
     var imageUrl = image.attr('src');
@@ -99,7 +90,6 @@ function setAllItmVal(ar) {
     $("#itmCapturedImage").attr('src', ar.itemPicture);
 }
 
-//getAllEmployees();
 $("#itmSave").click(function () {
 
     if (checkAllItm()) {
@@ -116,29 +106,6 @@ $("#itmSave").click(function () {
         swal("Error", "Error Item Save.!", "error");
     }
 });
-
-function loadItmAr() {
-    return new Promise(function (resolve, reject) {
-        var ar;
-        performAuthenticatedRequest();
-        const accessToken = localStorage.getItem('accessToken');
-        $.ajax({
-            url: "http://localhost:8080/helloshoes/api/v1/inventory/getAll",
-            method: "GET",
-            headers: {
-                'Authorization': 'Bearer ' + accessToken
-            },
-            success: function (res) {
-                console.log(res);
-                ar = res;
-                resolve(ar);
-            },
-            error: function (error) {
-                reject(error);
-            }
-        });
-    });
-}
 
 $("#itmDelete").click(function () {
     let id = $("#itmCode").val();
@@ -284,7 +251,6 @@ function saveItem() {
 }
 $("#itmFilter").on("change", function (e) {
     let val = $("#itmFilter").val();
-    alert(val);
     getAllItems("/"+val);
 });
 function getAllItems(val) {
@@ -302,19 +268,20 @@ function getAllItems(val) {
         success: function (res) {
             console.log(res);
             for (var r of res) {
-                let statusClass = r.status === "Not Available" ? "background-color: antiquewhite;" : "";
+                let status = r.status === "Not Available" ? "background-color: antiquewhite;" : "";
+                let low = r.status === "Low" ? "blinking" : "";
                 let row = `<tr>
-                    <th style="${statusClass}" scope="row">${r.itemCode}</th>
-                    <td style="${statusClass}" >${r.itemDesc}</td>             
-                    <td style="${statusClass}" >${r.category}</td>            
-                    <td style="${statusClass}" >${r.size}</td>                
-                    <td style="${statusClass}" >${r.supplier.supplierCode}</td>            
-                    <td style="${statusClass}" >${r.supplierName}</td>           
-                    <td style="${statusClass}" >${r.salePrice}</td>           
-                    <td style="${statusClass}" >${r.buyPrice}</td>            
-                    <td style="${statusClass}" >${r.expectedProfit}</td>      
-                    <td style="${statusClass}" >${r.profitMargin}</td>        
-                    <td style="${statusClass}" >${r.status}</td>              
+                    <th style="${status}" class="${low}" scope="row">${r.itemCode}</th>
+                    <td style="${status}" class="${low}" >${r.itemDesc}</td>             
+                    <td style="${status}" class="${low}" >${r.category}</td>            
+                    <td style="${status}" class="${low}" >${r.size}</td>                
+                    <td style="${status}" class="${low}" >${r.supplier.supplierCode}</td>            
+                    <td style="${status}" class="${low}" >${r.supplierName}</td>           
+                    <td style="${status}" class="${low}" >${r.salePrice}</td>           
+                    <td style="${status}" class="${low}" >${r.buyPrice}</td>            
+                    <td style="${status}" class="${low}" >${r.expectedProfit}</td>      
+                    <td style="${status}" class="${low}" >${r.profitMargin}</td>        
+                    <td style="${status}" class="${low}" >${r.status}</td>              
                 </tr>`;
 
                 $("#itemTable").append(row);

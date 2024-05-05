@@ -111,7 +111,9 @@ public class SalesServiceImpl implements SaleService {
                                     throw new NotFoundException("Customer not exist");
                             });
                     saleRepo.save(tranformer.convert(dto, Tranformer.ClassType.ORDER_ENTITY));
-                    //adminPanelRepo.save(getAdminPanel());
+                    if (detailRepo.countSaleDetails() != 0){
+                        adminPanelRepo.save(getAdminPanel());
+                    }
                 });
     }
 
@@ -121,7 +123,9 @@ public class SalesServiceImpl implements SaleService {
                 sales -> {
                     saleRepo.deleteById(dto.getOrderNo());
                     saleRepo.save(tranformer.convert(dto, Tranformer.ClassType.ORDER_ENTITY));
-                    //adminPanelRepo.save(getAdminPanel());
+                    if (detailRepo.countSaleDetails() != 0){
+                        adminPanelRepo.save(getAdminPanel());
+                    }
                 },
                 () -> {
                     throw new NotFoundException("Order Not Exist");
@@ -133,7 +137,9 @@ public class SalesServiceImpl implements SaleService {
         saleRepo.findById(id).ifPresentOrElse(
                 sales -> {
                     saleRepo.deleteById(id);
-                    //adminPanelRepo.save(getAdminPanel());
+                    if (detailRepo.countSaleDetails() != 0){
+                        adminPanelRepo.save(getAdminPanel());
+                    }
                 }
                 ,
                 () -> {
