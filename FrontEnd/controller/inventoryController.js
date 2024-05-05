@@ -302,52 +302,19 @@ function getAllItems(val) {
         success: function (res) {
             console.log(res);
             for (var r of res) {
+                let statusClass = r.status === "Not Available" ? "background-color: antiquewhite;" : "";
                 let row = `<tr>
-                    <th scope="row">${r.itemCode}</th>
-                    <td>${r.itemDesc}</td>             
-                    <td>${r.category}</td>            
-                    <td>${r.size}</td>                
-                    <td>${r.supplier.supplierCode}</td>            
-                    <td>${r.supplierName}</td>           
-                    <td>${r.salePrice}</td>           
-                    <td>${r.buyPrice}</td>            
-                    <td>${r.expectedProfit}</td>      
-                    <td>${r.profitMargin}</td>        
-                    <td>${r.status}</td>              
-                </tr>`;
-
-                $("#itemTable").append(row);
-                bindItmTrrEvents();
-            }
-        }
-    });
-}
-function getAllItemsBySort(val) {
-    performAuthenticatedRequest();
-    const accessToken = localStorage.getItem('accessToken');
-    console.log(accessToken);
-    $("#itemTable").empty();
-    $.ajax({
-        url: "http://localhost:8080/helloshoes/api/v1/inventory/getAll/"+val,
-        method: "GET",
-        headers: {
-            'Authorization': 'Bearer ' + accessToken
-        },
-        success: function (res) {
-            console.log(res);
-            for (var r of res) {
-                let row = `<tr>
-                    <th scope="row">${r.itemCode}</th>
-                    <td>${r.itemDesc}</td>             
-                    <td>${r.category}</td>            
-                    <td>${r.size}</td>                
-                    <td>${r.supplier.supplierCode}</td>            
-                    <td>${r.supplierName}</td>           
-                    <td>${r.salePrice}</td>           
-                    <td>${r.buyPrice}</td>            
-                    <td>${r.expectedProfit}</td>      
-                    <td>${r.profitMargin}</td>        
-                    <td>${r.status}</td>              
+                    <th style="${statusClass}" scope="row">${r.itemCode}</th>
+                    <td style="${statusClass}" >${r.itemDesc}</td>             
+                    <td style="${statusClass}" >${r.category}</td>            
+                    <td style="${statusClass}" >${r.size}</td>                
+                    <td style="${statusClass}" >${r.supplier.supplierCode}</td>            
+                    <td style="${statusClass}" >${r.supplierName}</td>           
+                    <td style="${statusClass}" >${r.salePrice}</td>           
+                    <td style="${statusClass}" >${r.buyPrice}</td>            
+                    <td style="${statusClass}" >${r.expectedProfit}</td>      
+                    <td style="${statusClass}" >${r.profitMargin}</td>        
+                    <td style="${statusClass}" >${r.status}</td>              
                 </tr>`;
 
                 $("#itemTable").append(row);

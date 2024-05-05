@@ -127,30 +127,41 @@ $("#order-clear,.order-nav").click(function () {
     });
 }*/
 $("#OrdItm").on("keydown keyup", function (e) {
-    let indexNo = o_Array.indexOf(o_Array.find((c) => c.field.attr("id") == e.target.id));
-    if (o_Array[indexNo].regEx.test($("#OrdItm").val())) {
-        searchItem($("#OrdItm").val()).then(function (res){
-            if (res != null || res != undefined){
-                $("#OrdItm").css("border", "2px solid green");
-                $("#OrdItmError").text("");
-                $("#OrdItmDes").val(res.itemDesc);
-                $("#ordItmSize").val(res.size);
-                $("#ordItmPrice").val(res.salePrice);
-                setAddItemBtn();
-            }
-            if( $("#OrdItmDes").val() == "" || $("#OrdItmDes").val() == null){
-                $("#OrdItmError").text("Supplier is not Exist");
-                $("#OrdItm").css("border", "2px solid red");
-            }
-        });
+    if ($("#OrdItm").val() !== "") {
+        let indexNo = o_Array.indexOf(o_Array.find((c) => c.field.attr("id") == e.target.id));
+        if (o_Array[indexNo].regEx.test($("#OrdItm").val())) {
+            searchItem($("#OrdItm").val()).then(function (res) {
+                if (res != null || res != undefined) {
+                    if (res.status == "Not Available") {
+                        $("#OrdItmError").text("Item is not ");
+                        $("#OrdItm").css("border", "2px solid red");
+                    } else {
+                        $("#OrdItm").css("border", "2px solid green");
+                        $("#OrdItmError").text("");
+                        $("#OrdItmDes").val(res.itemDesc);
+                        $("#ordItmSize").val(res.size);
+                        $("#ordItmPrice").val(res.salePrice);
+                        setAddItemBtn();
+                    }
+                }
+                if ($("#OrdItmDes").val() == "" || $("#OrdItmDes").val() == null) {
+                    $("#OrdItmError").text("Item is not Exist or Available");
+                    $("#OrdItm").css("border", "2px solid red");
+                }
+            });
+        } else {
+            $("#OrdItmError").text("itm-Code is a required field: Minimum 5");
+            $("#OrdItm").css("border", "2px solid red");
+        }
+        setOrderBtn();
+        setOrdClBtn();
     }else {
-        $("#OrdItmError").text("itm-Code is a required field: Minimum 5");
-        $("#OrdItm").css("border", "2px solid red");
+        $("#OrdItmError").text("");
+        $("#OrdItm").css("border", "1px solid #ced4da");
     }
-    setOrderBtn();
-    setOrdClBtn();
 });
 $("#ordCusId").on("keydown keyup", function (e) {
+    if ($("#ordCusId").val() !== "") {
     let indexNo = o_Array.indexOf(o_Array.find((c) => c.field.attr("id") == e.target.id));
     if (o_Array[indexNo].regEx.test($("#ordCusId").val())) {
         searchCustomer($("#ordCusId").val()).then(function (res){
@@ -177,6 +188,10 @@ $("#ordCusId").on("keydown keyup", function (e) {
     }
     setOrderBtn();
     setOrdClBtn();
+}else {
+    $("#ordCusIdError").text("");
+    $("#ordCusId").css("border", "1px solid #ced4da");
+}
 });
 function searchOrder(id) {
     console.log(id);
