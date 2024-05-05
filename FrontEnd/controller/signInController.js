@@ -1,17 +1,10 @@
 $("#btnSignIn").click(function () {
-    //showAlert();
     signIn();
-
-    /*allContainerHide();
-    adminPage.css('display','block');
-    logInPage.css('display','none');*/
 });
 $(document).ready(function () {
     $("#btnSignIn").prop("disabled", true);
 });
 $("#log-in-Password").on("keydown keyup", function (e) {
-    /*$("#log-in-PasswordError").text("");
-    $("#log-in-Password").css("border", "1px solid #ced4da");*/
     $("#btnSignIn").prop("disabled", true);
     if ($("#log-in-Password").val() !== "") {
         passwordCheck($("#log-in-Username").val(),$("#log-in-Password").val()).then(function (pass) {
@@ -48,8 +41,7 @@ $("#log-in-Password").on("keydown keyup", function (e) {
         }
 });
 $("#log-in-Username").on("keydown keyup", function (e) {
-    /*$("#log-in-UsernameError").text("");
-    $("#log-in-Username").css("border", "1px solid #ced4da");*/
+
     $("#btnSignIn").prop("disabled", true);
     if ($("#log-in-Username").val() !== "") {
             searchUserPanel($("#log-in-Username").val()).then(function (res) {
@@ -157,7 +149,7 @@ function performAuthenticatedRequest() {
             contentType: "application/json",
             success: function (res, textStatus, jsXH) {
                 localStorage.setItem('accessToken', res.token);
-                console.log("User SignIn Successfully "+res.token);
+                console.log("sign in Successfully "+res.token);
             },
             error: function (ob, textStatus, error) {
                 console.log("token renew sign in error "+accessToken);

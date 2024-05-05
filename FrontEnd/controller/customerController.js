@@ -1,32 +1,12 @@
 $(document).ready(function () {
-    // setTime();
-    // setDate();
+
     cusFieldSet(true);
     $("#cusSave").prop("disabled", true);
     $("#cusDelete").prop("disabled", true);
     $("#cusUpdate").prop("disabled", true);
     $("#cusSearch").prop("disabled", true);
     $("#cusClear").prop("disabled", true);
-    /*var targetNode = document.getElementById('customer-main');
-    var config = {attributes: true, attributeFilter: ['style']};
-    var callback = function (mutationsList, observer) {
-        for (var mutation of mutationsList) {
-            if (mutation.attributeName === 'style') {
-                var displayStyle = window.getComputedStyle(targetNode).getPropertyValue('display');
-                if (displayStyle === 'none') {
-                    stopWebcamStream();
-                    $('#cusVideo').hide();
-                    $("#cusCapturedImage").show();
-                    $('#cusCaptureButton').css("background-color", "#007bff");
-                    $('#cusCaptureButton').css("border-color", "#007bff");
-                    $('#cusCaptureButton').text("Capture");
-                    $("#cusCapturedImage").attr('src', "assets/images/walk.gif");
-                }
-            }
-        }
-    };
-    var observer = new MutationObserver(callback);
-    observer.observe(targetNode, config);*/
+
 });
 
 $('#cusCaptureButton').click(function () {
@@ -211,30 +191,6 @@ function loadCusId() {
     });
 }
 
-function loadCusAr() {
-    return new Promise(function (resolve, reject) {
-        var ar;
-        performAuthenticatedRequest();
-        const accessToken = localStorage.getItem('accessToken');
-        $.ajax({
-            url: "http://localhost:8080/helloshoes/api/v1/customer/getAll",
-            method: "GET",
-            headers: {
-                'Authorization': 'Bearer ' + accessToken
-            },
-            success: function (res) {
-                console.log(res);
-                ar = res;
-                resolve(ar);
-            },
-            error: function (error) {
-                reject(error);
-            }
-        });
-    });
-}
-
-
 function bindTrrEvents() {
     $('#customerTable>tr').click(function () {
 
@@ -269,11 +225,6 @@ function bindTrrEvents() {
         $("#cusContactNo").val(contactNo);
         $("#cusEmail").val(email);
         $("#lastPurchaseDate").val(recentPurchase);
-        /*$("#customerID").prop('disabled', false);
-        $("#customerName").prop('disabled', false);
-        $("#customerAddress").prop('disabled', false);
-        $("#cusUpdate").prop('disabled', false);
-        $("#cusDelete").prop('disabled', false);*/
 
         searchCustomer(customerId).then(function (res){
             captureClear();
@@ -319,23 +270,20 @@ $("#cusDelete").click(function () {
                         success: function (res) {
                             console.log(res);
                             swal("Deleted", "Customer Delete Successfully", "success");
+                            clearCus();
                             clearCustomerInputFields();
                             captureClear();
                             getAllCustomers();
                             setBtn();
                         },
                         error: function (ob, textStatus, error) {
-                            swal("Error", textStatus + "Error Customer Not Delete", "error");
+                            swal("Error","Error Customer Not Delete", "error");
                         }
                     });
                 }
             });
         }
     });
-
-    /*$("#customerID").prop('disabled', true);
-    $("#customerName").prop('disabled', true);
-    $("#customerAddress").prop('disabled', true);*/
 
 });
 
@@ -371,8 +319,8 @@ $("#cusUpdate").click(function () {
                         contentType: "application/json",
                         success: function (res) {
                             console.log(res);
-                            //alert("Customer Update Successfully")
                             swal("Updated", "Customer Update Successfully", "success");
+                            clearCus();
                             captureClear();
                             getAllCustomers();
                             setBtn();
@@ -382,16 +330,12 @@ $("#cusUpdate").click(function () {
                             swal("Error", textStatus + "Error Customer Not Update", "error");
                         }
                     });
-                    /* $("#customerID").prop('disabled', true);
-                     $("#customerName").prop('disabled', true);
-                     $("#customerAddress").prop('disabled', true);
-                     clearCustomerInputFields();*/
                 }
             });
 
         } else {
             swal("Error", "No such Customer..please check the ID", "error");
-            /*alert("No such Customer..please check the ID");*/
+
         }
     });
 
@@ -420,13 +364,14 @@ function saveCustomer() {
                     console.log(res);
                     // alert("Customer Added Successfully");
                     swal("Saved", "Customer Added Successfully", "success");
+                    clearCus();
                     getAllCustomers();
                     generateCustomerId();
                     setBtn();
                 },
                 error: function (ob, textStatus, error) {
                     //alert(textStatus + " : Error Customer Not Added")
-                    swal("Error", textStatus + " : Error Customer Not Added", "error");
+                    swal("Error", "Error Customer Not Added", "error");
                 }
             });
 

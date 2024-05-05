@@ -96,7 +96,7 @@ $("#itmSave").click(function () {
         var image = $("#itmCapturedImage");
         var imageUrl = image.attr('src');
         if (!imageUrl || imageUrl === 'assets/images/walk.gif') {
-            //alert("Error");
+
             swal("Error", "Take Item Photo.!", "error");
         } else {
             saveItem();
@@ -230,20 +230,17 @@ function saveItem() {
                 contentType: "application/json",
                 success: function (res, textStatus, jsXH) {
                     console.log(res);
-                    // alert("Customer Added Successfully");
                     swal("Saved", "Item Added Successfully", "success");
                     getAllItems("/getAll");
                     setItmBtn();
                 },
                 error: function (ob, textStatus, error) {
-                    //alert(textStatus + " : Error Customer Not Added")
                     swal("Error", textStatus + " : Error Employee Not Added", "error");
                 }
             });
 
 
         } else {
-            //alert("Customer already exits.!");
             swal("Error", "Employee already exits.!", "error");
             clearItmInputFields();
         }

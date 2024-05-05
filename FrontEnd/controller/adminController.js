@@ -121,7 +121,7 @@ $("#btnCustomer, #btnInventory, #btnSupplier, #btnEmployee, #btnSales,#btnAdminP
             allCaptureClear();
             break;
         case 'btnDashboard':
-            $("#formIcon").text("AdminPanel");
+            $("#formIcon").text("Admin Panel");
             adminDashboard.css('display', 'block');
            // getAllUsers();
             allCaptureClear();

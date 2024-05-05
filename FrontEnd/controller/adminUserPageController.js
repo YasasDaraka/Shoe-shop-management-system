@@ -231,7 +231,7 @@ $("#userUpdate").click(function () {
                         data: JSON.stringify(value),
                         contentType: "application/json",
                         success: function (res, textStatus, jsXH) {
-                            swal("Saved", "User Update Successfully", "success");
+                            swal("Updated", "User Update Successfully", "success");
                             getAllUsers();
                         },
                         error: function (ob, textStatus, error) {
@@ -271,7 +271,7 @@ function saveUser() {
             });
 
         } else {
-            swal("Error", "User already exits.!", "error");
+            swal("Error", "Admin already exits.!", "error");
         }
     });
 }
@@ -361,14 +361,14 @@ $("#userDelete").click(function () {
                         contentType: "application/json",
                         success: function (res) {
                             console.log(res);
-                            swal("Deleted", "user Delete Successfully", "success");
+                            swal("Deleted", "User Delete Successfully", "success");
                             userClear();
                             getAllUsers();
                             //captureClear();
                             //setBtn();
                         },
                         error: function (ob, textStatus, error) {
-                            swal("Error", textStatus + "Error user Not Delete", "error");
+                            swal("Error", textStatus + "Error User Not Delete", "error");
                         }
                     });
                 }

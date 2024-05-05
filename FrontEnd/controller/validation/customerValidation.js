@@ -26,8 +26,8 @@ c_vArray.push({ field: $("#cusDob"), regEx: CUS_DOB_REGEX, error: $("#cusDobErro
 c_vArray.push({ field: $("#cusContactNo"), regEx: CUS_CONTACT_REGEX, error: $("#cusContactNoError") });
 
 function clearCustomerInputFields() {
-    $("#cusId,#cusName,#cusBuildNo,#cusLane,#cusCity,#cusState,#cusPostalCode,#cusEmail,#cusDob,#cusGender,#cusContactNo").val("");
-    $("#cusId,#cusName,#cusBuildNo,#cusLane,#cusCity,#cusState,#cusPostalCode,#cusEmail,#cusDob,#cusGender,#cusContactNo").css("border", "1px solid #ced4da");
+    $("#cusId,#cusName,#cusBuildNo,#cusLane,#cusCity,#cusState,#cusPostalCode,#cusEmail,#cusDob,#cusGender,#cusContactNo,#totalPoints").val("");
+    $("#cusId,#cusName,#cusBuildNo,#cusLane,#cusCity,#cusState,#cusPostalCode,#cusEmail,#cusDob,#cusGender,#cusContactNo,#totalPoints").css("border", "1px solid #ced4da");
     $("#cusId").focus();
     $('input[name="rating"]').prop('checked', false);
     setBtn();
@@ -35,7 +35,7 @@ function clearCustomerInputFields() {
 //setBtn();
 function setClBtn(){
     var any = false;
-    $("#cusId,#cusName,#cusBuildNo,#cusLane,#cusCity,#cusState,#cusPostalCode,#cusEmail,#cusDob,#loyaltyDate,#cusContactNo").each(function () {
+    $("#cusId,#cusName,#cusBuildNo,#cusLane,#cusCity,#cusState,#cusPostalCode,#cusEmail,#cusDob,#loyaltyDate,#cusContactNo,#totalPoints").each(function () {
         var value = $(this).val();
         if (value !== undefined && value !== null||$('input[name="rating"]:checked').prop('checked') == true) {
             any= true;
@@ -75,23 +75,20 @@ function events(e) {
     }
 }
 
-$("#cusName,#cusBuildNo,#cusLane,#cusCity,#cusState,#cusPostalCode,#cusEmail,#cusContactNo,#cusGender, #cusDob,#loyaltyDate").on("keydown keyup change", function (e) {
+$("#cusName,#cusBuildNo,#cusLane,#cusCity,#cusState,#cusPostalCode,#cusEmail,#cusContactNo,#cusGender, #cusDob,#loyaltyDate,#totalPoints").on("keydown keyup change", function (e) {
     events(e);
 });
-/*$("#cusGender, #cusDob, #loyaltyDate").on("", function(e) {
-    events(e);
-});*/
 $("input[name='rating']").on("change", function(e) {
     setBtn();
 });
 $("#cusId").on("keydown keyup", function (e) {
-    events(e);
+    events(e)
     searchCustomer($("#cusId").val()).then(function (res){
-        $("#cusId,#cusName,#cusBuildNo,#cusLane,#cusCity,#cusState" +
-            ",#cusPostalCode,#cusEmail,#cusDob,#cusGender,#cusContactNo").css("border", "1px solid #ced4da");
         setBtn();
         captureClear();
         setAllCusVal(res);
+        // $("#cusId,#cusName,#cusBuildNo,#cusLane,#cusCity,#cusState,#cusPostalCode,#cusEmail,#cusDob,#cusGender,#cusContactNo,#totalPoints").css("border", "1px solid #ced4da");
+
     });
 });
 
@@ -188,6 +185,9 @@ function setBtn() {
 }
 
 $("#cusClear").click(function () {
+    clearCus();
+});
+function clearCus() {
     var ids = ["cusId", "cusGender", "cusName","cusDob","cusBuildNo", "cusLane", "cusCity","cusState","cusPostalCode",
         "cusEmail", "cusContactNo","loyaltyDate","totalPoints", "lastPurchaseDate","rating"];
     ids.forEach(function(id) {
@@ -202,8 +202,7 @@ $("#cusClear").click(function () {
     captureClear();
     setClBtn();
     $("#cusClear").prop("disabled", true);
-});
-
+}
 function captureClear() {
     stopWebcamStream();
     $('#video').hide();

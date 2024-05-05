@@ -145,7 +145,7 @@ function showAlert(name) {
         background: "url(assets/images/users.gif) no-repeat",
         backdrop: `
       rgba(233,197,74,0.4)
-      url("/images/nyan-cat.gif")
+      url("")
       left top
       no-repeat
     `,

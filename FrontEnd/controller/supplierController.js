@@ -1,7 +1,5 @@
 $(document).ready(function () {
 
-    // setTime();
-    // setDate();
     supFieldSet(true);
     $("#supSave").prop("disabled", true);
     $("#supDelete").prop("disabled", true);
@@ -208,17 +206,13 @@ $("#supDelete").click(function () {
                             setSupBtn();
                         },
                         error: function (ob, textStatus, error) {
-                            swal("Error", textStatus + "Error Supplier Not Delete", "error");
+                            swal("Error","Error Supplier Not Delete", "error");
                         }
                     });
                 }
             });
         }
     });
-
-    /*$("#customerID").prop('disabled', true);
-    $("#customerName").prop('disabled', true);
-    $("#customerAddress").prop('disabled', true);*/
 
 });
 
@@ -254,26 +248,19 @@ $("#supUpdate").click(function () {
                         contentType: "application/json",
                         success: function (res) {
                             console.log(res);
-                            //alert("Customer Update Successfully")
                             swal("Updated", "Supplier Update Successfully", "success");;
                             getAllSuppliers();
                             setSupBtn();
                         },
                         error: function (ob, textStatus, error) {
-                            //alert(textStatus+" : Error Customer Not Update");
-                            swal("Error", textStatus + "Error Supplier Not Update", "error");
+                            swal("Error","Error Supplier Not Update", "error");
                         }
                     });
-                    /* $("#customerID").prop('disabled', true);
-                     $("#customerName").prop('disabled', true);
-                     $("#customerAddress").prop('disabled', true);
-                     clearCustomerInputFields();*/
                 }
             });
 
         } else {
             swal("Error", "No such Supplier..please check the ID", "error");
-            /*alert("No such Customer..please check the ID");*/
         }
     });
 
@@ -300,21 +287,18 @@ function saveSupplier() {
                 contentType: "application/json",
                 success: function (res, textStatus, jsXH) {
                     console.log(res);
-                    // alert("Customer Added Successfully");
                     swal("Saved", "Supplier Added Successfully", "success");
                     generateSupplierId();
                     getAllSuppliers();
                     setSupBtn();
                 },
                 error: function (ob, textStatus, error) {
-                    //alert(textStatus + " : Error Customer Not Added")
-                    swal("Error", textStatus + " : Error Supplier Not Added", "error");
+                    swal("Error", "Error Supplier Not Added", "error");
                 }
             });
 
 
         } else {
-            //alert("Customer already exits.!");
             swal("Error", "Supplier already exits.!", "error");
             clearSupInputFields();
         }

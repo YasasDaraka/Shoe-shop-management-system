@@ -80,8 +80,7 @@ $("#confirmPassword").on("keydown keyup", function (e) {
     }
 });
 $("#confirmUsername").on("keydown keyup", function (e) {
-    /*$("#log-in-UsernameError").text("");
-    $("#log-in-Username").css("border", "1px solid #ced4da");*/
+
     $("#btnConfirm").prop("disabled", true);
     if ($("#confirmUsername").val() !== "") {
         searchUserPanel($("#confirmUsername").val()).then(function (res) {
@@ -165,12 +164,11 @@ $("#ordCusId").on("keydown keyup", function (e) {
                 $("#ordCusId").css("border", "2px solid green");
                 $("#ordCusIdError").text("");
                 $("#ordCusName").val(res.customerName);
-                if (res.loyaltyDate != null && res != undefined){
+                if (res.loyaltyDate == null && res == undefined){
                     $("#ordPointsError").text("No Register at Loyalty");
                 }else {
                     $("#ordPointsError").text("");
                 }
-                //$("#ordPoints").val(res.totalPoints);
                 setAddItemBtn();
             }
             if( $("#ordCusName").val() == "" || $("#ordCusName").val() == null){
@@ -252,7 +250,6 @@ function placeOrder(payment) {
     order.orderNo = oId;
     order.paymentMethod = payment;
     order.totalPoints = cusPoints;
-    //order.cashier = "John Doe";
     order.customerName.customerId = cusId;
     order.customerName.customerName = cusName;
 
@@ -270,13 +267,11 @@ function placeOrder(payment) {
         contentType: "application/json",
         success: function (res, textStatus, jsXH) {
             console.log(res);
-            //alert("Order Added Successfully");
             swal("Saved", "Order Added Successfully", "success");
-            //generateOrderId();
+            generateOrderId();
         },
         error: function (ob, textStatus, error) {
-            //alert(textStatus + " : Error Order Not Added")
-            swal("Error", textStatus + " : Error Order Not Added", "error");
+            swal("Error","Error Order Not Added", "error");
         }
     });
 }
@@ -460,11 +455,13 @@ $("#order-add-item").click(function () {
     points += Math.round(allTotal / 800);
     searchCustomer($("#ordCusId").val()).then(function (res){
         if (res != null || res != undefined){
-            if (res.loyaltyDate != null && res != undefined){
+            if (res.loyaltyDate == null && res == undefined){
                 $("#ordPointsError").text("No Register at Loyalty");
             }else {
                 $("#ordPointsError").text("");
-                $("#ordPoints").val(points);
+                if (allTotal > 800){
+                            $("#ordPoints").val(points);
+                }
             }
         }
         if( $("#ordCusName").val() == "" || $("#ordCusName").val() == null){
@@ -538,30 +535,41 @@ function loadOrderId() {
 
 $("#btnSubmitOrder,#card-payment").click(function () {
     let oId = $("#orderId").val();
-    searchOrder(oId).then(function (order) {
-        if (Object.keys(order).length === 0) {
-            if (itemValidate()) {
-                if (cashValidate()) {
-                    if ($(this).attr("id") == 'btnSubmitOrder'){
-                        placeOrder("Cash");
-                        clearAll();
-                        generateOrderId();
-                    }else {
-                        placeOrder("Card");
-                        clearAll();
-                        generateOrderId();
-                    }
+    if ($(this).attr('id') == "btnSubmitOrder"){
+        searchOrder(oId).then(function (order) {
+            if (Object.keys(order).length === 0) {
+                if (itemValidate()) {
+                    if (cashValidate()) {
+                            placeOrder("Cash");
+                            clearAll();
+                            generateOrderId();
 
+                    } else {
+                        swal("Error", "Insufficient Credit : Check Cash!", "error");
+                    }
                 } else {
-                    swal("Error", "Insufficient Credit : Check Cash!", "error");
+                    swal("Error", "Please Add Items to Place Order", "error");
                 }
-            } else {
-                swal("Error", "Please Add Items to Place Order", "error");
+            }else {
+                swal("Error", "Order Already Registered", "error");
             }
-        }else {
-            swal("Error", "Order Already Registered", "error");
-        }
-    });
+        });
+    }else if ($(this).attr('id') == "card-payment"){
+        searchOrder(oId).then(function (order) {
+            if (Object.keys(order).length === 0) {
+                if (itemValidate()) {
+                            placeOrder("Card");
+                            clearAll();
+                            generateOrderId();
+                } else {
+                    swal("Error", "Please Add Items to Place Order", "error");
+                }
+            }else {
+                swal("Error", "Order Already Registered", "error");
+            }
+        });
+    }
+
 });
 
 
@@ -575,8 +583,7 @@ $("#orderId").on("keyup input change", async function (e) {
                 $("#ordCusId").val(order.customerName.customerId);
                 $("#ordCusName").val(order.customerName.customerName);
                 $("#ordDate").val(order.purchaseDate);
-                /*$("#cusImage").attr('src', customer.proPic);
-                $('#cusImage').css('display', 'block');*/
+
             let code;
             let qty;
             let unitPrice;
@@ -691,10 +698,11 @@ function setOrdClBtn(){
     $("#order-clear").prop("disabled", empty);
 }
 function clearAll() {
-    $("#orderId,#OrdItmDes, #OrdItm, #ordItmPrice, #ordItmSize, #ordItmQty, #ordDate, #ordCusId, #ordCusName, #ordPoints,#txtCash,#txtDiscount,#txtBalance").val("");
-    $("#orderId,#OrdItmDes, #OrdItm, #ordItmPrice, #ordItmSize, #ordItmQty, #ordDate, #ordCusId, #ordCusName, #ordPoints,#txtCash").css("border", "1px solid #ced4da");
+    $("#orderId,#OrdItmDes, #OrdItm, #ordItmPrice, #ordItmSize, #ordItmQty, #ordDate, #ordCusId, #ordCusName, #ordPoints,#txtCash,#txtDiscount,#txtBalance,#confirmUsername,#confirmPassword").val("");
+    $("#orderId,#OrdItmDes, #OrdItm, #ordItmPrice, #ordItmSize, #ordItmQty, #ordDate, #ordCusId, #ordCusName, #ordPoints,#txtCash,#confirmUsername,#confirmPassword").css("border", "1px solid #ced4da");
 
     $("#ordItmQty").text("");
+    $("#ordPointsError").text("");
     $("#total,#subtotal").text("0");
     $("#order-add-item").prop("disabled", true);
     $("#btnSubmitOrder").prop("disabled", true);
@@ -702,8 +710,7 @@ function clearAll() {
     $("#order-clear").prop("disabled", true);
     $("#order-delete").prop("disabled", true);
     $("#order-table").empty();
-    /*$("#cusImage").attr('src', "");
-    $('#cusImage').css('display', 'none');*/
+    $("#btnConfirm").prop("disabled", true);
 }
 
 function checkCard() {

@@ -242,7 +242,7 @@ $("#adminUpdate").click(function () {
     console.log("update")
     searchUser().then(function (user) {
         if (user) {
-            swal("Do you really want to update this user.?", {
+            swal("Do you really want to update this admin.?", {
                 buttons: {
                     cancel1: {
                         text: "Cancel",
@@ -270,11 +270,12 @@ $("#adminUpdate").click(function () {
                         data: JSON.stringify(value),
                         contentType: "application/json",
                         success: function (res, textStatus, jsXH) {
-                            swal("Saved", "User Update Successfully", "success");
+                            swal("Updated", "Admin Update Successfully", "success");
+                            adminClear();
                             getAllAdmins();
                         },
                         error: function (ob, textStatus, error) {
-                            swal("Error", textStatus + " : Error User Not Updated", "error");
+                            swal("Error", textStatus + " : Error Admin Not Updated", "error");
                         }
                     });
                 }
@@ -301,6 +302,7 @@ function saveAdmin() {
                 contentType: "application/json",
                 success: function (res, textStatus, jsXH) {
                     swal("Saved", "User Added Successfully", "success");
+                    adminClear();
                     getAllAdmins();
                 },
                 error: function (ob, textStatus, error) {
@@ -386,13 +388,15 @@ $("#adminDelete").click(function () {
                         contentType: "application/json",
                         success: function (res) {
                             console.log(res);
-                            swal("Deleted", "user Delete Successfully", "success");
+                            swal("Deleted", "Admin Delete Successfully", "success");
+                            adminClear();
+                            getAllAdmins();
                             //captureClear();
-                            //getAllCustomers();
-                            //setBtn();
+
+
                         },
                         error: function (ob, textStatus, error) {
-                            swal("Error", textStatus + "Error user Not Delete", "error");
+                            swal("Error", textStatus + "Error Admin Not Delete", "error");
                         }
                     });
                 }
@@ -416,6 +420,7 @@ function adminClear() {
     $("#adminNewPass").hide();
     $("#adminNewPassLabel").hide();
     $("#adminNewPassLabel").text("");
+    $("#adminNewPass").text("");
     $("#adminIdError").text("");
     $("#adminOldPasswordError").text("");
     $("#adminName").css("border", "1px solid #ced4da");

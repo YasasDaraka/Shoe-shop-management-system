@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -41,13 +42,13 @@ public class Customer {
 
     @Embedded
     private Address address;
-
+    @Column(unique = true)
     private String contactNo;
 
     @Column(unique = true)
     private String email;
 
-    private Timestamp recentPurchase;
+    private LocalDateTime recentPurchase;
 
     @Column(columnDefinition = "LONGTEXT")
     private String proPic;

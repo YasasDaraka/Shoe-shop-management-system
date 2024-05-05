@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -103,9 +104,11 @@ public class SalesServiceImpl implements SaleService {
                                         Integer cusPoints = cus.getTotalPoints();
                                         cusPoints += point;
                                         cus.setTotalPoints(cusPoints);
-                                        cusRepo.save(cus);
+
                                     }
                                 }
+                                cus.setRecentPurchase(LocalDateTime.now());
+                                cusRepo.save(cus);
                             },
                             () -> {
                                     throw new NotFoundException("Customer not exist");
@@ -123,6 +126,14 @@ public class SalesServiceImpl implements SaleService {
                 sales -> {
                     saleRepo.deleteById(dto.getOrderNo());
                     saleRepo.save(tranformer.convert(dto, Tranformer.ClassType.ORDER_ENTITY));
+                    cusRepo.findById(dto.getCustomerName().getCustomerId()).ifPresentOrElse(
+                            cus -> {
+                                cus.setRecentPurchase(LocalDateTime.now());
+                                cusRepo.save(cus);
+                            },
+                            () -> {
+                                throw new NotFoundException("Customer not exist");
+                            });
                     if (detailRepo.countSaleDetails() != 0){
                         adminPanelRepo.save(getAdminPanel());
                     }
@@ -160,21 +171,21 @@ public class SalesServiceImpl implements SaleService {
             mostItem[index1++] = value;
         }
         String code = String.valueOf(mostItem[0]);
-        System.out.println(code);
-        Map<String, Object> item = detailRepo.findTotalQtyAndTotalAmountByItemCode(code);
+        Long qty = (Long) mostItem[1];
+        System.out.println(code+qty);
+        Inventory inventory = inventoryRepo.findById(code).get();
+        System.out.println(inventory.getItemPicture());
+
+        Map<String, Object> item = detailRepo.getTotalCost();
         Object[] ar = new Object[item.size()];
         int index2 = 0;
         for (Object value : item.values()) {
             ar[index2++] = value;
         }
-        String itemId = String.valueOf(ar[0]);
-        Long qty = (Long) ar[1];
-        Double salePrice = (Double) ar[2];
-
-        Inventory inventory = inventoryRepo.findById(itemId).get();
-        Double buyPrice = inventory.getBuyPrice();
-        Double cost = buyPrice*qty;
-        Double profit =salePrice-cost;
-        return new AdminPanel("dash",salePrice,profit,itemId,inventory.getItemPicture(), Math.toIntExact(qty));
+        Double totalBuy = (Double) ar[0];
+        Double itmTotal = detailRepo.getItmTotal();
+        Double profit =itmTotal-totalBuy;
+        System.out.println(totalBuy+" "+itmTotal+" "+profit);
+        return new AdminPanel("dash",itmTotal,profit,code,inventory.getItemPicture(), Math.toIntExact(qty));
     }
 }
