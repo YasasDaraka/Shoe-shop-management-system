@@ -20,3 +20,25 @@ function getAdminPanel() {
         });
     });
 }
+function setAdminPanel() {
+    getAdminPanel().then(function (value) {
+        if (Object.keys(value).length !== 0 ){
+
+            searchItem(value.mostSaleItem).then(function (itm) {
+                if (Object.keys(itm).length !== 0) {
+                    $("#panelImg").attr('src',value.mostSaleItemPicture);
+                    $("#dashItmCode").text(value.mostSaleItem);
+                    $("#dashItmDesc").text(itm.itemDesc);
+                    $("#dashItmSale").text("$"+itm.salePrice);
+                    $("#dashItmQTY").text(value.mostSaleItemQuantity);
+
+                    $("#totalSale").text("$"+value.totalSales);
+                    $("#totalProfit").text("$"+value.totalProfit);
+                    // $("#totalOrders").val(value.itemDesc);
+                }
+
+            });
+        }
+    });
+
+}

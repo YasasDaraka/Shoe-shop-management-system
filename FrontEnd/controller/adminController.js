@@ -123,7 +123,7 @@ $("#btnCustomer, #btnInventory, #btnSupplier, #btnEmployee, #btnSales,#btnAdminP
         case 'btnDashboard':
             $("#formIcon").text("Admin Panel");
             adminDashboard.css('display', 'block');
-           // getAllUsers();
+            setAdminPanel();
             allCaptureClear();
             break;
     }

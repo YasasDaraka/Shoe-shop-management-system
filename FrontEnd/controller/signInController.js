@@ -106,6 +106,7 @@ function signIn() {
                         showAlert("Admin");
                         adminPage.css('display','block');
                         adminDashboard.css('display','block');
+                        setAdminPanel();
                         $("#formIcon").text("AdminPanel");
                         logInPage.css('display','none');
                     } else if(res.role === "USER"){

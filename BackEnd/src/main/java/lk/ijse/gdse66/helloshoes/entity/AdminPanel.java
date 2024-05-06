@@ -1,5 +1,6 @@
 package lk.ijse.gdse66.helloshoes.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -17,6 +18,7 @@ public class AdminPanel {
     private Double totalSales;
     private Double totalProfit;
     private String mostSaleItem;
+    @Column(columnDefinition = "LONGTEXT")
     private String mostSaleItemPicture;
     private Integer mostSaleItemQuantity;
 }

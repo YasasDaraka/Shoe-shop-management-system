@@ -42,7 +42,12 @@ public class SalesServiceImpl implements SaleService {
 
     @Override
     public AdminPanelDTO getAdminPanelDetails() {
-        return tranformer.convert(getAdminPanel(), Tranformer.ClassType.PANNEL_DTO);
+        AdminPanel panel = getAdminPanel();
+        if (panel!= null){
+            return tranformer.convert(panel, Tranformer.ClassType.PANNEL_DTO);
+        }else {
+            throw new NotFoundException("Admin Panel is Empty");
+        }
     }
 
     @Override
@@ -165,27 +170,29 @@ public class SalesServiceImpl implements SaleService {
     @Override
     public AdminPanel getAdminPanel(){
         Map<String, Object> getItem = detailRepo.findMostPurchasedItem();
-        Object[] mostItem = new Object[getItem.size()];
-        int index1 = 0;
-        for (Object value : getItem.values()) {
-            mostItem[index1++] = value;
-        }
-        String code = String.valueOf(mostItem[0]);
-        Long qty = (Long) mostItem[1];
-        System.out.println(code+qty);
-        Inventory inventory = inventoryRepo.findById(code).get();
-        System.out.println(inventory.getItemPicture());
+        if (!getItem.isEmpty()){
+            Object[] mostItem = new Object[getItem.size()];
+            int index1 = 0;
+            for (Object value : getItem.values()) {
+                mostItem[index1++] = value;
+            }
+            String code = String.valueOf(mostItem[0]);
+            Long qty = (Long) mostItem[1];
+            System.out.println(code+qty);
+            Inventory inventory = inventoryRepo.findById(code).get();
 
-        Map<String, Object> item = detailRepo.getTotalCost();
-        Object[] ar = new Object[item.size()];
-        int index2 = 0;
-        for (Object value : item.values()) {
-            ar[index2++] = value;
+            Map<String, Object> item = detailRepo.getTotalCost();
+            Object[] ar = new Object[item.size()];
+            int index2 = 0;
+            for (Object value : item.values()) {
+                ar[index2++] = value;
+            }
+            Double totalBuy = (Double) ar[0];
+            Double itmTotal = detailRepo.getItmTotal();
+            Double profit =itmTotal-totalBuy;
+            System.out.println(totalBuy+" "+itmTotal+" "+profit);
+            return new AdminPanel("dash",itmTotal,profit,code,inventory.getItemPicture(), Math.toIntExact(qty));
         }
-        Double totalBuy = (Double) ar[0];
-        Double itmTotal = detailRepo.getItmTotal();
-        Double profit =itmTotal-totalBuy;
-        System.out.println(totalBuy+" "+itmTotal+" "+profit);
-        return new AdminPanel("dash",itmTotal,profit,code,inventory.getItemPicture(), Math.toIntExact(qty));
+        return null;
     }
 }
