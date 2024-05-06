@@ -433,7 +433,8 @@ $("#order-add-item").click(function () {
         });
         $('#order-table>tr>td').css({
             'flex': '1',
-            'max-width': 'calc(100%/7*1)'
+            'max-width': 'calc(100%/7*1)',
+            'text-align': 'center'
         });
         if ($("#order-table>tr").length > 1) {
             $('#order-table>tr').css({
@@ -636,7 +637,8 @@ $("#orderId").on("keyup input change", async function (e) {
                             });
                             $('#order-table>tr>td').css({
                                 'flex': '1',
-                                'max-width': 'calc(100%/7*1)'
+                                'max-width': 'calc(100%/7*1)',
+                                'text-align': 'center'
                             });
                             if ($("#order-table>tr").length > 1) {
                                 $('#order-table>tr').css({
@@ -650,6 +652,7 @@ $("#orderId").on("keyup input change", async function (e) {
                                 });
                             }
                             bindRemove();
+                            tableChange();
                         }
                     }
                 }
@@ -660,9 +663,35 @@ $("#orderId").on("keyup input change", async function (e) {
     }
     setOrdClBtn();
 });
+function tableChange() {
+
+    $("#order-table").on("DOMNodeInserted DOMNodeRemoved", "tr", async function (event) {
+
+        if (event.type === "DOMNodeInserted") {
+            let id = $("#orderId").val();
+            let order = await searchOrder(id);
+            let details = order.saleDetails;
+            let code;
+            let tableItm;
+            if (Object.keys(details).length !== 0) {
+                for (var info of details) {
+                    $('#order-table>tr').each(function (e) {
+                        code = info.orderDetailPK.itemCode;
+                        tableItm = $(this).children().eq(0).text();
+                        if (code !== tableItm) {
+                            $("#btnSubmitOrder").prop("disabled", true);
+                            $("#order-update").prop("disabled", false);
+                        }
+                    });
+                }
+            }
+        }
+    });
+
+}
 
 function bindRemove() {
-    $('#order-table>tr>td').click(function () {
+    $('#order-table>tr>td').click(async function () {
         let row = $(this).closest('tr');
         row.remove();
 
@@ -674,7 +703,8 @@ function bindRemove() {
         });
         $('#order-table>tr>td').css({
             'flex': '1',
-            'max-width': 'calc(100%/7*1)'
+            'max-width': 'calc(100%/7*1)',
+            'text-align': 'center'
         });
         if ($("#order-table>tr").length > 1) {
             $('#order-table>tr').css({
@@ -687,10 +717,33 @@ function bindRemove() {
                 'display': 'flex'
             });
         }
-        if ($("#order-table>tr").length > 1){
-            setOrdUpdateBtn();
+        if ($("#order-table>tr").length > 0) {
+            let id = $("#orderId").val();
+            let order = await searchOrder(id);
+            let details = order.saleDetails;
+            let code;
+            let tableItm;
+            if (details != null || details != undefined) {
+                if (Object.keys(details).length !== 0) {
+                    for (var info of details) {
+                        $('#order-table>tr').each(function (e) {
+                            code = info.orderDetailPK.itemCode;
+                            tableItm = $(this).children().eq(0).text();
+                            if (code == tableItm) {
+                                $("#btnSubmitOrder").prop("disabled", true);
+                                $("#order-update").prop("disabled", true);
+                                // setOrdUpdateBtn();
+                            }
+                        });
+                    }
+                }
+            }
+        } else {
+            $("#btnSubmitOrder").prop("disabled", true);
+            $("#order-update").prop("disabled", true);
         }
     });
+
 }
 
 async function setOrdUpdateBtn() {
