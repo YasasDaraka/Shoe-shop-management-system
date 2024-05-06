@@ -651,8 +651,8 @@ $("#orderId").on("keyup input change", async function (e) {
                                     'display': 'flex'
                                 });
                             }
-                            bindRemove();
-                            tableChange();
+                            bindRemove(order.saleDetails);
+                            tableChange(order.saleDetails);
                         }
                     }
                 }
@@ -663,14 +663,11 @@ $("#orderId").on("keyup input change", async function (e) {
     }
     setOrdClBtn();
 });
-function tableChange() {
+function tableChange(details) {
 
-    $("#order-table").on("DOMNodeInserted DOMNodeRemoved", "tr", async function (event) {
+    $("#order-table").on("DOMNodeInserted DOMNodeRemoved", "tr", function (event) {
 
         if (event.type === "DOMNodeInserted") {
-            let id = $("#orderId").val();
-            let order = await searchOrder(id);
-            let details = order.saleDetails;
             let code;
             let tableItm;
             if (Object.keys(details).length !== 0) {
@@ -690,8 +687,8 @@ function tableChange() {
 
 }
 
-function bindRemove() {
-    $('#order-table>tr>td').click(async function () {
+function bindRemove(details) {
+    $('#order-table>tr>td').click(function () {
         let row = $(this).closest('tr');
         row.remove();
 
@@ -718,9 +715,6 @@ function bindRemove() {
             });
         }
         if ($("#order-table>tr").length > 0) {
-            let id = $("#orderId").val();
-            let order = await searchOrder(id);
-            let details = order.saleDetails;
             let code;
             let tableItm;
             if (details != null || details != undefined) {
@@ -732,7 +726,7 @@ function bindRemove() {
                             if (code == tableItm) {
                                 $("#btnSubmitOrder").prop("disabled", true);
                                 $("#order-update").prop("disabled", true);
-                                // setOrdUpdateBtn();
+                                 setOrdUpdateBtn();
                             }
                         });
                     }
