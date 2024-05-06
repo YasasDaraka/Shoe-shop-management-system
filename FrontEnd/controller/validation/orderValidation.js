@@ -105,36 +105,6 @@ function cashValidate() {
     return false;
 }
 
-/*$("#orderQty").on("keydown keyup input", function (e){
-    let qty = parseInt($("#qtyOnHand").val());
-    let orderQty = parseInt($("#orderQty").val());
-    console.log(qty,orderQty);
-    if (qty>=orderQty && qty<=0){
-        $("#orderQty").css("border", "2px solid green");
-        $("#QtyError").text("");
-        $("#order-add-item").prop("disabled", false);
-    }if (qty<orderQty && qty>=0){
-        $("#orderQty").css("border", "2px solid red");
-        $("#QtyError").text("");
-        $("#order-add-item").prop("disabled", true);
-    }
-    if (qty<orderQty){
-        $("#orderQty").css("border", "2px solid red");
-        $("#QtyError").text(`Please Enter Amount lower than: ${qty}`);
-        $("#order-add-item").prop("disabled", true);
-    }
-    else if (orderQty<=0){
-        $("#orderQty").css("border", "2px solid red");
-        $("#QtyError").text(`Please Enter Valid Amount`);
-        $("#order-add-item").prop("disabled", true);
-    }
-    else if(isNaN(orderQty)){
-        $("#QtyError").text("Pleace Input Qty");
-        $("#order-add-item").prop("disabled", true);
-    }else{
-        $("#QtyError").text("");
-    }
-});*/
 
 $("#OrdItmDes, #OrdItm, #ordItmPrice, #ordItmSize, #ordItmQty, #ordCusId, #ordCusName, #ordPoints,#txtCash,#txtDiscount,#txtBalance").on("keydown keyup input change", function (e){
     var empty = true;

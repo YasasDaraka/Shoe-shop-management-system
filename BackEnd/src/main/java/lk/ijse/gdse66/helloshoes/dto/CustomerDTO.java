@@ -6,6 +6,7 @@ import lk.ijse.gdse66.helloshoes.service.util.LoyaltyLevel;
 import lombok.*;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
@@ -46,7 +47,7 @@ public class CustomerDTO{
 
     private String proPic;
 
-    private Timestamp recentPurchase;
+    private LocalDateTime recentPurchase;
 
 }
 

@@ -85,7 +85,7 @@ function purchaseBtnHide(value){
     $("#txtBalance").prop("disabled", value);
     $("#txtDiscount").prop("disabled", value);
     $("#txtCash").prop("disabled", value);
-    $("#btnSubmitOrder").prop("disabled", value);
+   // $("#btnSubmitOrder").prop("disabled", value);
 }
 function userLimits(){
     $("#cusUpdate").hide();
