@@ -26,6 +26,12 @@ public class SalesController {
     }
 
     @ResponseStatus(HttpStatus.OK)
+    @GetMapping(path = "/total")
+    public Integer getTotalSalecount() {
+        return saleService.totalSalesCount();
+    }
+
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping(path = "/getGenId")
     public String getCustomerGenId() {
         return saleService.getOrderGenId();

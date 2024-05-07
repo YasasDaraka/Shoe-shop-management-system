@@ -20,6 +20,28 @@ function getAdminPanel() {
         });
     });
 }
+function getOrderCount() {
+    return new Promise(function (resolve, reject) {
+        performAuthenticatedRequest();
+        const accessToken = localStorage.getItem('accessToken');
+        console.log(accessToken);
+        $.ajax({
+            url: "http://localhost:8080/helloshoes/api/v1/sales/total",
+            method: "GET",
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
+            dataType: "json",
+            success: function (res, textStatus, xhr) {
+                console.log(res);
+                resolve(res);
+            },
+            error: function (ob, textStatus, error) {
+                resolve(error);
+            }
+        });
+    });
+}
 function setAdminPanel() {
     getAdminPanel().then(function (value) {
         if (Object.keys(value).length !== 0 ){
@@ -34,7 +56,10 @@ function setAdminPanel() {
 
                     $("#totalSale").text("$"+value.totalSales);
                     $("#totalProfit").text("$"+value.totalProfit);
-                    // $("#totalOrders").val(value.itemDesc);
+
+                    getOrderCount().then(function (count) {
+                             $("#totalOrders").text(count);
+                    });
                 }
 
             });

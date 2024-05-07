@@ -9,6 +9,7 @@ import java.util.List;
 public interface SaleService {
 
     AdminPanelDTO getAdminPanelDetails();
+    Integer totalSalesCount();
     SalesDTO searchSales(String id);
     void saveSales(SalesDTO dto);
     void updateSales(SalesDTO dto);

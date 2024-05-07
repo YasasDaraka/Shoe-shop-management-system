@@ -49,7 +49,10 @@ public class SalesServiceImpl implements SaleService {
             throw new NotFoundException("Admin Panel is Empty");
         }
     }
-
+    @Override
+    public Integer totalSalesCount() {
+        return saleRepo.totalSalesCount();
+    }
     @Override
     public SalesDTO searchSales(String id) {
         return (SalesDTO) saleRepo.findById(id).map(sales -> {
