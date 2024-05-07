@@ -84,7 +84,7 @@ $("input[name='rating']").on("change", function(e) {
 $("#cusId").on("keydown keyup", function (e) {
     events(e)
     searchCustomer($("#cusId").val()).then(function (res){
-        setBtn();
+        //setBtn();
         captureClear();
         setAllCusVal(res);
         // $("#cusId,#cusName,#cusBuildNo,#cusLane,#cusCity,#cusState,#cusPostalCode,#cusEmail,#cusDob,#cusGender,#cusContactNo,#totalPoints").css("border", "1px solid #ced4da");
