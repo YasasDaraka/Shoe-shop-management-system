@@ -34,31 +34,7 @@ let ad_vArray = new Array();
 ad_vArray.push({ field: $("#adminName"), regEx: ADMIN_EMAIL_REGEX, error: $("#adminIdError") });
 ad_vArray.push({ field: $("#adminOldPassword"), regEx: ADMIN_PASS_REGEX, error: $("#adminOldPasswordError") });
 ad_vArray.push({ field: $("#adminNewPassword"), regEx: ADMIN_PASS_REGEX, error: $("#adminNewPasswordError") });
-function adminEvents(e) {
-    //setClBtn();
-    let indexNo = ad_vArray.indexOf(ad_vArray.find((c) => c.field.attr("id") == e.target.id));
 
-    if (e.key == "Tab") {
-        e.preventDefault();
-    }
-
-    checkAdminValidations(ad_vArray[indexNo]);
-
-    //setBtn();
-
-    if (e.key == "Enter") {
-
-        if (e.target.id != ad_vArray[ad_vArray.length - 1].field.attr("id")) {
-            if (checkAdminValidations(ad_vArray[indexNo])) {
-                ad_vArray[indexNo + 1].field.focus();
-            }
-        } else {
-            if (checkAdminValidations(ad_vArray[indexNo])) {
-                // saveAdmin();
-            }
-        }
-    }
-}
 function setAdminBorder(bol, ob) {
     if (!bol) {
         if (ob.field.val().length >= 1) {

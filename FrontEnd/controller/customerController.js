@@ -483,3 +483,8 @@ $('#cusSearch').click(function () {
     setClBtn();
     setBtn();
 });
+$('#backToCus').click(function () {
+    cusList.css('display', 'none');
+    cusMain.css('display', 'block');
+    customerPage.css('display', 'block');
+});

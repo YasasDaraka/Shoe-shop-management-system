@@ -2,45 +2,45 @@ $("#userBtnCustomer, #userBtnInventory, #userBtnSupplier, #userBtnEmployee, #use
     hideAdminPages();
     switch ($(this).attr('id')) {
         case 'userBtnCustomer':
-            $("#formIcon").text("Customer page");
+            $("#userFormIcon").text("Customer page");
             cusList.css('display', 'none');
             cusMain.css('display', 'block');
             customerPage.css('display', 'block');
             allCaptureClear();
             break;
         case 'userBtnInventory':
-            $("#formIcon").text("Inventory page");
+            $("#userFormIcon").text("Inventory page");
             itmList.css('display', 'none');
             itmMain.css('display', 'block');
             inventoryPage.css('display', 'block');
             allCaptureClear();
             break;
         case 'userBtnSupplier':
-            $("#formIcon").text("Supplier page");
+            $("#userFormIcon").text("Supplier page");
             supList.css('display', 'none');
             supMain.css('display', 'block');
             supplierPage.css('display', 'block');
             allCaptureClear();
             break;
         case 'userBtnEmployee':
-            $("#formIcon").text("Employee page");
+            $("#userFormIcon").text("Employee page");
             empList.css('display', 'none');
             empMain.css('display', 'block');
             employeePage.css('display', 'block');
             allCaptureClear();
             break;
         case 'userBtnSales':
-            $("#formIcon").text("Sales page");
+            $("#userFormIcon").text("Sales page");
             paymentPage.css('display', 'block');
             allCaptureClear();
             break;
         case 'userBtnUsers':
-            $("#formIcon").text("Users page");
+            $("#userFormIcon").text("Users page");
             userEditPage.css('display', 'block');
             allCaptureClear();
             break;
         case 'UserBtnDashboard':
-            $("#formIcon").text("Dashboard");
+            $("#userFormIcon").text("Dashboard");
             userDashboard.css('display', 'block');
             allCaptureClear();
             break;

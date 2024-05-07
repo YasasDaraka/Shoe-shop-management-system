@@ -219,7 +219,7 @@
     <header id="user-header">
       <nav class="navbar navbar-expand-lg bg-white nav-bar container-fluid d-flex " style="height: 60px; padding-right: 20px;padding-left: 50px">
         <div class="d-flex justify-content-center align-items-center"style="display: inline-block; box-shadow: 0px 1px 10px #909090; background-color: white; z-index: 4; width: 32px; height: 33px; border-radius: 25%"><img class="admin-icon" style="width: 60px; padding-right:10px; z-index: 5" src="assets/images/arrow.gif"></div>
-
+        <label id="userFormIcon" class="form-label m-0 position-absolute" style="left: 8vw; font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 20px;width: 20vw; z-index: 5"></label>
         <div class="d-flex justify-content-evenly">
           <div class="nav-item d-flex justify-content-center" style="padding-left:63vw ">
             <span style="color: darkgoldenrod">Time : </span><div class="nav-link active currTime" aria-current="page" href="#" style="z-index:5; font-weight: 600; font-size: 16px;" ></div>
@@ -460,6 +460,7 @@
             <div class="row">
               <div class="row mt-1 mt-lg-5 justify-content-start">
                 <div class="col-10">
+                  <button type="button" id="backToCus"  class="btn mt-3 ms-3" style="color: rgba(59,59,59,0.9) ;position: absolute;top: 5.5vw;left: 6vw; margin: 0; font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 12px"><i class="fa-solid fa-arrow-left me-2"></i>Back</button>
                   <div class="customerTableDiv" style="width: 89.4vw;">
                     <table style="font-size: xx-small;" class="table table-bordered rounded bg-light table-hover ">
                       <thead class="table-secondary text-light text-center">
@@ -715,6 +716,7 @@
             <div class="row">
               <div class="row mt-1 mt-lg-5 justify-content-start">
                 <div class="col-10">
+                  <button type="button" id="backToEmp"  class="btn mt-3 ms-3" style="color: rgba(59,59,59,0.9) ;position: absolute;top: 5.5vw;left: 6vw; margin: 0; font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 12px"><i class="fa-solid fa-arrow-left me-2"></i>Back</button>
                   <div class="employeeTableDiv" style="width: 89.4vw;">
                     <table style="font-size: xx-small;" class="table table-bordered rounded bg-light table-hover ">
                       <thead class="table-secondary text-light text-center">
@@ -928,6 +930,7 @@
             <div class="row">
               <div class="row mt-1 mt-lg-5 justify-content-start">
                 <div class="col-10">
+                  <button type="button" id="backToSup"  class="btn mt-3 ms-3" style="color: rgba(59,59,59,0.9) ;position: absolute;top: 5.5vw;left: 6vw; margin: 0; font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 12px"><i class="fa-solid fa-arrow-left me-2"></i>Back</button>
                   <div class="supplierTableDiv" style="width: 89.4vw;">
                     <table style="font-size: xx-small;" class="table table-bordered rounded bg-light table-hover ">
                       <thead class="table-secondary text-light text-center">
@@ -1144,6 +1147,7 @@
             <div class="row">
               <div class="row mt-1 mt-lg-5 justify-content-start">
                 <div class="col-10">
+                  <button type="button" id="backToItm"  class="btn mt-3 ms-3" style="color: rgba(59,59,59,0.9) ;position: absolute;top: 5.5vw;left: 6vw; margin: 0; font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 12px"><i class="fa-solid fa-arrow-left me-2"></i>Back</button>
                   <div class="itemTableDiv" style="width: 89.4vw;">
                     <select aria-label="Default select example" class="form-select" id="itmFilter" style="width: 10vw">
                       <option value="All">All</option>

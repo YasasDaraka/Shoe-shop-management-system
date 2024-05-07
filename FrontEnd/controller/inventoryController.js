@@ -380,3 +380,8 @@ $('#itmSearch').click(function () {
     setItmClBtn();
     setItmBtn();
 });
+$('#backToItm').click(function () {
+    itmList.css('display', 'none');
+    itmMain.css('display', 'block');
+    inventoryPage.css('display', 'block');
+});

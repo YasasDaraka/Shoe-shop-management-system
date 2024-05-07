@@ -399,3 +399,8 @@ $('#supSearch').click(function () {
     setSupClBtn();
     setSupBtn();
 });
+$('#backToSup').click(function () {
+    supList.css('display', 'none');
+    supMain.css('display', 'block');
+    supplierPage.css('display', 'block');
+});

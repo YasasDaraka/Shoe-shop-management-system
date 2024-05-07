@@ -115,7 +115,7 @@ function signIn() {
                         showAlert("User");
                         userPage.css('display','block');
                         userDashboard.css('display','block');
-                        $("#formIcon").text("Dashboard");
+                        $("#userFormIcon").text("Dashboard");
                         logInPage.css('display','none');
                     }
                 },

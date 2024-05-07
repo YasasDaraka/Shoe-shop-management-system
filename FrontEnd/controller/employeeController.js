@@ -529,3 +529,8 @@ $('#empSearch').click(function () {
     setEmpClBtn();
     setEmpBtn();
 });
+$('#backToEmp').click(function () {
+    empList.css('display', 'none');
+    empMain.css('display', 'block');
+    employeePage.css('display', 'block');
+});

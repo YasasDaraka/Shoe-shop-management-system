@@ -57,18 +57,22 @@ $("#getAllCus, #getAllItm, #getAllEmp, #getAllSup").click(function () {
         case 'getAllCus':
             cusList.css('display', 'block');
             getAllCustomers();
+            allCaptureClear();
             break;
         case 'getAllItm':
             itmList.css('display', 'block');
             getAllItems("/getAll");
+            allCaptureClear();
             break;
         case 'getAllEmp':
             empList.css('display', 'block');
             getAllEmployees();
+            allCaptureClear();
             break;
         case 'getAllSup':
             supList.css('display', 'block');
             getAllSuppliers();
+            allCaptureClear();
             break;
     }
 });

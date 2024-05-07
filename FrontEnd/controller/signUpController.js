@@ -20,12 +20,17 @@ function signUp() {
         success: function (res, textStatus, jsXH) {
             localStorage.setItem('accessToken', res.token);
             console.log(res);
-            swal("Saved", "Item Added Successfully", "success");
-            //clear texts
-
+            swal("Saved", "User Added Successfully", "success");
+            $("#inputEmailError").text("");
+            $("#inputEmail").css("border", "1px solid #ced4da");
+            $("#inputPasswordError").text("");
+            $("#inputPassword").css("border", "1px solid #ced4da");
+            $("#reInputPasswordError").text("");
+            $("#reInputPassword").css("border", "1px solid #ced4da");
+            $("#signup-page-signup").prop("disabled", true);
         },
         error: function (ob, textStatus, error) {
-            alert(textStatus + " : Error User Not Added")
+            swal("Error","Error User Not Added", "error");
         }
     });
 
