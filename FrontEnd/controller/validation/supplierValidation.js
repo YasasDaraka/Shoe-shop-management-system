@@ -92,6 +92,25 @@ $("#supId").on("keydown keyup", function (e) {
 
 function checkSupValidations(object) {
     if (object.regEx.test(object.field.val())) {
+        if ($("#supMobileNo").val() !== "" && $("#supLandNo").val() !== "") {
+            if ($("#supMobileNo").val() === $("#supLandNo").val()) {
+                $("#supMobileNo").css("border", "2px solid red");
+                $("#supMobileNoError").text("MobileNo cannot same LandNo");
+                $("#supLandNo").css("border", "2px solid red");
+                $("#supLandNoError").text("LandNo cannot same MobileNo");
+                return false;
+            } else {
+                $("#supMobileNo").css("border", "2px solid green");
+                $("#supMobileNoError").text("");
+                $("#supLandNo").css("border", "2px solid green");
+                $("#supLandNoError").text("");
+            }
+        }else {
+            $("#supMobileNo").css("border", "1px solid #ced4da");
+            $("#supMobileNoError").text("");
+            $("#supLandNo").css("border", "1px solid #ced4da");
+            $("#supLandNoError").text("");
+        }
         setSupBorder(true, object)
         return true;
     }

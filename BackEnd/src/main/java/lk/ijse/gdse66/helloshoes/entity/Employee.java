@@ -35,10 +35,12 @@ public class Employee {
     private Date joinDate;
     @Embedded
     private Address address;
+    @Column(unique = true)
     private String contactNo;
     @Column(unique = true)
     private String email;
     private String guardianName;
+    @Column(unique = true)
     private String emergencyContact;
 
 }
