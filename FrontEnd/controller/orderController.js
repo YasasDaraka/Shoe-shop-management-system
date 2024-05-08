@@ -57,13 +57,18 @@ $("#confirmPassword").on("keydown keyup", function (e) {
                 $("#confirmPassword").css("border", "2px solid green");
 
                 if ($("#confirmUsername").val() !== "") {
-                    searchUserPanel($("#confirmUsername").val()).then(function (res) {
-                        if (res) {
+                    getUserDetail($("#confirmUsername").val()).then(function (res) {
+                        if (res !== false) {
+                            if (res.role === "ADMIN"){
                             $("#confirmUsernameError").text("");
                             $("#confirmUsername").css("border", "2px solid green");
                             $("#btnConfirm").prop("disabled", false);
+                            } else {
+                                $("#confirmUsernameError").text("Invalid Admin username");
+                                $("#confirmUsername").css("border", "2px solid red");
+                            }
                         } else {
-                            $("#confirmUsernameError").text("Invalid User Name");
+                            $("#confirmUsernameError").text("Invalid Username");
                             $("#confirmUsername").css("border", "2px solid red");
                             $("#btnConfirm").prop("disabled", true);
                         }
@@ -89,27 +94,32 @@ $("#confirmUsername").on("keydown keyup", function (e) {
 
     $("#btnConfirm").prop("disabled", true);
     if ($("#confirmUsername").val() !== "") {
-        searchUserPanel($("#confirmUsername").val()).then(function (res) {
-            if (res) {
-                $("#confirmUsernameError").text("");
-                $("#confirmUsername").css("border", "2px solid green");
-                passwordCheck($("#confirmUsername").val(),$("#confirmPassword").val()).then(function (pass) {
-                    if (pass) {
-                        $("#confirmPasswordError").text("");
-                        $("#confirmPassword").css("border", "2px solid green");
-                        $("#btnConfirm").prop("disabled", false);
+        getUserDetail($("#confirmUsername").val()).then(function (res) {
+            if (res !== false) {
+                if (res.role === "ADMIN") {
+                    $("#confirmUsernameError").text("");
+                    $("#confirmUsername").css("border", "2px solid green");
+                    passwordCheck($("#confirmUsername").val(), $("#confirmPassword").val()).then(function (pass) {
+                        if (pass) {
+                            $("#confirmPasswordError").text("");
+                            $("#confirmPassword").css("border", "2px solid green");
+                            $("#btnConfirm").prop("disabled", false);
 
-                    }else {
-                        $("#confirmPasswordError").text("Invalid password");
-                        $("#confirmPassword").css("border", "2px solid red");
-                        $("#btnConfirm").prop("disabled", true);
-                    }
-                });
-            }
-            else {
-                $("#confirmUsernameError").text("Invalid Username");
-                $("#confirmUsername").css("border", "2px solid red");
-            }
+                        } else {
+                            $("#confirmPasswordError").text("Invalid password");
+                            $("#confirmPassword").css("border", "2px solid red");
+                            $("#btnConfirm").prop("disabled", true);
+                        }
+                    });
+                } else {
+                    $("#confirmUsernameError").text("Invalid Admin username");
+                    $("#confirmUsername").css("border", "2px solid red");
+                }
+            }else
+                {
+                    $("#confirmUsernameError").text("Invalid Username");
+                    $("#confirmUsername").css("border", "2px solid red");
+                }
         });
     } else {
         $("#confirmUsernameError").text("");
@@ -825,6 +835,7 @@ function clearAll() {
     $("#orderId,#OrdItmDes, #OrdItm, #ordItmPrice, #ordItmSize, #ordItmQty, #ordDate, #ordCusId, #ordCusName, #ordPoints,#txtCash,#confirmUsername,#confirmPassword").css("border", "1px solid #ced4da");
 
     $("#ordItmQty").text("");
+    $("#OrdItmError").text("");
     $("#ordItmQtyError").text("");
     $("#ordPointsError").text("");
     $("#total,#subtotal").text("0");

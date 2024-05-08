@@ -131,7 +131,29 @@ function searchUserPanel(name) {
     });
 
 }
+function getUserDetail(name) {
+    return new Promise(function (resolve, reject) {
+        performAuthenticatedRequest();
+        const accessToken = localStorage.getItem('accessToken');
+        console.log(accessToken);
+        $.ajax({
+            url: "http://localhost:8080/helloshoes/api/v1/auth/search/" + name,
+            method: "GET",
+            dataType: "json",
+            success: function (res, textStatus, xhr) {
+                if (xhr.status === 200) {
+                    resolve(res);
+                } else {
+                    resolve(false);
+                }
+            },
+            error: function (ob, textStatus, error) {
+                resolve(false);
+            }
+        });
+    });
 
+}
 function userCheckToUpdate(oldPass) {
     searchUserPanel($("#userName").val()).then(function (user) {
         if (user) {
