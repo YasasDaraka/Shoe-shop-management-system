@@ -1002,7 +1002,7 @@
 
                     <div class="col"style="width: 9vw;">
                       <label for="itmQty" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Qty</label>
-                      <input type="number" class="form-control" id="itmQty" style="width: 9vw">
+                      <input type="number" class="form-control" id="itmQty" style="width: 10vw">
                       <p><small class="text-danger position-absolute mt-1" id="itmQtyError"></small></p>
                     </div>
                     </div>
@@ -1171,6 +1171,7 @@
                         <th scope="col">Desc</th>
                         <th scope="col">Category</th>
                         <th scope="col">Size</th>
+                        <th scope="col">Qty</th>
                         <th scope="col">Supplier ID</th>
                         <th scope="col">Supplier Name</th>
                         <th scope="col">Sale Price</th>
@@ -1222,13 +1223,19 @@
 
                     <div class="col">
                       <label for="OrdItm" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Item Code</label>
-                      <input type="text" class="form-control" id="OrdItm"style="width: 16vw">
+                      <input type="text" class="form-control" id="OrdItm"style="width: 12vw">
                       <p><small class="text-danger position-absolute mt-1" id="OrdItmError"></small></p>
                     </div>
 
                     <div class="col">
                       <label for="ordItmPrice" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Unit price</label>
-                      <input type="text" class="form-control" id="ordItmPrice"style="width: 16vw" readonly>
+                      <input type="text" class="form-control" id="ordItmPrice"style="width: 12vw" readonly>
+                    </div>
+
+                    <div class="col"style="width: 9vw;">
+                      <label for="qtyOnHand" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Qty on hand</label>
+                      <input type="number" class="form-control" id="qtyOnHand" style="width: 10vw" readonly>
+                      <p><small class="text-danger position-absolute mt-1" id="qtyOnHandError"></small></p>
                     </div>
 
                   </div>

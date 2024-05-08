@@ -29,6 +29,7 @@ public class InventoryServiceImpl implements InventoryService {
 
     @Override
     public InventoryDTO searchInventory(String id) {
+        System.out.println(id);
         return (InventoryDTO) inventoryRepo.findById(id)
                 .map(emp -> tranformer.convert(emp, Tranformer.ClassType.ITEM_DTO))
                 .orElseThrow(() -> new NotFoundException("Item Not Exist"));
@@ -43,9 +44,13 @@ public class InventoryServiceImpl implements InventoryService {
                 () -> {
                     String proPic = dto.getItemPicture();
                     if (proPic != null) {
+                        if ("assets/images/walk.gif".equals(proPic)){
+                            throw new NotFoundException("Item Pic Not Exist");
+                        }
                         Supplier supplier = supplierRepo.findById(dto.getSupplier().getSupplierCode())
                                 .orElseThrow(() -> new NotFoundException("Supplier not found"));
                         dto.setSupplierName(supplier.getSupplierName());
+                        dto.setOriginalQty(dto.getQty());
                         inventoryRepo.save(tranformer.convert(dto, Tranformer.ClassType.ITEM_ENTITY));
                     } else {
                         throw new NotFoundException("Item Pic Not Exist");
@@ -56,12 +61,20 @@ public class InventoryServiceImpl implements InventoryService {
     @Override
     public void updateInventory(InventoryDTO dto) {
         inventoryRepo.findById(dto.getItemCode()).ifPresentOrElse(
-                customer -> {
+                inventory -> {
                     String proPic = dto.getItemPicture();
                     if (proPic != null) {
+                        if ("assets/images/walk.gif".equals(proPic)){
+                            dto.setItemPicture(inventory.getItemPicture());
+                        }
                         Supplier supplier = supplierRepo.findById(dto.getSupplier().getSupplierCode())
                                 .orElseThrow(() -> new NotFoundException("Supplier not found"));
                         dto.setSupplierName(supplier.getSupplierName());
+                        if (inventory.getOriginalQty() < dto.getQty()){
+                            dto.setOriginalQty(dto.getQty());
+                        }else {
+                            dto.setOriginalQty(inventory.getOriginalQty());
+                        }
                         inventoryRepo.save(tranformer.convert(dto, Tranformer.ClassType.ITEM_ENTITY));
                     } else {
                         throw new NotFoundException("Item Pic Not Exist");

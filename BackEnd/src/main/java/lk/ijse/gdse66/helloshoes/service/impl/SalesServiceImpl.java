@@ -43,16 +43,18 @@ public class SalesServiceImpl implements SaleService {
     @Override
     public AdminPanelDTO getAdminPanelDetails() {
         AdminPanel panel = getAdminPanel();
-        if (panel!= null){
+        if (panel != null) {
             return tranformer.convert(panel, Tranformer.ClassType.PANNEL_DTO);
-        }else {
+        } else {
             throw new NotFoundException("Admin Panel is Empty");
         }
     }
+
     @Override
     public Integer totalSalesCount() {
         return saleRepo.totalSalesCount();
     }
+
     @Override
     public SalesDTO searchSales(String id) {
         return (SalesDTO) saleRepo.findById(id).map(sales -> {
@@ -96,18 +98,39 @@ public class SalesServiceImpl implements SaleService {
                     throw new DuplicateRecordException("Order Already Exist");
                 },
                 () -> {
-                    if (dto.getSaleDetails().isEmpty()){
+                    if (dto.getSaleDetails().isEmpty()) {
                         throw new NotFoundException("Items not added to save Order");
                     }
+                    List<SaleDetailsDTO> itms = dto.getSaleDetails();
+
+                    for (SaleDetailsDTO itm : itms) {
+                        inventoryRepo.findById(itm.getOrderDetailPK().getItemCode())
+                                .ifPresentOrElse(inventory -> {
+                                    Integer qtyHand = inventory.getQty();
+                                    Integer balanceQty = qtyHand - itm.getItmQTY();
+                                    inventory.setQty(balanceQty);
+                                    if (balanceQty != 0 && inventory.getOriginalQty() != 0 && balanceQty < inventory.getOriginalQty() / 2) {
+                                        inventory.setStatus("Low");
+                                    } else if (balanceQty == 0 && inventory.getOriginalQty() != 0) {
+                                        inventory.setStatus("Not Available");
+                                        inventory.setOriginalQty(0);
+                                    } else if (balanceQty != 0 && inventory.getOriginalQty() != 0 && balanceQty > inventory.getOriginalQty() / 2) {
+                                        inventory.setStatus("Available");
+                                    }
+                                    inventoryRepo.save(inventory);
+                                }, () -> {
+                                    throw new NotFoundException("Item not exist");
+                                });
+                    }
+
                     cusRepo.findById(dto.getCustomerName().getCustomerId()).ifPresentOrElse(
                             cus -> {
-                                if (cus.getLoyaltyDate() != null){
+                                if (cus.getLoyaltyDate() != null) {
                                     Double total = 0.0;
-                                    List<SaleDetailsDTO> itms = dto.getSaleDetails();
                                     for (SaleDetailsDTO itm : itms) {
-                                         total += itm.getItmTotal();
+                                        total += itm.getItmTotal();
                                     }
-                                    if (total >= 800.00){
+                                    if (total >= 800.00) {
                                         Integer point = (int) Math.round(total / 800.0);
                                         Integer cusPoints = cus.getTotalPoints();
                                         cusPoints += point;
@@ -119,10 +142,11 @@ public class SalesServiceImpl implements SaleService {
                                 cusRepo.save(cus);
                             },
                             () -> {
-                                    throw new NotFoundException("Customer not exist");
+                                throw new NotFoundException("Customer not exist");
                             });
+
                     saleRepo.save(tranformer.convert(dto, Tranformer.ClassType.ORDER_ENTITY));
-                    if (detailRepo.countSaleDetails() != 0){
+                    if (detailRepo.countSaleDetails() != 0) {
                         adminPanelRepo.save(getAdminPanel());
                     }
                 });
@@ -142,7 +166,7 @@ public class SalesServiceImpl implements SaleService {
                             () -> {
                                 throw new NotFoundException("Customer not exist");
                             });
-                    if (detailRepo.countSaleDetails() != 0){
+                    if (detailRepo.countSaleDetails() != 0) {
                         adminPanelRepo.save(getAdminPanel());
                     }
                 },
@@ -155,8 +179,57 @@ public class SalesServiceImpl implements SaleService {
     public void deleteSales(String id) {
         saleRepo.findById(id).ifPresentOrElse(
                 sales -> {
-                    saleRepo.deleteById(id);
-                    if (detailRepo.countSaleDetails() != 0){
+                    if (detailRepo.countSaleDetails() != 0) {
+
+                        List<SaleDetails> itms = sales.getSaleDetails();
+
+                        for (SaleDetails itm : itms) {
+                            inventoryRepo.findById(itm.getOrderDetailPK().getItemCode())
+                                    .ifPresentOrElse(inventory -> {
+                                        Integer qtyHand = inventory.getQty();
+                                        Integer balanceQty = qtyHand + itm.getItmQTY();
+                                        inventory.setQty(balanceQty);
+                                        if (inventory.getOriginalQty() < balanceQty) {
+                                            inventory.setOriginalQty(balanceQty);
+                                        }
+
+                                        if (balanceQty != 0 && inventory.getOriginalQty() != 0 && balanceQty < inventory.getOriginalQty() / 2) {
+                                            inventory.setStatus("Low");
+                                        } else if (balanceQty == 0 && inventory.getOriginalQty() != 0) {
+                                            inventory.setStatus("Not Available");
+                                            inventory.setOriginalQty(0);
+                                        } else if (balanceQty != 0 && inventory.getOriginalQty() != 0 && balanceQty > inventory.getOriginalQty() / 2) {
+                                            inventory.setStatus("Available");
+                                        }
+                                        inventoryRepo.save(inventory);
+                                    }, () -> {
+                                        throw new NotFoundException("Item not exist");
+                                    });
+                        }
+
+                        cusRepo.findById(sales.getCustomerName().getCustomerId()).ifPresentOrElse(
+                                cus -> {
+                                    if (sales.getTotalPoints() != null) {
+                                        if (cus.getLoyaltyDate() != null) {
+                                            Integer points = sales.getTotalPoints();
+                                            Integer cusPoints = cus.getTotalPoints();
+                                            if (cusPoints != 0) {
+                                                cusPoints -= points;
+                                                cus.setTotalPoints(cusPoints);
+                                            }
+                                        }
+                                    }
+                                    cus.setRecentPurchase(LocalDateTime.now());
+                                    cusRepo.save(cus);
+                                },
+                                () -> {
+                                    throw new NotFoundException("Customer not exist");
+                                });
+
+                        saleRepo.deleteById(id);
+                        if (detailRepo.countSaleDetails() != 0) {
+                            adminPanelRepo.save(getAdminPanel());
+                        }
                         adminPanelRepo.save(getAdminPanel());
                     }
                 }
@@ -166,14 +239,16 @@ public class SalesServiceImpl implements SaleService {
                 }
         );
     }
+
     @Override
     public String getOrderGenId() {
         return generator.getGenerateID(saleRepo.getOrderId(), IdGenerator.GenerateTypes.ORDER);
     }
+
     @Override
-    public AdminPanel getAdminPanel(){
+    public AdminPanel getAdminPanel() {
         Map<String, Object> getItem = detailRepo.findMostPurchasedItem();
-        if (!getItem.isEmpty()){
+        if (!getItem.isEmpty()) {
             Object[] mostItem = new Object[getItem.size()];
             int index1 = 0;
             for (Object value : getItem.values()) {
@@ -181,7 +256,7 @@ public class SalesServiceImpl implements SaleService {
             }
             String code = String.valueOf(mostItem[0]);
             Long qty = (Long) mostItem[1];
-            System.out.println(code+qty);
+            System.out.println(code + qty);
             Inventory inventory = inventoryRepo.findById(code).get();
 
             Map<String, Object> item = detailRepo.getTotalCost();
@@ -192,9 +267,9 @@ public class SalesServiceImpl implements SaleService {
             }
             Double totalBuy = (Double) ar[0];
             Double itmTotal = detailRepo.getItmTotal();
-            Double profit =itmTotal-totalBuy;
-            System.out.println(totalBuy+" "+itmTotal+" "+profit);
-            return new AdminPanel("dash",itmTotal,profit,code,inventory.getItemPicture(), Math.toIntExact(qty));
+            Double profit = itmTotal - totalBuy;
+            System.out.println(totalBuy + " " + itmTotal + " " + profit);
+            return new AdminPanel("dash", itmTotal, profit, code, inventory.getItemPicture(), Math.toIntExact(qty));
         }
         return null;
     }

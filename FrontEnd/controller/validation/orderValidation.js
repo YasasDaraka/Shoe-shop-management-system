@@ -7,21 +7,20 @@ function setAndTriggerValue($element, value) {
     $element[0].dispatchEvent(inputChangeEvent);
 }
 
-$("#ordItmQty").on("keydown keyup input", function (e){
-    let indexNo = o_Array.indexOf(o_Array.find((c) => c.field.attr("id") == e.target.id));
-    checkOrderValidations(o_Array[indexNo]);
-    setAddItemBtn();
-    setOrderBtn();
-});
+
 function setAddItemBtn() {
     /*let nm =  Item_NAME_REGEX.test($("#itemName").val());
-    let pr =  UNIT_PRICE_REGEX.test($("#price").val());
-    let qh =  Item_QTY_REGEX.test($("#qtyOnHand").val());*/
+    let pr =  UNIT_PRICE_REGEX.test($("#price").val());*/
+    let qh =  itm_QTY_REGEX.test($("#qtyOnHand").val());
     let oq =  QTY_REGEX.test($("#ordItmQty").val());
 
-    if(oq){
-
+    if(oq && qh){
+        if (QTYValidate){
             $("#order-add-item").prop("disabled", false);
+        }else {
+            $("#order-add-item").prop("disabled", true);
+        }
+            //$("#order-add-item").prop("disabled", false);
 
             //$("#order-add-item").prop("disabled", true);          use id search
 
@@ -115,4 +114,57 @@ $("#OrdItmDes, #OrdItm, #ordItmPrice, #ordItmSize, #ordItmQty, #ordCusId, #ordCu
         }
     });
     $("#order-clear").prop("disabled", empty);
+});
+function QTYValidate() {
+    let qty = parseInt($("#qtyOnHand").val());
+    let orderQty = parseInt($("#ordItmQty").val());
+    if (qty<orderQty) {
+        return false;
+    }
+    return true;
+}
+$("#ordItmQty").on("keydown keyup input", function (e){
+    $("#order-add-item").prop("disabled", true);
+    let qty = parseInt($("#qtyOnHand").val());
+    let orderQty = parseInt($("#ordItmQty").val());
+    console.log(qty,orderQty);
+    if (qty>=orderQty && qty<=0){
+        $("#ordItmQty").css("border", "2px solid green");
+        $("#ordItmQtyError").text("");
+        $("#order-add-item").prop("disabled", false);
+    }if (qty<orderQty && qty>=0){
+        $("#ordItmQty").css("border", "2px solid red");
+        $("#ordItmQtyError").text("");
+        $("#order-add-item").prop("disabled", true);
+    }
+    if (qty<orderQty){
+        $("#ordItmQty").css("border", "2px solid red");
+        $("#ordItmQtyError").text(`Please Enter Amount lower than: ${qty}`);
+        $("#order-add-item").prop("disabled", true);
+    }
+    else if (orderQty<=0){
+        $("#ordItmQty").css("border", "2px solid red");
+        $("#ordItmQtyError").text(`Please Enter Valid Amount`);
+        $("#order-add-item").prop("disabled", true);
+    }
+    else if(isNaN(orderQty)){
+        $("#ordItmQtyError").text("Please Input Qty");
+        $("#order-add-item").prop("disabled", true);
+    }else{
+        $("#ordItmQtyError").text("");
+    }
+    setAddItemBtn();
+});
+$("#ordItmQty").on("keydown keyup input", function (e){
+    let indexNo = o_Array.indexOf(o_Array.find((c) => c.field.attr("id") == e.target.id));
+    checkOrderValidations(o_Array[indexNo]);
+    let qty = parseInt($("#qtyOnHand").val());
+    let orderQty = parseInt($("#ordItmQty").val());
+    if (qty<orderQty){
+        $("#ordItmQty").css("border", "2px solid red");
+        $("#ordItmQtyError").text(`Please Enter Amount lower than: ${qty}`);
+        $("#order-add-item").prop("disabled", true);
+    }
+    //setAddItemBtn();
+    //setOrderBtn();
 });

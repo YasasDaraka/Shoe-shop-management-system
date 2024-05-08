@@ -71,6 +71,7 @@ function returnAllItmVal() {
         expectedProfit: parseFloat($("#itmProfit").val()),
         profitMargin: parseFloat($("#itmProfitMargin").val()),
         status: $("#itmStatus").val(),
+        qty: $("#itmQty").val(),
     };
 
     return formData;
@@ -87,6 +88,7 @@ function setAllItmVal(ar) {
     $("#itmProfit").val(ar.expectedProfit);
     $("#itmProfitMargin").val(ar.profitMargin);
     $("#itmStatus").val(ar.status);
+    $("#itmQty").val(ar.qty);
     $("#itmCapturedImage").attr('src', ar.itemPicture);
 }
 
@@ -146,7 +148,7 @@ $("#itmDelete").click(function () {
                             getAllItems("/getAll");
                         },
                         error: function (ob, textStatus, error) {
-                            swal("Error", textStatus + "Error Employee Not Delete", "error");
+                            swal("Error", textStatus + "Error Item Not Delete", "error");
                         }
                     });
                 }
@@ -188,13 +190,12 @@ $("#itmUpdate").click(function () {
                         contentType: "application/json",
                         success: function (res) {
                             console.log(res);
-                            //alert("Customer Update Successfully")
                             swal("Updated", "Item Update Successfully", "success");
                             itmCaptureClear();
                             getAllItems("/getAll");
                         },
                         error: function (ob, textStatus, error) {
-                            //alert(textStatus+" : Error Customer Not Update");
+                            console.log(ob ,textStatus, error)
                             swal("Error", textStatus + "Error Item Not Update", "error");
                         }
                     });
@@ -235,7 +236,7 @@ function saveItem() {
                     setItmBtn();
                 },
                 error: function (ob, textStatus, error) {
-                    swal("Error", textStatus + " : Error Employee Not Added", "error");
+                    swal("Error", textStatus + " : Error Item Not Added", "error");
                 }
             });
 
@@ -272,6 +273,7 @@ function getAllItems(val) {
                     <td style="${status}" class="${low}" >${r.itemDesc}</td>             
                     <td style="${status}" class="${low}" >${r.category}</td>            
                     <td style="${status}" class="${low}" >${r.size}</td>                
+                    <td style="${status}" class="${low}" >${r.qty}</td>                
                     <td style="${status}" class="${low}" >${r.supplier.supplierCode}</td>            
                     <td style="${status}" class="${low}" >${r.supplierName}</td>           
                     <td style="${status}" class="${low}" >${r.salePrice}</td>           
@@ -293,18 +295,20 @@ function bindItmTrrEvents() {
         var itemDesc = $(this).children().eq(1).text();
         var category = $(this).children().eq(2).text();
         var size = $(this).children().eq(3).text();
-        var supplierCode = $(this).children().eq(4).text();
-        var supplierName = $(this).children().eq(5).text();
-        var salePrice = $(this).children().eq(6).text();
-        var buyPrice = $(this).children().eq(7).text();
-        var expectedProfit = $(this).children().eq(8).text();
-        var profitMargin = $(this).children().eq(9).text();
-        var status = $(this).children().eq(10).text();
+        var qty = $(this).children().eq(4).text();
+        var supplierCode = $(this).children().eq(5).text();
+        var supplierName = $(this).children().eq(6).text();
+        var salePrice = $(this).children().eq(7).text();
+        var buyPrice = $(this).children().eq(8).text();
+        var expectedProfit = $(this).children().eq(9).text();
+        var profitMargin = $(this).children().eq(10).text();
+        var status = $(this).children().eq(11).text();
 
         $("#itmCode").val(itemCode);
         $("#itmName").val(itemDesc);
         $("#itmCat").val(category);
         $("#itmSize").val(size);
+        $("#itmQty").val(qty);
         $("#itmSupId").val(supplierCode);
         $("#itmSupName").val(supplierName);
         $("#itmSalePrice").val(salePrice);

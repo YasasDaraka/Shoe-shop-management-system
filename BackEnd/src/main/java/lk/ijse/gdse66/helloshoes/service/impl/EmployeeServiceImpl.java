@@ -93,9 +93,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public void updateEmployee(EmployeeDTO dto) {
         employeeRepo.findById(dto.getEmployeeId()).ifPresentOrElse(
-                customer -> {
+                employee -> {
                     String proPic = dto.getProPic();
                     if (proPic != null) {
+                        if ("assets/images/walk.gif".equals(proPic)){
+                            dto.setProPic(employee.getProPic());
+                        }
                         employeeRepo.save(tranformer.convert(dto, Tranformer.ClassType.EMP_ENTITY));
                     } else {
                         throw new NotFoundException("Employee ProPic Not Exist");

@@ -97,6 +97,9 @@ public class CustomerServiceImpl implements CustomerService {
                 customer -> {
                     String proPic = dto.getProPic();
                     if (proPic != null) {
+                        if ("assets/images/walk.gif".equals(proPic)){
+                            dto.setProPic(customer.getProPic());
+                        }
                         customerRepo.save(tranformer.convert(dto, Tranformer.ClassType.CUS_ENTITY));
                     } else {
                         throw new NotFoundException("Customer ProPic Not Exist");
