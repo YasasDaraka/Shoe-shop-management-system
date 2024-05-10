@@ -246,7 +246,7 @@ function searchOrder(id) {
     });
 }
 
-function placeOrder(payment) {
+function placeOrder(payment,method) {
     const cahier = localStorage.getItem('cashier');
     let order = {
         orderNo: "",
@@ -297,7 +297,7 @@ function placeOrder(payment) {
     console.log(accessToken);
     $.ajax({
         url: "http://localhost:8080/helloshoes/api/v1/sales",
-        method: "POST",
+        method: method,
         headers: {
             'Authorization': 'Bearer ' + accessToken
         },
@@ -345,7 +345,7 @@ function updateOrder(payment) {
     let id = $("#orderId").val();
     searchOrder(id).then(function (isValid) {
         if (Object.keys(isValid).length !== 0) {
-            swal("Do you really want to update this employee.?", {
+            swal("Do you really want to update this Order.?", {
                 buttons: {
                     cancel1: {
                         text: "Cancel",
@@ -363,7 +363,7 @@ function updateOrder(payment) {
                     if (itemValidate()) {
 
                         if (cashValidate()) {
-                            placeOrder(payment);
+                            placeOrder(payment,"PUT");
                             clearAll();
                             purchaseBtnHide(true);
                             generateOrderId();
@@ -602,7 +602,7 @@ $("#btnSubmitOrder,#card-payment").click(function () {
             if (Object.keys(order).length === 0) {
                 if (itemValidate()) {
                     if (cashValidate()) {
-                            placeOrder("Cash");
+                            placeOrder("Cash","POST");
                             clearAll();
                             generateOrderId();
 
@@ -626,7 +626,7 @@ $("#btnSubmitOrder,#card-payment").click(function () {
                 if (Object.keys(order).length === 0) {
                     if (itemValidate()) {
                         if ($("#cardNum").val() !== "" && $("#bankName").val() !== "" && $("#cardMonth").val() !== "" && $("#cardYear").val() !== ""  && $("#verifyNum").val() !== "" ){
-                            placeOrder("Card");
+                            placeOrder("Card","POST");
                             clearAll();
                             purchaseBtnHide(true);
                             generateOrderId();

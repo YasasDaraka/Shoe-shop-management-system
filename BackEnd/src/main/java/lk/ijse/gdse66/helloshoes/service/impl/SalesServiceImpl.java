@@ -156,22 +156,112 @@ public class SalesServiceImpl implements SaleService {
     public void updateSales(SalesDTO dto) {
         saleRepo.findById(dto.getOrderNo()).ifPresentOrElse(
                 sales -> {
+                    Double total = 0.0;
+                    List<SaleDetails> oldDto = sales.getSaleDetails();
+                    for (SaleDetails oldItems : oldDto) {
+                        List<SaleDetailsDTO> newDto = dto.getSaleDetails();
+                        for (SaleDetailsDTO newItems : newDto) {
+                            String oldCode = oldItems.getOrderDetailPK().getItemCode();
+                            String newCode = newItems.getOrderDetailPK().getItemCode();
+                            if (!oldCode.equals(newCode)){
+                                updateItems(newCode,newItems.getItmQTY(),"subtract");
+                                 total = newItems.getItmTotal();
+                            }
+                            else if (oldCode.equals(newCode) && oldItems.getItmQTY()<newItems.getItmQTY() || oldItems.getItmQTY()>newItems.getItmQTY()){
+                                if (oldItems.getItmQTY()<newItems.getItmQTY()){
+                                    int count = newItems.getItmQTY() - oldItems.getItmQTY();
+                                    updateItems(newCode,count,"subtract");
+                                    total = newItems.getItmTotal() - oldItems.getItmTotal();
+                                }else if (oldItems.getItmQTY()>newItems.getItmQTY()){
+                                    int count = oldItems.getItmQTY() - newItems.getItmQTY();
+                                    updateItems(newCode,count,"add");
+                                    Double check = oldItems.getItmTotal() - newItems.getItmTotal();
+                                    if (total >= 800.00) {
+                                        updateCustomer(sales.getCustomerName().getCustomerId(),check,"subtract");
+                                    }
+                                }
+
+                            }
+                        }
+                    }
                     saleRepo.deleteById(dto.getOrderNo());
                     saleRepo.save(tranformer.convert(dto, Tranformer.ClassType.ORDER_ENTITY));
-                    cusRepo.findById(dto.getCustomerName().getCustomerId()).ifPresentOrElse(
-                            cus -> {
-                                cus.setRecentPurchase(LocalDateTime.now());
-                                cusRepo.save(cus);
-                            },
-                            () -> {
-                                throw new NotFoundException("Customer not exist");
-                            });
+
+                    if (total >= 800.00) {
+                        updateCustomer(sales.getCustomerName().getCustomerId(),total,"add");
+                    }
+
                     if (detailRepo.countSaleDetails() != 0) {
                         adminPanelRepo.save(getAdminPanel());
                     }
                 },
                 () -> {
                     throw new NotFoundException("Order Not Exist");
+                });
+    }
+    private void updateCustomer(String id,Double total,String op){
+        if (total != 0.0) {
+            cusRepo.findById(id).ifPresentOrElse(
+                    cus -> {
+                        if (cus.getLoyaltyDate() != null) {
+                            Integer point = (int) Math.round(total / 800.0);
+                            switch (op) {
+                                case "add":
+                                    if (total >= 800.00) {
+                                        Integer cusPoints = cus.getTotalPoints();
+                                        cusPoints += point;
+                                        cus.setTotalPoints(cusPoints);
+                                    }
+                                    break;
+                                case "subtract":
+                                    if (cus.getLoyaltyDate() != null) {
+                                        Integer cusPoints = cus.getTotalPoints();
+                                        if (cusPoints != 0) {
+                                            cusPoints -= point;
+                                            cus.setTotalPoints(cusPoints);
+                                        }
+                                    }
+                                    break;
+                            }
+
+                        }
+                        cus.setRecentPurchase(LocalDateTime.now());
+                        cusRepo.save(cus);
+                    },
+                    () -> {
+                        throw new NotFoundException("Customer not exist");
+                    });
+        }
+    }
+    private void updateItems(String itmCode,int updateQty,String op){
+        inventoryRepo.findById(itmCode)
+                .ifPresentOrElse(inventory -> {
+                    Integer qtyHand = inventory.getQty();
+                    Integer balanceQty = 0;
+                    switch (op) {
+                        case "add":
+                            balanceQty = qtyHand + updateQty;
+                            break;
+                        case "subtract":
+                            balanceQty = qtyHand - updateQty;
+                            break;
+                    }
+                    inventory.setQty(balanceQty);
+                    if (inventory.getOriginalQty() < balanceQty) {
+                        inventory.setOriginalQty(balanceQty);
+                    }
+
+                    if (balanceQty != 0 && inventory.getOriginalQty() != 0 && balanceQty < inventory.getOriginalQty() / 2) {
+                        inventory.setStatus("Low");
+                    } else if (balanceQty == 0 && inventory.getOriginalQty() != 0) {
+                        inventory.setStatus("Not Available");
+                        inventory.setOriginalQty(0);
+                    } else if (balanceQty != 0 && inventory.getOriginalQty() != 0 && balanceQty > inventory.getOriginalQty() / 2) {
+                        inventory.setStatus("Available");
+                    }
+                    inventoryRepo.save(inventory);
+                }, () -> {
+                    throw new NotFoundException("Item not exist");
                 });
     }
 
@@ -230,7 +320,6 @@ public class SalesServiceImpl implements SaleService {
                         if (detailRepo.countSaleDetails() != 0) {
                             adminPanelRepo.save(getAdminPanel());
                         }
-                        adminPanelRepo.save(getAdminPanel());
                     }
                 }
                 ,

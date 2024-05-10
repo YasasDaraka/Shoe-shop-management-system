@@ -63,6 +63,16 @@ function setAdminPanel() {
                 }
 
             });
+        }else {
+            $("#panelImg").attr('src',"assets/images/sport-shoe.png");
+            $("#dashItmCode").text("");
+            $("#dashItmDesc").text("");
+            $("#dashItmSale").text("");
+            $("#dashItmQTY").text("");
+
+            $("#totalSale").text("$0.00");
+            $("#totalProfit").text("$0.00");
+            $("#totalOrders").text(0);
         }
     });
 
