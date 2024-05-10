@@ -657,7 +657,6 @@ $("#orderId").on("keyup input change", async function (e) {
                 $("#ordCusId").val(order.customerName.customerId);
                 $("#ordCusName").val(order.customerName.customerName);
                 $("#ordDate").val(order.purchaseDate);
-                $("#total").text(order.total);
 
                 let code;
                 let qty;
@@ -718,6 +717,13 @@ $("#orderId").on("keyup input change", async function (e) {
             }
 
         }
+        let allTotal = 0.0
+        $('#order-table>tr').each(function (e) {
+            let full = $(this).children().eq(6).text();
+            allTotal += parseFloat(full);
+        });
+        $("#total").text(allTotal);
+        $("#subtotal").text(allTotal);
         setOrdClBtn();
     }else {
         $("#btnSubmitOrder").prop("disabled", true);
@@ -745,6 +751,13 @@ function tableChange(details) {
                     });
                 }
             }
+            let allTotal = 0.0
+            $('#order-table>tr').each(function (e) {
+                let full = $(this).children().eq(6).text();
+                allTotal += parseFloat(full);
+            });
+            $("#total").text(allTotal);
+            $("#subtotal").text(allTotal);
         }
     });
 
@@ -790,11 +803,21 @@ function bindRemove(details) {
                                 $("#btnSubmitOrder").prop("disabled", true);
                                 $("#order-update").prop("disabled", true);
                                  setOrdUpdateBtn();
+                            }else {
+                                setOrdUpdateBtn();
+                                $("#order-update").prop("disabled", false);
                             }
                         });
                     }
                 }
             }
+            let allTotal = 0.0
+            $('#order-table>tr').each(function (e) {
+                let full = $(this).children().eq(6).text();
+                allTotal += parseFloat(full);
+            });
+            $("#total").text(allTotal);
+            $("#subtotal").text(allTotal);
         } else {
             $("#btnSubmitOrder").prop("disabled", true);
             $("#order-update").prop("disabled", true);

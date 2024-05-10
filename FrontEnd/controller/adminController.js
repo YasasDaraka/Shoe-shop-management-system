@@ -145,10 +145,11 @@ function allCaptureClear() {
 }
 
 $("#side-bar-icon").click(function () {
-    /*var navBarWidth = parseFloat($("#nav-bar").css('width'));
-    if (Math.abs(navBarWidth - 5) < 0.01) {
-        console.log("nav")
+
         $("#nav-bar").css('width', "20%");
         $("#nav-bar").css("transition", "all 0.3s ease");
-    }*/
+        $("#side-bar-icon").css("transition", "all 0.3s");
+        $("#side-bar-icon").css('left', "97.2%");
+
+
 });
