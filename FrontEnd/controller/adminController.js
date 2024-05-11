@@ -145,11 +145,33 @@ function allCaptureClear() {
 }
 
 $("#side-bar-icon").click(function () {
+    let attr = $("#bar-icon").attr('src');
 
+    if (attr === "assets/images/arrow.gif"){
         $("#nav-bar").css('width', "20%");
         $("#nav-bar").css("transition", "all 0.3s ease");
         $("#side-bar-icon").css("transition", "all 0.3s");
         $("#side-bar-icon").css('left', "97.2%");
+        $("#bar-icon").attr('src',"assets/images/arrow-rotate.gif");
+        $("#bar-icon").css({
+            "width": "38px",
+            "padding-right": "0px",
+            "z-index": "5"
+        });
+    }else if (attr === "assets/images/arrow-rotate.gif"){
+        $("#nav-bar").css('width', "5%");
+        $("#nav-bar").css("transition", "all 0.3s ease");
+        $("#side-bar-icon").css("transition", "all 0.3s");
+        /*$("#side-bar-icon").css('left', "2.7%");*/
+        $("#bar-icon").attr('src',"assets/images/arrow.gif");
+        $("#bar-icon").css({
+            "width": "60px",
+            "padding-right": "10px",
+            "z-index": "5"
+        });
+    }
+
+
 
 
 });
