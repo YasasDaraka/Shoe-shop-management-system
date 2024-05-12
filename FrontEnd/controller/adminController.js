@@ -80,6 +80,7 @@ $("#btnCustomer, #btnInventory, #btnSupplier, #btnEmployee, #btnSales,#btnAdminP
     hideAdminPages();
     switch ($(this).attr('id')) {
         case 'btnCustomer':
+            checkLabel();
             $("#formIcon").text("Customer page");
             cusList.css('display', 'none');
             cusMain.css('display', 'block');
@@ -87,6 +88,7 @@ $("#btnCustomer, #btnInventory, #btnSupplier, #btnEmployee, #btnSales,#btnAdminP
             allCaptureClear();
             break;
         case 'btnInventory':
+            checkLabel();
             $("#formIcon").text("Inventory page");
             itmList.css('display', 'none');
             itmMain.css('display', 'block');
@@ -94,6 +96,7 @@ $("#btnCustomer, #btnInventory, #btnSupplier, #btnEmployee, #btnSales,#btnAdminP
             allCaptureClear();
             break;
         case 'btnSupplier':
+            checkLabel();
             $("#formIcon").text("Supplier page");
             supList.css('display', 'none');
             supMain.css('display', 'block');
@@ -101,6 +104,7 @@ $("#btnCustomer, #btnInventory, #btnSupplier, #btnEmployee, #btnSales,#btnAdminP
             allCaptureClear();
             break;
         case 'btnEmployee':
+            checkLabel();
             $("#formIcon").text("Employee page");
             empList.css('display', 'none');
             empMain.css('display', 'block');
@@ -108,23 +112,27 @@ $("#btnCustomer, #btnInventory, #btnSupplier, #btnEmployee, #btnSales,#btnAdminP
             allCaptureClear();
             break;
         case 'btnAdminPanel':
+            checkLabel();
             $("#formIcon").text("Admin page");
             adminEditPage.css('display', 'block');
             getAllAdmins();
             allCaptureClear();
             break;
         case 'btnSales':
+            checkLabel();
             $("#formIcon").text("Sales page");
             paymentPage.css('display', 'block');
             allCaptureClear();
             break;
         case 'btnUsers':
+            checkLabel();
             $("#formIcon").text("Users page");
             userEditPage.css('display', 'block');
             getAllUsers();
             allCaptureClear();
             break;
         case 'btnDashboard':
+            checkLabel();
             $("#formIcon").text("Admin Panel");
             adminDashboard.css('display', 'block');
             setAdminPanel();
@@ -158,6 +166,9 @@ $("#side-bar-icon").click(function () {
             "padding-right": "0px",
             "z-index": "5"
         });
+        $(".lb-hide").css("transition", "all 0.3s");
+        $(".lb-hide").css('font-size', "18px");
+        checkLabel();
     }else if (attr === "assets/images/arrow-rotate.gif"){
         $("#nav-bar").css('width', "5%");
         $("#nav-bar").css("transition", "all 0.3s ease");
@@ -169,9 +180,21 @@ $("#side-bar-icon").click(function () {
             "padding-right": "10px",
             "z-index": "5"
         });
+        $(".lb-hide").css("transition", "all 0.3s");
+        $(".lb-hide").css('font-size', "0px");
+        checkLabel();
     }
 
-
-
-
 });
+function checkLabel() {
+    let attr = $("#bar-icon").attr('src');
+
+    if (attr === "assets/images/arrow.gif"){
+        $("#formIcon").css("transition", "all 0.3s");
+        $("#formIcon").css('left', "8vw");
+
+    }else if (attr === "assets/images/arrow-rotate.gif"){
+        $("#formIcon").css("transition", "all 0.3s");
+        $("#formIcon").css('left', "23vw");
+    }
+}
