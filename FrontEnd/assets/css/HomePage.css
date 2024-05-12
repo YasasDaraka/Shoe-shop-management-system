@@ -31,7 +31,7 @@ html {
     background-color: #FFA633;
     font-family: 'Fira Sans', sans-serif;
 }
-#btn-log,#signIn,#signUp,#adminLogOut,#card-payment,#userLogOut{
+#btn-log,#signIn,#signUp,#adminLogOut,#card-payment,#userLogOut,#sendOffer{
     padding: 0.593vw 1.112vw;
     text-decoration: none;
     font-weight: bold;
@@ -45,7 +45,7 @@ html {
     transition: .5s ease-out;
     font-size: 0.8vw;
 }
-#btn-log:hover,#signIn:hover,#signUp:hover,#adminLogOut:hover,#card-payment:hover,#userLogOut:hover{
+#btn-log:hover,#signIn:hover,#signUp:hover,#adminLogOut:hover,#card-payment:hover,#userLogOut:hover,#sendOffer:hover{
     background-position: left;
     color: #ffffff;
 }

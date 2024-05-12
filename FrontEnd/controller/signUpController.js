@@ -28,6 +28,9 @@ function signUp() {
             $("#reInputPasswordError").text("");
             $("#reInputPassword").css("border", "1px solid #ced4da");
             $("#signup-page-signup").prop("disabled", true);
+            $("#inputEmail").val("");
+            $("#inputPassword").val("");
+            $("#reInputPassword").val("");
         },
         error: function (ob, textStatus, error) {
             swal("Error","Error User Not Added", "error");
