@@ -124,4 +124,9 @@ public class CustomerServiceImpl implements CustomerService {
     public String getCustomerGenId() {
         return generator.getGenerateID(customerRepo.getCusId(), IdGenerator.GenerateTypes.CUSTOMER);
     }
+
+    @Override
+    public Integer getTotalCustomerCount() {
+        return customerRepo.totalCustomerCount();
+    }
 }

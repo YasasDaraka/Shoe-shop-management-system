@@ -42,6 +42,50 @@ function getOrderCount() {
         });
     });
 }
+function getCustomerCount() {
+    return new Promise(function (resolve, reject) {
+        performAuthenticatedRequest();
+        const accessToken = localStorage.getItem('accessToken');
+        console.log(accessToken);
+        $.ajax({
+            url: "http://localhost:8080/helloshoes/api/v1/customer/total",
+            method: "GET",
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
+            dataType: "json",
+            success: function (res, textStatus, xhr) {
+                console.log(res);
+                resolve(res);
+            },
+            error: function (ob, textStatus, error) {
+                resolve(error);
+            }
+        });
+    });
+}
+function getItemCount() {
+    return new Promise(function (resolve, reject) {
+        performAuthenticatedRequest();
+        const accessToken = localStorage.getItem('accessToken');
+        console.log(accessToken);
+        $.ajax({
+            url: "http://localhost:8080/helloshoes/api/v1/inventory/total",
+            method: "GET",
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
+            dataType: "json",
+            success: function (res, textStatus, xhr) {
+                console.log(res);
+                resolve(res);
+            },
+            error: function (ob, textStatus, error) {
+                resolve(error);
+            }
+        });
+    });
+}
 function setAdminPanel() {
     getAdminPanel().then(function (value) {
         if (Object.keys(value).length !== 0 ){
@@ -60,6 +104,7 @@ function setAdminPanel() {
                     getOrderCount().then(function (count) {
                              $("#totalOrders").text(count);
                     });
+
                 }
 
             });
@@ -76,4 +121,15 @@ function setAdminPanel() {
         }
     });
 
+    getCustomerCount().then(function (count) {
+        $("#totalCustomers").text(count);
+    });
+
+    getItemCount().then(function (count) {
+        $("#totalItems").text(count);
+    });
+
 }
+$("#sendOffer").click(function () {
+    offer.css('display','block');
+});

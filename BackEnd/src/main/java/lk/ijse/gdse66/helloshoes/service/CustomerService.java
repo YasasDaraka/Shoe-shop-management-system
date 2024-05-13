@@ -12,4 +12,5 @@ public interface CustomerService {
     void updateCustomer(CustomerDTO dto);
     void deleteCustomer(String id);
     String getCustomerGenId();
+    Integer getTotalCustomerCount();
 }

@@ -1673,7 +1673,7 @@
     </div>
   </section>
 
-  <section id="admin-dashboard-container">
+  <section id="admin-dashboard-container" class="position-relative">
     <div class="container-fluid p-0" style="height: 90.5vh; z-index: 5;" >
       <div class="row h-100 m-0 w-100">
         <div class="container m-0" style="padding: 1.9vw 1.9vw 1.5vw 7vw;">
@@ -1831,6 +1831,45 @@
 
           </div>
         </div>
+      </div>
+    </div>
+    <div id="offer-container" class="container-fluid p-0" style="background-color:rgba(229,229,229,0.5); position:absolute; top: 0 !important; height: 91vh; z-index: 5;width: 95vw;left: 5vw; right:0; top: 4.4vw; bottom: 0; margin: auto">
+      <div style="border-radius: 10px; z-index: 15; width: 60vw;position: absolute; left: 0; right:0; top: 4.4vw; bottom: 0; margin: auto">
+
+        <div class="container" style="box-shadow: 0px 1px 10px #3aa7ee; border-radius: 10px;background-color:rgb(255,255,255); height: 30vw; width: 50vw;position: relative;top: 1vw;right: 0.5vw;">
+          <div class="col-6 d-flex" style="height: 29.5vw;">
+
+            <!--<div class="mt-2"><h1 class="mt-2" style="padding-top: 2.1vh; font-family: 'Fira Sans', sans-serif; font-weight: 700; font-size: 30px; color: #434142;text-align: center;">Card Payment</h1>-->
+
+              <div class="mt-4" style="width: 100%; height: 95%">
+                <div class="col-sm d-flex flex-column align-items-center">
+                  <label for="subject" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px; color: #35393B;">Subject</label>
+                  <input type="text" class="form-control border border-info" id="subject"style="width: 18vw">
+                </div>
+                <div class="">
+
+                  <div class="row">
+
+                    <div class="mt-2 d-flex flex-column align-items-center">
+                      <label for="message" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Message</label>
+                      <input type="text" class="form-control border border-info" id="message" style="width: 18vw; height: 15.5vw">
+                    </div>
+
+
+                    <div class="mt-2 d-flex flex-column ">
+                      <div class="col d-flex justify-content-center mt-2">
+                        <button id="offer-send" type="button" class="btn p-0 m-0" style="width: 12vw;height: 5vh;">Send</button>
+                        <button id="offerCancel" type="button" class="p-0 m-0 pay-icon" style="width: 6vw;height: 5vh;">Cancel</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+         </div>
       </div>
     </div>
   </section>

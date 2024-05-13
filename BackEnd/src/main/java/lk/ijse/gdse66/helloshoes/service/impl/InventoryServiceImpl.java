@@ -108,4 +108,9 @@ public class InventoryServiceImpl implements InventoryService {
             return null;
         }
     }
+
+    @Override
+    public Integer getTotalItemCount() {
+        return inventoryRepo.totalItemCount();
+    }
 }

@@ -22,6 +22,7 @@ let userEditPage = $('#user-edit-container');
 let adminDashboard = $('#admin-dashboard-container');
 let userDashboard = $('#user-dashboard-container');
 let orderVerify = $('#confirm-container');
+let offer = $('#offer-container');
 
 let videoStream;
 let empVideoStream;
@@ -44,6 +45,7 @@ function allContainerHide(){
     adminDashboard.css('display','none');
     userDashboard.css('display','none');
     orderVerify.css('display','none');
+    offer.css('display','none');
 }
 $(window).on('load',function (){
     $("#loader").css('display','none');

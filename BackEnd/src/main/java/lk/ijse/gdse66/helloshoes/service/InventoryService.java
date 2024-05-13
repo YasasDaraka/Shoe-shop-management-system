@@ -10,4 +10,5 @@ public interface InventoryService {
     void updateInventory(InventoryDTO dto);
     void deleteInventory(String id);
     List<InventoryDTO> getAllSortedInventory(String value);
+    Integer getTotalItemCount();
 }

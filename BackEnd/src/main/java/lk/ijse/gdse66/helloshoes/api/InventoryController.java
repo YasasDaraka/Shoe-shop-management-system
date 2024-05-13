@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/inventory")
+@RequestMapping("api/v1/ ")
 @CrossOrigin
 public class InventoryController {
     public InventoryController() {
@@ -24,6 +24,12 @@ public class InventoryController {
     public List<InventoryDTO> getAllInventory() {
         return itemService.getAllInventory();
     }*/
+
+    @ResponseStatus(HttpStatus.OK)
+    @GetMapping(path = "/total")
+    public Integer getTotalItemCount() {
+        return itemService.getTotalItemCount();
+    }
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(path = "/search/{id}")

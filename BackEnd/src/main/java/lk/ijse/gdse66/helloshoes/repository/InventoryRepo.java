@@ -18,4 +18,6 @@ public interface InventoryRepo extends JpaRepository<Inventory,String> {
     @Query("SELECT s FROM Inventory s WHERE SUBSTRING(s.itemCode, 2, 1) = 'S' ORDER BY CASE WHEN :orderBy = 'itemDesc' THEN s.itemDesc END ASC, CASE WHEN :orderBy = 'price' THEN s.salePrice END ASC")
     List<Inventory> orderBy(@Param("orderBy") String orderBy);
 
+    @Query(value ="SELECT COUNT(c) FROM Inventory c")
+    Integer totalItemCount();
 }
