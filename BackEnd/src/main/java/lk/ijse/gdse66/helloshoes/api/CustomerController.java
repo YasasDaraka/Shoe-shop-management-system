@@ -1,6 +1,7 @@
 package lk.ijse.gdse66.helloshoes.api;
 
 import lk.ijse.gdse66.helloshoes.dto.CustomerDTO;
+import lk.ijse.gdse66.helloshoes.dto.MessageDTO;
 import lk.ijse.gdse66.helloshoes.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -63,6 +64,13 @@ public class CustomerController {
     public ResponseEntity<Void> deleteCustomer(@RequestParam("cusId") String cusId) {
         cusService.deleteCustomer(cusId);
         return ResponseEntity.noContent().build();
+    }
+    @PostMapping(path = "/send")
+    @ResponseStatus(HttpStatus.CREATED)
+    public ResponseEntity<Void> sendOffer(@RequestBody MessageDTO dto) {
+        System.out.println(dto.toString());
+        cusService.sendOffer(dto);
+        return ResponseEntity.ok().build();
     }
 
 }

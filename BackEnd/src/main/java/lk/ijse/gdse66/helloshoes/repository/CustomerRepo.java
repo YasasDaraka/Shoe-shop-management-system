@@ -14,4 +14,6 @@ public interface CustomerRepo extends JpaRepository<Customer,String> {
     List<Customer> findByCustomerDob(Date date);
     @Query(value ="SELECT COUNT(c) FROM Customer c")
     Integer totalCustomerCount();
+    @Query("SELECT c.email FROM Customer c")
+    List<String> getAllEmails();
 }

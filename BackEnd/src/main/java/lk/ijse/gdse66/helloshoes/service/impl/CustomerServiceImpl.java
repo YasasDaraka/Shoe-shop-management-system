@@ -2,6 +2,7 @@ package lk.ijse.gdse66.helloshoes.service.impl;
 
 import jakarta.mail.MessagingException;
 import lk.ijse.gdse66.helloshoes.dto.CustomerDTO;
+import lk.ijse.gdse66.helloshoes.dto.MessageDTO;
 import lk.ijse.gdse66.helloshoes.repository.CustomerRepo;
 import lk.ijse.gdse66.helloshoes.service.CustomerService;
 import lk.ijse.gdse66.helloshoes.service.exception.DuplicateRecordException;
@@ -128,5 +129,26 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Integer getTotalCustomerCount() {
         return customerRepo.totalCustomerCount();
+    }
+
+    @Override
+    public void sendOffer(MessageDTO dto) {
+        if (dto.getSubject().equals("") || dto.getMessage().equals("")){
+            throw  new NotFoundException("Message or Subject is Empty");
+        }
+        List<String> emails = customerRepo.getAllEmails();
+        if (emails != null) {
+            for (String email : emails) {
+                try {
+                    if (sender.checkConnection()) {
+                        sender.outMail(dto.getMessage(), email, dto.getSubject());
+                    } else {
+                        System.err.println("Failed connect mail server.");
+                    }
+                } catch (MessagingException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }

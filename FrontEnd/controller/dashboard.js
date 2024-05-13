@@ -119,16 +119,16 @@ function setAdminPanel() {
     });
 
     getCustomerCount().then(function (count) {
-        if (Object.keys(count).length !== 0 ){
-            $("#totalCustomers").text(`${count}`);
+        if (count !== 0 || count !== null){
+            $("#totalCustomers").text(count);
         }else {
             $("#totalCustomers").text("0");
         }
     });
 
     getItemCount().then(function (count) {
-        if (Object.keys(count).length !== 0 ){
-            $("#totalItems").text(`${count}`);
+        if (count !== 0 || count !== null){
+            $("#totalItems").text(count);
         }else {
             $("#totalItems").text("0");
         }
@@ -146,4 +146,37 @@ $("#offerCancel").click(function () {
 function clearOffer() {
     $("#subject").val("");
     $("#message").val("");
+}
+
+$("#offer-send").click(function () {
+    if ($("#subject").val() !== "" && $("#message").val() !== ""){
+        send();
+    }else {
+        swal("Error","Please add details", "error");
+    }
+});
+
+function send() {
+        performAuthenticatedRequest();
+        const accessToken = localStorage.getItem('accessToken');
+        let data = {
+            subject: $("#subject").val(),
+            message: $("#message").val(),
+        }
+        $.ajax({
+            url: "http://localhost:8080/helloshoes/api/v1/customer/send",
+            method: "POST",
+            data: JSON.stringify(data),
+            contentType: "application/json",
+            headers: {
+                'Authorization': 'Bearer ' + accessToken
+            },
+            success: function (res) {
+                swal("Success", "Mails Sending Successfully", "success");
+            },
+            error: function (error) {
+                swal("Error","Error sending mails", "error");
+            }
+        });
+        clearOffer();
 }
