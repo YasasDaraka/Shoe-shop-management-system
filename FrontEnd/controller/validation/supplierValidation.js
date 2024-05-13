@@ -1,5 +1,5 @@
 const SUP_ID_REGEX = /^S00-(0*[1-9]\d{0,2})$/;
-const SUP_NAME_REGEX = /^[A-Za-z ]{5,}$/;
+const SUP_NAME_REGEX = /^[A-Za-z ]{3,}$/;
 const SUP_ADDRESS_BUILD_REGEX = /^[A-Za-z0-9 ]{3,}$/;
 const SUP_ADDRESS_LANE_REGEX = /^[A-Za-z0-9 ]{3,}$/;
 const SUP_ADDRESS_CITY_REGEX = /^[A-Za-z0-9 ]{3,}$/;
