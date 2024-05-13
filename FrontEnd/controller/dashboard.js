@@ -131,5 +131,14 @@ function setAdminPanel() {
 
 }
 $("#sendOffer").click(function () {
+    clearOffer();
     offer.css('display','block');
 });
+$("#offerCancel").click(function () {
+    clearOffer();
+    offer.css('display','none');
+});
+function clearOffer() {
+    $("#subject").val("");
+    $("#message").val("");
+}
