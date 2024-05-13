@@ -33,7 +33,6 @@ function getOrderCount() {
             },
             dataType: "json",
             success: function (res, textStatus, xhr) {
-                console.log(res);
                 resolve(res);
             },
             error: function (ob, textStatus, error) {
@@ -55,7 +54,6 @@ function getCustomerCount() {
             },
             dataType: "json",
             success: function (res, textStatus, xhr) {
-                console.log(res);
                 resolve(res);
             },
             error: function (ob, textStatus, error) {
@@ -77,7 +75,6 @@ function getItemCount() {
             },
             dataType: "json",
             success: function (res, textStatus, xhr) {
-                console.log(res);
                 resolve(res);
             },
             error: function (ob, textStatus, error) {
@@ -122,11 +119,19 @@ function setAdminPanel() {
     });
 
     getCustomerCount().then(function (count) {
-        $("#totalCustomers").text(count);
+        if (Object.keys(count).length !== 0 ){
+            $("#totalCustomers").text(`${count}`);
+        }else {
+            $("#totalCustomers").text("0");
+        }
     });
 
     getItemCount().then(function (count) {
-        $("#totalItems").text(count);
+        if (Object.keys(count).length !== 0 ){
+            $("#totalItems").text(`${count}`);
+        }else {
+            $("#totalItems").text("0");
+        }
     });
 
 }
