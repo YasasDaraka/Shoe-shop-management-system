@@ -53,15 +53,4 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
 }
-    /*User user = userRepo.findByEmail(signInRequest.getEmail())
-            .map(userCheck -> {
-                boolean matches = passwordEncoder.matches(signInRequest.getPassword(), userCheck.getPassword());
-                if (!matches) {
-                    new PassordNotFoundException("user not found")
-                    System.out.println("Password matches!");
-                } else {
-                    System.out.println("Password does not match!");
-                }
 
-            })
-            .orElseThrow(() -> new UsernameNotFoundException("user not found"));*/
