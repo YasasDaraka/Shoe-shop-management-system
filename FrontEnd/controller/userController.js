@@ -40,6 +40,7 @@ $("#userBtnCustomer, #userBtnInventory, #userBtnSupplier, #userBtnEmployee, #use
             allCaptureClear();
             break;
         case 'userBtnUsers':
+            getAllUsers();
             checkUserLabel();
             $("#userFormIcon").text("Users page");
             userEditPage.css('display', 'block');

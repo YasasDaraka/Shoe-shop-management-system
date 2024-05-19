@@ -10,6 +10,7 @@ import lk.ijse.gdse66.helloshoes.service.exception.NotFoundException;
 import lk.ijse.gdse66.helloshoes.service.util.IdGenerator;
 import lk.ijse.gdse66.helloshoes.service.util.Sender;
 import lk.ijse.gdse66.helloshoes.service.util.Tranformer;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +19,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Base64;
 import java.util.List;
-
+@Slf4j
 @Service
 @Transactional
 public class CustomerServiceImpl implements CustomerService {
@@ -60,6 +61,7 @@ public class CustomerServiceImpl implements CustomerService {
                 "Hello Shoes Team";
         customerRepo.findById(dto.getCustomerId()).ifPresentOrElse(
                 customer -> {
+                    log.error("Customer Already Exist");
                     throw new DuplicateRecordException("Customer Already Exist");
                 },
                 () -> {
@@ -80,9 +82,11 @@ public class CustomerServiceImpl implements CustomerService {
                         Base64.getEncoder().encodeToString(profilePic.getBytes());
                     }*/
                     customerRepo.save(tranformer.convert(dto, Tranformer.ClassType.CUS_ENTITY));
+                    log.info("Customer "+dto.getCustomerId()+" Save successfully");
                     try {
                         if (sender.checkConnection()) {
                             sender.outMail(mass, dto.getEmail(), "Welcome to Hello Shoes!");
+                            log.info("Mail send to Customer "+dto.getCustomerId()+" successfully");
                         } else {
                             System.err.println("Failed connect mail server.");
                         }
@@ -102,11 +106,14 @@ public class CustomerServiceImpl implements CustomerService {
                             dto.setProPic(customer.getProPic());
                         }
                         customerRepo.save(tranformer.convert(dto, Tranformer.ClassType.CUS_ENTITY));
+                        log.info("Update Customer "+dto.getCustomerId()+" successfully");
                     } else {
+                        log.error("Customer ProPic Not Exist");
                         throw new NotFoundException("Customer ProPic Not Exist");
                     }
                 },
                 () -> {
+                    log.error("Customer Not Exist");
                     throw new NotFoundException("Customer Not Exist");
                 });
     }
@@ -114,8 +121,13 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public void deleteCustomer(String id) {
         customerRepo.findById(id).ifPresentOrElse(
-                customer -> customerRepo.deleteById(id),
+                customer -> {
+                    customerRepo.deleteById(id);
+                    log.info("Delete user "+id+" successfully");
+                }
+                ,
                 () -> {
+                    log.error("Customer Not Exist");
                     throw new NotFoundException("Customer Not Exist");
                 }
         );

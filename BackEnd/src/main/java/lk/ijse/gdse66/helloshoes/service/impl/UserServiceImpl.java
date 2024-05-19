@@ -8,6 +8,7 @@ import lk.ijse.gdse66.helloshoes.service.exception.NotFoundException;
 import lk.ijse.gdse66.helloshoes.service.util.Role;
 import lk.ijse.gdse66.helloshoes.service.util.Tranformer;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
-
+@Slf4j
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -57,11 +58,14 @@ public class UserServiceImpl implements UserService {
                     Role roleEnum = Role.valueOf(role);
                     if (userRole == roleEnum) {
                         userRepo.save(new User(user.getId(), dto.getEmail(), passwordEncoder.encode(dto.getPassword()), dto.getRole()));
+                        log.info("Update user "+dto.getEmail()+" successfully");
                     } else {
+                        log.error("Not : "+role+" role");
                         throw new NotFoundException("Not : " + role + " role");
                     }
                 },
                 () -> {
+                    log.error("User Not Exist");
                     throw new NotFoundException("User Not Exist");
                 });
     }
@@ -74,19 +78,24 @@ public class UserServiceImpl implements UserService {
                     if (role.equals(user.getRole())) {
                         if (role.equals(Role.USER)) {
                             userRepo.deleteByEmailAndRole(dto.getEmail(),Role.USER);
+                            log.info("Delete user "+dto.getEmail()+" successfully");
                         }else {
                             boolean matches = passwordEncoder.matches(dto.getPassword(), user.getPassword());
                             if (matches) {
                                 userRepo.deleteByEmailAndRole(dto.getEmail(), Role.ADMIN);
+                                log.info("Delete user "+dto.getEmail()+" successfully");
                             } else {
+                                log.error("Incorrect Password");
                                 throw new NotFoundException("Incorrect Password");
                             }
                         }
                     }else {
+                        log.error("Not : "+role+" role");
                         throw new NotFoundException("Not : "+role+" role");
                     }
                 },
                 () -> {
+                    log.error(role+" Not Exist");
                     throw new NotFoundException(role+" Not Exist");
                 }
         );
@@ -110,6 +119,7 @@ public class UserServiceImpl implements UserService {
         } else if ("ADMIN".equals(role)) {
             return tranformer.convert(userRepo.findAllByRole(Role.ADMIN), Tranformer.ClassType.USER_DTO_LIST);
         } else {
+            log.error("Not : "+role+" role");
             throw new NotFoundException("Not : "+role+" role");
         }
 

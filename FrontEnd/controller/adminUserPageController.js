@@ -37,6 +37,9 @@ $("#userName").on("keydown keyup", function (e) {
     /*$("#userIdError").text("");
     $("#userName").css("border", "1px solid #ced4da");*/
     //adminEvents(e);
+    $("#userClear").prop("disabled", true);
+    $("#userSave").prop("disabled", true);
+    $("#userUpdate").prop("disabled", true);
     if ($("#userName").val() !== "") {
         $("#userClear").prop("disabled", false);
     if (User_EMAIL_REGEX.test($("#userName").val())) {
@@ -44,6 +47,12 @@ $("#userName").on("keydown keyup", function (e) {
             $("#userIdError").text("");
             $("#userName").css("border", "2px solid green");
             if (!res) {
+                $("#userNewPass").hide();
+                $("#userNewPassLabel").hide();
+                $("#userNewPass").val("");
+                $("#userNewPassError").text("");
+                $("#userNewPass").css("border", "1px solid #ced4da");
+                $("#userDelete").prop("disabled", true);
                 if ($("#userOldPassword").val() !== "") {
                     if (User_PASS_REGEX.test($("#userOldPassword").val())) {
                         $("#userSave").prop("disabled", false);
@@ -54,8 +63,14 @@ $("#userName").on("keydown keyup", function (e) {
                     }
                 }
             } else {
-                userCheckToUpdate($("#userOldPassword").val());
-                $("#userDelete").prop("disabled", false);
+                const role = localStorage.getItem('role');
+                if (role == "ADMIN"){
+                    $("#userDelete").prop("disabled", false);
+                }
+                else if (role == "USER"){
+                    userCheckToUpdate($("#userOldPassword").val());
+                }
+
             }
             //captureClear();
         });
@@ -67,14 +82,21 @@ $("#userName").on("keydown keyup", function (e) {
         $("#userIdError").text("");
         $("#userName").css("border", "1px solid #ced4da");
         $("#userClear").prop("disabled", true);
+        $("#userNewPass").hide();
+        $("#userNewPassLabel").hide();
+        $("#userNewPass").val("");
+        $("#userNewPassError").text("");
+        $("#userNewPass").css("border", "1px solid #ced4da");
     }
 });
 $("#userOldPassword").on("keydown keyup", function (e) {
     /*$("#userOldPasswordError").text("");
     $("#userOldPassword").css("border", "1px solid #ced4da");*/
     if ($("#userOldPassword").val() !== "") {
-        $("#userClear").prop("disabled", true);
+        $("#userClear").prop("disabled", false);
         if (User_PASS_REGEX.test($("#userOldPassword").val())) {
+            $("#userOldPasswordError").text("");
+            $("#userOldPassword").css("border", "2px solid green");
             searchUserPanel($("#userName").val()).then(function (res) {
                 const role = localStorage.getItem('role');
                 if (!res) {
@@ -99,6 +121,11 @@ $("#userOldPassword").on("keydown keyup", function (e) {
         $("#userOldPasswordError").text("");
         $("#userOldPassword").css("border", "1px solid #ced4da")
         $("#userClear").prop("disabled", true);
+        $("#userNewPass").hide();
+        $("#userNewPassLabel").hide();
+        $("#userNewPass").val("");
+        $("#userNewPassError").text("");
+        $("#userNewPass").css("border", "1px solid #ced4da");
     }
 });
 $("#userOldPassword").on("keydown keyup", function (e) {
@@ -108,6 +135,7 @@ $("#userOldPassword").on("keydown keyup", function (e) {
     var password = $("#userOldPassword").val();
     userCheckToUpdate(password);
 });
+
 function searchUserPanel(name) {
     return new Promise(function (resolve, reject) {
         performAuthenticatedRequest();
@@ -131,6 +159,7 @@ function searchUserPanel(name) {
     });
 
 }
+
 function getUserDetail(name) {
     return new Promise(function (resolve, reject) {
         performAuthenticatedRequest();
@@ -154,6 +183,7 @@ function getUserDetail(name) {
     });
 
 }
+
 function userCheckToUpdate(oldPass) {
     searchUserPanel($("#userName").val()).then(function (user) {
         if (user) {
@@ -196,6 +226,7 @@ function userCheckToUpdate(oldPass) {
         }
     });
 }
+
 $("#userNewPass").on("keydown keyup", function (e) {
 
     if ($("#userNewPass").val() !== "" && $("#userOldPassword").val() !== "") {
@@ -327,7 +358,7 @@ function getAllUsers() {
                     <td>${r.role}</td>
                     </tr>`;
                 $("#userTable").append(row);
-                $('#userTable').css({
+                /*$('#userTable').css({
                     'max-height': '100px',
                     'overflow-y': 'auto',
                     'display': 'table-caption'
@@ -342,6 +373,38 @@ function getAllUsers() {
                     'display': 'inline-table',
                     'width': '100%'
                 });
+*/
+
+                $('#userTable').css({
+                    'max-height': '100px',
+                    'overflow-y': 'auto',
+                    'display': 'table-caption'
+                });
+                $('#userTable>tr>td').css({
+                    'width': 'calc(100%/2*1)'
+                });
+                $('#userTable > tr > td:nth-child(1),#userTable > tr > td:nth-child(1)').css({
+                    'width': '100%'
+                });
+                $('#userTable>tr').css({
+                    'display': 'inline-table',
+                    'width': '100%'
+                });
+
+                if ($("#userTable>tr").length > 2) {
+                    $('#userTable>tr> th,#userTable>tr > td').css({
+                        'width': 'calc(100%/2*1)'
+                    });
+                    $('#userTable').css({
+                        'max-height': '100px',
+                        'overflow-y': 'auto',
+                        'display': 'table-caption',
+                        'width': '105%'
+                    });
+                    $('#userTable>tr').css({
+                        'display': 'flex',
+                    });
+                }
                 bindUserTrrEvents();
             }
         }
@@ -407,6 +470,11 @@ $("#userClear").click(function () {
    userClear();
 });
 function userClear() {
+    $("#userNewPass").hide();
+    $("#userNewPassLabel").hide();
+    $("#userNewPass").val("");
+    $("#userNewPassError").text("");
+    $("#userNewPass").css("border", "1px solid #ced4da");
     var ids = ["userName", "userIdError", "userOldPassword","userOldPasswordError"];
     ids.forEach(function(id) {
         $("#" + id).val("");

@@ -308,6 +308,7 @@ function getAllAdmins() {
                     <td>${r.role}</td>
                     </tr>`;
                 $("#adminTable").append(row);
+
                 $('#adminTable').css({
                     'max-height': '100px',
                     'overflow-y': 'auto',
@@ -324,6 +325,20 @@ function getAllAdmins() {
                     'width': '100%'
                 });
 
+                if ($("#adminTable>tr").length > 2) {
+                    $('#adminTable>tr> th,#adminTable>tr > td').css({
+                        'width': 'calc(100%/2*1)'
+                    });
+                    $('#adminTable').css({
+                        'max-height': '100px',
+                        'overflow-y': 'auto',
+                        'display': 'table-caption',
+                        'width': '105%'
+                    });
+                    $('#adminTable>tr').css({
+                        'display': 'flex',
+                    });
+                }
             }
         }
     });
