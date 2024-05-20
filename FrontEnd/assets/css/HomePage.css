@@ -102,3 +102,22 @@ html {
     left: 5vw;
     top: 1vw;
 }
+
+/* Apply styles to the table container */
+.table-container {
+    max-height: 100px; /* Adjust the height as needed */
+    overflow-y: auto;
+}
+
+/* Apply styles to the thead element */
+.table-container thead {
+    background-color: #f0f0f0; /* Background color for the header */
+    position: sticky;
+    top: 0;
+    z-index: 1; /* Ensure the header is above the table body */
+}
+
+/* Apply styles to individual th elements if needed */
+.table-container th {
+    /* Add any additional styles here */
+}

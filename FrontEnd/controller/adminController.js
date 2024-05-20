@@ -37,12 +37,14 @@ function hideAdminPages(){
     adminEditPage.css('display','none');
     userEditPage.css('display','none');
     $("#formIcon").text("");
+    $("#inventoryListLabel").text("")
 }
 function hideMainPages(){
     empMain.css('display','none');
     supMain.css('display','none');
     itmMain.css('display','none');
     cusMain.css('display','none');
+    $("#inventoryListLabel").text("")
 }
 function hideAllLoadPages(){
     empList.css('display','none');

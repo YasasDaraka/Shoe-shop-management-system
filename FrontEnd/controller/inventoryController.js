@@ -321,6 +321,8 @@ function bindItmTrrEvents() {
             itmCaptureClear();
             $("#itmCapturedImage").attr('src', res.itemPicture);
         });
+        $("#inventoryListLabel").text(itemCode+" is selected back to view details");
+
     });
 }
 function validItem(id) {
@@ -388,4 +390,5 @@ $('#backToItm').click(function () {
     itmList.css('display', 'none');
     itmMain.css('display', 'block');
     inventoryPage.css('display', 'block');
+    $("#inventoryListLabel").text("")
 });

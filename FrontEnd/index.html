@@ -1163,9 +1163,10 @@
                       <option value="FS">Formal</option>
                       <option value="CS">Casual</option>
                     </select>
-                    <table style="font-size: small;" class="table table-bordered rounded bg-light table-hover ">
-                      <thead class="table-secondary text-light text-center">
-                      <tr class="" style="border: 1px solid #FFA633FF; box-shadow: inset 1px 1px #FFA633, 0 0 4px #FFA633;"id="item-thead">
+                    <div style="max-height: 28vw; overflow-y:auto">
+                    <table style="font-size: small; " class="table table-bordered rounded bg-light table-hover">
+                      <thead class="table-secondary text-light text-center" style="position: sticky;top: 0;">
+                      <tr class="" style="border: 1px solid #FFA633FF; box-shadow: inset 1px 1px #FFA633, 0 0 4px #FFA633;position: sticky;top: 0;"id="item-thead">
                         <th scope="col">Item ID</th>
                         <th scope="col">Desc</th>
                         <th scope="col">Category</th>
@@ -1185,9 +1186,14 @@
                       </tbody>
                     </table>
                   </div>
+
+                  </div>
                 </div>
               </div>
             </div>
+          </div>
+          <div class="container-fluid position-absolute d-flex justify-content-center align-items-center" style="width: 91.2%; height: 4vw; bottom: 2vw">
+            <label id="inventoryListLabel" class="form-label m-0" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 18px">Item</label>
           </div>
         </div>
       </div>
