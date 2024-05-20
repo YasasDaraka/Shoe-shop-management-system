@@ -169,6 +169,25 @@ function checkAllItm() {
     return true;
 }
 
+function setProfit(){
+    let salePrice = parseFloat($("#itmSalePrice").val());
+    let buyPrice = parseFloat($("#itmBuyPrice").val());
+    if (!isNaN(salePrice) && !isNaN(buyPrice)) {
+        let profit = salePrice - buyPrice;
+        let profitMargin = Math.round((profit / salePrice) * 100);
+        profitMargin = profitMargin.toFixed(1);
+        $("#itmProfit").val(profit);
+        $("#itmProfitMargin").val(profitMargin);
+    }
+}
+
+$("#itmBuyPrice").on("input", function() {
+    setProfit();
+});
+
+$("#itmSalePrice").on("input", function() {
+    setProfit();
+});
 function setItmBorder(bol, ob) {
     if (!bol) {
         if (ob.field.val().length >= 1) {

@@ -280,7 +280,7 @@ $("#userUpdate").click(function () {
                     console.log(value);
                     $.ajax({
                         url: "http://localhost:8080/helloshoes/api/v1/auth/user",
-                        method: "PUt",
+                        method: "PUT",
                         data: JSON.stringify(value),
                         contentType: "application/json",
                         success: function (res, textStatus, jsXH) {

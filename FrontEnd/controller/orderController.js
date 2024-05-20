@@ -734,30 +734,37 @@ $("#orderId").on("keyup input change", async function (e) {
 
 function tableChange(details) {
 
-    $("#order-table").on("DOMNodeInserted DOMNodeRemoved", "tr", function (event) {
+    $("#order-table").on("DOMNodeInserted DOMNodeRemoved", "tr",async function (event) {
 
         if (event.type === "DOMNodeInserted") {
-            let code;
-            let tableItm;
-            if (Object.keys(details).length !== 0) {
-                for (var info of details) {
-                    $('#order-table>tr').each(function (e) {
-                        code = info.orderDetailPK.itemCode;
-                        tableItm = $(this).children().eq(0).text();
-                        if (code !== tableItm) {
-                            $("#btnSubmitOrder").prop("disabled", true);
-                            $("#order-update").prop("disabled", false);
+            if ($("#orderId").val() !== "") {
+                let id = $("#orderId").val();
+                let order = await searchOrder(id);
+                if (Object.keys(order).length !== 0) {
+                    let code;
+                    let tableItm;
+                    if (Object.keys(details).length !== 0) {
+
+                        for (var info of details) {
+                            $('#order-table>tr').each(function (e) {
+                                code = info.orderDetailPK.itemCode;
+                                tableItm = $(this).children().eq(0).text();
+                                if (code !== tableItm) {
+                                    $("#btnSubmitOrder").prop("disabled", true);
+                                    $("#order-update").prop("disabled", false);
+                                }
+                            });
                         }
+                    }
+                    let allTotal = 0.0
+                    $('#order-table>tr').each(function (e) {
+                        let full = $(this).children().eq(6).text();
+                        allTotal += parseFloat(full);
                     });
+                    $("#total").text(allTotal);
+                    $("#subtotal").text(allTotal);
                 }
             }
-            let allTotal = 0.0
-            $('#order-table>tr').each(function (e) {
-                let full = $(this).children().eq(6).text();
-                allTotal += parseFloat(full);
-            });
-            $("#total").text(allTotal);
-            $("#subtotal").text(allTotal);
         }
     });
 

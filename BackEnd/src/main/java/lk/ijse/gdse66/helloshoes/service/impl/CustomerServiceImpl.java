@@ -8,6 +8,7 @@ import lk.ijse.gdse66.helloshoes.service.CustomerService;
 import lk.ijse.gdse66.helloshoes.service.exception.DuplicateRecordException;
 import lk.ijse.gdse66.helloshoes.service.exception.NotFoundException;
 import lk.ijse.gdse66.helloshoes.service.util.IdGenerator;
+import lk.ijse.gdse66.helloshoes.service.util.LoyaltyLevel;
 import lk.ijse.gdse66.helloshoes.service.util.Sender;
 import lk.ijse.gdse66.helloshoes.service.util.Tranformer;
 import lombok.extern.slf4j.Slf4j;
@@ -81,6 +82,12 @@ public class CustomerServiceImpl implements CustomerService {
                     /*if (proPic != null && !proPic.startsWith("data:image/png;base64,")) {
                         Base64.getEncoder().encodeToString(profilePic.getBytes());
                     }*/
+                    if (dto.getLoyaltyDate() != null) {
+                        LoyaltyLevel loyalty = setCustomerLevel(dto.getTotalPoints());
+                        if (loyalty != null) {
+                            dto.setLevel(loyalty);
+                        }
+                    }
                     customerRepo.save(tranformer.convert(dto, Tranformer.ClassType.CUS_ENTITY));
                     log.info("Customer "+dto.getCustomerId()+" Save successfully");
                     try {
@@ -104,6 +111,12 @@ public class CustomerServiceImpl implements CustomerService {
                     if (proPic != null) {
                         if ("assets/images/walk.gif".equals(proPic)){
                             dto.setProPic(customer.getProPic());
+                        }
+                        if (dto.getLoyaltyDate() != null) {
+                            LoyaltyLevel loyalty = setCustomerLevel(dto.getTotalPoints());
+                            if (loyalty != null) {
+                                dto.setLevel(loyalty);
+                            }
                         }
                         customerRepo.save(tranformer.convert(dto, Tranformer.ClassType.CUS_ENTITY));
                         log.info("Update Customer "+dto.getCustomerId()+" successfully");
@@ -161,6 +174,17 @@ public class CustomerServiceImpl implements CustomerService {
                     e.printStackTrace();
                 }
             }
+        }
+    }
+    private LoyaltyLevel setCustomerLevel(Integer check) {
+        if (check < 50) {
+            return LoyaltyLevel.NEW;
+        } else if (check < 100) {
+            return LoyaltyLevel.BRONZE;
+        } else if (check < 200) {
+            return LoyaltyLevel.SILVER;
+        } else {
+            return LoyaltyLevel.GOLD;
         }
     }
 }

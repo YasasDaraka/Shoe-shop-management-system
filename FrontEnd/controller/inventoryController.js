@@ -252,7 +252,7 @@ $("#itmFilter").on("change", function (e) {
     getAllItems("/"+val);
 });
 function getAllItems(val) {
-
+    console.log(val);
     performAuthenticatedRequest();
     const accessToken = localStorage.getItem('accessToken');
     console.log(accessToken);

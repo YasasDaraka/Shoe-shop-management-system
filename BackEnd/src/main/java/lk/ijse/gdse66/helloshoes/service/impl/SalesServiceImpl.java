@@ -9,6 +9,7 @@ import lk.ijse.gdse66.helloshoes.service.SaleService;
 import lk.ijse.gdse66.helloshoes.service.exception.DuplicateRecordException;
 import lk.ijse.gdse66.helloshoes.service.exception.NotFoundException;
 import lk.ijse.gdse66.helloshoes.service.util.IdGenerator;
+import lk.ijse.gdse66.helloshoes.service.util.LoyaltyLevel;
 import lk.ijse.gdse66.helloshoes.service.util.Tranformer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -137,6 +138,10 @@ public class SalesServiceImpl implements SaleService {
                                         cus.setTotalPoints(cusPoints);
 
                                     }
+                                    LoyaltyLevel loyalty = setCustomerLevel(cus.getTotalPoints());
+                                    if (loyalty != null){
+                                        cus.setLevel(loyalty);
+                                    }
                                 }
                                 cus.setRecentPurchase(LocalDateTime.now());
                                 cusRepo.save(cus);
@@ -223,7 +228,10 @@ public class SalesServiceImpl implements SaleService {
                                     }
                                     break;
                             }
-
+                            LoyaltyLevel loyalty = setCustomerLevel(cus.getTotalPoints());
+                            if (loyalty != null){
+                                cus.setLevel(loyalty);
+                            }
                         }
                         cus.setRecentPurchase(LocalDateTime.now());
                         cusRepo.save(cus);
@@ -233,6 +241,19 @@ public class SalesServiceImpl implements SaleService {
                     });
         }
     }
+
+    private LoyaltyLevel setCustomerLevel(Integer check) {
+        if (check < 50) {
+            return LoyaltyLevel.NEW;
+        } else if (check < 100) {
+            return LoyaltyLevel.BRONZE;
+        } else if (check < 200) {
+            return LoyaltyLevel.SILVER;
+        } else {
+            return LoyaltyLevel.GOLD;
+        }
+    }
+
     private void updateItems(String itmCode,int updateQty,String op){
         inventoryRepo.findById(itmCode)
                 .ifPresentOrElse(inventory -> {
@@ -306,6 +327,10 @@ public class SalesServiceImpl implements SaleService {
                                             if (cusPoints != 0) {
                                                 cusPoints -= points;
                                                 cus.setTotalPoints(cusPoints);
+                                            }
+                                            LoyaltyLevel loyalty = setCustomerLevel(cus.getTotalPoints());
+                                            if (loyalty != null){
+                                                cus.setLevel(loyalty);
                                             }
                                         }
                                     }

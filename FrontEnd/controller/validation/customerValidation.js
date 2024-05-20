@@ -188,6 +188,8 @@ $("#cusClear").click(function () {
     clearCus();
 });
 function clearCus() {
+    $('#lastPurchaseDate').val("")
+    $('#loyaltyDate').val("")
     var ids = ["cusId", "cusGender", "cusName","cusDob","cusBuildNo", "cusLane", "cusCity","cusState","cusPostalCode",
         "cusEmail", "cusContactNo","loyaltyDate","totalPoints", "lastPurchaseDate","rating"];
     ids.forEach(function(id) {

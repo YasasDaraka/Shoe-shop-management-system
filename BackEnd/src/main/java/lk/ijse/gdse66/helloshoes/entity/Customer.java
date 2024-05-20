@@ -30,6 +30,7 @@ public class Customer {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
+    @Temporal(TemporalType.DATE)
     private Date loyaltyDate;
 
     @Enumerated(EnumType.STRING)
