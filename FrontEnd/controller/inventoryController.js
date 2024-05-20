@@ -321,7 +321,7 @@ function bindItmTrrEvents() {
             itmCaptureClear();
             $("#itmCapturedImage").attr('src', res.itemPicture);
         });
-        $("#inventoryListLabel").text(itemCode+" is selected back to view details");
+        $("#inventoryListLabel").text(itemCode+" is selected, Back to view details");
 
     });
 }
