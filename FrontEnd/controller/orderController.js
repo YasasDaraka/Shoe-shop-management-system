@@ -13,7 +13,7 @@ $(document).ready(function () {
     $("#order-clear").prop("disabled", true);
     $("#order-update").prop("disabled", true);
     $("#order-delete").prop("disabled", true);
-    //generateOrderId();
+
     $('#order-thead').css({
         'width': '100%',
         'display': 'flex'

@@ -1,32 +1,11 @@
 $(document).ready(function () {
-    // setTime();
-    // setDate();
     empFieldSet(true);
     $("#empSave").prop("disabled", true);
     $("#empDelete").prop("disabled", true);
     $("#empUpdate").prop("disabled", true);
     $("#empSearch").prop("disabled", true);
     $("#empClear").prop("disabled", true);
-/*    var targetNode = document.getElementById('employee-main');
-    var config = {attributes: true, attributeFilter: ['style']};
-    var callback = function (mutationsList, observer) {
-        for (var mutation of mutationsList) {
-            if (mutation.attributeName === 'style') {
-                var displayStyle = window.getComputedStyle(targetNode).getPropertyValue('display');
-                if (displayStyle === 'none') {
-                    stopEmpWebcamStream();
-                    $('#empVideo').hide();
-                    $("#empCapturedImage").show();
-                    $('#empCaptureButton').css("background-color", "#007bff");
-                    $('#empCaptureButton').css("border-color", "#007bff");
-                    $('#empCaptureButton').text("Capture");
-                    $("#empCapturedImage").attr('src', "assets/images/walk.gif");
-                }
-            }
-        }
-    };
-    var observer = new MutationObserver(callback);
-    observer.observe(targetNode, config);*/
+
 });
 $('#empCaptureButton').click(function () {
     let text = $(this).text();

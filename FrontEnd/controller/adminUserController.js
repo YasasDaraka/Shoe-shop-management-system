@@ -1,7 +1,4 @@
 $(document).ready(function () {
-    // setTime();
-    // setDate();
-    //adminFieldSet(true);
     $("#adminNewPass").hide();
     $("#adminNewPassLabel").hide();
     $("#adminSave").prop("disabled", true);
