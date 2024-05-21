@@ -163,6 +163,9 @@ function bindSupTrrEvents() {
         $("#supEmail").val(email);
         $("#supMobileNo").val(mobileNo);
         $("#supLandNo").val(landNo);
+
+        $("#supListLabelSp").text(id);
+        $("#supListLabel").text(" selected, Back to view details");
         setSupBtn();
     });
 }

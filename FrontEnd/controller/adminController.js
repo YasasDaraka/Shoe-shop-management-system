@@ -39,6 +39,8 @@ function hideAdminPages(){
     $("#formIcon").text("");
     $("#inventoryListLabel").text("")
     $("#inventoryListLabelSp").text("");
+    $("#supListLabel").text("")
+    $("#supListLabelSp").text("");
 }
 function hideMainPages(){
     empMain.css('display','none');
@@ -47,6 +49,8 @@ function hideMainPages(){
     cusMain.css('display','none');
     $("#inventoryListLabel").text("")
     $("#inventoryListLabelSp").text("");
+    $("#supListLabel").text("")
+    $("#supListLabelSp").text("");
 }
 function hideAllLoadPages(){
     empList.css('display','none');

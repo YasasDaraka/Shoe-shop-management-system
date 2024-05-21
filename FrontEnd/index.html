@@ -461,8 +461,9 @@
                 <div class="col-10">
                   <button type="button" id="backToCus"  class="btn mt-3 ms-3" style="color: rgba(59,59,59,0.9) ;position: absolute;top: 5.5vw;left: 6vw; margin: 0; font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 12px"><i class="fa-solid fa-arrow-left me-2"></i>Back</button>
                   <div class="customerTableDiv" style="width: 89.4vw;">
+                    <div style="max-height: 28vw; overflow-y:auto">
                     <table style="font-size: xx-small;" class="table table-bordered rounded bg-light table-hover ">
-                      <thead class="table-secondary text-light text-center">
+                      <thead class="table-secondary text-light text-center"style="position: sticky;top: 0;">
                       <tr class="" style="border: 1px solid #FFA633FF; box-shadow: inset 1px 1px #FFA633, 0 0 4px #FFA633;"id="customer-thead">
                         <th scope="col">Customer code</th>
                         <th scope="col">Customer name</th>
@@ -486,6 +487,8 @@
                       </tbody>
                     </table>
                   </div>
+
+                 </div>
                 </div>
               </div>
             </div>
@@ -717,8 +720,9 @@
                 <div class="col-10">
                   <button type="button" id="backToEmp"  class="btn mt-3 ms-3" style="color: rgba(59,59,59,0.9) ;position: absolute;top: 5.5vw;left: 6vw; margin: 0; font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 12px"><i class="fa-solid fa-arrow-left me-2"></i>Back</button>
                   <div class="employeeTableDiv" style="width: 89.4vw;">
+                    <div style="max-height: 28vw; overflow-y:auto">
                     <table style="font-size: xx-small;" class="table table-bordered rounded bg-light table-hover ">
-                      <thead class="table-secondary text-light text-center">
+                      <thead class="table-secondary text-light text-center"style="position: sticky;top: 0;">
                       <tr class="" style="border: 1px solid #FFA633FF; box-shadow: inset 1px 1px #FFA633, 0 0 4px #FFA633;"id="employee-thead">
                         <th scope="col">Emp ID</th>
                         <th scope="col">Name</th>
@@ -745,6 +749,8 @@
                       </tbody>
                     </table>
                   </div>
+
+                 </div>
                 </div>
               </div>
             </div>
@@ -931,8 +937,9 @@
                 <div class="col-10">
                   <button type="button" id="backToSup"  class="btn mt-3 ms-3" style="color: rgba(59,59,59,0.9) ;position: absolute;top: 5.5vw;left: 6vw; margin: 0; font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 12px"><i class="fa-solid fa-arrow-left me-2"></i>Back</button>
                   <div class="supplierTableDiv" style="width: 89.4vw;">
+                    <div style="max-height: 28vw; overflow-y:auto">
                     <table style="font-size: xx-small;" class="table table-bordered rounded bg-light table-hover ">
-                      <thead class="table-secondary text-light text-center">
+                      <thead class="table-secondary text-light text-center"style="position: sticky;top: 0;">
                       <tr class="" style="border: 1px solid #FFA633FF; box-shadow: inset 1px 1px #FFA633, 0 0 4px #FFA633;"id="supplier-thead">
                         <th scope="col">Sup ID</th>
                         <th scope="col">Name</th>
@@ -953,9 +960,14 @@
                       </tbody>
                     </table>
                   </div>
+
+                 </div>
                 </div>
               </div>
             </div>
+          </div>
+          <div class="container-fluid position-absolute d-flex justify-content-center align-items-center" style="width: 91.2%; height: 4vw; bottom: 2vw">
+            <span id="supListLabelSp" class="form-label m-0" style="color:#0A58CA;font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 18px;"></span><label id="supListLabel" class="form-label m-0" style="padding-left:0.3vw; font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 17px; color: #4d5f71"></label>
           </div>
         </div>
       </div>
@@ -1727,9 +1739,12 @@
                          </div>
                          <h1 class="mt-1 mb-3"style="color:#4D5F71;" id="totalSale">$0.00</h1>
                          <div class="mb-0">
-                           <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 6.65% </span>
+                           <!--<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 6.65% </span>-->
                            <span class="text-muted">Since last week</span>
                          </div>
+                       </div>
+                       <div class="col-md-5 d-flex justify-content-center align-items-center">
+                         <img src="assets/images/total.gif" style="width: 5vw;">
                        </div>
                      </div>
 
@@ -1743,9 +1758,12 @@
                          </div>
                          <h1 class="mt-1 mb-3"style="color:#4D5F71;"id="totalProfit">$0.00</h1>
                          <div class="mb-0">
-                           <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 6.65% </span>
+                          <!-- <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 6.65% </span>-->
                            <span class="text-muted">Since last week</span>
                          </div>
+                       </div>
+                       <div class="col-md-5 d-flex justify-content-center align-items-center">
+                         <img src="assets/images/profit2.gif" style="width: 6vw;">
                        </div>
                      </div>
 
@@ -1759,9 +1777,12 @@
                          </div>
                          <h1 class="mt-1 mb-3" style="color:#4D5F71;" id="totalOrders">0</h1>
                          <div class="mb-0">
-                           <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 6.65% </span>
+                           <!--<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 6.65% </span>-->
                            <span class="text-muted">Since last week</span>
                          </div>
+                       </div>
+                       <div class="col-md-5 d-flex justify-content-center align-items-center">
+                         <img src="assets/images/cart.gif" style="width: 7vw; padding-bottom: 0.5vw;">
                        </div>
                      </div>
 
@@ -1775,11 +1796,11 @@
 
                      <div class="row h-50" style="width: 29vw;padding-left: 1vw; padding-top: 0.5vw">
                        <div class="card-body d-flex align-items-center justify-content-center mt-3"style="height: 9.4vw;box-shadow: 0px 1px 10px #909090;background-color: #c5ecf875;">
-                         <div class="col-md-4 d-flex justify-content-center align-items-center">
-                           <img src="assets/images/customers.gif" style="width: 7vw;">
+                         <div class="col-md-5 d-flex justify-content-center align-items-center">
+                           <img src="assets/images/shoe2.gif" style="width: 7vw;">
                          </div>
 
-                         <div class="col-md-8 d-flex justify-content-center align-items-center" style="height: 9.4vw; flex-direction: column">
+                         <div class="col-md-6 d-flex justify-content-center align-items-center" style="height: 9.4vw; flex-direction: column">
                            <div class="row">
                              <div class="col mt-0">
                                <h5 class="card-title"style="color:#8E9AA5;">Total Items</h5>
@@ -1846,8 +1867,12 @@
         <div class="container" style="box-shadow: 0px 1px 10px #3aa7ee; border-radius: 10px;background-color:rgb(255,255,255); height: 30vw; width: 50vw;position: relative;top: 1vw;right: 0.5vw;">
           <div class="col-12 d-flex" style="height: 29.5vw;">
 
-            <div><h1 class="mt-2" style="padding-top: 0.8vw; font-family: 'Fira Sans', sans-serif; font-weight: 700; font-size: 30px; color: #434142;text-align: center;">Send Offers</h1>
-
+            <div>
+              <!--<h1 class="mt-2" style="padding-top: 0.8vw; font-family: 'Fira Sans', sans-serif; font-weight: 700; font-size: 30px; color: #434142;text-align: center;">Send Offers</h1>-->
+              <div class="d-flex justify-content-center align-items-center position-relative">
+              <img src="assets/images/sendoffer.gif" style="height: 5.7vw; position: absolute; padding-top: 0.7vw;">
+                <h1 class="mt-2" style="padding-top: 0.8vw; font-family: 'Fira Sans', sans-serif; font-weight: 700; font-size: 30px; color: #434142;text-align: center;">Send Offers</h1>
+                </div>
               <div class="mt-2" style="width: 100%; height: 85%">
                 <div class="col-sm d-flex flex-column align-items-center">
                   <label for="subject" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px; color: #35393B;">Subject</label>
@@ -1859,7 +1884,7 @@
 
                     <div class="mt-2 d-flex flex-column align-items-center">
                       <label for="message" class="form-label" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Message</label>
-                      <textarea class="form-control border border-info" id="message" style="width: 18vw; height: 13vw;resize: none;" required></textarea>
+                      <textarea class="form-control border border-info" id="message" style="width: 18vw; height: 12vw;resize: none;" required></textarea>
                     </div>
 
 
