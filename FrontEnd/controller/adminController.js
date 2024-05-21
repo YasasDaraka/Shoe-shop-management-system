@@ -38,6 +38,7 @@ function hideAdminPages(){
     userEditPage.css('display','none');
     $("#formIcon").text("");
     $("#inventoryListLabel").text("")
+    $("#inventoryListLabelSp").text("");
 }
 function hideMainPages(){
     empMain.css('display','none');
@@ -45,6 +46,7 @@ function hideMainPages(){
     itmMain.css('display','none');
     cusMain.css('display','none');
     $("#inventoryListLabel").text("")
+    $("#inventoryListLabelSp").text("");
 }
 function hideAllLoadPages(){
     empList.css('display','none');
