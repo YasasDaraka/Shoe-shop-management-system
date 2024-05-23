@@ -65,6 +65,11 @@ $(window).on('load', function () {
         allContainerHide();
         header.css('display', 'block');
         mainPage.css('display', 'block');
+
+        if ($("body").css('background') !== ''){
+            applyDarkMode();
+            setDarkEffect();
+        }
     });
 
     $('#signUp').click(function () {
