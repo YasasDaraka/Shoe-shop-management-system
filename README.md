@@ -111,3 +111,9 @@ Limit access to users
 ### Notifications
 
 ![image](assets/Screenshot20.png)
+
+### Dark Mode
+
+![image](assets/Screenshot21.png)
+
+![image](assets/Screenshot22.png)
