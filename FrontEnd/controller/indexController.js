@@ -66,10 +66,21 @@ $(window).on('load', function () {
         header.css('display', 'block');
         mainPage.css('display', 'block');
 
-        if ($("body").css('background') !== ''){
+        let val = false;
+        $('img').each(function() {
+            var imageUrl = $(this).attr('src');
+            if (imageUrl === 'assets/images/shoe-dark.gif') {
+                val = true;
+            }
+        });
+        if (val){
             applyDarkMode();
             setDarkEffect();
         }
+        /*if ($("body").css('background') !== ''){
+            applyDarkMode();
+            setDarkEffect();
+        }*/
     });
 
     $('#signUp').click(function () {
