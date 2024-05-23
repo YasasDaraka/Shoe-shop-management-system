@@ -232,6 +232,8 @@ function bindTrrEvents() {
             $("#cusCapturedImage").attr('src', res.proPic);
 
         });
+        $("#cusListLabelSp").text(customerId);
+        $("#cusListLabel").text(" selected, Back to view details");
         setBtn();
     });
 }

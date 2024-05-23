@@ -211,6 +211,7 @@ $("#adminNewPass").on("keydown keyup", function (e) {
 $("#adminSave").click(function () {
     saveAdmin();
 });
+
 $("#adminUpdate").click(function () {
     console.log("update")
     searchUser().then(function (user) {
@@ -254,10 +255,11 @@ $("#adminUpdate").click(function () {
                 }
             });
         } else {
-            swal("Error", "User already exits.!", "error");
+            swal("Error", "User not exits.!", "error");
         }
     });
 });
+
 function saveAdmin() {
     searchUser().then(function (user) {
         console.log("save 1")
@@ -340,6 +342,7 @@ function getAllAdmins() {
         }
     });
 }
+
 $("#adminDelete").click(function () {
     let id = $("#adminName").val();
 

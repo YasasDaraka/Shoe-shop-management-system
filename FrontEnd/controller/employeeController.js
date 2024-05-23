@@ -237,17 +237,15 @@ function bindEmpTrrEvents() {
         $("#empBranch").val(branch);
         $("#guardianName").val(guardianName);
         $("#emergencyContact").val(emergencyContact);
-        /*$("#customerID").prop('disabled', false);
-        $("#customerName").prop('disabled', false);
-        $("#customerAddress").prop('disabled', false);
-        $("#cusUpdate").prop('disabled', false);
-        $("#cusDelete").prop('disabled', false);*/
+
         setEmpBtn();
         searchEmployee(employeeId).then(function (res){
             empCaptureClear();
             $("#empCapturedImage").attr('src', res.proPic);
 
         });
+        $("#empListLabelSp").text(employeeId);
+        $("#empListLabel").text(" selected, Back to view details");
     });
 }
 

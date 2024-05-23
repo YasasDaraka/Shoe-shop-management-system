@@ -35,8 +35,80 @@
 <body>
 <section id="loader"><img class="personal-img" src="assets/images/orange_circles.gif" alt="This is image" ></section>
 <header id="header">
-  <nav class="navbar navbar-expand-lg bg-white nav-bar container-fluid d-flex " style="height: 60px; padding-right: 20px">
+  <nav class="navbar navbar-expand-lg <!--bg-white--> nav-bar container-fluid d-flex " style="height: 60px; padding-right: 20px">
      <!-- <img src="" width="" class="me-3">-->
+    <div class="col-md-2">
+      <svg class="svg-set" viewBox="0 0 800 600">
+        <title>Day And Night Toggle</title>
+        <description>A user interface toggle with two options - a sun with a cloud that animates to a crescent moon with stars</description>
+        <defs>
+          <filter id="shadow" x="-100%" y="-100%" width="250%" height="250%">
+            <feGaussianBlur stdDeviation="4" result="coloredBlur" />
+            <feOffset dx="0" dy="0" result="offsetblur"></feOffset>
+            <feFlood id="glowAlpha" flood-color="#000" flood-opacity="0.07"></feFlood>
+            <feComposite in2="offsetblur" operator="in"></feComposite>
+            <feMerge>
+              <feMergeNode/>
+              <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+          </filter>
+          <mask id="moonMask">
+            <rect id="outlineFill"  x="225" y="215" width="350" height="170" rx="86" ry="86" fill="#FFF" stroke="#000" stroke-width="0"/>
+            <circle class="moonMask" cx="487" cy="300" r="66" fill="#06070B"/>
+          </mask>
+          <clipPath id="outlineMask">
+            <use xlink:href="#outlineFill"/>
+          </clipPath>
+
+          <path id="cloud" d="M20.67,42.52h39c22,0,18-16.52,11.19-17.51,1.93-7.5-1.94-25-23.19-25s-24,18-24,18S12.75,13.2,5,18.83C-3.8,25.15-2.33,42.52,20.67,42.52Z"/>
+        </defs>
+
+        <g class="whole" >
+
+          <rect class="outline" x="220" y="210" width="360" height="180" rx="90" ry="90" fill="#85E8FE" stroke="#FCFDFE" stroke-width="10"/>
+          <g class="starGroup" fill="#FFF" clip-path="url(#outlineMask)">
+            <polygon points="405 248.25 406.58 254.42 412.75 256 406.58 257.58 405 263.75 403.42 257.58 397.25 256 403.42 254.42 405 248.25"/>
+            <path d="M427.33,301.9a1.5,1.5,0,0,0,0-3,1.5,1.5,0,0,0,0,3Z"/>
+            <path d="M402.59,367.21a1.5,1.5,0,0,0,0-3,1.5,1.5,0,0,0,0,3Z"/>
+            <polygon points="447 325.5 450.17 337.83 462.5 341 450.17 344.17 447 356.5 443.83 344.17 431.5 341 443.83 337.83 447 325.5"/>
+            <path d="M464,241.53a1.5,1.5,0,0,0,0-3,1.5,1.5,0,0,0,0,3Z"/>
+            <polygon points="496 274.25 497.58 280.42 503.75 282 497.58 283.58 496 289.75 494.42 283.58 488.25 282 494.42 280.42 496 274.25"/>
+            <path d="M503.53,351.38a1.5,1.5,0,0,0,0-3,1.5,1.5,0,0,0,0,3Z"/>
+            <path d="M537.18,249.45a1.5,1.5,0,0,0,0-3,1.5,1.5,0,0,0,0,3Z"/>
+            <path d="M553,322.68a1.5,1.5,0,0,0,0-3,1.5,1.5,0,0,0,0,3Z"/>
+          </g>
+          <circle class="sun" cx="486" cy="300" r="66" fill="#FEC100"/>
+          <g mask="url(#moonMask)">
+            <circle class="moon" cx="403" cy="300" r="66" fill="#FFF" opacity="0"/>
+          </g>
+
+          <g class="planeGroup" fill="#FFF" clip-path="url(#outlineMask)" opacity="1">
+
+            <path class="plane" d="M611.12,262.15l-7.16,0-6.48-5.43-1.06.58,1.93,4.88-3.67.06-3.48-3.37-.78.36,1.26,3.05h-.58a27.07,27.07,0,0,0,4.6,2.24s8.57,0,12.37,0H611c.65,0,2.19,0,2.19-1.25C613.19,262.26,612.05,262.15,611.12,262.15Z"  fill="#fff"/>
+            <line class="contrail" x1="590.17" y1="264" x2="246.51" y2="264" fill="none" stroke="#fff" stroke-width="1" opacity="0.53"/>
+
+          </g>
+          <g class="cloudGroup" fill="#FFF" clip-path="url(#outlineMask)">
+            <g class="cloud" filter="url(#shadow)">
+              <rect x="515.79" y="314.92" width="47.15" height="10.37" rx="5.19" ry="5.19"/>
+              <circle cx="521.45" cy="313.98" r="11.32"/>
+              <circle cx="540.84" cy="305.91" r="15.61"/>
+              <circle cx="556.82" cy="316.34" r="8.96"/>
+            </g>
+            <g class="cloud"  filter="url(#shadow)">
+              <rect x="397.85" y="349.02" width="92.34" height="10.37" rx="5.19" ry="5.19" transform="translate(888.03 708.41) rotate(180)"/>
+              <circle cx="484.53" cy="348.08" r="11.32"/>
+              <circle cx="432.65" cy="332.46" r="24.66"/>
+              <circle cx="464.35" cy="338.11" r="17.51"/>
+              <circle cx="404.21" cy="348.19" r="11.32"/>
+            </g>
+          </g>
+
+        </g>
+        <rect class="hit" x="220" y="210" width="360" height="180" rx="90" ry="90" fill="transparent" stroke="none" stroke-width="0"/>
+
+      </svg>
+    </div>
       <div class="ms-auto">
         <button type="button" class="btn" id="signIn">Sign In</button>
         <button type="button" class="btn" id="signUp">Sign Up</button>
@@ -48,11 +120,12 @@
 
   <section id="main-view">
     <section class="container-fluid" >
+      <div class="background"><div id="particles-js"></div></div>
 
       <div class="container" style="position: relative">
 
         <img src="assets/images/shoe.gif" style="width: 50%; position: absolute; top: 12vh; left: 45vw">
-        <h1 style="position: absolute; top: 20vh; left: 5vw; font-family: 'Fira Sans', sans-serif; font-weight: 700; font-size: 60px">Step Up</h1>
+        <h1 class="dark-h1" style="position: absolute; top: 20vh; left: 5vw; font-family: 'Fira Sans', sans-serif; font-weight: 700; font-size: 60px">Step Up</h1>
         <h1 style="position: absolute; top: 27vh; left: 5vw; font-family: 'Fira Sans', sans-serif; font-weight: 900; font-size: 80px; color: #FFA633">Feel Sculpted</h1>
         <h7 style="width: 30vw; position: absolute; top: 41vh; left: 5.3vw; font-family: 'Fira Sans', sans-serif; font-weight: bold; font-size: 20px; color: #9FA0A0">Exclusive access, fresh fits, medium, high support for every move and every body.</h7>
         <button type="button" class="btn" id="btn-log" style="position: absolute; top: 48vh; left: 5.3vw">Sign In<i class="fa-solid fa-arrow-right ms-2"></i></button>
@@ -66,8 +139,8 @@
     <img src="assets/images/shoe.gif" style="width: 47.5%; position: absolute; top: 19vh; left: 5.5vw">
     <div id="log-in-container">
 
-      <button type="button" id="logInBackToHome" class="btn mt-3 ms-3" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 10px"><i class="fa-solid fa-arrow-left me-2"></i>Back to Homepage</button>
-      <h1 class="mt-4 ms-5" style="font-family: 'Fira Sans', sans-serif; font-weight: 900; font-size: 40px">Sign In</h1>
+      <button type="button" id="logInBackToHome" class="btn mt-3 ms-3 btn-white" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 10px"><i class="fa-solid fa-arrow-left me-2"></i>Back to Homepage</button>
+      <h1 class="mt-4 ms-5 dark-h1" style="font-family: 'Fira Sans', sans-serif; font-weight: 900; font-size: 40px">Sign In</h1>
       <h1 class="ms-5" style="color: #FFA633 ;font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 10px">Sign In to Access the Portal</h1>
 
       <h1 id="txtLogID" class="visually-hidden" style="color: #FFA633 ;font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">aaaa</h1>
@@ -88,7 +161,7 @@
 
       <button id="btnSignIn" type="button" class="btn  ms-5 mt-4" style="background-color: rgba(59, 59, 59, 0.9);color: #ffffff;width: 350px">Sign In</button>
 
-      <h1 class="mt-4" style="color: #FFA633 ;font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 12px; text-align: center"><a style="text-decoration: none; color: black" >Haven't Account ?</a></h1>
+      <h1 class="mt-4" style="color: #FFA633 ;font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 12px; text-align: center"><a class="dark-h1" style="text-decoration: none; color: black" >Haven't Account ?</a></h1>
 
 
     </div>
@@ -97,15 +170,15 @@
   <section id="sign-up-page">
     <form id="sign-up-form">
 
-      <div id="sign-up-container" style="border-radius: 10px">
+      <div id="sign-up-container" class="sign-up-dark" style="border-radius: 10px">
 
-        <div class="container">
+        <div class="container .sign-up-dark">
 
-          <div class="row" style="">
+          <div class="row sign-up-dark" style="">
 
-            <div class="col-5" style="height: 72vh; background-color: #f1f1f1;  box-shadow: 0px 1px 10px #FFA633; border: 2px solid #FFA633; text-align: center; position: relative; border-radius: 10px">
+            <div class="col-5 sign-up-dark" style="height: 72vh; background-color: #f1f1f1;  box-shadow: 0px 1px 10px #FFA633; border: 2px solid #FFA633; text-align: center; position: relative; border-radius: 10px">
 
-              <button type="button" id="signUpBackToHome"  class="btn mt-3 ms-3" style="color: rgba(59,59,59,0.9) ;position: absolute; top: 1vh; left: 0; margin: 0; font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 10px"><i class="fa-solid fa-arrow-left me-2"></i>Back to Homepage</button>
+              <button type="button" id="signUpBackToHome"  class="btn mt-3 ms-3 btn-white" style="color: rgba(59,59,59,0.9) ;position: absolute; top: 1vh; left: 0; margin: 0; font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 10px"><i class="fa-solid fa-arrow-left me-2"></i>Back to Homepage</button>
 
               <h1 style="font-family: 'Fira Sans', sans-serif; font-weight: 700; font-size: 40px; color: #ffa633; position: absolute; top: 20vh; right: 0; left: 0; margin: 0">Welcome</h1>
 
@@ -113,10 +186,10 @@
                 Hello Shoes company retail company of high end  shoes and accessory!
               </h1>
 
-              <h1 style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 12px; color: rgba(59,59,59,0.9); width: 15vw; position: absolute; top: 40vh; right: 5vw; margin: 0">Have You an Account ?</h1>
+              <h1 class="dark-h1" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 12px; color: rgba(59,59,59,0.9); width: 15vw; position: absolute; top: 40vh; right: 5vw; margin: 0">Have You an Account ?</h1>
 
               <a>
-                <button  id="log-in-btn" type="button" class="btn ms-5 mt-4" style="background-color: white;box-shadow: 0px 1px 10px #C2C3C2;border-color: #000000FF;font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 13px; color: #000000; width: 15vw; position: absolute; top: 40vh; right: 5vw; margin: 0">Log In</button>
+                <button  id="log-in-btn" type="button" class="btn ms-5 mt-4 btn-white" style="background-color: white;box-shadow: 0px 1px 10px #C2C3C2;border-color: #000000FF;font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 13px; color: #000000; width: 15vw; position: absolute; top: 40vh; right: 5vw; margin: 0">Log In</button>
               </a>
 
 
@@ -125,7 +198,7 @@
 
             <div class="col-7">
 
-              <h1 class="ms-4 mt-4" style="font-family: 'Fira Sans', sans-serif; font-weight: 700; font-size: 40px; color: black;">Create Account</h1>
+              <h1 class="ms-4 mt-4 dark-h1" style="font-family: 'Fira Sans', sans-serif; font-weight: 700; font-size: 40px; color: black;">Create Account</h1>
 
               <h1 class="ms-4" style="color: #FFA633 ;font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">Sign Up to Access the Portal</h1>
 
@@ -170,30 +243,102 @@
         </div>
       </div>
 
-            </form>
+      </form>
   </section>
 
   <section id="admin-container">
     <header id="admin-header">
-      <nav  class="navbar navbar-expand-lg bg-white nav-bar container-fluid d-flex " style="height: 60px; padding-right: 20px;padding-left: 50px">
+      <nav  class="navbar header-dark navbar-expand-lg <!--bg-white--> nav-bar container-fluid d-flex " style="height: 60px; padding-right: 20px;padding-left: 50px">
         <label id="formIcon" class="form-label m-0 position-absolute" style="left: 8vw; font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 20px;width: 20vw;"></label>
         <div class="d-flex justify-content-evenly">
-          <div class="nav-item d-flex justify-content-center" style="padding-left:65.25vw ">
+          <div class="nav-item d-flex justify-content-center" style="padding-left:58.25vw ">
             <span style="color: darkgoldenrod">Time : </span><div class="nav-link active currTime" aria-current="page" href="#" style="z-index:5; font-weight: 600; font-size: 16px;" ></div>
           </div>
-          <div class="nav-item position-absolute d-flex justify-content-center" style="left: 80vw;">
+          <div class="nav-item position-absolute d-flex justify-content-center" style="left: 74vw;">
             <span style="color: darkgoldenrod">Date : </span><div class="nav-link active currDate" aria-current="page" href="#" style="z-index:5;font-weight: 600; font-size: 16px;"></div>
           </div>
         </div>
-        <div class="ms-auto">
-          <button type="button" class="btn" id="adminLogOut" style="z-index: 5;">Log Out</button>
+        <div class="ms-auto" style="position: relative;left: 16%;">
+          <div class="d-inline" >
+            <svg class="svg-set-2" viewBox="0 0 800 600">
+              <title>Day And Night Toggle</title>
+              <description>A user interface toggle with two options - a sun with a cloud that animates to a crescent moon with stars</description>
+              <defs>
+                <filter id="shadow" x="-100%" y="-100%" width="250%" height="250%">
+                  <feGaussianBlur stdDeviation="4" result="coloredBlur" />
+                  <feOffset dx="0" dy="0" result="offsetblur"></feOffset>
+                  <feFlood id="glowAlpha" flood-color="#000" flood-opacity="0.07"></feFlood>
+                  <feComposite in2="offsetblur" operator="in"></feComposite>
+                  <feMerge>
+                    <feMergeNode/>
+                    <feMergeNode in="SourceGraphic"></feMergeNode>
+                  </feMerge>
+                </filter>
+                <mask id="moonMask">
+                  <rect id="outlineFill"  x="225" y="215" width="350" height="170" rx="86" ry="86" fill="#FFF" stroke="#000" stroke-width="0"/>
+                  <circle class="moonMask" cx="487" cy="300" r="66" fill="#06070B"/>
+                </mask>
+                <clipPath id="outlineMask">
+                  <use xlink:href="#outlineFill"/>
+                </clipPath>
+
+                <path id="cloud" d="M20.67,42.52h39c22,0,18-16.52,11.19-17.51,1.93-7.5-1.94-25-23.19-25s-24,18-24,18S12.75,13.2,5,18.83C-3.8,25.15-2.33,42.52,20.67,42.52Z"/>
+              </defs>
+
+              <g class="whole" >
+
+                <rect class="outline" x="220" y="210" width="360" height="180" rx="90" ry="90" fill="#85E8FE" stroke="#FCFDFE" stroke-width="10"/>
+                <g class="starGroup" fill="#FFF" clip-path="url(#outlineMask)">
+                  <polygon points="405 248.25 406.58 254.42 412.75 256 406.58 257.58 405 263.75 403.42 257.58 397.25 256 403.42 254.42 405 248.25"/>
+                  <path d="M427.33,301.9a1.5,1.5,0,0,0,0-3,1.5,1.5,0,0,0,0,3Z"/>
+                  <path d="M402.59,367.21a1.5,1.5,0,0,0,0-3,1.5,1.5,0,0,0,0,3Z"/>
+                  <polygon points="447 325.5 450.17 337.83 462.5 341 450.17 344.17 447 356.5 443.83 344.17 431.5 341 443.83 337.83 447 325.5"/>
+                  <path d="M464,241.53a1.5,1.5,0,0,0,0-3,1.5,1.5,0,0,0,0,3Z"/>
+                  <polygon points="496 274.25 497.58 280.42 503.75 282 497.58 283.58 496 289.75 494.42 283.58 488.25 282 494.42 280.42 496 274.25"/>
+                  <path d="M503.53,351.38a1.5,1.5,0,0,0,0-3,1.5,1.5,0,0,0,0,3Z"/>
+                  <path d="M537.18,249.45a1.5,1.5,0,0,0,0-3,1.5,1.5,0,0,0,0,3Z"/>
+                  <path d="M553,322.68a1.5,1.5,0,0,0,0-3,1.5,1.5,0,0,0,0,3Z"/>
+                </g>
+                <circle class="sun" cx="486" cy="300" r="66" fill="#FEC100"/>
+                <g mask="url(#moonMask)">
+                  <circle class="moon" cx="403" cy="300" r="66" fill="#FFF" opacity="0"/>
+                </g>
+
+                <!--<g class="planeGroup" fill="#FFF" clip-path="url(#outlineMask)" opacity="1">
+
+                  <path class="plane" d="M611.12,262.15l-7.16,0-6.48-5.43-1.06.58,1.93,4.88-3.67.06-3.48-3.37-.78.36,1.26,3.05h-.58a27.07,27.07,0,0,0,4.6,2.24s8.57,0,12.37,0H611c.65,0,2.19,0,2.19-1.25C613.19,262.26,612.05,262.15,611.12,262.15Z"  fill="#fff"/>
+                  <line class="contrail" x1="590.17" y1="264" x2="246.51" y2="264" fill="none" stroke="#fff" stroke-width="1" opacity="0.53"/>
+
+                </g>-->
+                <g class="cloudGroup" fill="#FFF" clip-path="url(#outlineMask)">
+                  <g class="cloud" filter="url(#shadow)">
+                    <rect x="515.79" y="314.92" width="47.15" height="10.37" rx="5.19" ry="5.19"/>
+                    <circle cx="521.45" cy="313.98" r="11.32"/>
+                    <circle cx="540.84" cy="305.91" r="15.61"/>
+                    <circle cx="556.82" cy="316.34" r="8.96"/>
+                  </g>
+                  <g class="cloud"  filter="url(#shadow)">
+                    <rect x="397.85" y="349.02" width="92.34" height="10.37" rx="5.19" ry="5.19" transform="translate(888.03 708.41) rotate(180)"/>
+                    <circle cx="484.53" cy="348.08" r="11.32"/>
+                    <circle cx="432.65" cy="332.46" r="24.66"/>
+                    <circle cx="464.35" cy="338.11" r="17.51"/>
+                    <circle cx="404.21" cy="348.19" r="11.32"/>
+                  </g>
+                </g>
+
+              </g>
+              <rect class="hit" x="220" y="210" width="360" height="180" rx="90" ry="90" fill="transparent" stroke="none" stroke-width="0"/>
+
+            </svg>
+          </div>
+          <button type="button" class="btn position-relative" id="adminLogOut" style="z-index: 5; left: -5%;">Log Out</button>
         </div>
       </nav>
     </header>
 
     <div class="container-fluid h-100">
       <div class="row h-100">
-        <div class="col-lg-3 col-10 " id="nav-bar">
+        <div class="col-lg-3 col-10 nav-bar-dark" id="nav-bar">
           <div id="side-bar-icon" class="d-flex justify-content-center align-items-center"style="top: 1vw;left: 2.7vw;position: relative; display: inline-block; box-shadow: 0px 1px 10px #909090; background-color: white; z-index: 16; width: 32px; height: 33px; border-radius: 25%"><img id="bar-icon" class="admin-icon" style="width: 60px; padding-right:10px; z-index: 5;" src="assets/images/arrow.gif"></div>
           <nav class="nav">
             <div class="nav_list d-lg-flex flex-lg-column align-items-center justify-content-between" style="padding-top: 9.1vh; padding-left:0.3vh; height: 41.1vw;">
@@ -217,26 +362,97 @@
 
   <section id="user-container">
     <header id="user-header">
-      <nav class="navbar navbar-expand-lg bg-white nav-bar container-fluid d-flex " style="height: 60px; padding-right: 20px;padding-left: 50px">
+      <nav class="navbar header-dark navbar-expand-lg <!--bg-white--> nav-bar container-fluid d-flex " style="height: 60px; padding-right: 20px;padding-left: 50px">
         <label id="userFormIcon" class="form-label m-0 position-absolute" style="left: 8vw; font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 20px;width: 20vw; z-index: 5"></label>
         <div class="d-flex justify-content-evenly">
-          <div class="nav-item d-flex justify-content-center" style="padding-left:65.25vw ">
+          <div class="nav-item d-flex justify-content-center" style="padding-left:58.25vw ">
             <span style="color: darkgoldenrod">Time : </span><div class="nav-link active currTime" aria-current="page" href="#" style="z-index:5; font-weight: 600; font-size: 16px;" ></div>
           </div>
-          <div class="nav-item position-absolute d-flex justify-content-center" style="left: 80vw;">
+          <div class="nav-item position-absolute d-flex justify-content-center" style="left: 74vw;">
             <span style="color: darkgoldenrod">Date : </span><div class="nav-link active currDate" aria-current="page" href="#" style="z-index:5;font-weight: 600; font-size: 16px;"></div>
           </div>
         </div>
+        <div class="ms-auto" style="position: relative;left: 16%;">
+          <div class="d-inline" >
+            <svg class="svg-set-2" viewBox="0 0 800 600">
+              <title>Day And Night Toggle</title>
+              <description>A user interface toggle with two options - a sun with a cloud that animates to a crescent moon with stars</description>
+              <defs>
+                <filter id="shadow" x="-100%" y="-100%" width="250%" height="250%">
+                  <feGaussianBlur stdDeviation="4" result="coloredBlur" />
+                  <feOffset dx="0" dy="0" result="offsetblur"></feOffset>
+                  <feFlood id="glowAlpha" flood-color="#000" flood-opacity="0.07"></feFlood>
+                  <feComposite in2="offsetblur" operator="in"></feComposite>
+                  <feMerge>
+                    <feMergeNode/>
+                    <feMergeNode in="SourceGraphic"></feMergeNode>
+                  </feMerge>
+                </filter>
+                <mask id="moonMask">
+                  <rect id="outlineFill"  x="225" y="215" width="350" height="170" rx="86" ry="86" fill="#FFF" stroke="#000" stroke-width="0"/>
+                  <circle class="moonMask" cx="487" cy="300" r="66" fill="#06070B"/>
+                </mask>
+                <clipPath id="outlineMask">
+                  <use xlink:href="#outlineFill"/>
+                </clipPath>
 
-        <div class="ms-auto">
-          <button type="button" class="btn" id="userLogOut" style="z-index: 5;">Log Out</button>
+                <path id="cloud" d="M20.67,42.52h39c22,0,18-16.52,11.19-17.51,1.93-7.5-1.94-25-23.19-25s-24,18-24,18S12.75,13.2,5,18.83C-3.8,25.15-2.33,42.52,20.67,42.52Z"/>
+              </defs>
+
+              <g class="whole" >
+
+                <rect class="outline" x="220" y="210" width="360" height="180" rx="90" ry="90" fill="#85E8FE" stroke="#FCFDFE" stroke-width="10"/>
+                <g class="starGroup" fill="#FFF" clip-path="url(#outlineMask)">
+                  <polygon points="405 248.25 406.58 254.42 412.75 256 406.58 257.58 405 263.75 403.42 257.58 397.25 256 403.42 254.42 405 248.25"/>
+                  <path d="M427.33,301.9a1.5,1.5,0,0,0,0-3,1.5,1.5,0,0,0,0,3Z"/>
+                  <path d="M402.59,367.21a1.5,1.5,0,0,0,0-3,1.5,1.5,0,0,0,0,3Z"/>
+                  <polygon points="447 325.5 450.17 337.83 462.5 341 450.17 344.17 447 356.5 443.83 344.17 431.5 341 443.83 337.83 447 325.5"/>
+                  <path d="M464,241.53a1.5,1.5,0,0,0,0-3,1.5,1.5,0,0,0,0,3Z"/>
+                  <polygon points="496 274.25 497.58 280.42 503.75 282 497.58 283.58 496 289.75 494.42 283.58 488.25 282 494.42 280.42 496 274.25"/>
+                  <path d="M503.53,351.38a1.5,1.5,0,0,0,0-3,1.5,1.5,0,0,0,0,3Z"/>
+                  <path d="M537.18,249.45a1.5,1.5,0,0,0,0-3,1.5,1.5,0,0,0,0,3Z"/>
+                  <path d="M553,322.68a1.5,1.5,0,0,0,0-3,1.5,1.5,0,0,0,0,3Z"/>
+                </g>
+                <circle class="sun" cx="486" cy="300" r="66" fill="#FEC100"/>
+                <g mask="url(#moonMask)">
+                  <circle class="moon" cx="403" cy="300" r="66" fill="#FFF" opacity="0"/>
+                </g>
+
+                <!--<g class="planeGroup" fill="#FFF" clip-path="url(#outlineMask)" opacity="1">
+
+                  <path class="plane" d="M611.12,262.15l-7.16,0-6.48-5.43-1.06.58,1.93,4.88-3.67.06-3.48-3.37-.78.36,1.26,3.05h-.58a27.07,27.07,0,0,0,4.6,2.24s8.57,0,12.37,0H611c.65,0,2.19,0,2.19-1.25C613.19,262.26,612.05,262.15,611.12,262.15Z"  fill="#fff"/>
+                  <line class="contrail" x1="590.17" y1="264" x2="246.51" y2="264" fill="none" stroke="#fff" stroke-width="1" opacity="0.53"/>
+
+                </g>-->
+                <g class="cloudGroup" fill="#FFF" clip-path="url(#outlineMask)">
+                  <g class="cloud" filter="url(#shadow)">
+                    <rect x="515.79" y="314.92" width="47.15" height="10.37" rx="5.19" ry="5.19"/>
+                    <circle cx="521.45" cy="313.98" r="11.32"/>
+                    <circle cx="540.84" cy="305.91" r="15.61"/>
+                    <circle cx="556.82" cy="316.34" r="8.96"/>
+                  </g>
+                  <g class="cloud"  filter="url(#shadow)">
+                    <rect x="397.85" y="349.02" width="92.34" height="10.37" rx="5.19" ry="5.19" transform="translate(888.03 708.41) rotate(180)"/>
+                    <circle cx="484.53" cy="348.08" r="11.32"/>
+                    <circle cx="432.65" cy="332.46" r="24.66"/>
+                    <circle cx="464.35" cy="338.11" r="17.51"/>
+                    <circle cx="404.21" cy="348.19" r="11.32"/>
+                  </g>
+                </g>
+
+              </g>
+              <rect class="hit" x="220" y="210" width="360" height="180" rx="90" ry="90" fill="transparent" stroke="none" stroke-width="0"/>
+
+            </svg>
+          </div>
+          <button type="button" class="btn position-relative" id="userLogOut" style="z-index: 5; left: -5%;">Log Out</button>
         </div>
       </nav>
     </header>
 
     <div class="container-fluid h-100">
       <div class="row h-100">
-        <div class="col-lg-3 col-10 " id="user-nav-bar">
+        <div class="col-lg-3 col-10 nav-bar-dark" id="user-nav-bar">
           <div id="user-side-bar-icon" class="d-flex justify-content-center align-items-center"style="top: 1vw;left: 2.7vw;position: relative; display: inline-block; box-shadow: 0px 1px 10px #909090; background-color: white; z-index: 16; width: 32px; height: 33px; border-radius: 25%"><img id="user-bar-icon" class="admin-icon" style="width: 60px; padding-right:10px; z-index: 5;" src="assets/images/arrow.gif"></div>
           <nav class="nav">
             <div class="nav_list d-lg-flex flex-lg-column align-items-center justify-content-between" style="padding-top: 9.1vh; padding-left:0.3vh; height: 41.1vw;">
@@ -459,7 +675,7 @@
             <div class="row">
               <div class="row mt-1 mt-lg-5 justify-content-start">
                 <div class="col-10">
-                  <button type="button" id="backToCus"  class="btn mt-3 ms-3" style="color: rgba(59,59,59,0.9) ;position: absolute;top: 5.5vw;left: 6vw; margin: 0; font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 12px"><i class="fa-solid fa-arrow-left me-2"></i>Back</button>
+                  <button type="button" id="backToCus"  class="btn mt-3 ms-3 btn-white" style="color: rgba(59,59,59,0.9) ;position: absolute;top: 5.5vw;left: 6vw; margin: 0; font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 12px"><i class="fa-solid fa-arrow-left me-2"></i>Back</button>
                   <div class="customerTableDiv" style="width: 89.4vw;">
                     <div style="max-height: 28vw; overflow-y:auto">
                     <table style="font-size: xx-small;" class="table table-bordered rounded bg-light table-hover ">
@@ -492,6 +708,9 @@
                 </div>
               </div>
             </div>
+          </div>
+          <div class="container-fluid position-absolute d-flex justify-content-center align-items-center" style="width: 91.2%; height: 4vw; bottom: 2vw">
+            <span id="cusListLabelSp" class="form-label m-0" style="color:#0A58CA;font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 18px;"></span><label id="cusListLabel" class="form-label m-0" style="padding-left:0.3vw; font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 17px; color: #4d5f71"></label>
           </div>
         </div>
       </div>
@@ -718,7 +937,7 @@
             <div class="row">
               <div class="row mt-1 mt-lg-5 justify-content-start">
                 <div class="col-10">
-                  <button type="button" id="backToEmp"  class="btn mt-3 ms-3" style="color: rgba(59,59,59,0.9) ;position: absolute;top: 5.5vw;left: 6vw; margin: 0; font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 12px"><i class="fa-solid fa-arrow-left me-2"></i>Back</button>
+                  <button type="button" id="backToEmp"  class="btn mt-3 ms-3 btn-white" style="color: rgba(59,59,59,0.9) ;position: absolute;top: 5.5vw;left: 6vw; margin: 0; font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 12px"><i class="fa-solid fa-arrow-left me-2"></i>Back</button>
                   <div class="employeeTableDiv" style="width: 89.4vw;">
                     <div style="max-height: 28vw; overflow-y:auto">
                     <table style="font-size: xx-small;" class="table table-bordered rounded bg-light table-hover ">
@@ -754,6 +973,9 @@
                 </div>
               </div>
             </div>
+          </div>
+          <div class="container-fluid position-absolute d-flex justify-content-center align-items-center" style="width: 91.2%; height: 4vw; bottom: 2vw">
+            <span id="empListLabelSp" class="form-label m-0" style="color:#0A58CA;font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 18px;"></span><label id="empListLabel" class="form-label m-0" style="padding-left:0.3vw; font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 17px; color: #4d5f71"></label>
           </div>
         </div>
       </div>
@@ -935,7 +1157,7 @@
             <div class="row">
               <div class="row mt-1 mt-lg-5 justify-content-start">
                 <div class="col-10">
-                  <button type="button" id="backToSup"  class="btn mt-3 ms-3" style="color: rgba(59,59,59,0.9) ;position: absolute;top: 5.5vw;left: 6vw; margin: 0; font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 12px"><i class="fa-solid fa-arrow-left me-2"></i>Back</button>
+                  <button type="button" id="backToSup"  class="btn mt-3 ms-3 btn-white" style="color: rgba(59,59,59,0.9) ;position: absolute;top: 5.5vw;left: 6vw; margin: 0; font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 12px"><i class="fa-solid fa-arrow-left me-2"></i>Back</button>
                   <div class="supplierTableDiv" style="width: 89.4vw;">
                     <div style="max-height: 28vw; overflow-y:auto">
                     <table style="font-size: xx-small;" class="table table-bordered rounded bg-light table-hover ">
@@ -1164,7 +1386,7 @@
             <div class="row">
               <div class="row mt-1 mt-lg-5 justify-content-start">
                 <div class="col-10">
-                  <button type="button" id="backToItm"  class="btn mt-3 ms-3" style="color: rgba(59,59,59,0.9) ;position: absolute;top: 5.5vw;left: 6vw; margin: 0; font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 12px"><i class="fa-solid fa-arrow-left me-2"></i>Back</button>
+                  <button type="button" id="backToItm"  class="btn mt-3 ms-3 btn-white" style="color: rgba(59,59,59,0.9) ;position: absolute;top: 5.5vw;left: 6vw; margin: 0; font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 12px"><i class="fa-solid fa-arrow-left me-2"></i>Back</button>
                   <div class="itemTableDiv" style="width: 89.4vw;">
                     <select aria-label="Default select example" class="form-select" id="itmFilter" style="width: 10vw">
                       <option value="getAll">All</option>
@@ -1411,14 +1633,14 @@
           </div>
         </div>
       </div>
-    <div id="card-container" class="container-fluid p-0" style="background-color:rgba(229,229,229,0.5); position:absolute; height: 91vh; z-index: 5;width: 95vw;left: 5vw; right:0; top: 4.4vw; bottom: 0; margin: auto">
+    <div id="card-container" class="container-fluid p-0 " style="background-color:rgba(229,229,229,0.5); position:absolute; height: 91vh; z-index: 5;width: 95vw;left: 5vw; right:0; top: 4.4vw; bottom: 0; margin: auto">
     <div style="border-radius: 10px; z-index: 15; width: 60vw;position: absolute; left: 0; right:0; top: 4.4vw; bottom: 0; margin: auto">
 
-      <div class="container" style="box-shadow: 0px 1px 10px #3aa7ee; border-radius: 10px;background-color:rgb(255,255,255);">
+      <div class="container payment-con-dark" style="box-shadow: 0px 1px 10px #3aa7ee; border-radius: 10px;background-color:rgb(255,255,255);">
 
-        <div class="row" style="">
+        <div class="row " style="">
 
-          <div class="col-7" style="padding: 0;height: 72vh; /*background-color: #f1f1f1;*/  box-shadow: 0px 1px 10px #FFA633; border: 2px solid #FFA633; text-align: center; position: relative; border-radius: 10px">
+          <div class="col-7 payment-dark" style="padding: 0;height: 72vh; /*background-color: #f1f1f1;*/  box-shadow: 0px 1px 10px #FFA633; border: 2px solid #FFA633; text-align: center; position: relative; border-radius: 10px">
               <!--<img style="position: absolute; width: 30vw; z-index: 5; top: 0; bottom: 0; left: 0; right: 0; margin: auto;" src="assets/images/banks.png">-->
               <img style="position: absolute; width: 30vw; z-index: 5; top: 0; bottom: 2vh; left: 0.4vw; right: 0; margin: auto;" src="assets/images/banks2.png">
             <div style="padding: 0;height: 72vh;">
@@ -1432,7 +1654,7 @@
           <div class="col-5">
             <div class="d-flex justify-content-center align-items-center position-relative">
               <img src="assets/images/sendoffer.gif" style="height: 6vw; position: absolute; padding-top: 0.7vw; padding-left: 1.5vw;">
-              <h1 class="mt-2" style="padding-top: 2.1vh; padding-left: 0.7vw; font-family: 'Fira Sans', sans-serif; font-weight: 700; font-size: 30px; color: #434142;text-align: center;">Card Payment</h1>
+              <h1 class="mt-2 dark-h1" style="padding-top: 2.1vh; padding-left: 0.7vw; font-family: 'Fira Sans', sans-serif; font-weight: 700; font-size: 30px; color: #434142;text-align: center;">Card Payment</h1>
             </div>
             <!--<div class="mt-2"><h1 class="mt-2" style="padding-top: 2.1vh; font-family: 'Fira Sans', sans-serif; font-weight: 700; font-size: 30px; color: #434142;text-align: center;">Card Payment</h1>-->
 
@@ -1485,11 +1707,11 @@
     </div>
     </div></div></div></div>
     <div id="confirm-container" class="container-fluid p-0" style="background-color:rgba(229,229,229,0.5); position:absolute; height: 91vh; z-index: 5;width: 95vw;left: 5vw; right:0; top: 4.4vw; bottom: 0; margin: auto">
-      <div style="background-color:white; box-shadow:  0px 1px 10px #FFA633; z-index: 15; height: 31vw; width: 27.6vw;position: absolute; left: 0; right:0; top: 0vw; bottom: 0; margin: auto">
-        <div id="confirmAdmin" style="background-color:white">
+      <div class="payment-con-dark" style="background-color:white; box-shadow:  0px 1px 10px #FFA633; z-index: 15; height: 31vw; width: 27.6vw;position: absolute; left: 0; right:0; top: 0vw; bottom: 0; margin: auto">
+        <div class="payment-con-dark" id="confirmAdmin" style="background-color:white">
 
-          <button type="button" id="backToPayment" class="btn mt-3 ms-3" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 10px"><i class="fa-solid fa-arrow-left me-2"></i>Back</button>
-          <h1 class="mt-4 ms-5" style="font-family: 'Fira Sans', sans-serif; font-weight: 900; font-size: 2.95vw">Confirm Admin</h1>
+          <button type="button" id="backToPayment" class="btn mt-3 ms-3 btn-white" style="font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 10px"><i class="fa-solid fa-arrow-left me-2"></i>Back</button>
+          <h1 class="mt-4 ms-5 dark-h1" style="font-family: 'Fira Sans', sans-serif; font-weight: 900; font-size: 2.95vw">Confirm Admin</h1>
           <h1 class="ms-5" style="color: #FFA633 ;font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 10px">Confirm to Access the Portal</h1>
 
           <h1 class="visually-hidden" style="color: #FFA633 ;font-family: 'Fira Sans', sans-serif; font-weight: 500; font-size: 15px">aaaa</h1>
@@ -1678,12 +1900,12 @@
     <div class="container-fluid p-0" style="height: 90.5vh; z-index: 5;" >
       <div class="row h-100 m-0 w-100">
         <div class="container m-0" style="padding: 1.9vw 1.9vw 1.5vw 7vw;">
-          <div class="row h-100 m-0" style="box-shadow: 0px 1px 10px #909090; border-radius: 10px;">
+          <div class="row h-100 m-0 sign-up-dark" style="box-shadow: 0px 1px 10px #909090; border-radius: 10px;">
 
             <div class="container" style="position: relative">
 
               <img src="assets/images/sport-shoe.png" style="width: 45%; position: absolute; top: 12vh; left: 45vw">
-              <h1 style="position: absolute; top: 20vh; left: 5vw; font-family: 'Fira Sans', sans-serif; font-weight: 700; font-size: 60px">Step Up</h1>
+              <h1 class="dark-h1" style="position: absolute; top: 20vh; left: 5vw; font-family: 'Fira Sans', sans-serif; font-weight: 700; font-size: 60px">Step Up</h1>
               <h1 style="position: absolute; top: 27vh; left: 5vw; font-family: 'Fira Sans', sans-serif; font-weight: 900; font-size: 80px; color: #FFA633">Feel Sculpted</h1>
               <h7 style="width: 30vw; position: absolute; top: 41vh; left: 5.3vw; font-family: 'Fira Sans', sans-serif; font-weight: bold; font-size: 20px; color: #9FA0A0">Exclusive access, fresh fits, medium, high support for every move and every body.</h7>
 
@@ -1699,30 +1921,30 @@
     <div class="container-fluid p-0" style="height: 90.5vh; z-index: 5;" >
       <div class="row h-100 m-0 w-100">
         <div class="container m-0" style="padding: 1.9vw 1.9vw 1.5vw 7vw;">
-          <div class="row h-100 m-0" style="box-shadow: 0px 1px 10px #909090; border-radius: 10px; background-color: #F4F5F7">
+          <div class="row h-100 m-0 admin-dash-dark" style="box-shadow: 0px 1px 10px #909090; border-radius: 10px; background-color: #F4F5F7">
 
             <div class="container" style="height: 37.5vw;">
               <div class="row">
                 <div class="col-md-4 position-relative" style="height: 37.5vw;">
-                  <h4 class=""style="color:#4D5F71;margin: 0;text-align: center;position:absolute;right:0;left:0; top: 0.9vw" id="">Most Sale Item</h4>
+                  <h4 class=" panel-label"style="color:#4D5F71;margin: 0;text-align: center;position:absolute;right:0;left:0; top: 0.9vw" id="">Most Sale Item</h4>
                   <div class="row m-3 position-relative" style="border-radius: 1vw; height: 16vw; top: 1.5vw;">
                     <img src="assets/images/sport-shoe.png" id="panelImg" class="web" style="display:block;width: 36vh; display: block;left: 0;right: 0;bottom: 1vw;top: 0;margin: auto;">
                   </div>
                   <div class="row p-3 d-flex justify-content-center" style="height: 19vw;" >
-                    <div class="row d-flex align-items-center" style="width: 26vw; height: 3.2vw; border-radius: 10px;box-shadow: 0px 1px 10px #909090; background-color: rgba(255,255,255,0.5);">
-                      <div class="d-flex justify-content-lg-evenly"><h5 class="m-0 p-0" style="color:#4D5F71; text-align: center;width: calc(100% / 2);" >Item Code</h5><h5 id="dashItmCode" class="m-0 p-0 text-no-wrap "style="text-align: center;width: calc(100% / 2);"></h5></div>
+                    <div class="row d-flex align-items-center panel-itm-dark" style="width: 26vw; height: 3.2vw; border-radius: 10px;box-shadow: 0px 1px 10px #909090; background-color: rgba(255,255,255,0.5);">
+                      <div class="d-flex justify-content-lg-evenly"><h5 class="m-0 p-0 panel-itm-label" style="color:#4D5F71; text-align: center;width: calc(100% / 2);" >Item Code</h5><h5 id="dashItmCode" class="m-0 p-0 text-no-wrap itm-value"style="text-align: center;width: calc(100% / 2);"></h5></div>
                     </div>
 
-                    <div class="row d-flex align-items-center" style="width: 26vw; height: 3.2vw;border-radius: 10px;box-shadow: 0px 1px 10px #909090; background-color: rgba(255,255,255,0.5);">
-                      <div class="d-flex justify-content-lg-evenly"><h5 class="m-0 p-0" style="color:#4D5F71;text-align: center;width: calc(100% / 2);">Description</h5><h5 id="dashItmDesc" class="m-0 p-0 text-no-wrap "style="text-align: center;width: calc(100% / 2);"></h5></div>
+                    <div class="row d-flex align-items-center panel-itm-dark" style="width: 26vw; height: 3.2vw;border-radius: 10px;box-shadow: 0px 1px 10px #909090; background-color: rgba(255,255,255,0.5);">
+                      <div class="d-flex justify-content-lg-evenly"><h5 class="m-0 p-0 panel-itm-label" style="color:#4D5F71;text-align: center;width: calc(100% / 2);">Description</h5><h5 id="dashItmDesc" class="m-0 p-0 text-no-wrap itm-value"style="text-align: center;width: calc(100% / 2);"></h5></div>
                     </div>
 
-                    <div class="row d-flex align-items-center" style="width: 26vw; height: 3.2vw;border-radius: 10px; box-shadow: 0px 1px 10px #909090; background-color: rgba(255,255,255,0.5);">
-                      <div class="d-flex justify-content-lg-evenly"><h5 class="m-0 p-0" style="color:#4D5F71; text-align: center;width: calc(100% / 2);">Sale Price</h5><h5 id="dashItmSale" class="m-0 p-0 text-no-wrap "style="text-align: center;width: calc(100% / 2);"></h5></div>
+                    <div class="row d-flex align-items-center panel-itm-dark" style="width: 26vw; height: 3.2vw;border-radius: 10px; box-shadow: 0px 1px 10px #909090; background-color: rgba(255,255,255,0.5);">
+                      <div class="d-flex justify-content-lg-evenly"><h5 class="m-0 p-0 panel-itm-label" style="color:#4D5F71; text-align: center;width: calc(100% / 2);">Sale Price</h5><h5 id="dashItmSale" class="m-0 p-0 text-no-wrap itm-value"style="text-align: center;width: calc(100% / 2);"></h5></div>
                     </div>
 
-                    <div class="row d-flex align-items-center" style="width: 26vw; height: 3.2vw;border-radius: 10px; box-shadow: 0px 1px 10px #909090; background-color: rgba(255,255,255,0.5);">
-                      <div class="d-flex justify-content-lg-evenly"><h5 class="m-0 p-0" style="color:#4D5F71; text-align: center;width: calc(100% / 2);">Sale Qty</h5><h5  id="dashItmQTY" class="m-0 p-0 text-no-wrap "style="text-align: center;width: calc(100% / 2);"></h5></div>
+                    <div class="row d-flex align-items-center panel-itm-dark" style="width: 26vw; height: 3.2vw;border-radius: 10px; box-shadow: 0px 1px 10px #909090; background-color: rgba(255,255,255,0.5);">
+                      <div class="d-flex justify-content-lg-evenly"><h5 class="m-0 p-0 panel-itm-label" style="color:#4D5F71; text-align: center;width: calc(100% / 2);">Sale Qty</h5><h5  id="dashItmQTY" class="m-0 p-0 text-no-wrap itm-value"style="text-align: center;width: calc(100% / 2);"></h5></div>
                     </div>
 
                   </div>
@@ -1732,7 +1954,7 @@
                  <div class="row d-flex align-items-center position-relative" style="padding: 1.5vw; right: 2.8vw;width: 63vw; height: 38%">
                    <div class="col-md-12 d-flex justify-content-between">
 
-                     <div class="col-md-4 d-flex align-items-center"style="box-shadow: 0px 1px 10px #909090; background-color: #c5ecf875;height: 80%;width: 18vw">
+                     <div class="col-md-4 d-flex align-items-center panel-dark"style="box-shadow: 0px 1px 10px #909090; background-color: #c5ecf875;height: 80%;width: 18vw">
                        <div class="card-body d-flex align-items-center justify-content-center"style="height: 10vw; flex-direction: column">
                          <div class="row">
                            <div class="col mt-0">
@@ -1740,7 +1962,7 @@
                            </div>
 
                          </div>
-                         <h1 class="mt-1 mb-3"style="color:#4D5F71;" id="totalSale">$0.00</h1>
+                         <h1 class="mt-1 mb-3 panel-label"style="color:#4D5F71;" id="totalSale">$0.00</h1>
                          <div class="mb-0">
                            <!--<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 6.65% </span>-->
                            <span class="text-muted">Since last week</span>
@@ -1751,7 +1973,7 @@
                        </div>
                      </div>
 
-                     <div class="col-md-4 d-flex align-items-center"style="box-shadow: 0px 1px 10px #909090; background-color: #c5ecf875;height: 80%;width: 18vw">
+                     <div class="col-md-4 d-flex align-items-center panel-dark"style="box-shadow: 0px 1px 10px #909090; background-color: #c5ecf875;height: 80%;width: 18vw">
                        <div class="card-body d-flex align-items-center justify-content-center"style="height: 10vw; flex-direction: column">
                          <div class="row">
                            <div class="col mt-0">
@@ -1759,7 +1981,7 @@
                            </div>
 
                          </div>
-                         <h1 class="mt-1 mb-3"style="color:#4D5F71;"id="totalProfit">$0.00</h1>
+                         <h1 class="mt-1 mb-3 panel-label"style="color:#4D5F71;"id="totalProfit">$0.00</h1>
                          <div class="mb-0">
                           <!-- <span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 6.65% </span>-->
                            <span class="text-muted">Since last week</span>
@@ -1770,7 +1992,7 @@
                        </div>
                      </div>
 
-                     <div class="col-md-4 d-flex align-items-center"style="box-shadow: 0px 1px 10px #909090; background-color: #c5ecf875; height: 80%;width: 18vw">
+                     <div class="col-md-4 d-flex align-items-center panel-dark"style="box-shadow: 0px 1px 10px #909090; background-color: #c5ecf875; height: 80%;width: 18vw">
                        <div class="card-body d-flex align-items-center justify-content-center"style="height: 10vw; flex-direction: column">
                          <div class="row">
                            <div class="col mt-0">
@@ -1778,7 +2000,7 @@
                            </div>
 
                          </div>
-                         <h1 class="mt-1 mb-3" style="color:#4D5F71;" id="totalOrders">0</h1>
+                         <h1 class="mt-1 mb-3 panel-label" style="color:#4D5F71;" id="totalOrders">0</h1>
                          <div class="mb-0">
                            <!--<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 6.65% </span>-->
                            <span class="text-muted">Since last week</span>
@@ -1798,7 +2020,7 @@
                      </div>
 
                      <div class="row h-50" style="width: 29vw;padding-left: 1vw; padding-top: 0.5vw">
-                       <div class="card-body d-flex align-items-center justify-content-center mt-3"style="height: 9.4vw;box-shadow: 0px 1px 10px #909090;background-color: #c5ecf875;">
+                       <div class="card-body d-flex align-items-center justify-content-center mt-3 panel-dark"style="height: 9.4vw;box-shadow: 0px 1px 10px #909090;background-color: #c5ecf875;">
                          <div class="col-md-5 d-flex justify-content-center align-items-center">
                            <img src="assets/images/shoe2.gif" style="width: 7vw;">
                          </div>
@@ -1810,7 +2032,7 @@
                              </div>
 
                            </div>
-                           <h1 class="mt-1 mb-3"style="color:#4D5F71;" id="totalItems">0</h1>
+                           <h1 class="mt-1 mb-3 panel-label"style="color:#4D5F71;" id="totalItems">0</h1>
                            <div class="mb-0">
                            </div>
                          </div>
@@ -1820,7 +2042,7 @@
                    </div>
                    <div class="col-md-6">
                      <div class="row h-50" style="width: 27.5vw;padding-left: 1vw;">
-                       <div class="card-body d-flex align-items-center justify-content-center"style="height: 9.4vw;box-shadow: 0px 1px 10px #909090;background-color: #c5ecf875;">
+                       <div class="card-body d-flex align-items-center justify-content-center panel-dark"style="height: 9.4vw;box-shadow: 0px 1px 10px #909090;background-color: #c5ecf875;">
 
                          <div class="col-md-8 d-flex justify-content-center align-items-center" style="height: 9.4vw; flex-direction: column">
                            <div class="row">
@@ -1829,7 +2051,7 @@
                              </div>
 
                            </div>
-                           <h1 class="mt-1 mb-3"style="color:#4D5F71;" id="totalCustomers">0</h1>
+                           <h1 class="mt-1 mb-3 panel-label"style="color:#4D5F71;" id="totalCustomers">0</h1>
                            <div class="mb-0">
                            </div>
                          </div>
@@ -1867,14 +2089,14 @@
     <div id="offer-container" class="container-fluid p-0" style="background-color:rgba(229,229,229,0.5); position:absolute; top: 0 !important; height: 91vh; z-index: 5;width: 95vw;left: 5vw; right:0; top: 4.4vw; bottom: 0; margin: auto">
       <div style="border-radius: 10px; z-index: 15; width: 60vw;position: absolute; left: 0; right:0; top: 4.4vw; bottom: 0; margin: auto">
 
-        <div class="container" style="box-shadow: 0px 1px 10px #3aa7ee; border-radius: 10px;background-color:rgb(255,255,255); height: 30vw; width: 50vw;position: relative;top: 1vw;right: 0.5vw;">
+        <div class="container offer-dark" style="box-shadow: 0px 1px 10px #3aa7ee; border-radius: 10px;background-color:rgb(255,255,255); height: 30vw; width: 50vw;position: relative;top: 1vw;right: 0.5vw;">
           <div class="col-12 d-flex" style="height: 29.5vw;">
 
             <div>
               <!--<h1 class="mt-2" style="padding-top: 0.8vw; font-family: 'Fira Sans', sans-serif; font-weight: 700; font-size: 30px; color: #434142;text-align: center;">Send Offers</h1>-->
               <div class="d-flex justify-content-center align-items-center position-relative">
               <img src="assets/images/sendoffer.gif" style="height: 5.7vw; position: absolute; padding-top: 0.7vw;">
-                <h1 class="mt-2" style="padding-top: 0.8vw; font-family: 'Fira Sans', sans-serif; font-weight: 700; font-size: 30px; color: #434142;text-align: center;">Send Offers</h1>
+                <h1 class="mt-2 dark-h1" style="padding-top: 0.8vw; font-family: 'Fira Sans', sans-serif; font-weight: 700; font-size: 30px; color: #434142;text-align: center;">Send Offers</h1>
                 </div>
               <div class="mt-2" style="width: 100%; height: 85%">
                 <div class="col-sm d-flex flex-column align-items-center">
@@ -1925,6 +2147,8 @@
 <footer id="footer">
 </footer>
 <script src="assets/jquery/code.jquery.com_jquery-3.7.1.min.js"></script>
+<script src="assets/sweetalerts/TweenMax.min.js"></script>
+<script src="assets/sweetalerts/TweenLite.min.js"></script>
 <script src="controller/indexController.js"></script>
 <script src="controller/signInController.js"></script>
 <script src="controller/signUpController.js"></script>
@@ -1946,6 +2170,8 @@
 <script src="assets/sweetalerts/sweetalert2@10.js"></script>
 <script src="assets/sweetalerts/sweetalert.min.js"></script>
 <script src="assets/sweetalerts/popper.min.js"></script>
+
+<script src="assets/sweetalerts/particles.min.js"></script>
 
 </body>
 </html>

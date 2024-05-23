@@ -103,21 +103,54 @@ html {
     top: 1vw;
 }
 
-/* Apply styles to the table container */
 .table-container {
-    max-height: 100px; /* Adjust the height as needed */
+    max-height: 100px;
     overflow-y: auto;
 }
 
-/* Apply styles to the thead element */
 .table-container thead {
-    background-color: #f0f0f0; /* Background color for the header */
+    background-color: #f0f0f0;
     position: sticky;
     top: 0;
-    z-index: 1; /* Ensure the header is above the table body */
+    z-index: 1;
 }
+/*dark theam*/
+/*body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+}
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -20;
+    background: linear-gradient(103deg, #1E1E20 0%, #212121 32%);
+}
+#particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: -10;
+}*/
 
-/* Apply styles to individual th elements if needed */
-.table-container th {
-    /* Add any additional styles here */
+.svg-set{
+    width:40%;
+    height:20%;
+    visibility:hidden;
+}
+.svg-set-2{
+   /* left: -5%;*/
+    position: relative;
+    width: 30%;
+    height:20%;
+    visibility:hidden;
+}
+.hit{
+    cursor:pointer;
+    -webkit-tap-highlight-color:transparent;
+    overflow: hidden;
 }

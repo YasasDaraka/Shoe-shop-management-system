@@ -28,7 +28,13 @@ $(document).ready(function () {
 $("#paymentCard").click(function () {
     purchaseBtnHide(true);
     allContainerHide();
-    adminPage.css('display','block');
+    const role = localStorage.getItem('role');
+    if (role == "USER") {
+        userPage.css('display','block');
+    }
+    if (role == "ADMIN") {
+        adminPage.css('display','block');
+    }
     paymentPage.css('display','block');
     cardPage.css('display','block');
 });
@@ -36,7 +42,13 @@ $("#paymentCard").click(function () {
 $("#cancel").click(function () {
     purchaseBtnHide(true);
     cardPage.css('display','none');
-    adminPage.css('display','block');
+    const role = localStorage.getItem('role');
+    if (role == "USER") {
+        userPage.css('display','block');
+    }
+    if (role == "ADMIN") {
+        adminPage.css('display','block');
+    }
     paymentPage.css('display','block');
 });
 
