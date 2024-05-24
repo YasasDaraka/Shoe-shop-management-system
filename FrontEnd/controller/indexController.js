@@ -459,6 +459,14 @@ function setAllDark() {
     });
 
     $('table').removeClass('bg-light').addClass('table-dark');
+    $('#itemTable > tr').each(function() {
+        let bgColor = $(this).find('th').css('background-color');
+        let hasClass = $(this).find('th').hasClass('blinking')
+        if (bgColor === "rgb(250, 235, 215)" || hasClass) {
+            $(this).find('th').css('color', '#454545');
+            $(this).find('td').css('color', '#454545');
+        }
+    });
     $("#btn-log,#signIn,#signUp,#adminLogOut,#card-payment,#userLogOut,#sendOffer,#offer-send").css({
         "padding": "0.593vw 1.112vw",
         "text-decoration": "none",
