@@ -27,6 +27,7 @@ let offer = $('#offer-container');
 let videoStream;
 let empVideoStream;
 let itmVideoStream;
+let mode = false;
 
 function allContainerHide() {
     header.css('display', 'none');
@@ -65,22 +66,10 @@ $(window).on('load', function () {
         allContainerHide();
         header.css('display', 'block');
         mainPage.css('display', 'block');
-
-        let val = false;
-        $('img').each(function() {
-            var imageUrl = $(this).attr('src');
-            if (imageUrl === 'assets/images/shoe-dark.gif') {
-                val = true;
-            }
-        });
-        if (val){
+        if (mode){
             applyDarkMode();
             setDarkEffect();
         }
-        /*if ($("body").css('background') !== ''){
-            applyDarkMode();
-            setDarkEffect();
-        }*/
     });
 
     $('#signUp').click(function () {
@@ -178,6 +167,11 @@ function showAlert(name) {
       no-repeat
     `,
         didOpen: () => {
+            if (mode){
+                $('.swal2-title').css('color', 'rgba(255,255,255,0.8)');
+            }else {
+                $('.swal2-title').css('color', '#4D5F71');
+            }
             Swal.showLoading();
             const timer = Swal.getPopup().querySelector("b");
             timerInterval = setInterval(() => {
@@ -589,13 +583,13 @@ function darkBtn() {
         if (tl.time() > 0 && tl.time() < tl.duration()) {
             tl.play();
             removeDarkMode();
+            mode = false;
         } else {
             tl.play(0);
             setAllDark();
             applyDarkMode();
             setDarkEffect();
-
-
+            mode = true;
         }
     }
 
