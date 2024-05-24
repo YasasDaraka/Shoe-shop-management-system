@@ -256,6 +256,7 @@ function removeDarkMode() {
             $(this).attr('src',"assets/images/shoe-dark.gif");
         }
     });
+    $('table').removeClass('table-dark').addClass('bg-light');
     $("#btn-log,#signIn,#signUp,#adminLogOut,#card-payment,#userLogOut,#sendOffer,#offer-send").css({
         "padding": "0.593vw 1.112vw",
         "text-decoration": "none",
@@ -456,6 +457,8 @@ function setAllDark() {
             $(this).css('background-color',"#333539");
             $(this).css('color',"#f0f0f0");
     });
+
+    $('table').removeClass('bg-light').addClass('table-dark');
     $("#btn-log,#signIn,#signUp,#adminLogOut,#card-payment,#userLogOut,#sendOffer,#offer-send").css({
         "padding": "0.593vw 1.112vw",
         "text-decoration": "none",
