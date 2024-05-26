@@ -24,7 +24,7 @@ public class SupplierServiceImpl implements SupplierService {
     IdGenerator generator;
     @Override
     public List<SupplierDTO> getAllSuppliers() {
-        return tranformer.convert(supplierRepo.findAll(), Tranformer.ClassType.SUP_DTO_LIST);
+        return tranformer.convert(supplierRepo.getAllSuppliers(), Tranformer.ClassType.SUP_DTO_LIST);
     }
 
     @Override

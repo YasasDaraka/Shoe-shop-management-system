@@ -107,7 +107,7 @@ function signIn() {
                         adminPage.css('display','block');
                         adminDashboard.css('display','block');
                         setAdminPanel();
-                        $("#formIcon").text("AdminPanel");
+                        $("#formIcon").text("Admin Panel");
                         logInPage.css('display','none');
                     } else if(res.role === "USER"){
                         userLimits();

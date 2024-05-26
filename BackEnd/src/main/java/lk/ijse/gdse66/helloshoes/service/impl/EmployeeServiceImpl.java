@@ -27,7 +27,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     Sender sender;
     @Override
     public List<EmployeeDTO> getAllEmployees() {
-        return tranformer.convert(employeeRepo.findAll(), Tranformer.ClassType.EMP_DTO_LIST);
+        return tranformer.convert(employeeRepo.getAllEmployees(), Tranformer.ClassType.EMP_DTO_LIST);
     }
 
     @Override

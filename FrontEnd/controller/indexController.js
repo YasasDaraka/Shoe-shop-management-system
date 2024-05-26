@@ -90,9 +90,6 @@ $(window).on('load', function () {
     setDate();
     setTime();
     darkBtn();
-    /*setDarkEffect();
-    applyDarkMode();
-    setAllDark();*/
 });
 
 function purchaseBtnHide(value) {
@@ -118,9 +115,6 @@ function userLimits() {
     $("#supUpdate").hide();
     $("#supDelete").hide();
 
-    /*$("#order-update").hide()
-    $("#order-delete").hide();*/
-
     $('#empCaptureButton').hide();
     $('#itmCaptureButton').hide();
 
@@ -140,8 +134,7 @@ function userlimitOff() {
     $("#supSave").show();
     $("#supUpdate").show();
     $("#supDelete").show();
-    /*$("#order-update").show();
-    $("#order-delete").show();*/
+
     $('#userSave').show();
 
     $('#empCaptureButton').show();
@@ -250,12 +243,7 @@ function removeDarkMode() {
         $(this).css('background-color',"");
         $(this).css('color',"");
     });
-    $('img').each(function() {
-        var imageUrl = $(this).attr('src');
-        if (imageUrl === 'assets/images/shoe.gif') {
-            $(this).attr('src',"assets/images/shoe-dark.gif");
-        }
-    });
+
     $('table').removeClass('table-dark').addClass('bg-light');
     $("#btn-log,#signIn,#signUp,#adminLogOut,#card-payment,#userLogOut,#sendOffer,#offer-send").css({
         "padding": "0.593vw 1.112vw",
@@ -445,13 +433,6 @@ function setAllDark() {
     $(".panel-label").css('color', '#9daebf');
     $(".panel-itm-label").css('color', '#8E9AA5');
     $(".itm-value").css('color', '#9daebf');
-
-    $('img').each(function() {
-        var imageUrl = $(this).attr('src');
-        if (imageUrl === 'assets/images/shoe.gif') {
-            $(this).attr('src',"assets/images/shoe-dark.gif");
-        }
-    });
 
     $('input,select,textarea').each(function() {
             $(this).css('background-color',"#333539");

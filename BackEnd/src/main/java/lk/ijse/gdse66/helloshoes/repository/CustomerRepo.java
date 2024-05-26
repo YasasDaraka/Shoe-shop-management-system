@@ -1,6 +1,7 @@
 package lk.ijse.gdse66.helloshoes.repository;
 
 import lk.ijse.gdse66.helloshoes.entity.Customer;
+import lk.ijse.gdse66.helloshoes.entity.Supplier;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -16,4 +17,6 @@ public interface CustomerRepo extends JpaRepository<Customer,String> {
     Integer totalCustomerCount();
     @Query("SELECT c.email FROM Customer c")
     List<String> getAllEmails();
+    @Query(value = "SELECT * FROM customer ORDER BY CAST(SUBSTRING(customer_id, 5) AS SIGNED), SUBSTRING(customer_id, 1, 4)",nativeQuery = true)
+    List<Supplier> getAllCustomers();
 }

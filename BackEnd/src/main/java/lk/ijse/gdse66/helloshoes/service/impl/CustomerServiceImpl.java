@@ -34,7 +34,7 @@ public class CustomerServiceImpl implements CustomerService {
     Sender sender;
     @Override
     public List<CustomerDTO> getAllCustomer() {
-        return tranformer.convert(customerRepo.findAll(), Tranformer.ClassType.CUS_DTO_LIST);
+        return tranformer.convert(customerRepo.getAllCustomers(), Tranformer.ClassType.CUS_DTO_LIST);
     }
 
     @Override
