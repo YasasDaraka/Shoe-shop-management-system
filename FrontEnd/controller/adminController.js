@@ -41,6 +41,10 @@ function hideAdminPages(){
     $("#inventoryListLabelSp").text("");
     $("#supListLabel").text("")
     $("#supListLabelSp").text("");
+    $("#cusListLabel").text("")
+    $("#cusListLabelSp").text("");
+    $("#empListLabel").text("")
+    $("#empListLabelSp").text("");
 }
 function hideMainPages(){
     empMain.css('display','none');
@@ -51,6 +55,10 @@ function hideMainPages(){
     $("#inventoryListLabelSp").text("");
     $("#supListLabel").text("")
     $("#supListLabelSp").text("");
+    $("#cusListLabel").text("")
+    $("#cusListLabelSp").text("");
+    $("#empListLabel").text("")
+    $("#empListLabelSp").text("");
 }
 function hideAllLoadPages(){
     empList.css('display','none');
