@@ -9,8 +9,7 @@ function setAndTriggerValue($element, value) {
 
 
 function setAddItemBtn() {
-    /*let nm =  Item_NAME_REGEX.test($("#itemName").val());
-    let pr =  UNIT_PRICE_REGEX.test($("#price").val());*/
+
     let qh =  itm_QTY_REGEX.test($("#qtyOnHand").val());
     let oq =  QTY_REGEX.test($("#ordItmQty").val());
 
@@ -20,9 +19,6 @@ function setAddItemBtn() {
         }else {
             $("#order-add-item").prop("disabled", true);
         }
-            //$("#order-add-item").prop("disabled", false);
-
-            //$("#order-add-item").prop("disabled", true);          use id search
 
     }else {
         $("#order-add-item").prop("disabled", true);
@@ -165,6 +161,5 @@ $("#ordItmQty").on("keydown keyup input", function (e){
         $("#ordItmQtyError").text(`Please Enter Amount lower than: ${qty}`);
         $("#order-add-item").prop("disabled", true);
     }
-    //setAddItemBtn();
-    //setOrderBtn();
+
 });

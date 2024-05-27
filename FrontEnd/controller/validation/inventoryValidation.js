@@ -1,7 +1,7 @@
 const itm_ID_REGEX = /^[A-Za-z0-9 ]{3,}$/;
 const itm_DESC_REGEX = /^[A-Za-z0-9 ]{3,}$/;
 const itm_CAT_REGEX = /^[A-Za-z ]{3,}$/;
-const itm_SIZE_REGEX = /^[1-9]+$/;
+const itm_SIZE_REGEX = /^[1-9][0-9]*$/
 const itm_SUP_ID_REGEX = /^S00-(0*[1-9]\d{0,2})$/;
 const itm_SALE_PRICE_REGEX = /^[1-9]\d*(\.\d+)?$/;
 const itm_BUY_PRICE_REGEX = /^[1-9]\d*(\.\d+)?$/;

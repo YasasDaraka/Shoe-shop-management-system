@@ -27,7 +27,7 @@ public class InventoryDTO {
     @Pattern(regexp = "^[1-9]+$", message = "Size is not valid")
     private Integer size;
     @Min(value = 1,message = "Qty must be at least 1")
-    @Pattern(regexp = "^[1-9]\\d*$", message = "Qty is not valid")
+    @Pattern(regexp = "^[1-9][0-9]*$", message = "Qty is not valid")
     private Integer qty;
     private Integer originalQty;
     private SupplierDTO supplier;

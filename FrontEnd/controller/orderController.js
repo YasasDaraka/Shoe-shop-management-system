@@ -373,15 +373,22 @@ function updateOrder(payment) {
                 if (value === "confirm") {
 
                     if (itemValidate()) {
-
-                        if (cashValidate()) {
+                        if(payment == "Card"){
                             placeOrder(payment,"PUT");
                             clearAll();
                             purchaseBtnHide(true);
                             generateOrderId();
-                        } else {
-                            swal("Error", "Insufficient Credit : Check Cash!", "error");
+                        }else if (payment == "Cash"){
+                            if (cashValidate()) {
+                                placeOrder(payment,"PUT");
+                                clearAll();
+                                purchaseBtnHide(true);
+                                generateOrderId();
+                            } else {
+                                swal("Error", "Insufficient Credit : Check Cash!", "error");
+                            }
                         }
+
                     } else {
                         swal("Error", "Please Add Items to Place Order", "error");
                     }
@@ -471,7 +478,7 @@ $("#order-add-item").click(function () {
 
     if (!itemExists) {
         let row = `<tr>
-                     <td><img class="rounded mx-auto d-block" src="assets/images/delete.gif" alt="Card" style="width: 36px; z-index: 5;" /></td>
+                     <td><img class="rounded mx-auto d-block" src="assets/images/delete3.gif" alt="Card" style="width: 1.5vw; z-index: 5;" /></td>
                      <td>${id}</td>
                      <td>${name}</td>
                      <td>${size}</td>
@@ -688,7 +695,7 @@ $("#orderId").on("keyup input change", async function (e) {
 
                             let total = parseFloat(unitPrice) * parseFloat(qty);
                             let row = `<tr>
-                     <td><img class="rounded mx-auto d-block" src="assets/images/delete.gif" alt="Card" style="width: 36px; z-index: 5;" /></td>
+                     <td><img class="rounded mx-auto d-block" src="assets/images/delete3.gif" alt="Card" style="width: 1.5vw; z-index: 5;" /></td>
                      <td>${code}</td>
                      <td>${itemName}</td>
                      <td>${size}</td>
@@ -760,7 +767,7 @@ function tableChange(details) {
                         for (var info of details) {
                             $('#order-table>tr').each(function (e) {
                                 code = info.orderDetailPK.itemCode;
-                                tableItm = $(this).children().eq(0).text();
+                                tableItm = $(this).children().eq(1).text();
                                 if (code !== tableItm) {
                                     $("#btnSubmitOrder").prop("disabled", true);
                                     $("#order-update").prop("disabled", false);
@@ -783,7 +790,7 @@ function tableChange(details) {
 }
 
 function bindRemove(details) {
-    $('#order-table>tr>td').click(function () {
+    $('#order-table>tr>td:nth-child(1)').click(function () {
         let row = $(this).closest('tr');
         row.remove();
 
@@ -817,7 +824,7 @@ function bindRemove(details) {
                     for (var info of details) {
                         $('#order-table>tr').each(function (e) {
                             code = info.orderDetailPK.itemCode;
-                            tableItm = $(this).children().eq(0).text();
+                            tableItm = $(this).children().eq(1).text();
                             if (code == tableItm) {
                                 $("#btnSubmitOrder").prop("disabled", true);
                                 $("#order-update").prop("disabled", true);
