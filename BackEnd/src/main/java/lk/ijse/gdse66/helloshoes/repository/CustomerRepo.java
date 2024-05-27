@@ -18,5 +18,5 @@ public interface CustomerRepo extends JpaRepository<Customer,String> {
     @Query("SELECT c.email FROM Customer c")
     List<String> getAllEmails();
     @Query(value = "SELECT * FROM customer ORDER BY CAST(SUBSTRING(customer_id, 5) AS SIGNED), SUBSTRING(customer_id, 1, 4)",nativeQuery = true)
-    List<Supplier> getAllCustomers();
+    List<Customer> getAllCustomers();
 }

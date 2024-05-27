@@ -80,8 +80,11 @@ function cusFieldSet(state) {
 
 function returnAllCusVal() {
 
-    var rating = $("input[name='rating']:checked").val();
     var image = $("#cusCapturedImage");
+    let purchase = $("#lastPurchaseDate").val();
+    if ( purchase == "No orders"){
+        purchase = null;
+    }
     var imageUrl = image.attr('src');
     var formData = {
         customerId: $("#cusId").val(),
@@ -100,30 +103,46 @@ function returnAllCusVal() {
         },
         contactNo: $("#cusContactNo").val(),
         email: $("#cusEmail").val(),
-        recentPurchase: $("#lastPurchaseDate").val(),
+        recentPurchase: purchase,
         proPic: imageUrl
     };
     return formData;
 }
 function setLevel(value) {
     console.log(value)
+    $('#level-label').text('');
     switch (value) {
         case 'GOLD':
             $('#star4').prop('checked', true);
+            $('#level-label').text('GOLD');
             break;
         case 'SILVER':
             $('#star3').prop('checked', true);
+            $('#level-label').text('SILVER');
             break;
         case 'BRONZE':
             $('#star2').prop('checked', true);
+            $('#level-label').text('BRONZE');
             break;
         case 'NEW':
             $('#star1').prop('checked', true);
+            $('#level-label').text('NEW');
             break;
     }
 }
+$("input[name='rating']").change(function () {
+    $("#level-label").css('left', '46%');
+    var value = $("input[name='rating']:checked").val();
+    if (value === "SILVER" || value === "BRONZE"){
+        $("#level-label").css('left', '41%');
+    }
+    if (value === "GOLD"){
+        $("#level-label").css('left', '45%');
+    }
+    $("#level-label").text(value);
+})
 function setAllCusVal(ar) {
-    /*var rating = $("input[name='rating']:checked").val();*/
+
     setLevel(ar.level);
     $("#cusName").val(ar.customerName);
     $("#cusGender").val(ar.gender);
@@ -137,12 +156,16 @@ function setAllCusVal(ar) {
     $("#cusPostalCode").val(ar.address.postalCode);
     $("#cusContactNo").val(ar.contactNo);
     $("#cusEmail").val(ar.email);
+    if (ar.recentPurchase == null){
+        ar.recentPurchase = "No orders";
+    }
     $("#lastPurchaseDate").val(ar.recentPurchase);
     $("#cusCapturedImage").attr('src', ar.proPic);
 
 }
 
 getAllCustomers();
+
 $("#cusSave").click(function () {
 
     if (checkAll()) {
@@ -400,6 +423,9 @@ function getAllCustomers() {
         success: function (res) {
             console.log(res);
             for (var r of res) {
+                if (r.recentPurchase == null){
+                    r.recentPurchase = "No orders";
+                }
                 let row = `<tr>
                     <th scope="row">${r.customerId}</th>
                     <td>${r.customerName}</td>

@@ -14,5 +14,5 @@ public interface EmployeeRepo extends JpaRepository<Employee,String> {
     String getEmployeeIds();
     List<Employee> findByEmployeeDob(Date date);
     @Query(value = "SELECT * FROM employee ORDER BY CAST(SUBSTRING(employee_id, 5) AS SIGNED), SUBSTRING(employee_id, 1, 4)",nativeQuery = true)
-    List<Supplier> getAllEmployees();
+    List<Employee> getAllEmployees();
 }

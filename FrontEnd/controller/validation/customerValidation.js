@@ -214,4 +214,5 @@ function captureClear() {
     $('#cusCaptureButton').text("Capture");
     $("#cusCapturedImage").attr('src', "assets/images/walk.gif");
     $('input[name="rating"]:checked').prop('checked', false);
+    $("#level-label").text('');
 }

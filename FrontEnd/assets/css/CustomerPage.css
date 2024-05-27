@@ -25,7 +25,7 @@ body {
 .star-label span {
     font-size: 3vw;
     color: #ccc;
-    margin-right: 5px; /* Add spacing between stars */
+    margin-right: 5px;
 }
 
 .rating input[type="radio"] {
@@ -33,9 +33,9 @@ body {
 }
 
 .rating input[type="radio"]:checked ~ .star-label img {
-    display: block; /* Show the image when radio button is checked */
+    display: block;
 }
 
 .rating input[type="radio"]:checked ~ .star-label span {
-    color: #fdd835; /* Change star color to gold for checked radio buttons */
+    color: #fdd835;
 }

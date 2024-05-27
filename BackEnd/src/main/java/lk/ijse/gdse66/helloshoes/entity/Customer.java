@@ -43,6 +43,7 @@ public class Customer {
 
     @Embedded
     private Address address;
+
     @Column(unique = true)
     private String contactNo;
 

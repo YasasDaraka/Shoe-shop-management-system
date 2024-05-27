@@ -1,5 +1,6 @@
 package lk.ijse.gdse66.helloshoes.api;
 
+import jakarta.validation.Valid;
 import lk.ijse.gdse66.helloshoes.dto.CustomerDTO;
 import lk.ijse.gdse66.helloshoes.dto.MessageDTO;
 import lk.ijse.gdse66.helloshoes.service.CustomerService;
@@ -47,14 +48,14 @@ public class CustomerController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Void> saveCustomer(@RequestBody CustomerDTO dto) {
+    public ResponseEntity<Void> saveCustomer(@Valid @RequestBody CustomerDTO dto) {
         System.out.println("Received customer data: " + dto.toString());
         cusService.saveCustomer(dto);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping
-    public ResponseEntity<Void> updateCustomer(@RequestBody CustomerDTO dto) {
+    public ResponseEntity<Void> updateCustomer(@Valid @RequestBody CustomerDTO dto) {
         System.out.println("Received customer data: " + dto.toString());
         cusService.updateCustomer(dto);
         return ResponseEntity.noContent().build();
