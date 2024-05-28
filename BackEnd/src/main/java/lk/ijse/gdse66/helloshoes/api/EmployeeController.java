@@ -1,5 +1,6 @@
 package lk.ijse.gdse66.helloshoes.api;
 
+import jakarta.validation.Valid;
 import lk.ijse.gdse66.helloshoes.dto.EmployeeDTO;
 import lk.ijse.gdse66.helloshoes.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,14 +40,14 @@ public class EmployeeController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Void> saveEmployee(@RequestBody EmployeeDTO dto) {
+    public ResponseEntity<Void> saveEmployee(@Valid @RequestBody EmployeeDTO dto) {
         System.out.println("Received employee data: " + dto.toString());
         empService.saveEmployee(dto);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping
-    public ResponseEntity<Void> updateEmployee(@RequestBody EmployeeDTO dto) {
+    public ResponseEntity<Void> updateEmployee(@Valid @RequestBody EmployeeDTO dto) {
         System.out.println("Received employee data: " + dto.toString());
         empService.updateEmployee(dto);
         return ResponseEntity.noContent().build();

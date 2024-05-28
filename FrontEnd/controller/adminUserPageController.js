@@ -269,9 +269,16 @@ $("#userUpdate").click(function () {
                 },
             }).then((con) => {
                 if (con === "confirm") {
+                    const role = localStorage.getItem('role');
+                    let password ;
+                    if (role == "ADMIN"){
+                        password = $("#userOldPassword").val();
+                    }else if (role == "USER"){
+                        password = $("#userNewPass").val();
+                    }
                     let value = {
                         email: $("#userName").val(),
-                        password: $("#userOldPassword").val(),
+                        password: password,
                         role: $('#userRole').val()
                     }
                     console.log(value);
@@ -282,7 +289,12 @@ $("#userUpdate").click(function () {
                         contentType: "application/json",
                         success: function (res, textStatus, jsXH) {
                             swal("Updated", "User Update Successfully", "success");
+                            const email = localStorage.getItem('email');
+                            if ($("#userName").val() == email){
+                                localStorage.setItem('password', password);
+                            }
                             getAllUsers();
+                            userClear();
                         },
                         error: function (ob, textStatus, error) {
                             swal("Error", textStatus + " : Error User Not Update", "error");
@@ -335,7 +347,11 @@ function bindUserTrrEvents() {
         $("#userName").val(name);
         $("#userRole").val(role);
 
-        $("#userDelete").prop('disabled', false);
+        const storedRole = localStorage.getItem('role');
+        if (storedRole == "ADMIN"){
+            $("#userDelete").prop('disabled', false);
+        }
+        //$("#userDelete").prop('disabled', false);
     });
 }
 
@@ -434,7 +450,7 @@ $("#userDelete").click(function () {
                     let value = {
                         email: $("#userName").val(),
                         password: $("#userOldPassword").val(),
-                        role: "ADMIN"
+                        role: "USER"
                     }
                     $.ajax({
                         url: "http://localhost:8080/helloshoes/api/v1/auth/user",

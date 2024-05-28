@@ -245,6 +245,11 @@ $("#adminUpdate").click(function () {
                         contentType: "application/json",
                         success: function (res, textStatus, jsXH) {
                             swal("Updated", "Admin Update Successfully", "success");
+                            const email = localStorage.getItem('email');
+                            if ($("#adminName").val() == email){
+                                localStorage.setItem('password', $("#adminNewPass").val());
+                                localStorage.setItem('role', $('#adminRole').val());
+                            }
                             adminClear();
                             getAllAdmins();
                         },

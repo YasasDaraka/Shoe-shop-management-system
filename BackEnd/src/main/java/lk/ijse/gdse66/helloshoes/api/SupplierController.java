@@ -1,5 +1,6 @@
 package lk.ijse.gdse66.helloshoes.api;
 
+import jakarta.validation.Valid;
 import lk.ijse.gdse66.helloshoes.dto.SupplierDTO;
 import lk.ijse.gdse66.helloshoes.service.SupplierService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,14 +41,14 @@ public class SupplierController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Void> saveSupplier(@RequestBody SupplierDTO dto) {
+    public ResponseEntity<Void> saveSupplier(@Valid @RequestBody SupplierDTO dto) {
         System.out.println("Received supplier data: " + dto.toString());
         supService.saveSupplier(dto);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping
-    public ResponseEntity<Void> updateSupplier(@RequestBody SupplierDTO dto) {
+    public ResponseEntity<Void> updateSupplier(@Valid @RequestBody SupplierDTO dto) {
         System.out.println("Received supplier data: " + dto.toString());
         supService.updateSupplier(dto);
         return ResponseEntity.noContent().build();

@@ -1,5 +1,6 @@
 package lk.ijse.gdse66.helloshoes.api;
 
+import jakarta.validation.Valid;
 import lk.ijse.gdse66.helloshoes.auth.request.SignInRequest;
 import lk.ijse.gdse66.helloshoes.auth.request.SignUpRequest;
 import lk.ijse.gdse66.helloshoes.auth.response.JwtAuthResponse;
@@ -65,24 +66,24 @@ public class UserController {
     }
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping(path = "/admin")
-    public ResponseEntity<Void> deleteAdmin(@RequestBody UserDTO dto) {
+    public ResponseEntity<Void> deleteAdmin(@Valid @RequestBody UserDTO dto) {
             userService.deleteUser(dto, Role.ADMIN);
         return ResponseEntity.noContent().build();
     }
     @ResponseStatus(HttpStatus.OK)
     @DeleteMapping(path = "/user")
-    public ResponseEntity<Void> deleteUser(@RequestBody UserDTO dto) {
+    public ResponseEntity<Void> deleteUser(@Valid @RequestBody UserDTO dto) {
         userService.deleteUser(dto,Role.USER);
         return ResponseEntity.noContent().build();
     }
     @PutMapping(path = "/admin")
-    public ResponseEntity<Void> updateAdmin(@RequestBody UserDTO dto) {
+    public ResponseEntity<Void> updateAdmin(@Valid @RequestBody UserDTO dto) {
         System.out.println("Received user data: " + dto.toString());
         userService.updateUser(dto,"ADMIN");
         return ResponseEntity.noContent().build();
     }
     @PutMapping(path = "/user")
-    public ResponseEntity<Void> updateUser(@RequestBody UserDTO dto) {
+    public ResponseEntity<Void> updateUser(@Valid @RequestBody UserDTO dto) {
         System.out.println("Received user data: " + dto.toString());
         userService.updateUser(dto,"USER");
         return ResponseEntity.noContent().build();

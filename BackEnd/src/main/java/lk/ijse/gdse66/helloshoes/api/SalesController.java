@@ -1,5 +1,6 @@
 package lk.ijse.gdse66.helloshoes.api;
 
+import jakarta.validation.Valid;
 import lk.ijse.gdse66.helloshoes.dto.SalesDTO;
 import lk.ijse.gdse66.helloshoes.service.SaleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,14 +40,14 @@ public class SalesController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Void> saveSales(@RequestBody SalesDTO dto) {
+    public ResponseEntity<Void> saveSales(@Valid @RequestBody SalesDTO dto) {
         System.out.println("Received Sales data: " + dto.toString());
         saleService.saveSales(dto);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping
-    public ResponseEntity<Void> updateSales(@RequestBody SalesDTO dto) {
+    public ResponseEntity<Void> updateSales(@Valid @RequestBody SalesDTO dto) {
         System.out.println("Received Sales data: " + dto.toString());
         saleService.updateSales(dto);
         return ResponseEntity.noContent().build();
