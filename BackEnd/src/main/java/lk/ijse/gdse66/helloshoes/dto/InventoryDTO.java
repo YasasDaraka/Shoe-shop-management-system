@@ -13,7 +13,7 @@ import lombok.*;
 @Builder
 public class InventoryDTO {
     @NotNull(message = "Item code is required")
-    @Pattern(regexp = "I00-0*[1-9]\\d{0,2}", message = "Item code is not valid")
+    @Pattern(regexp = "[A-Za-z0-9 ]{3,}$", message = "Item code is not valid")
     private String itemCode;
     @NotNull(message = "Item name is required")
     @Pattern(regexp = "^[A-Za-z0-9 ]{3,}$", message = "Item name is not valid")
@@ -24,10 +24,8 @@ public class InventoryDTO {
     private String category;
     @NotNull(message = "Size is required")
     @Min(value = 1,message = "Size must be at least 1")
-    @Pattern(regexp = "^[1-9]+$", message = "Size is not valid")
     private Integer size;
     @Min(value = 1,message = "Qty must be at least 1")
-    @Pattern(regexp = "^[1-9][0-9]*$", message = "Qty is not valid")
     private Integer qty;
     private Integer originalQty;
     private SupplierDTO supplier;

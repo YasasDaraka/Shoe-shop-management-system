@@ -41,14 +41,14 @@ public class InventoryController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Void> saveInventory(@Valid @RequestBody InventoryDTO dto) {
-        System.out.println("Received Inventory data: " + dto.toString());
+        //System.out.println("Received Inventory data: " + dto.toString());
         itemService.saveInventory(dto);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping
     public ResponseEntity<Void> updateInventory(@Valid @RequestBody InventoryDTO dto) {
-        System.out.println("Received Inventory data: " + dto.toString());
+       // System.out.println("Received Inventory data: " + dto.toString());
         itemService.updateInventory(dto);
         return ResponseEntity.noContent().build();
     }

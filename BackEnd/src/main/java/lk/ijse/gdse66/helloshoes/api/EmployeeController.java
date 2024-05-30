@@ -41,14 +41,14 @@ public class EmployeeController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Void> saveEmployee(@Valid @RequestBody EmployeeDTO dto) {
-        System.out.println("Received employee data: " + dto.toString());
+       // System.out.println("Received employee data: " + dto.toString());
         empService.saveEmployee(dto);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping
     public ResponseEntity<Void> updateEmployee(@Valid @RequestBody EmployeeDTO dto) {
-        System.out.println("Received employee data: " + dto.toString());
+       // System.out.println("Received employee data: " + dto.toString());
         empService.updateEmployee(dto);
         return ResponseEntity.noContent().build();
     }

@@ -30,7 +30,6 @@ public class EmployeeDTO {
     private String designation;
     private Role role;
     @NotNull(message = "DOB is required")
-    @Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "DOB is not valid")
     private Date employeeDob;
     private Date joinDate;
     private AddressDTO address;

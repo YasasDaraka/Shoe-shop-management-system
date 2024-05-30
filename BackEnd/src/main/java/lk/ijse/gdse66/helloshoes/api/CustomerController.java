@@ -49,14 +49,14 @@ public class CustomerController {
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Void> saveCustomer(@Valid @RequestBody CustomerDTO dto) {
-        System.out.println("Received customer data: " + dto.toString());
+       // System.out.println("Received customer data: " + dto.toString());
         cusService.saveCustomer(dto);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping
     public ResponseEntity<Void> updateCustomer(@Valid @RequestBody CustomerDTO dto) {
-        System.out.println("Received customer data: " + dto.toString());
+       // System.out.println("Received customer data: " + dto.toString());
         cusService.updateCustomer(dto);
         return ResponseEntity.noContent().build();
     }

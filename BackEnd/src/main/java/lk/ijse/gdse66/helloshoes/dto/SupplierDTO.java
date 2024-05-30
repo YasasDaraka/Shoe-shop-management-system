@@ -21,8 +21,6 @@ public class SupplierDTO {
     private String supplierName;
     private Category category;
     private InAddressDTO address;
-    @NotNull(message = "contact is required")
-    @Pattern(regexp = "^[^\\p{L}]{10,}$", message = "contact is not valid")
     private ContactDTO contact;
     @NotNull(message = "Email is required")
     @Pattern(regexp = "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$", message = "Email is not valid")

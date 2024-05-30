@@ -29,7 +29,7 @@ public class InventoryServiceImpl implements InventoryService {
 
     @Override
     public InventoryDTO searchInventory(String id) {
-        System.out.println(id);
+        //System.out.println(id);
         return (InventoryDTO) inventoryRepo.findById(id)
                 .map(emp -> tranformer.convert(emp, Tranformer.ClassType.ITEM_DTO))
                 .orElseThrow(() -> new NotFoundException("Item Not Exist"));
