@@ -84,11 +84,15 @@ $("input[name='rating']").on("change", function(e) {
 $("#cusId").on("keydown keyup", function (e) {
     events(e)
     searchCustomer($("#cusId").val()).then(function (res){
-        //setBtn();
-        captureClear();
-        setAllCusVal(res);
-        // $("#cusId,#cusName,#cusBuildNo,#cusLane,#cusCity,#cusState,#cusPostalCode,#cusEmail,#cusDob,#cusGender,#cusContactNo,#totalPoints").css("border", "1px solid #ced4da");
-
+        if (Object.keys(res).length !== 0 ){
+            captureClear();
+            setAllCusVal(res);
+        }else {
+            $("#cusName,#cusBuildNo,#cusLane,#cusCity,#cusState,#cusPostalCode,#cusEmail,#cusDob,#cusGender,#cusContactNo,#totalPoints").css("border", "1px solid #ced4da");
+            $("#cusName,#cusBuildNo,#cusLane,#cusCity,#cusState,#cusPostalCode,#cusEmail,#cusDob,#cusGender,#cusContactNo,#totalPoints,#loyaltyDate,#lastPurchaseDate").val("");
+            $('input[name="rating"]').prop('checked', false);
+        }
+        setBtn();
     });
 });
 

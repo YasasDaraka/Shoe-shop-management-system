@@ -8,7 +8,7 @@ const itm_BUY_PRICE_REGEX = /^[1-9]\d*(\.\d+)?$/;
 const itm_PROFIT_REGEX = /^[1-9]\d*(\.\d+)?$/;
 const itm_MARGIN_REGEX = /^[1-9]\d*(\.\d+)?$/;
 const itm_STATES_REGEX = /^[A-Za-z ]{3,}$/;
-const itm_QTY_REGEX = /^[1-9]\d*$/;
+const itm_QTY_REGEX = /^\d+$/;
 
 const itm_vArray = new Array();
 itm_vArray.push({ field: $("#itmCode"), regEx: itm_ID_REGEX, error: $("#itmCodeError") });

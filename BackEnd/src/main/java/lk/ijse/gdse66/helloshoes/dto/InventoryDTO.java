@@ -25,7 +25,7 @@ public class InventoryDTO {
     @NotNull(message = "Size is required")
     @Min(value = 1,message = "Size must be at least 1")
     private Integer size;
-    @Min(value = 1,message = "Qty must be at least 1")
+    @Min(value = 0,message = "Qty must be at least 0")
     private Integer qty;
     private Integer originalQty;
     private SupplierDTO supplier;

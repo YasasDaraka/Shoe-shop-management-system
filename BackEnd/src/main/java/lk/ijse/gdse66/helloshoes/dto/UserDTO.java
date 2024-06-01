@@ -18,7 +18,6 @@ public class UserDTO {
     @NotBlank(message = "email can not be null")
     @Pattern(regexp = "^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$", message = "Email is not valid")
     private String email;
-    @NotBlank(message = "password can not be null")
     private String password;
 
     private Role role;

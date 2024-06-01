@@ -460,8 +460,8 @@ $("#userDelete").click(function () {
                         success: function (res) {
                             console.log(res);
                             swal("Deleted", "User Delete Successfully", "success");
-                            userClear();
                             getAllUsers();
+                            userClear();
                             //captureClear();
                             //setBtn();
                         },

@@ -75,6 +75,15 @@ public class InventoryServiceImpl implements InventoryService {
                         }else {
                             dto.setOriginalQty(inventory.getOriginalQty());
                         }
+                        double check = inventory.getOriginalQty() / 2;
+                        if (dto.getQty() != 0 && check>dto.getQty()){
+                            dto.setStatus("Low");
+                        }else if (dto.getQty() != 0 && check<dto.getQty()){
+                            dto.setStatus("Available");
+                        }else if (dto.getQty() == 0){
+                            dto.setStatus("Not Available");
+                            dto.setOriginalQty(0);
+                        }
                         inventoryRepo.save(tranformer.convert(dto, Tranformer.ClassType.ITEM_ENTITY));
                     } else {
                         throw new NotFoundException("Item Pic Not Exist");

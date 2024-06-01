@@ -153,7 +153,7 @@ $("#inputEmail").on("keydown keyup", function (e) {
 
             searchUserPanel($("#inputEmail").val()).then(function (res) {
                 if (res) {
-                    $("#inputEmailError").text("Invalid User Name");
+                    $("#inputEmailError").text("User already exist");
                     $("#inputEmail").css("border", "2px solid red");
                     $("#signup-page-signup").prop("disabled", true);
                 } else {
